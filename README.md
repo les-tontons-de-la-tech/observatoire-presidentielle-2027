@@ -6,7 +6,7 @@ Trois pages statiques publiées sous **https://dileviathan.fr/observatoire** (et
 `dev.dileviathan.fr/observatoire`, derrière mot de passe et en `noindex`).
 Aucune n'est marquée `noindex` : elles sont destinées à l'indexation. Les deux premières sont
 régénérées **chaque jour
-à 08:20** par cron ; la troisième est le rétro-test 2022, recalculable à volonté.
+à 18:00** par cron ; la troisième est le rétro-test 2022, recalculable à volonté.
 
 | URL | Contenu | Fichier généré |
 |---|---|---|
@@ -162,7 +162,7 @@ explique notre horizon.
 
 En bref, au 14/09/2026 : la source des sondages contrôle les nouvelles enquêtes **chaque jour à 11:00**
 (Paris) et publie une release **le dimanche** ; la prévision bayésienne citée se recalcule **chaque jour à
-07:20**. Nos pages sont régénérées le matin, avec un cache de 12 heures sur la source.
+07:20**. Nos pages sont régénérées **le soir à 18:00**, après le contrôle quotidien de la source — un sondage validé à 11:00 est publié le jour même.
 
 ## Déploiement — comment ces pages sont servies
 

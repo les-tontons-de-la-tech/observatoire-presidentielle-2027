@@ -54,19 +54,17 @@ Deux de ses rétro-tests sont publiés : `as_of 2021-09-01` (**J−221**) et `as
 
 | | Source | Nous |
 |---|---|---|
-| Contrôle | quotidien 11:00 (Paris) | cron quotidien **08:20** |
-| Données | 2 à 4 mises à jour/semaine | cache 12 h, réévalué chaque matin |
+| Contrôle | quotidien 11:00 (Paris) | cron quotidien **18:00** (après le contrôle source) |
+| Données | 2 à 4 mises à jour/semaine | cache 12 h, réévalué chaque soir |
 | Battement | hebdomadaire (dimanche) | mouvements sur 7 et 28 jours |
 | Prévision comparée | quotidienne 07:20 | cache 6 h |
 
 Trois conséquences :
 
-1. **Nous passons 2 h 45 avant le contrôle quotidien de la source.** Un sondage validé aujourd'hui à 11:00
-   n'entre chez nous que demain à 08:20 : jusqu'à 21 heures de retard sur la donnée du jour. Décaler notre
-   passage vers 11:30 ramènerait ce retard à une demi-heure. Le rythme resterait quotidien : rien d'autre à
-   changer.
-2. **La prévision comparée est rafraîchie avant nous** (07:20 contre 08:20) : notre comparaison affiche bien
-   la version du jour, et son cache de 6 h ne fait rien perdre.
+1. **Nous passons après le contrôle quotidien de la source.** Un sondage validé aujourd'hui à 11:00
+   est publié le jour même à 18:00 : moins de 7 heures de latence sur la donnée du jour.
+2. **La prévision comparée est rafraîchie 11 h avant nous** (07:20 contre 18:00) : notre comparaison
+   est toujours basée sur la version du jour, et son cache de 6 h ne fait rien perdre.
 3. **Le rythme réel des sondages suit l'agenda politique, pas notre cron.** Par semaine de terrain :
    23 sondages la semaine du 24/08, 15 celle du 31/08, 8 celle du 07/09 — et **aucun** les semaines du 03/08
    et du 10/08. Une page quotidienne sur une source qui s'arrête trois semaines en août doit le dire :

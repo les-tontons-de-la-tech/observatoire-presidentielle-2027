@@ -785,6 +785,10 @@ if(c==="dark"||(!c&&window.matchMedia&&window.matchMedia("(prefers-color-scheme:
 THEME_BTN = """<button type="button" class="themebtn" id="themebtn" aria-label="Changer le thème"
   title="Passer en mode clair ou sombre">&#9681;</button>"""
 
+# Lien vers la page « Workflow » (annexe technique : comment le site se fabrique).
+# Défini une seule fois ici, utilisé par les quatre pages — un seul endroit à corriger.
+NAV_WORKFLOW = '<a href="/observatoire/workflow/">Workflow</a>'
+
 THEME_JS = """<script>(function(){var b=document.getElementById("themebtn");if(!b)return;
 b.addEventListener("click",function(){var r=document.documentElement;
 var sombre=r.getAttribute("data-theme")==="dark";
@@ -1001,7 +1005,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <body>
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· agrégation</span></div>
-  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a><a href="#tete">Tête de course</a>
+  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a>{NAV_WORKFLOW}<a href="#tete">Tête de course</a>
   <a href="#tableau">Tableau</a><a href="#evolution">Évolution</a>
   <a href="#comparaison">Comparaison</a><a href="#methode">Méthode</a>
   <a href="#a-lire">Citer un chiffre</a><a href="#limites">Limites</a></div>{THEME_BTN}
@@ -1289,7 +1293,7 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 <body>
 <div class="topbar"><div class="wrap nav">
   <div class="brand">Présidentielle 2027 <span>· observatoire</span></div>
-  <div class="navlinks"><a href="/observatoire/sondages/">Agrégation</a><a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a><a href="#evolution">Évolution</a>
+  <div class="navlinks"><a href="/observatoire/sondages/">Agrégation</a><a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a>{NAV_WORKFLOW}<a href="#evolution">Évolution</a>
   <a href="#comparaison">Comparaison</a><a href="#methode">Méthode</a><a href="#donnees">Données</a><a href="#limites">Limites</a></div>{THEME_BTN}
 </div></div>
 

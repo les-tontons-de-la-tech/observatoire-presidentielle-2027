@@ -9,6 +9,15 @@ chiffre qu'on ne peut plus citer.
 
 ---
 
+## 15 septembre 2026
+
+**Nouveauté — Page « Workflow » : comment le site se fabrique.**
+Un schéma d'architecture, ses légendes et les réglages du rétro-test, intégrés au design du site
+(thème clair/sombre, navigation commune). La page est générée par `workflow.py` (versionné),
+le schéma utilise la palette de couleurs du site et bascule avec le thème.
+
+---
+
 ## 14 septembre 2026
 
 **Chiffres — Fenêtre de sélection portée à 90 jours, effets de maison corrigés.**

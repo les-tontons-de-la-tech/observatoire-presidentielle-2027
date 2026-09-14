@@ -91,7 +91,8 @@
       "Résultats de 2022 : ministère de l'Intérieur (archives des résultats électorales), recoupés avec Wikipédia — 12 scores concordants, 35 132 947 suffrages exprimés.",
       "Candidatures : recensement de La Chaîne parlementaire, complété pour chaque date par la source de première main citée sur la page des candidats.",
       "Liste officielle des candidats : Conseil constitutionnel, publiée au Journal officiel — c'est le seul document qui fait foi.",
-      "Prévision bayésienne citée pour comparaison : whyalwaysrose/presidentielle-2027, licence MIT."
+      "Prévision bayésienne citée pour comparaison : whyalwaysrose/presidentielle-2027, licence MIT.",
+      "Code de calcul : le générateur est public — les-tontons-de-la-tech/observatoire-presidentielle-2027 (licence MIT). Méthode, calculs et journal de ses révisions y sont lisibles ligne à ligne."
     ],
     "legal_titre": "Cadre légal",
     "legal": [

@@ -19,15 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Données tierces (non redistribuées ici, citées et téléchargées à l'exécution) :
-
-- Sondages : compilation MieuxVoter/presidentielle2027 — licence MIT.
-- Résultats officiels 2022 : ministère de l'Intérieur (données publiques), recoupés
-  avec Wikipédia (CC BY-SA) pour contrôle ; seuls les résultats officiels sont publiés.
-- Prévision bayésienne citée pour comparaison : whyalwaysrose/presidentielle-2027 — licence MIT.
-
-Les enquêtes d'opinion elles-mêmes appartiennent à leurs instituts et à leurs commanditaires ;
-ce dépôt ne les redistribue pas et n'en reproduit que les valeurs agrégées nécessaires au calcul.

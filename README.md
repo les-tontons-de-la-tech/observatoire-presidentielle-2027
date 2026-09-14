@@ -2,7 +2,8 @@
 
 Trois pages statiques publiées sous **https://dileviathan.fr/observatoire** (et testées sur
 `dileviathan.fr/observatoire` (public depuis le 14/09/2026 ; aussi servi sur
-`dev.dileviathan.fr/observatoire`, derrière le basic auth du sandbox pour les relectures, tant que la route publique n'est pas ouverte).
+`dileviathan.fr/observatoire` ; une copie de relecture reste servie sur
+`dev.dileviathan.fr/observatoire`, derrière mot de passe et en `noindex`).
 Aucune n'est marquée `noindex` : elles sont destinées à l'indexation. Les deux premières sont
 régénérées **chaque jour
 à 08:20** par cron ; la troisième est le rétro-test 2022, recalculable à volonté.
@@ -152,38 +153,46 @@ différence qui subsiste.
 | `nginx/default.conf` | conf nginx du conteneur (`absolute_redirect off`) |
 | `archive/generate_avec_polymarket.py` | version du générateur avec le panneau marchés (retiré) |
 
-## Exploitation
+## Déploiement — comment ces pages sont servies
+
+Le générateur écrit des fichiers statiques : aucune base de données, aucun serveur applicatif. Le
+dossier `site/` est monté dans un conteneur nginx (`nginx:alpine`), lui-même placé derrière un
+reverse proxy qui **conserve** le préfixe `/observatoire`.
 
 ```bash
-bash /root/.hermes/profiles/dileviathan/scripts/observatoire_daily.sh   # cron : régénère + vérifie
-bash /root/.hermes/scripts/observatoire_poc_run.sh [--force] [--recreate]  # conteneur + pages
-python3 /root/presidentielle2027/backtest2022.py [--force]            # rétro-test 2022
-python3 /root/presidentielle2027/digest.py                            # message quotidien
+# reproduire ce qui est publié, en local
+python3 generate.py && python3 candidats.py && python3 backtest2022.py
+docker run -d --name observatoire -p 127.0.0.1:8090:80 \
+  -v "$PWD/site:/usr/share/nginx/html/observatoire:ro" \
+  -v "$PWD/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro" nginx:alpine
+# puis http://127.0.0.1:8090/observatoire/
 ```
 
-**Cron** : job `Présidentielle 2027 — agrégation quotidienne` (`20 8 * * *`, mode `no_agent`,
-script `simulation_daily.sh` **dans le dossier `scripts/` du profil**, livraison Telegram). Sortie
-vide = silencieux ; code ≠ 0 = alerte. Journal : `/var/log/observatoire_poc.log`.
+Deux réglages nginx ne sont pas cosmétiques : `absolute_redirect off` (sans quoi une redirection de
+dossier perd le préfixe `/observatoire` et renvoie un 404) et `Cache-Control: no-cache` (les pages
+changent tous les jours ; un lecteur bloqué sur la veille croit à un bug).
 
-Conteneur `simulation-poc` (nginx:alpine, 127.0.0.1:8090) :
+**Automatisation** : un cron quotidien régénère les trois séries de pages, puis vérifie que la page
+locale répond 200. Sortie vide = silence, code de retour ≠ 0 = alerte. Le même passage envoie un
+message de synthèse : dernières valeurs, mouvements sur 7 et 28 jours, état de la source.
 
-```
--v /root/presidentielle2027/site:/usr/share/nginx/html/observatoire:ro
--v /root/presidentielle2027/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-```
-
-Route Caddy (bloc `dev.dileviathan.fr`) : `handle /observatoire* { reverse_proxy 127.0.0.1:8090 }`.
-Rechargement : `caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile`
-(`systemctl reload caddy` échoue sur ce VPS — voir le skill `dileviathan-site`).
+**Publication** : au-delà de la QA ci-dessous, la page se **suspend d'elle-même** la veille et le jour
+d'un scrutin — l'article 11 de la loi du 19 juillet 1977 interdit alors toute publication, diffusion
+ou commentaire de sondage, et un avis remplace le contenu. La suspension se teste en simulant une date
+de scrutin, sans attendre 2027.
 
 ## Vérifications faites (14/09/2026)
 
-- Local : `/observatoire/`, `/observatoire/sondages/`, `/observatoire/backtest/` → 200 ; `/observatoire` →
-  301 `Location: /observatoire/` (relatif) ; `/observatoire/inexistant` → 404.
-- Routage Caddy : instance de test avec la même paire de handlers sans auth → `/` renvoie le site
-  Diléviathan, `/observatoire[...]` renvoie le POC.
-- Cron : job déclenché à la main → `succeeded`, message livré.
-- Sandbox : 401 (basic auth) ; en production : 200 attendu sur les trois URL.
+- Routes : `/observatoire/`, `/observatoire/sondages/`, `/observatoire/candidats/`,
+  `/observatoire/backtest/` → 200 ; `/observatoire/inexistant` → 404 ; l'ancien chemin `/simulation`
+  → 301 permanent vers `/observatoire`.
+- Pages publiques : `robots: index, follow`, aucun `X-Robots-Tag` en production, les quatre URL
+  déclarées dans le sitemap du site.
+- Thème clair et sombre : contrastes mesurés dans les deux thèmes, **aucun texte sous le seuil AA**
+  sur les quatre pages.
+- Lisibilité multi-format : débordement horizontal nul à 390, 768 et 1180 px.
+- Texte : aucun chiffre saisi à la main, aucun jeton non remplacé dans le HTML servi.
+- Copie de relecture : 401 (mot de passe) et `noindex, nofollow` — elle ne peut pas être indexée.
 
 ## Suite envisagée
 
@@ -212,3 +221,19 @@ Rechargement : `caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile`
   - **communiqué de la Commission des sondages du 14 septembre 2026** : à compter du 15/09/2026, les
     enquêtes d'opinion liées au débat présidentiel 2027 — hors intentions de vote — entrent dans le
     champ de la loi, les médias qui les publient devant en respecter les articles 2 et 3.
+
+## Sources et licences
+
+- **Sondages** : compilation [MieuxVoter/presidentielle2027](https://github.com/MieuxVoter/presidentielle2027),
+  licence MIT. Les enquêtes appartiennent à leurs instituts et commanditaires ; ce dépôt ne les
+  redistribue pas, il en recalcule des agrégats à partir de la compilation publique.
+- **Résultats officiels de 2022** : ministère de l'Intérieur (données publiques), recoupés avec
+  Wikipédia (CC BY-SA) pour contrôle — seuls les résultats officiels sont publiés.
+- **Candidatures** : recensement de La Chaîne parlementaire, complété ligne par ligne par la source de
+  première main citée dans `data/candidats2027.json`.
+- **Liste officielle des candidats** : Conseil constitutionnel, publiée au *Journal officiel* — seul
+  document qui fait foi.
+- **Prévision bayésienne citée pour comparaison** : [whyalwaysrose/presidentielle-2027](https://github.com/whyalwaysrose/presidentielle-2027),
+  licence MIT.
+
+Le code de ce dépôt est sous licence MIT (`LICENSE`).

@@ -1,0 +1,449 @@
+{
+  "verifie_le": "2026-09-14",
+  "scrutins": {
+    "premier_tour": "2027-04-18",
+    "second_tour": "2027-05-02",
+    "officialisation": "Conseil des ministres du 1er juillet 2026 (compte rendu info.gouv.fr)",
+    "source": "https://www.info.gouv.fr/conseil-des-ministres/compte-rendu-du-conseil-des-ministres-du-01-07-2026"
+  },
+  "sources_reference": [
+    {
+      "niveau": "officiel",
+      "quoi": "liste des candidats : décision du Conseil constitutionnel publiée au Journal officiel, décret de convocation, dates des tours",
+      "url": "https://www.info.gouv.fr/",
+      "note": "seule source qui fait foi pour l'officialisation ; rien n'est officialisé avant mars-avril 2027"
+    },
+    {
+      "niveau": "consolidation presse",
+      "quoi": "recensement des déclarations et des prétendants, mis à jour au fil de l'eau",
+      "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "note": "LCP (Assemblée nationale), article mis à jour le 6 septembre 2026 : 34 « déclarés ou putatifs », dont 16 « déjà en lice »"
+    },
+    {
+      "niveau": "primaire",
+      "quoi": "date exacte de chaque déclaration",
+      "url": "",
+      "note": "source de première main citée ligne par ligne (AFP, TF1, RTL, Le Point, X du candidat) — jamais une date sans source"
+    }
+  ],
+  "candidats": [
+    {
+      "nom": "Édouard Philippe",
+      "parti": "Horizons",
+      "famille": "centre",
+      "statut": "declare",
+      "date_declaration": "2024-09-03",
+      "precision": "jour",
+      "source": "https://www.lepoint.fr/politique/exclusif-edouard-philippe-je-serai-candidat-a-la-prochaine-election-presidentielle-03-09-2024-2569359_20.php",
+      "source_label": "Le Point, 03/09/2024",
+      "commentaire": "premier à se déclarer, avant même la fin du mandat."
+    },
+    {
+      "nom": "Gabriel Attal",
+      "parti": "Renaissance",
+      "famille": "centre",
+      "statut": "declare",
+      "date_declaration": "2026-05-22",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-gabriel-attal-officialise-sa-candidature-436721",
+      "source_label": "LCP, 22/05/2026",
+      "commentaire": "officialisée autour de cinq priorités (école, salaires, frontières, IA) ; premier meeting la semaine suivante."
+    },
+    {
+      "nom": "Bruno Retailleau",
+      "parti": "Les Républicains",
+      "famille": "droite",
+      "statut": "declare",
+      "date_declaration": "2026-04-15",
+      "precision": "mois",
+      "source": "https://lcp.fr/actualites/presidentielle-bruno-retailleau-choisi-comme-candidat-officiel-des-republicains-435440",
+      "source_label": "LCP, mi-avril 2026",
+      "commentaire": "désigné par les adhérents LR lors d'une consultation interne."
+    },
+    {
+      "nom": "David Lisnard",
+      "parti": "Nouvelle Énergie",
+      "famille": "droite",
+      "statut": "declare",
+      "date_declaration": "2026-03-31",
+      "precision": "mois",
+      "source": "https://lcp.fr/actualites/je-suis-candidat-david-lisnard-quitte-lr-et-relance-le-debat-sur-une-primaire-a-droite",
+      "source_label": "LCP, fin mars 2026",
+      "commentaire": "quitte LR en annonçant sa candidature et relance le débat d'une primaire à droite."
+    },
+    {
+      "nom": "Xavier Bertrand",
+      "parti": "Nous France",
+      "famille": "droite",
+      "statut": "declare",
+      "date_declaration": "2026-08-26",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/2027-figure-de-la-droite-xavier-bertrand-confirme-qu-il-sera-candidat-a-l-election",
+      "source_label": "LCP, 26/08/2026",
+      "commentaire": "confirmation après une première annonce en février."
+    },
+    {
+      "nom": "Marine Le Pen",
+      "parti": "Rassemblement national",
+      "famille": "extreme-droite",
+      "statut": "declare",
+      "date_declaration": "2026-07-07",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/ce-soir-je-suis-candidate-a-l-election-presidentielle-annonce-marine-le-pen-438886",
+      "source_label": "LCP, 07/07/2026",
+      "commentaire": "lancée dès septembre 2023 sur TF1, confirmée après la décision de la cour d'appel de Paris."
+    },
+    {
+      "nom": "Jean-Luc Mélenchon",
+      "parti": "La France insoumise",
+      "famille": "gauche",
+      "statut": "declare",
+      "date_declaration": "2026-05-28",
+      "precision": "mois",
+      "source": "https://lcp.fr/actualites/presidentielle-jean-luc-melenchon-officialise-sa-candidature-pour-2027-435851",
+      "source_label": "LCP, fin mai 2026",
+      "commentaire": "quatrième candidature consécutive."
+    },
+    {
+      "nom": "Fabien Roussel",
+      "parti": "Parti communiste français",
+      "famille": "gauche",
+      "statut": "declare",
+      "date_declaration": "2026-09-06",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/fabien-roussel-officiellement-candidat-du-pcf-a-l-election-presidentielle-de-2027-441389",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "validé par le vote des militants à 72 %."
+    },
+    {
+      "nom": "Delphine Batho",
+      "parti": "Génération écologie",
+      "famille": "ecologiste",
+      "statut": "declare",
+      "date_declaration": "2025-11-25",
+      "precision": "jour",
+      "source": "https://www.nouvelobs.com/politique/20251125.OBS110076/delphine-batho-je-suis-candidate-a-l-election-presidentielle-pour-reconstruire-une-ecologie-capable-de-gouverner.html",
+      "source_label": "Le Nouvel Obs, 25/11/2025",
+      "commentaire": "« pour reconstruire une écologie capable de gouverner »."
+    },
+    {
+      "nom": "Karim Bouamrane",
+      "parti": "Parti socialiste",
+      "famille": "gauche",
+      "statut": "declare",
+      "date_declaration": "2026-06-01",
+      "precision": "mois",
+      "source": "https://x.com/karim_bouamrane/status/2064254272712130638",
+      "source_label": "X, juin 2026",
+      "commentaire": "maire de Saint-Ouen, « pour une France humaine et une France forte » — date à préciser."
+    },
+    {
+      "nom": "Nathalie Arthaud",
+      "parti": "Lutte ouvrière",
+      "famille": "extreme-gauche",
+      "statut": "declare",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "date de déclaration non documentée par la source consultée."
+    },
+    {
+      "nom": "Nicolas Dupont-Aignan",
+      "parti": "Debout la France",
+      "famille": "souverainiste",
+      "statut": "declare",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "date de déclaration non documentée par la source consultée."
+    },
+    {
+      "nom": "Florian Philippot",
+      "parti": "Les Patriotes",
+      "famille": "souverainiste",
+      "statut": "declare",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "date de déclaration non documentée par la source consultée."
+    },
+    {
+      "nom": "François Asselineau",
+      "parti": "Union populaire républicaine",
+      "famille": "souverainiste",
+      "statut": "declare",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "date de déclaration non documentée par la source consultée."
+    },
+    {
+      "nom": "Clara Egger",
+      "parti": "Solution démocratique",
+      "famille": "divers",
+      "statut": "declare",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "date de déclaration non documentée par la source consultée."
+    },
+    {
+      "nom": "Antoine Mikolajczak",
+      "parti": "Équinoxe",
+      "famille": "divers",
+      "statut": "declare",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "date de déclaration non documentée par la source consultée."
+    },
+    {
+      "nom": "Francis Lalanne",
+      "parti": "France Libre",
+      "famille": "divers",
+      "statut": "declare",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "date de déclaration non documentée par la source consultée."
+    },
+    {
+      "nom": "Raphaël Glucksmann",
+      "parti": "Place publique / primaire socialiste",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "2026-08-23",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-raphael-glucksmann-officialise-sa-candidature-et-participera-a-la",
+      "source_label": "LCP, 23/08/2026",
+      "commentaire": "candidat à la primaire du camp social-démocrate (premier tour les 10 et 11 octobre 2026)."
+    },
+    {
+      "nom": "Olivier Faure",
+      "parti": "Parti socialiste",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "2026-08-30",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 30/08/2026",
+      "commentaire": "candidat à la primaire socialiste."
+    },
+    {
+      "nom": "Ségolène Royal",
+      "parti": "Parti socialiste",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "2026-07-10",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-segolene-royal-annonce-sa-candidature-a-la-primaire-socialiste",
+      "source_label": "LCP, 10/07/2026",
+      "commentaire": "candidate à la primaire socialiste."
+    },
+    {
+      "nom": "Emmanuel Maurel",
+      "parti": "Gauche républicaine et socialiste",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "2026-09-04",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 04/09/2026",
+      "commentaire": "candidat à la primaire socialiste."
+    },
+    {
+      "nom": "Fabien Verdier",
+      "parti": "ex-Parti socialiste",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "2026-09-03",
+      "precision": "jour",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 03/09/2026",
+      "commentaire": "ancien maire de Châteaudun, candidat à la primaire socialiste."
+    },
+    {
+      "nom": "Philippe Brun",
+      "parti": "Parti socialiste",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "2026-07-10",
+      "precision": "mois",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, juillet 2026",
+      "commentaire": "candidat à la primaire socialiste."
+    },
+    {
+      "nom": "Jérôme Guedj",
+      "parti": "Parti socialiste",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "2026-07-10",
+      "precision": "mois",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, juillet 2026",
+      "commentaire": "candidat à la primaire socialiste."
+    },
+    {
+      "nom": "Marine Tondelier",
+      "parti": "Les Écologistes",
+      "famille": "ecologiste",
+      "statut": "conditionnel",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "investie par son parti ; maintient sa candidature après l'échec de la primaire de la gauche."
+    },
+    {
+      "nom": "François Ruffin",
+      "parti": "Debout",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-s-il-n-y-a-pas-de-primaire-moi-j-y-vais-annonce-francois-ruffin",
+      "source_label": "LCP, 2026",
+      "commentaire": "« s'il n'y a pas de primaire, moi j'y vais » : candidat si la primaire n'a pas lieu."
+    },
+    {
+      "nom": "Clémentine Autain",
+      "parti": "L'Après",
+      "famille": "gauche",
+      "statut": "conditionnel",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "candidature liée à la tenue d'une primaire de la gauche non-mélenchoniste."
+    },
+    {
+      "nom": "Lydie Massard",
+      "parti": "Union démocratique bretonne",
+      "famille": "ecologiste",
+      "statut": "conditionnel",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://www.letelegramme.fr/morbihan/pontivy-56300/la-pontivyenne-lydie-massard-candidate-a-la-primaire-de-la-gauche-pour-la-prochaine-presidentielle-7017809.php",
+      "source_label": "Le Télégramme, 2026",
+      "commentaire": "candidate à la primaire de la gauche."
+    },
+    {
+      "nom": "Éric Zemmour",
+      "parti": "Reconquête",
+      "famille": "extreme-droite",
+      "statut": "conditionnel",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://www.rtl.fr/actu/politique/s-il-n-y-a-pas-de-primaire-je-serai-candidat-eric-zemmour-affirme-sur-rtl-qu-il-se-prepare-a-la-presidentielle-2027-malgre-la-percee-magnifique-de-sarah-knafo-7900630227",
+      "source_label": "RTL, 2026",
+      "commentaire": "« s'il n'y a pas de primaire, je serai candidat » ; primaire jugée de moins en moins probable."
+    },
+    {
+      "nom": "François Hollande",
+      "parti": "Parti socialiste",
+      "famille": "gauche",
+      "statut": "suspens",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-francois-hollande-propose-la-retraite-a-63-ans-et-dira-en-decembre-s-il",
+      "source_label": "LCP, 2026",
+      "commentaire": "dira « en décembre » ; refuse de passer par une primaire."
+    },
+    {
+      "nom": "Bernard Cazeneuve",
+      "parti": "La Convention",
+      "famille": "gauche",
+      "statut": "suspens",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://www.leparisien.fr/elections/presidentielle/cest-par-un-contrat-qui-me-lie-aux-francais-que-je-presente-ma-candidature-bernard-cazeneuve-devoile-sa-lettre-pour-2027-16-07-2026-IZIQSDYXKBBT5MZBHIDBXGXFYE.php",
+      "source_label": "Le Parisien, 16/07/2026",
+      "commentaire": "a présenté son projet présidentiel, sans passer par la primaire."
+    },
+    {
+      "nom": "Bruno Le Maire",
+      "parti": "Renaissance (ex)",
+      "famille": "centre",
+      "statut": "suspens",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-bruno-le-maire-dira-en-octobre-s-il-est-candidat-437967",
+      "source_label": "LCP, 2026",
+      "commentaire": "décision annoncée « en octobre » ; manifeste publié le 23 août."
+    },
+    {
+      "nom": "Élisabeth Borne",
+      "parti": "Renaissance",
+      "famille": "centre",
+      "statut": "suspens",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-de-8h20-le-grand-entretien/l-invite-de-8h20-le-grand-entretien-du-mercredi-06-mai-2026-8151349",
+      "source_label": "France Inter, 06/05/2026",
+      "commentaire": "a quitté la direction de Renaissance et publié un livre de propositions."
+    },
+    {
+      "nom": "Dominique de Villepin",
+      "parti": "La France humaniste",
+      "famille": "centre",
+      "statut": "suspens",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "pas officiellement candidat ; une centaine de personnes travaillent à la recherche des 500 parrainages."
+    },
+    {
+      "nom": "Olivier Becht",
+      "parti": "Ensemble pour la République (apparenté)",
+      "famille": "centre",
+      "statut": "suspens",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-ancien-ministre-et-camarade-de-macron-a-l-ena-olivier-becht-envisage-une-candidature_AN-202606160283.html",
+      "source_label": "BFMTV, 16/06/2026",
+      "commentaire": "envisage une candidature."
+    },
+    {
+      "nom": "Benjamin Lucas",
+      "parti": "Générations",
+      "famille": "gauche",
+      "statut": "retire",
+      "date_declaration": "2026-05-01",
+      "precision": "mois",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "candidature annoncée puis retirée le 7 juillet 2026 : « prenant acte qu'il n'y aura pas de primaire et donc que ma candidature à la primaire n'a plus de sens »."
+    },
+    {
+      "nom": "Gérald Darmanin",
+      "parti": "Renaissance",
+      "famille": "centre",
+      "statut": "soutien",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "non candidat : a officialisé le 17 août 2026 son soutien à Édouard Philippe."
+    },
+    {
+      "nom": "Sarah Knafo",
+      "parti": "Reconquête",
+      "famille": "extreme-droite",
+      "statut": "soutien",
+      "date_declaration": "",
+      "precision": "",
+      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
+      "source_label": "LCP, 06/09/2026",
+      "commentaire": "non candidate : « Je souhaite qu'Éric Zemmour soit notre candidat » (Journal du Dimanche)."
+    }
+  ]
+}

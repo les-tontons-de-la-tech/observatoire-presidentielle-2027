@@ -1,0 +1,16 @@
+# Données téléchargées — jamais versionnées : elles se rechargent toutes seules.
+# (La compilation MieuxVoter pèse ~900 Ko et change chaque jour ; on cite sa source, on ne la recopie pas.)
+data/polls.json
+data/polls2022.json
+data/forecast_bayes.json
+
+# Pages générées — le dépôt porte le générateur, pas son résultat.
+# Elles se régénèrent à l'identique avec : python3 generate.py && python3 candidats.py && python3 backtest2022.py
+site/
+
+# Divers
+__pycache__/
+*.pyc
+*.bak
+*.bak-*
+.DS_Store

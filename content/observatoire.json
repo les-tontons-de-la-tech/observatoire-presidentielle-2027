@@ -1,0 +1,107 @@
+{
+  "_lisez_moi": "Textes rédigés de l'observatoire. Ce fichier est éditorial : il ne contient aucun chiffre calculé. Les chiffres viennent des scripts (generate.py, backtest2022.py, candidats.py) et de data/*.json. Toute modification ici doit être accompagnée d'une entrée de changelog datée.",
+  "maj": "2026-09-14",
+  "changelog": [
+    {
+      "date": "2026-09-14",
+      "nature": "chiffres",
+      "titre": "Fenêtre de sélection portée à 90 jours, effets de maison corrigés",
+      "texte": "Deux réglages mesurés sur la campagne 2022, et retenus parce qu'ils réduisent l'erreur : la fenêtre passe de 60 à 90 jours (elle supprime l'échéance de septembre 2021 où la page ne publiait rien) et chaque institut est corrigé de son écart moyen au consensus des autres. Erreur moyenne sur six échéances : 3,19 → 3,11 point. À J−132 seule, elle reste de 3,8 points — le gain est réel mais faible, et le dire fait partie du résultat.",
+      "pages": [
+        "agrégation",
+        "rétro-test"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "chiffres",
+      "titre": "Dates du scrutin fixées et vérifiées",
+      "texte": "Le premier tour aura lieu le dimanche 18 avril 2027 et le second le dimanche 2 mai 2027 (Conseil des ministres du 1er juillet 2026). La page affiche désormais l'échéance et se suspend automatiquement la veille et le jour du vote, conformément à l'article 11 de la loi du 19 juillet 1977.",
+      "pages": [
+        "accueil",
+        "agrégation",
+        "candidats"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "nouveauté",
+      "titre": "Page « Les candidats » et section « Qui sera sur le bulletin ? »",
+      "texte": "Trente-huit personnes recensées, chaque ligne portant sa source et sa date de vérification ; un retrait reste affiché, barré. S'y ajoute une mesure, et non un modèle : la part des questionnaires publiés qui testent réellement chaque nom. Elle produit un résultat vérifiable — une seule paire de noms se partage un même siège sans jamais se croiser, Marine Le Pen et Jordan Bardella, avec une bascule complète entre mars et septembre 2026.",
+      "pages": [
+        "candidats"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "texte",
+      "titre": "Vocabulaire de source clarifié",
+      "texte": "Les colonnes qui attribuaient les chiffres à « notre agrégation » disent maintenant d'où vient la matière : « MieuxVoter » pour la compilation des sondages, « Estimation MieuxVoter » et « Prévision bayésienne » dans le rétro-test. La distinction est explicite : la compilation est leur, la moyenne pondérée est calculée ici.",
+      "pages": [
+        "agrégation",
+        "rétro-test"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "texte",
+      "titre": "Section « À lire avant de citer un chiffre »",
+      "texte": "Publiée sur cette page : ce qui peut être cité, sous quelle forme, et ce qui serait faux. Une moyenne de sondages n'est pas un sondage, et une probabilité de second tour n'est pas une intention de vote.",
+      "pages": [
+        "agrégation"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "présentation",
+      "titre": "Thème clair et sombre, lecture sur téléphone et tablette",
+      "texte": "Les quatre pages adoptent le thème du site, avec mémorisation du choix. Contrastes vérifiés dans les deux thèmes : aucun texte sous le seuil AA. Sur téléphone, l'en-tête tient sur une ligne, les tableaux se transforment en fiches et la mesure de lecture passe de 88 à 70 signes par ligne.",
+      "pages": [
+        "accueil",
+        "agrégation",
+        "rétro-test",
+        "candidats"
+      ]
+    }
+  ],
+  "a_lire": {
+    "titre": "À lire avant de citer un chiffre",
+    "chapo": "Cette page ne publie pas de sondages. Elle publie la moyenne de sondages publiés ailleurs, calculée ici. Ce que vous pouvez en citer, sous quelle forme, et ce qui serait faux.",
+    "regles_titre": "Citer correctement",
+    "regles": [
+      "Citez la moyenne, jamais un sondage : « moyenne des sondages publiés au {{date_maj}}, scénario {{scenario}} ({{scenario_size}} candidats), {{polls_aggregated}} enquêtes agrégées sur une fenêtre de {{window}} jours ». Aucun institut n'a publié ce chiffre : il est calculé ici.",
+      "Citez l'intervalle avec le niveau : « {{tete_nom}} {{tete_val}} % [{{tete_ic}}] », et non « {{tete_val}} % ». Un chiffre nu laisse croire à une précision que la moyenne n'a pas.",
+      "N'écrivez pas « selon un sondage ». Cette page n'interroge personne : elle agrège des enquêtes déjà publiées, dont la liste, les marges et les commanditaires sont affichés plus bas.",
+      "Sous un point d'écart, nous ne commentons pas : l'écart est dans la marge. Ne le commentez pas non plus.",
+      "N'attribuez pas la moyenne à la source : MieuxVoter publie la compilation des sondages ; la pondération, elle, est faite ici et sa méthode est publiée.",
+      "Ne mélangez jamais deux natures de chiffres : intentions de vote (ici), probabilités de second tour et de victoire (prévision bayésienne, clairement séparée), cotes de marchés (nous n'en publions pas)."
+    ],
+    "pieges_titre": "Les pièges du chiffre",
+    "pieges": [
+      "Le scénario est verrouillé : un candidat retenu dans le scénario n'est pas une prédiction de candidature, et un candidat absent n'a pas « 0 % » — il n'est simplement pas testé dans cette liste.",
+      "Un nom testé dans une minorité de questionnaires peut être une candidature très sérieuse, et un nom testé dans tous peut ne jamais se déclarer : cette mesure décrit ce que les instituts jugent plausible, pas ce qui va se produire.",
+      "La marge d'erreur des instituts n'est pas intégrée à la moyenne. Un intervalle de moyenne ne remplace pas la marge d'un sondage.",
+      "Les effets de maison sont corrigés, mais en 2022 les instituts se trompaient surtout ensemble : corriger un écart entre instituts ne corrige pas un aveuglement collectif.",
+      "Le rétro-test porte sur le premier tour et s'arrête à J−132, faute de compilation libre couvrant janvier à avril 2022. Ce qu'il démontre vaut à cette distance, pas à dix jours du vote.",
+      "Le premier tour n'annonce pas le second : la qualification dépend des reports, de la participation et des alliances, que cette page ne modélise pas."
+    ],
+    "sources_titre": "Sources",
+    "sources": [
+      "Sondages : compilation MieuxVoter/presidentielle2027, licence MIT — les enquêtes elles-mêmes appartiennent à leurs instituts.",
+      "Résultats de 2022 : ministère de l'Intérieur (archives des résultats électorales), recoupés avec Wikipédia — 12 scores concordants, 35 132 947 suffrages exprimés.",
+      "Candidatures : recensement de La Chaîne parlementaire, complété pour chaque date par la source de première main citée sur la page des candidats.",
+      "Liste officielle des candidats : Conseil constitutionnel, publiée au Journal officiel — c'est le seul document qui fait foi.",
+      "Prévision bayésienne citée pour comparaison : whyalwaysrose/presidentielle-2027, licence MIT."
+    ],
+    "legal_titre": "Cadre légal",
+    "legal": [
+      "Loi n° 77-808 du 19 juillet 1977 relative à la publication et à la diffusion de certains sondages d'opinion : l'article 2 impose de mentionner l'organisme, le commanditaire et l'acheteur, le nombre de personnes interrogées, les dates et la marge d'erreur ; l'article 3 impose le dépôt d'une notice.",
+      "Loi organique n° 2021-335 du 29 mars 2021 : marges d'erreur obligatoires pour les sondages liés à l'élection présidentielle.",
+      "Article 11 : aucune publication, diffusion ni commentaire de sondage la veille et le jour du scrutin. Cette page s'y conforme automatiquement.",
+      "Article 12 : 75 000 € d'amende, y compris pour usage impropre du mot « sondage » — raison de plus pour appeler un chiffre ce qu'il est.",
+      "Nous ne sommes pas un institut de sondage et nous ne réalisons aucune enquête : nous agrégeons des enquêtes publiées et nous citons nos sources."
+    ],
+    "contact": "Une correction à signaler, une source manquante, un chiffre qui vous paraît faux : christophe@dileviathan.fr. Les corrections de fond sont datées dans le journal des mises à jour.",
+    "_jetons": "Les {{ }} sont remplis au rendu par generate.py (contenu.py::a_lire_bloc) : date_maj, scenario, scenario_size, polls_aggregated, window, tete_nom, tete_val, tete_ic."
+  }
+}

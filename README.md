@@ -153,6 +153,17 @@ différence qui subsiste.
 | `nginx/default.conf` | conf nginx du conteneur (`absolute_redirect off`) |
 | `archive/generate_avec_polymarket.py` | version du générateur avec le panneau marchés (retiré) |
 
+## Périodicité des sources
+
+Quand nos chiffres bougent dépend de quand bougent les sources. Relevé daté, à l'API GitHub :
+[`docs/sources-et-periodicite.md`](docs/sources-et-periodicite.md) — cadence des dépôts, crons des
+automatisations, rythme d'arrivée des sondages, rétro-tests publiés en face, et le point de licence qui
+explique notre horizon.
+
+En bref, au 14/09/2026 : la source des sondages contrôle les nouvelles enquêtes **chaque jour à 11:00**
+(Paris) et publie une release **le dimanche** ; la prévision bayésienne citée se recalcule **chaque jour à
+07:20**. Nos pages sont régénérées le matin, avec un cache de 12 heures sur la source.
+
 ## Déploiement — comment ces pages sont servies
 
 Le générateur écrit des fichiers statiques : aucune base de données, aucun serveur applicatif. Le

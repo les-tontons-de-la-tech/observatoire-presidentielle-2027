@@ -1,74 +1,115 @@
-# Périodicité des sources — relevé du 14 septembre 2026
+# Périodicité des sources — relevé du 15 septembre 2026
 
-Relevé fait à l'API GitHub (dépôts, commits par fichier, workflows, exécutions, releases), à la fois
-pour savoir **quand** nos chiffres changent et pour savoir **quand** regarder.
+Relevé fait à l'API GitHub (dépôts, commits par fichier, workflows, exécutions, releases) **et dans les
+fichiers de workflow eux-mêmes**, à la fois pour savoir **quand** nos chiffres changent et pour savoir
+**quand** regarder.
+
+Ce relevé remplace celui du 14/09/2026. Trois choses ont changé depuis (elles sont signalées par ⚠️) :
+le pipeline d'extraction de la source n'est **pas** planifié et il est **relu par une personne** ; une
+exécution planifiée a été servie avec plus de cinq heures de retard ; et la prévision comparée a gagné
+un candidat.
 
 ## 1. MieuxVoter/presidentielle2027 — la source des chiffres
 
 | | |
 |---|---|
 | Créé le | 2025-10-18 |
-| Licence | MIT · 6 ⭐ · 491 Ko · 297 fichiers · non archivé |
-| Dernier push | 2026-09-14 (le jour du relevé) |
+| Licence | MIT · 491 Ko · 297 fichiers · non archivé |
+| Dernier push | 2026-09-15 |
 | Activité | ~100 commits sur 30 jours · **médiane 1 jour** entre deux commits |
+| Sondages compilés | **233**, le plus récent **2026-09-10** (OpinionWay) |
 
-Trois automatisations comptent :
+**Aucun sondage nouveau depuis le 10/09.** Au 15/09, cela fait cinq jours, et la semaine du 14/09 n'a
+encore rien produit. La compilation n'a pas bougé entre les deux relevés : même nombre d'enquêtes,
+même enquête la plus récente. Vérification faite en comparant l'empreinte (institut + dates +
+échantillon) des 233 entrées : **zéro sondage présent en amont et absent de notre cache**.
 
-- **`Check for New Presidential Polls`** — cron `0 9 * * *`, donc **chaque jour à 09:00 UTC (11:00 à Paris)** :
-  le dépôt cherche les nouveaux sondages publiés.
-- **`Weekly Release - Sondages`** — cron `0 9 * * 0`, **le dimanche à 11:00 à Paris** : publication d'une
-  release hebdomadaire (tags `semaine-2026-09-06`, publiées depuis le 30/08/2026).
-- **`Validate polls and merge`** — à chaque push : validation puis fusion automatique.
+Huit automatisations actives :
 
-Le fichier de données (`presidentielle2027.json`, 894 Ko) a été mis à jour 46 fois en trois semaines, par
-grappes : trois fois le 12/09, puis les 11/09, 07/09 (×2), 06/09, 02/09, 31/08, 28/08. Autrement dit :
-**un contrôle quotidien, deux à quatre mises à jour de données par semaine**, et un battement hebdomadaire
-le dimanche.
+| Automatisation | Déclencheur | Rôle |
+|---|---|---|
+| `Check for New Presidential Polls` | cron `0 9 * * *` (**09:00 UTC**, 11:00 Paris) | cherche les nouveaux sondages |
+| `Weekly Release - Sondages` | cron `0 9 * * 0` (**dimanche** 09:00 UTC) | release hebdomadaire |
+| `Validate polls and merge` | à chaque push | valide puis fusionne |
+| `LLM mining` | **issues / commentaires / manuel — pas de cron** ⚠️ | dépouille une issue en PR brouillon |
+| `Auto-merge on push` | à chaque push | fusion automatique |
+| `is your code linted with black?` | à chaque push | formatage |
+| `Copilot`, `Copilot cloud agent` | dynamiques | revue de PR |
 
-Signal à surveiller : le dépôt développe un **pipeline d'extraction par LLM** (« feat(sondage mining) »,
-« fix(mining): réponses tronquées ») pour lire les sondages dans la presse, avec fusion automatique après
-validation. La source va donc capter plus vite — et se tromper parfois plus vite aussi. Nos garde-fous
-(seuil de deux sondages pour publier un candidat, amplitude affichée à côté de la moyenne) sont ce qui nous
-protège de ses erreurs d'extraction.
+⚠️ **Correction du relevé précédent, sur le point le plus important.** Le 14/09, la présence de commits
+« feat(sondage mining) » laissait craindre une source qui capterait plus vite *et se tromperait plus
+vite*. La lecture du fichier `llm-mining.yml` impose une lecture plus calme : **le pipeline n'a aucun
+cron**, il s'enclenche sur l'ouverture d'une issue ou un commentaire, et son propre en-tête pose la
+règle — *« Une personne doit toujours relire la PR avant de la rendre prête à fusionner. »* Une
+extraction automatique ne devient donc jamais une donnée publiée sans relecture humaine. C'est une
+garantie, et elle est écrite par la source elle-même.
+
+⚠️ **Délai d'exécution observé.** Le 15/09, l'exécution planifiée de 09:00 UTC a été servie à
+**14:16 UTC** (soit 16:16 Paris), et elle s'est terminée en `success` sans nouveau sondage. Le retard
+est réel mais sans conséquence pour nous : **14:16 < 18:00**, notre régénération passe toujours après
+le contrôle de la source. La marge est en revanche plus mince que ce que le cron laissait croire.
+
+Dernières releases : `semaine-2026-09-06` (publiée le 13/09), `semaine-2026-08-30`, `semaine-2026-08-23`.
+Prochaine attendue **dimanche 20/09** — le battement reste hebdomadaire.
 
 ## 2. whyalwaysrose/presidentielle-2027 — la prévision bayésienne citée
 
 | | |
 |---|---|
-| Créé le | 2026-09-07 (huit jours au moment du relevé) |
-| Licence | MIT · 0 ⭐ · 554 Ko · 75 fichiers |
-| Dernier push | 2026-09-13 |
-| Activité | 11 commits, **médiane 1 jour** |
+| Créé le | 2026-09-07 · MIT · 554 Ko · 75 fichiers |
+| Dernier push | 2026-09-15 |
+| Champ publié | **28 candidats** ⚠️ (Karim Bouamrane ajouté le 15/09) |
+| `as_of` | **2026-09-10** — inchangé, parce que le terrain n'a pas bougé |
+| `generated_at` | recalculé **chaque jour** |
 
-- **`Daily forecast`** — cron `20 5 * * *`, donc **chaque jour à 05:20 UTC (07:20 à Paris)**.
-- **`Deploy site`** — à chaque push.
+Deux automatisations : `daily.yml` (« Daily forecast », cron `20 5 * * *` — **05:20 UTC**, 07:20 Paris)
+et `pages.yml` (« Deploy site »).
 
-Le fichier publié (`site/data/forecast.json`) a été mis à jour **une fois par jour, sept jours d'affilée**
-(07/09 → 13/09). La prévision est donc quotidienne — mais elle bouge peu : son `as_of` est le 2026-09-10,
-c'est-à-dire la date du dernier terrain disponible. Une exécution quotidienne sur des sondages qui ne
-bougent pas ne change pas le résultat ; nous affichons donc sa date `as_of` plutôt que sa date de calcul.
+Le choix de 05:20 UTC est expliqué dans leur propre fichier : *« Les instituts publient au fil de la
+journée et les notices de la Commission des sondages suivent ; la source compilée se reconstruit à son
+propre rythme. Tourner à 05:20 UTC récupère tout ce qui a été déposé la veille. »* Bonne raison, et
+elle vaut pour nous aussi.
 
-Deux de ses rétro-tests sont publiés : `as_of 2021-09-01` (**J−221**) et `as_of 2022-03-11` (**J−30**).
+⚠️ **Piège technique qu'ils documentent et que nous n'avions pas noté** : un commit poussé par
+`GITHUB_TOKEN` **ne déclenche aucun autre workflow** (protection anti-boucle de GitHub). C'est
+pourquoi `daily.yml` déploie lui-même le résultat qu'il vient de produire, et pourquoi `pages.yml`
+couvre tout le reste. À retenir pour nos propres automatisations.
+
+Leur activité du 15/09 est du logiciel, pas de la donnée — et deux de leurs commits recoupent
+directement nos propres mesures :
+
+- *« Test the survey-weight exponent: **it does not matter** »* — ils testent la pondération par
+  fraîcheur et concluent qu'elle ne change rien. **Notre rétro-test 2022 dit exactement la même chose**
+  (3,83 pondéré contre 3,73 pour la dernière enquête seule). Même conclusion, deux méthodes.
+- *« stop a narrowed field publishing silently »* — ils corrigent un cas où un champ de candidats
+  restreint pouvait être publié sans que cela se voie. Chez nous, c'est le rôle des compteurs de
+  périmètre affichés en haut de la page d'agrégation.
+
+La prévision en cache porte le **même `generated_at` que la version amont** : notre comparaison est
+donc, à la seconde près, sur la version du jour.
 
 ## 3. Ce que cette cadence nous dit de la nôtre
 
 | | Source | Nous |
 |---|---|---|
-| Contrôle | quotidien 11:00 (Paris) | cron quotidien **18:00** (après le contrôle source) |
+| Contrôle | quotidien, planifié 11:00 (Paris) — servi à 16:16 le 15/09 ⚠️ | cron quotidien **18:00** (après le contrôle source) |
 | Données | 2 à 4 mises à jour/semaine | cache 12 h, réévalué chaque soir |
 | Battement | hebdomadaire (dimanche) | mouvements sur 7 et 28 jours |
 | Prévision comparée | quotidienne 07:20 | cache 6 h |
 
 Trois conséquences :
 
-1. **Nous passons après le contrôle quotidien de la source.** Un sondage validé aujourd'hui à 11:00
-   est publié le jour même à 18:00 : moins de 7 heures de latence sur la donnée du jour.
+1. **Nous passons après le contrôle quotidien de la source**, mais avec 1 h 44 de marge seulement le
+   15/09 au lieu des 7 heures prévues. Un sondage validé aujourd'hui à 16:16 est publié le jour même
+   à 18:00. Si GitHub sert un jour la planification après 18:00, la donnée du jour glisse au
+   lendemain — sans erreur, mais avec un jour de retard.
 2. **La prévision comparée est rafraîchie 11 h avant nous** (07:20 contre 18:00) : notre comparaison
    est toujours basée sur la version du jour, et son cache de 6 h ne fait rien perdre.
 3. **Le rythme réel des sondages suit l'agenda politique, pas notre cron.** Par semaine de terrain :
-   23 sondages la semaine du 24/08, 15 celle du 31/08, 8 celle du 07/09 — et **aucun** les semaines du 03/08
-   et du 10/08. Une page quotidienne sur une source qui s'arrête trois semaines en août doit le dire :
-   d'où la fenêtre de 90 jours et les compteurs de périmètre affichés en haut de la page d'agrégation.
+   23 sondages la semaine du 24/08, 15 celle du 31/08, 8 celle du 07/09 — **aucun** les semaines du
+   03/08 et du 10/08, et **aucun** pour l'instant la semaine du 14/09. Une page quotidienne sur une
+   source qui s'arrête plusieurs semaines doit le dire : d'où la fenêtre de 90 jours et les compteurs
+   de périmètre affichés en haut de la page d'agrégation.
 
 ## 4. Le point de licence, mis au jour par ce relevé
 
@@ -82,11 +123,7 @@ et atteint J−30 grâce à elle. C'est exactement ce que nous nous interdisons 
 des données tierces qui n'ont pas de licence ; c'est la limite connue de l'autre source, et la raison
 documentée de la nôtre.
 
-Un autre de ses commits mérite d'être noté : *« reject weighting institutes by accuracy »* — il a testé puis
-écarté la correction des instituts, quand nous avons mesuré que la nôtre ne rapportait que 0,04 point. Même
-conclusion atteinte de deux côtés, par deux méthodes différentes.
-
 ---
 
-*Relevé reproductible : API GitHub (`/repos`, `/commits?path=`, `/actions/workflows`, `/releases`),
-14/09/2026.*
+*Relevé reproductible : API GitHub (`/repos`, `/commits?path=`, `/actions/runs`, `/actions/workflows`,
+`/releases`, `/contents/.github/workflows`) et lecture directe des fichiers de workflow, 15/09/2026.*

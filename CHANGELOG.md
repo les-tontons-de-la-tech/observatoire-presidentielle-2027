@@ -11,6 +11,15 @@ chiffre qu'on ne peut plus citer.
 
 ## 15 septembre 2026
 
+**Sources — Relevé des sources : aucun nouveau sondage depuis le 10 septembre.**
+Les deux sources ont été vérifiées le 15/09, dans leurs dépôts et dans leurs fichiers de workflow. La
+compilation des sondages compte toujours 233 enquêtes, la plus récente datant du 10/09 (OpinionWay) :
+cinq jours sans nouveau terrain, et la semaine du 14/09 n'a encore rien produit. L'automatisation
+quotidienne de la source a bien tourné et n'a rien trouvé. Sa prévision bayésienne est recalculée
+chaque jour, mais son terrain s'arrête au 10/09 : elle ne bouge donc pas. La page n'est pas figée par
+une panne, elle l'est par le calendrier politique. Le relevé complet — déclencheurs, cadence, licence —
+est dans `docs/sources-et-periodicite.md`.
+
 **Nouveauté — Page « Veille législative » : ce que le Parlement vote.**
 Une nouvelle page suit les textes de loi du périmètre technopolitique — numérique, intelligence
 artificielle, données, surveillance, cybersécurité, médias — dans la législature en cours. Les scrutins

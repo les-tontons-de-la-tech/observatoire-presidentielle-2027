@@ -4,6 +4,15 @@
  "changelog": [
   {
    "date": "2026-09-15",
+   "nature": "sources",
+   "titre": "Relevé des sources : aucun nouveau sondage depuis le 10 septembre",
+   "texte": "Les deux sources ont été vérifiées le 15/09. La compilation des sondages compte toujours 233 enquêtes, la plus récente datant du 10/09 (OpinionWay) : cinq jours sans nouveau terrain, et la semaine du 14/09 n'a encore rien produit. L'automatisation quotidienne de la source a bien tourné et n'a rien trouvé. Sa prévision bayésienne est recalculée chaque jour, mais son terrain s'arrête au 10/09 : elle ne bouge donc pas. La page n'est pas figée par une panne, elle l'est par le calendrier politique.",
+   "pages": [
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-15",
    "nature": "nouveauté",
    "titre": "Page « Veille législative » : ce que le Parlement vote",
    "texte": "Une nouvelle page suit les textes de loi du périmètre technopolitique — numérique, intelligence artificielle, données, surveillance, cybersécurité, médias — dans la législature en cours. Les scrutins publics de l'Assemblée nationale sont regroupés par texte de loi, avec leur vote final et le détail de chaque scrutin. 6 textes et 99 scrutins retenus, dont 92 tenus en 2026 ; les textes de la législature précédente (loi SREN, majorité numérique) restent listés en référence.",

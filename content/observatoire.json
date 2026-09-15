@@ -1,7 +1,34 @@
 {
  "_lisez_moi": "Textes rédigés de l'observatoire. Ce fichier est éditorial : il ne contient aucun chiffre calculé. Les chiffres viennent des scripts (generate.py, backtest2022.py, candidats.py) et de data/*.json. Toute modification ici doit être accompagnée d'une entrée de changelog datée.",
- "maj": "2026-09-14",
+ "maj": "2026-09-15",
  "changelog": [
+  {
+   "date": "2026-09-15",
+   "nature": "nouveauté",
+   "titre": "Page « Veille législative » : ce que le Parlement vote",
+   "texte": "Une nouvelle page suit les textes de loi du périmètre technopolitique — numérique, intelligence artificielle, données, surveillance, cybersécurité, médias — dans la législature en cours. Les scrutins publics de l'Assemblée nationale sont regroupés par texte de loi, avec leur vote final et le détail de chaque scrutin. 6 textes et 99 scrutins retenus, dont 92 tenus en 2026 ; les textes de la législature précédente (loi SREN, majorité numérique) restent listés en référence.",
+   "pages": [
+    "veille législative"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "chiffres",
+   "titre": "Vote par groupe politique sur chaque texte, chaque député compté",
+   "texte": "Chaque texte porte la ventilation du vote par groupe, avec la position, les voix pour, contre, les abstentions, les non-votants et les absents — la somme égale l'effectif du groupe, vérifié ligne par ligne. La barre de répartition est tracée sur l'effectif et non sur les seuls votants : sur le vote du 21 juillet 2026, le Rassemblement national compte 17 participants sur 122 membres et 105 absents, ce que la barre rend visible. Les noms et couleurs des groupes sont ceux du référentiel officiel de l'Assemblée.",
+   "pages": [
+    "veille législative"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "correction",
+   "titre": "Position des groupes recalculée : le champ de l'Assemblée contredit ses propres décomptes",
+   "texte": "Le champ « position majoritaire » publié par l'Assemblée donne le groupe Écologiste et Social « contre » avec 19 voix pour, 7 contre et 7 abstentions, là où sa propre page affiche « Pour » ; le Rassemblement national y est donné « contre » avec 2 contre pour 14 abstentions. La position affichée est donc recalculée à partir des voix exprimées de chaque groupe, et le motif est écrit sur la page.",
+   "pages": [
+    "veille législative"
+   ]
+  },
   {
    "date": "2026-09-15",
    "nature": "nouveauté",

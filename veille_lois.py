@@ -709,11 +709,28 @@ if __name__ == "__main__":
     refs = reference_texts(ref)
     n_total_ref = len(ref)
 
+    # ------------------------------------------------------------------
+    # Garde-fou : ne jamais écraser une page correcte par une page vide.
+    # Si la source est injoignable ET le cache absent, on sort en erreur sans
+    # régénérer — la page précédente reste en ligne, et le cron alerte.
+    # ------------------------------------------------------------------
+    echecs = []
+    if not cur:
+        echecs.append(f"scrutins L{LEG_CUR} indisponibles (source et cache)")
+    if not textes:
+        echecs.append("aucun texte retenu après filtrage")
+    if echecs:
+        print("  ❌ ÉCHEC — page non régénérée, la version précédente reste en ligne")
+        for e in echecs:
+            print(f"     · {e}")
+        raise SystemExit(1)
+
     print(f"  → {len(textes)} textes suivis, {sum(t['nb'] for t in textes)} scrutins (L{LEG_CUR})")
     print(f"  → {len(refs)} textes de référence (L{LEG_REF})")
 
-    # Signaler tout groupe non résolu : référentiel incomplet (organe dissous) ou
-    # nouveau groupe. Mieux vaut un avertissement visible qu'un « ? » silencieux.
+    # Avertissements non bloquants : ils s'affichent dans la sortie du cron.
+    if not gmap:
+        print("  ⚠️  référentiel des groupes indisponible — noms de groupes manquants")
     connus = set(gmap) | set(ALIAS_GROUPES)
     inconnus = {g["ref"] for t in textes for v in t["votes"]
                 for g in v.get("groupes", []) if g["ref"] and g["ref"] not in connus}

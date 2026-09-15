@@ -11,6 +11,26 @@ chiffre qu'on ne peut plus citer.
 
 ## 15 septembre 2026
 
+**Nouveauté — Page « Veille législative » : ce que le Parlement vote.**
+Une nouvelle page suit les textes de loi du périmètre technopolitique — numérique, intelligence
+artificielle, données, surveillance, cybersécurité, médias — dans la législature en cours. Les scrutins
+publics de l'Assemblée nationale sont regroupés par texte de loi, avec leur vote final et le détail de
+chaque scrutin. 6 textes et 99 scrutins retenus, dont 92 tenus en 2026 ; les textes de la législature
+précédente (loi SREN, majorité numérique) restent listés en référence.
+
+**Chiffres — Vote par groupe politique sur chaque texte, chaque député compté.**
+Chaque texte porte la ventilation du vote par groupe : position, voix pour, contre, abstentions,
+non-votants et absents — la somme égale l'effectif du groupe, vérifié sur les 72 lignes publiées. La
+barre de répartition est tracée sur l'effectif et non sur les seuls votants : sur le vote du 21 juillet
+2026, le Rassemblement national compte 17 participants sur 122 membres et 105 absents, ce que la barre
+rend visible. Noms et couleurs des groupes : référentiel officiel de l'Assemblée.
+
+**Correction — Position des groupes recalculée : le champ de l'Assemblée contredit ses propres décomptes.**
+Le champ « position majoritaire » publié par l'Assemblée donne le groupe Écologiste et Social « contre »
+avec 19 voix pour, 7 contre et 7 abstentions, là où sa propre page affiche « Pour » ; le Rassemblement
+national y est donné « contre » avec 2 contre pour 14 abstentions. La position affichée est donc
+recalculée à partir des voix exprimées de chaque groupe, et le motif est écrit sur la page.
+
 **Nouveauté — Compte à rebours du premier tour, thème clair/sombre.**
 La page d'accueil affiche un chrono en temps réel jusqu'au 18 avril 2027 à 20 h (fermeture des
 bureaux), la page Agrégation un rappel compact « J−n ». Dates du scrutin au format français

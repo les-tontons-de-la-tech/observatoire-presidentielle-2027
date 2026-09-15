@@ -200,6 +200,16 @@ def load_groupes(leg):
         return {}
 
 
+# Groupes absents du référentiel courant : organes dissous puis recréés sous un
+# autre identifiant. L'Assemblée ne conserve que les organes actifs dans AMO10,
+# mais les scrutins antérieurs référencent l'ancien identifiant.
+# Vérifié le 15/09/2026 sur la page officielle du scrutin n° 447 (16 membres).
+ALIAS_GROUPES = {
+    "PO847173": {"sigle": "UDR", "nom": "Union des droites pour la République",
+                 "couleur": "#3367A7"},
+}
+
+
 def dominante(pour, contre, abst):
     """Position dominante d'un groupe, calculée sur ses voix exprimées.
 
@@ -230,15 +240,20 @@ def group_votes(s):
         pour = int(dec.get("pour") or 0)
         contre = int(dec.get("contre") or 0)
         abst = int(dec.get("abstentions") or 0)
+        nv = int(dec.get("nonVotants") or 0)
+        membres = int(g.get("nombreMembresGroupe") or 0)
         out.append({
             "ref": g.get("organeRef"),
-            "membres": int(g.get("nombreMembresGroupe") or 0),
+            "membres": membres,
             "position_an": (vote.get("positionMajoritaire") or "").lower(),
             "dominante": dominante(pour, contre, abst),
             "pour": pour,
             "contre": contre,
             "abst": abst,
-            "nv": int(dec.get("nonVotants") or 0),
+            "nv": nv,
+            # Députés du groupe qui n'apparaissent dans aucun décompte du scrutin :
+            # c'est ce reste qui répond à « où sont les autres ? ».
+            "absents": max(0, membres - (pour + contre + abst + nv)),
         })
     out.sort(key=lambda x: -x["membres"])
     return out
@@ -412,6 +427,15 @@ td.barcell{width:130px}
 .bar i.p{background:var(--green)}
 .bar i.c{background:var(--red)}
 .bar i.a{background:var(--amber)}
+.bar i.n{background:var(--blue)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 0;max-width:none}
+.legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;
+  vertical-align:middle}
+.legend .sw.p{background:var(--green)}
+.legend .sw.c{background:var(--red)}
+.legend .sw.a{background:var(--amber)}
+.legend .sw.n{background:var(--blue)}
+.legend .sw.abs{background:var(--track);border:1px solid var(--line)}
 details.gv{border-top:none;padding-top:0;margin-top:14px}
 details.gv summary{color:var(--ink);font-weight:600}
 @media(max-width:899px){.card{overflow-x:auto}}
@@ -476,48 +500,63 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
                 else "dernier scrutin enregistré")
         lignes = ""
         for g in gv["groupes"]:
-            info = gmap.get(g["ref"]) or {}
-            sigle = info.get("sigle") or "—"
+            info = gmap.get(g["ref"]) or ALIAS_GROUPES.get(g["ref"]) or {}
+            sigle = info.get("sigle") or (g["ref"] or "—")
             nom = info.get("nom") or ""
             coul = info.get("couleur") or "#8D949A"
             cls, lab = POS.get(g["dominante"], ("pos-nv", "—"))
-            exprime = g["pour"] + g["contre"] + g["abst"]
-            participe = exprime + g["nv"]
+            m = g["membres"] or 1
 
-            def pc(x):
-                return round(100 * x / exprime) if exprime else 0
+            def pc(x, m=m):
+                return round(100 * x / m, 1)
 
-            barre = (f'<span class="bar">'
+            def val(x):
+                return x if x else "—"
+
+            titre = (f'{g["pour"]} pour, {g["contre"]} contre, {g["abst"]} abstentions, '
+                     f'{g["nv"]} non-votants, {g["absents"]} absents')
+            barre = (f'<span class="bar" title="{titre}">'
                      f'<i class="p" style="width:{pc(g["pour"])}%"></i>'
                      f'<i class="c" style="width:{pc(g["contre"])}%"></i>'
-                     f'<i class="a" style="width:{pc(g["abst"])}%"></i></span>')
+                     f'<i class="a" style="width:{pc(g["abst"])}%"></i>'
+                     f'<i class="n" style="width:{pc(g["nv"])}%"></i></span>')
             lignes += (
                 f'<tr><td class="grp" style="border-left-color:{coul}">'
                 f'<b>{sigle}</b> <span class="small muted">{nom}</span></td>'
                 f'<td><span class="pill {cls}">{lab}</span></td>'
-                f'<td class="num">{participe} <span class="muted">/ {g["membres"]}</span></td>'
-                f'<td class="num">{g["pour"] or "—"}</td>'
-                f'<td class="num">{g["contre"] or "—"}</td>'
-                f'<td class="num">{g["abst"] or "—"}</td>'
+                f'<td class="num">{val(g["pour"])}</td>'
+                f'<td class="num">{val(g["contre"])}</td>'
+                f'<td class="num">{val(g["abst"])}</td>'
+                f'<td class="num">{val(g["nv"])}</td>'
+                f'<td class="num">{val(g["absents"])}</td>'
+                f'<td class="num muted">{g["membres"]}</td>'
                 f'<td class="barcell">{barre}</td></tr>\n')
 
         return f"""
   <details open class="gv">
     <summary>Vote par groupe politique</summary>
     <p class="small muted" style="max-width:none;margin:8px 0 6px">
-      {quoi}, du {fr_date(gv["date"])}. Position majoritaire de chaque groupe et décompte
-      de ses voix. La colonne « votants » rapporte les membres du groupe ayant pris part
-      au vote à son effectif : les députés absents ne figurent dans aucun décompte.</p>
+      {quoi}, du {fr_date(gv["date"])}. Chaque député du groupe est compté une fois :
+      pour + contre + abstentions + non-votants + absents = effectif.</p>
     <table>
-      <tr><th>Groupe</th><th>Position dominante</th><th class="num">Votants</th><th class="num">Pour</th>
-      <th class="num">Contre</th><th class="num">Abst.</th><th>Répartition</th></tr>
+      <tr><th>Groupe</th><th>Position dominante</th><th class="num">Pour</th>
+      <th class="num">Contre</th><th class="num">Abst.</th><th class="num">Non-vot.</th>
+      <th class="num">Absents</th><th class="num">Effectif</th><th>Répartition</th></tr>
       {lignes}
     </table>
+    <p class="legend small muted">
+      <span class="sw p"></span>pour
+      <span class="sw c"></span>contre
+      <span class="sw a"></span>abstention
+      <span class="sw n"></span>non-votant (présent, sans vote)
+      <span class="sw abs"></span>absent (dans aucun décompte du scrutin)
+    </p>
     <p class="small muted" style="max-width:none;margin-top:8px">
       « Position dominante » est calculée sur les voix exprimées du groupe (partagée en cas
       d'égalité) — et non reprise du champ « position majoritaire » publié par l'Assemblée,
       qui contredit ses propres décomptes. Un groupe qui se divise reste donc lisible ligne
-      par ligne dans les colonnes de décompte.</p>
+      par ligne. Un député absent, ou présent sans voter, ne soutient ni ne rejette le texte :
+      ne pas lire les colonnes « absents » et « non-votants » comme un vote.</p>
   </details>"""
 
     cards = ""
@@ -672,6 +711,14 @@ if __name__ == "__main__":
 
     print(f"  → {len(textes)} textes suivis, {sum(t['nb'] for t in textes)} scrutins (L{LEG_CUR})")
     print(f"  → {len(refs)} textes de référence (L{LEG_REF})")
+
+    # Signaler tout groupe non résolu : référentiel incomplet (organe dissous) ou
+    # nouveau groupe. Mieux vaut un avertissement visible qu'un « ? » silencieux.
+    connus = set(gmap) | set(ALIAS_GROUPES)
+    inconnus = {g["ref"] for t in textes for v in t["votes"]
+                for g in v.get("groupes", []) if g["ref"] and g["ref"] not in connus}
+    if inconnus:
+        print(f"  ⚠️  groupes non résolus : {sorted(inconnus)} — compléter ALIAS_GROUPES")
 
     render(textes, refs, n_total_cur, n_total_ref, gmap)
 

@@ -96,7 +96,7 @@
     {
       "nom": "Jean-Luc Mélenchon",
       "parti": "La France insoumise",
-      "famille": "gauche",
+      "famille": "extreme-gauche",
       "statut": "declare",
       "date_declaration": "2026-05-28",
       "precision": "mois",
@@ -118,7 +118,7 @@
     {
       "nom": "Delphine Batho",
       "parti": "Génération écologie",
-      "famille": "ecologiste",
+      "famille": "gauche",
       "statut": "declare",
       "date_declaration": "2025-11-25",
       "precision": "jour",
@@ -151,7 +151,7 @@
     {
       "nom": "Nicolas Dupont-Aignan",
       "parti": "Debout la France",
-      "famille": "souverainiste",
+      "famille": "extreme-droite",
       "statut": "declare",
       "date_declaration": "",
       "precision": "",
@@ -162,7 +162,7 @@
     {
       "nom": "Florian Philippot",
       "parti": "Les Patriotes",
-      "famille": "souverainiste",
+      "famille": "extreme-droite",
       "statut": "declare",
       "date_declaration": "",
       "precision": "",
@@ -173,7 +173,7 @@
     {
       "nom": "François Asselineau",
       "parti": "Union populaire républicaine",
-      "famille": "souverainiste",
+      "famille": "divers",
       "statut": "declare",
       "date_declaration": "",
       "precision": "",
@@ -294,7 +294,7 @@
     {
       "nom": "Marine Tondelier",
       "parti": "Les Écologistes",
-      "famille": "ecologiste",
+      "famille": "gauche",
       "statut": "conditionnel",
       "date_declaration": "",
       "precision": "",
@@ -316,7 +316,7 @@
     {
       "nom": "Clémentine Autain",
       "parti": "L'Après",
-      "famille": "gauche",
+      "famille": "extreme-gauche",
       "statut": "conditionnel",
       "date_declaration": "",
       "precision": "",
@@ -327,7 +327,7 @@
     {
       "nom": "Lydie Massard",
       "parti": "Union démocratique bretonne",
-      "famille": "ecologiste",
+      "famille": "gauche",
       "statut": "conditionnel",
       "date_declaration": "",
       "precision": "",

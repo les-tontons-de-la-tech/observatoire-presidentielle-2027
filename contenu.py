@@ -56,7 +56,7 @@ def _sub(texte, valeurs=None):
 def _entree(e, valeurs=None):
     return (f'<div class="maj"><div class="maj-t"><span class="maj-n">{e["nature"]}</span>'
             f'<strong>{e["titre"]}</strong>'
-            f'<span class="muted small" style="margin-left:auto">{frd(e["date"])}</span></div>'
+            f'<span class="muted small" style="margin-left:auto;padding-left:1em">{frd(e["date"])}</span></div>'
             f'<p class="small muted" style="margin:6px 0 0">{_sub(e["texte"], valeurs)}</p></div>')
 
 
@@ -101,7 +101,7 @@ def a_lire_bloc(valeurs=None):
             f'  {liste(c["sources_titre"], c["sources"])}\n'
             f'  {liste(c["legal_titre"], c["legal"])}\n'
             f'  <h3 style="margin-top:26px">Journal des mises à jour</h3>\n'
-            f'  <p class="small muted">Chaque changement de chiffre, de texte ou de présentation est '
+            f'  <p class="small muted" style="max-width:none">Chaque changement de chiffre, de texte ou de présentation est '
             f'daté. Aucun chiffre ne change sans une ligne ici.</p>\n'
             f'  {_corps(None, valeurs)[0]}\n'
             f'  <div class="note-legale small" style="margin-top:22px">\n'

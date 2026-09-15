@@ -302,7 +302,9 @@ def render(bt):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <title>Rétro-test 2022 — la méthode mise à l'épreuve</title>
-<style>{G.CSS}{G.DARK}</style>
+<style>{G.CSS}{G.DARK}
+/* Tables : largeur pleine dans les cartes */
+section.card table{{width:100%}}</style>
 {G.THEME_HEAD}</head>
 <body>
 <div class="topbar"><div class="wrap nav">
@@ -351,7 +353,7 @@ def render(bt):
 
 <section class="card">
   <h2>Sensibilité au réglage le plus arbitraire</h2>
-  <p class="small muted">La demi-vie est notre choix le plus discutable (elle fixe la vitesse à
+  <p class="small muted" style="max-width:none">La demi-vie est notre choix le plus discutable (elle fixe la vitesse à
   laquelle une vieille enquête perd son poids). Voici son effet, à la dernière échéance : si l'erreur
   variait fortement, le réglage serait un aveu de fragilité.</p>
   <table style="margin-top:10px"><tr><th>Réglage</th><th class="num">Erreur moyenne</th>
@@ -363,7 +365,7 @@ def render(bt):
   <h2>Deux réglages mesurés, pas choisis au feeling</h2>
 
   <h3 style="margin-top:18px">Fenêtre de sélection du scénario</h3>
-  <p class="small muted">La fenêtre fixe la durée pendant laquelle on cherche le scénario de
+  <p class="small muted" style="max-width:none">La fenêtre fixe la durée pendant laquelle on cherche le scénario de
   candidatures le plus testé. Trop courte, on rate les scénarios les plus documentés ; trop longue, on
   agrège des sondages d'un autre âge. Erreur moyenne sur les échéances, et couverture (échéances où
   quelque chose était publiable) — correction des effets de maison activée sur toutes les
@@ -378,7 +380,7 @@ def render(bt):
   Au-delà (120 jours), le gain est nul et l'on agrège des enquêtes plus anciennes pour rien.</p>
 
   <h3 style="margin-top:24px">Correction des effets de maison</h3>
-  <p class="small muted">Chaque institut a sa manière de poser ses questions et de redresser ses
+  <p class="small muted" style="max-width:none">Chaque institut a sa manière de poser ses questions et de redresser ses
   résultats. Nous estimons son écart moyen au consensus des autres — par itérations, avec contraction
   vers zéro quand l'institut est peu vu — puis nous corrigeons avant d'agréger.</p>
   <table style="margin-top:10px"><tr><th>Configuration</th><th class="num">Erreur moyenne</th>

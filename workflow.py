@@ -27,10 +27,26 @@ CSS_PAGE = """
 html[data-theme="dark"]{--d-violet:#b9a3fb;--d-slate:#a7b0c4}
 
 .dgwrap{overflow-x:auto;background:var(--bg);border:1px solid var(--line);border-radius:14px;
-  padding:14px 10px;margin-top:6px}
-/* Sur téléphone, un schéma de 1100 px réduit à 390 px rend ses libellés illisibles :
-   largeur plancher + défilement horizontal, plutôt qu'un schéma muet. */
+  padding:14px 10px;margin-top:6px;cursor:zoom-in}
+.dgwrap.zoom-active{cursor:zoom-out}
 .dgwrap svg{display:block;margin:0 auto;min-width:900px;max-width:100%;height:auto}
+/* Lightbox overlay pour le zoom du schéma */
+#dg-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);
+  backdrop-filter:blur(4px);cursor:zoom-out;overflow:hidden}
+#dg-overlay.open{display:flex;align-items:center;justify-content:center}
+#dg-overlay .dg-wrap-inner{position:relative;max-width:95vw;max-height:95vh;overflow:hidden;
+  cursor:grab;border-radius:12px;box-shadow:0 0 60px rgba(0,0,0,.5)}
+#dg-overlay .dg-wrap-inner:active{cursor:grabbing}
+#dg-overlay svg{display:block;max-width:none;max-height:none;transform-origin:0 0;
+  background:var(--paper,#11183a);border-radius:12px}
+#dg-overlay .close-btn{position:fixed;top:16px;right:20px;width:40px;height:40px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:50%;
+  color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:10000;transition:background .2s}
+#dg-overlay .close-btn:hover{background:rgba(255,255,255,.3)}
+#dg-overlay .zoom-hint{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.5);font-size:13px;pointer-events:none;z-index:10000;
+  background:rgba(0,0,0,.4);padding:6px 14px;border-radius:20px;white-space:nowrap}
 .dghint{display:none;font-size:.8rem;color:var(--muted);margin:8px 0 0}
 @media(max-width:920px){.dghint{display:block}}
 
@@ -331,12 +347,19 @@ PAGE = f"""<!doctype html>
 
 <section id="schema" class="card">
   <h2>Le cycle, de la source à la page publiée</h2>
-  <p class="small muted">Six étapes, une seule source de chiffres (MieuxVoter, licence MIT) et des
+  <p class="small muted" style="max-width:none">Six étapes, une seule source de chiffres (MieuxVoter, licence MIT) et des
   couches complémentaires toujours étiquetées séparément. Une intention de vote ne se moyenne jamais
   avec une probabilité de marché ou de modèle.</p>
-  <div class="dgwrap">{SCHEMA}</div>
-  <p class="dghint">↔ le schéma défile horizontalement</p>
+  <div class="dgwrap" id="dg-wrap">{SCHEMA}</div>
+  <p class="dghint">↔ le schéma défile horizontalement · cliquez pour zoomer</p>
 </section>
+
+<!-- Lightbox overlay pour le zoom -->
+<div id="dg-overlay">
+  <div class="dg-wrap-inner" id="dg-inner"></div>
+  <div class="close-btn" id="dg-close">✕</div>
+  <div class="zoom-hint">Molette pour zoomer · glisser pour se déplacer · Échap pour fermer</div>
+</div>
 
 <div class="cards">
   <div class="card2">
@@ -362,7 +385,7 @@ PAGE = f"""<!doctype html>
 
 <section class="card">
   <h2>Ce que le rétro-test 2022 a appris</h2>
-  <p class="small muted">La méthode rejouée sur la campagne 2022, comparée au résultat officiel
+  <p class="small muted" style="max-width:none">La méthode rejouée sur la campagne 2022, comparée au résultat officiel
   du ministère de l'Intérieur (12 scores sur 12 vérifiés). C'est ce qui a fixé les deux réglages
   ci-dessus, et c'est aussi ce qui borne la confiance à leur accorder.</p>
   <ul class="tight">
@@ -380,12 +403,12 @@ PAGE = f"""<!doctype html>
 
 <section class="card">
   <h2>Vérifier par soi-même</h2>
-  <p class="small">Le code est publié sous licence MIT, les données dérivées et le contenu
+  <p class="small" style="max-width:none">Le code est publié sous licence MIT, les données dérivées et le contenu
   éditorial sont versionnés au jour le jour :
   <a href="https://github.com/les-tontons-de-la-tech/observatoire-presidentielle-2027">dépôt
   observatoire-presidentielle-2027</a>. Les caches téléchargés (~900 Ko chez MieuxVoter) ne sont
   pas recopiés : ils se rechargent, et la source est citée.</p>
-  <p class="small muted" style="margin-top:10px">Page régénérée par <code>workflow.py</code>.
+  <p class="small muted" style="margin-top:10px;max-width:none">Page régénérée par <code>workflow.py</code>.
   Journal des changements de chiffres et de textes : <code>CHANGELOG.md</code> du dépôt.</p>
 </section>
 </main>
@@ -393,7 +416,55 @@ PAGE = f"""<!doctype html>
 <footer class="wrap">
   <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
 </footer>
-{G.THEME_JS}</body>
+{G.THEME_JS}
+<script>(function(){{
+var wrap=document.getElementById("dg-wrap"),overlay=document.getElementById("dg-overlay"),
+inner=document.getElementById("dg-inner"),close=document.getElementById("dg-close");
+if(!wrap||!overlay)return;
+var svg=wrap.querySelector("svg");if(!svg)return;
+var scale=1,tx=0,ty=0,down=false,sx=0,sy=0,stx=0,sty=0;
+function openZoom(){{
+overlay.classList.add("open");
+var clone=svg.cloneNode(true);
+clone.setAttribute("width","1100");
+clone.setAttribute("height","930");
+inner.innerHTML="";
+inner.appendChild(clone);
+scale=1;tx=0;ty=0;
+updateTransform();
+}}
+function closeZoom(){{overlay.classList.remove("open");inner.innerHTML="";}}
+function updateTransform(){{
+var el=inner.querySelector("svg");
+if(!el)return;
+el.style.transform="translate("+tx+"px,"+ty+"px) scale("+scale+")";
+}}
+wrap.addEventListener("click",function(){{openZoom();}});
+overlay.addEventListener("click",function(e){{if(e.target===overlay||e.target===close)closeZoom();}});
+overlay.addEventListener("wheel",function(e){{
+e.preventDefault();
+var ds=e.deltaY>0?0.9:1.1;
+var rect=inner.getBoundingClientRect();
+var mx=e.clientX-rect.left,my=e.clientY-rect.top;
+var ns=scale*ds;if(ns<0.3)ns=0.3;if(ns>8)ns=8;
+tx=mx-(mx-tx)*(ns/scale);
+ty=my-(my-ty)*(ns/scale);
+scale=ns;
+updateTransform();
+}},{{passive:false}});
+inner.addEventListener("mousedown",function(e){{
+down=true;sx=e.clientX;sy=e.clientY;stx=tx;sty=ty;
+e.preventDefault();
+}});
+document.addEventListener("mousemove",function(e){{
+if(!down)return;var dx=e.clientX-sx,dy=e.clientY-sy;
+tx=stx+dx;ty=sty+dy;updateTransform();
+}});
+document.addEventListener("mouseup",function(){{down=false;}});
+document.addEventListener("keydown",function(e){{
+if(e.key==="Escape")closeZoom();
+}});
+}})();</script></body>
 </html>
 """
 

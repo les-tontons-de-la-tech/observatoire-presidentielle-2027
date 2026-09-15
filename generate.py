@@ -73,6 +73,11 @@ FORECAST_URL = ("https://raw.githubusercontent.com/whyalwaysrose/presidentielle-
                 "main/site/data/forecast.json")
 
 
+def _get_json(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "poc-agregateur-2027"})
+    with urllib.request.urlopen(req, timeout=45) as r:
+        return json.loads(r.read().decode("utf-8", "replace"))
+
 def fetch_forecast(force=False):
     """Prévision bayésienne whyalwaysrose/presidentielle-2027 (MIT) : probabilités, pas intentions.
     Toute erreur renvoie None — la page se génère sans la comparaison."""
@@ -98,7 +103,14 @@ def fetch_forecast(force=False):
         json.dump(keep, open(cache, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         return keep
     except Exception:
-        return None
+        # Échec du fetch : conserver le cache existant avec horodatage
+        if os.path.exists(cache):
+            try:
+                stale = json.load(open(cache, encoding="utf-8"))
+                stale["cached_at"] = os.path.getmtime(cache)
+                return stale
+            except Exception:
+                return None
 
 
 def _match_forecast(nom, cands):
@@ -161,7 +173,7 @@ def backtest_block():
     top2 = " et ".join(b["top2"])
     return (
         '<h3 style="margin-top:24px">Validation : la méthode rejouée sur 2022</h3>'
-        '<p class="small">Rejouée sur la campagne 2022 (sondages compilés sous licence MIT, résultat '
+        '<p class="small" style="max-width:none">Rejouée sur la campagne 2022 (sondages compilés sous licence MIT, résultat '
         'officiel vérifié), notre agrégation affiche <strong>' + fr1u(b["mae"])
         + " point d'erreur moyenne</strong> à J−" + str(b["jours"]) + ", " + str(b["n"])
         + " candidats réels publiés, et les deux finalistes identifiés (" + top2 + "). "
@@ -217,18 +229,24 @@ def forecast_block(agg, trends, fc):
     if not fc or not fc.get("candidats"):
         return ('<p class="small muted">Prévision bayésienne indisponible à cette génération '
                 '(source externe) — la page reste complète par ailleurs.</p>')
+    stale = ''
+    if fc.get("cached_at"):
+        from datetime import datetime as dt
+        stale = ('<p class="small muted" style="color:var(--amber);max-width:none">⚠ Données mises à jour le '
+                 + dt.fromtimestamp(fc["cached_at"]).strftime("%d/%m/%Y à %H:%M")
+                 + ' — la source externe est temporairement injoignable.</p>')
     d = fc.get("diagnostics") or {}
     s = fc.get("sondages") or {}
     rf = d.get("runoff_fit") or {}
-    intro = ('<p class="small muted">Deux colonnes de gauche : nos <strong>intentions de vote</strong> '
+    intro = ('<p class="small muted" style="max-width:none">Deux colonnes de gauche : nos <strong>intentions de vote</strong> '
              'mesurées (moyenne pondérée). Quatre colonnes de droite : leurs <strong>probabilités</strong> '
              'issues de 80 000 simulations d\'un modèle bayésien. Les niveaux se comparent avec prudence '
              '(deux objets différents) ; l\'incertitude, elle, se compare directement — et elle est '
              'édifiante.</p>'
-             '<p class="small muted">Ce que recouvre la colonne « MieuxVoter » : la compilation ouverte '
+             '<p class="small muted" style="max-width:none">Ce que recouvre la colonne « MieuxVoter » : la compilation ouverte '
              'des sondages (licence MIT) et la moyenne pondérée calculée à partir d\'elle, selon la '
              'méthode publiée plus bas — jamais un chiffre repris tel quel.</p>')
-    chiffres = (f'<h3 style="margin-top:24px">La prévision bayésienne, en chiffres</h3><ul class="tight small">'
+    chiffres = (f'<h3 style="margin-top:24px">La prévision bayésienne, en chiffres</h3><ul class="tight small" style="max-width:none">'
                 f'<li><strong>{s.get("surveys", "?")} enquêtes</strong> et '
                 f'<strong>{s.get("hypotheses", "?")} hypothèses</strong> de candidatures dépouillées '
                 f'({s.get("hypotheses_tour1", "?")} de premier tour, '
@@ -258,7 +276,7 @@ def forecast_block(agg, trends, fc):
     ecart_txt = " · ".join(
         f'{r["candidat"]} {fr1u(r["nous_num"])} % contre {fr1u(r["q50"])} %' for r in tete3)
     lecture = (
-        '<h3 style="margin-top:24px">Ce qu\'on lit dans l\'écart</h3><ul class="tight small">'
+        '<h3 style="margin-top:24px">Ce qu\'on lit dans l\'écart</h3><ul class="tight small" style="max-width:none">'
         '<li><strong>Les deux lectures se rejoignent sur le haut du tableau.</strong> '
         + ecart_txt + '. Deux méthodes opposées, la même source de sondages : '
         + ('le plus large écart des trois est de ' + fr1u(abs(tete_max["nous_num"] - tete_max["q50"]))
@@ -290,10 +308,10 @@ def forecast_block(agg, trends, fc):
         'rejoignent — un modèle bayésien et une moyenne expliquée ne convergent pas par hasard.</li>'
         '</ul>')
 
-    garde = ('<p class="small muted">Ce que cette page garde : lisibilité totale (aucune dépendance, '
+    garde = ('<p class="small muted" style="max-width:none">Ce que cette page garde : lisibilité totale (aucune dépendance, '
              'aucun modèle latent à croire sur parole), chiffre explicite d\'un scénario donné, aucune '
              'donnée non licite. Ce qu\'il doit emprunter : la validation par rétro-test.</p>')
-    return intro + compare_table(agg, trends, fc) + chiffres + compare_duels(fc) + lecture + garde
+    return intro + stale + compare_table(agg, trends, fc) + chiffres + compare_duels(fc) + lecture + garde
 
 
 def parse_date(s):
@@ -709,13 +727,14 @@ table{width:100%;border-collapse:collapse;font-size:.9rem}
 th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
 th{font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.num{text-align:right;letter-spacing:normal}
 .muted{color:var(--muted)}
 .small{font-size:.85rem}
 .maj{border-left:3px solid var(--line);padding:2px 0 2px 14px;margin:16px 0 0}
 .maj-t{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .maj-t strong{font-size:.95rem;color:var(--ink)}
 .maj-n{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
-  border:1px solid var(--line);border-radius:999px;padding:2px 8px;white-space:nowrap}
+  border:1px solid var(--line);border-radius:999px;padding:2px 0;min-width:76px;text-align:center;white-space:nowrap}
 .excl{border-left:3px solid var(--amber);background:var(--excl-bg);padding:12px 14px;border-radius:0 10px 10px 0}
 footer{padding:34px 0 60px;color:var(--muted);font-size:.84rem;text-align:right}
 code{background:var(--track);padding:1px 5px;border-radius:5px;font-size:.86em}
@@ -747,6 +766,22 @@ ul.tight li{margin:5px 0}
 .steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:30px;height:30px;
 border-radius:50%;background:#1d1c17;color:#fff;font-weight:800;display:flex;align-items:center;
 justify-content:center;font-size:.9rem}
+<!-- Chrono countdown glassmorphism -->
+.chrono-glass{text-align:center;padding:18px 14px;margin:14px 0;border-radius:18px;
+  background:rgba(255,253,248,.75);border:1px solid rgba(217,210,195,.5);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.chrono-glass-label{font-size:.82rem;font-weight:600;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.04em;margin-bottom:6px;display:block}
+.chrono-glass-units{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.chrono-unit{display:flex;flex-direction:column;align-items:center;min-width:64px}
+.chrono-num{font-size:1.7rem;font-weight:700;line-height:1.1;color:var(--ink);
+  font-variant-numeric:tabular-nums;font-family:'Space Grotesk','JetBrains Mono',monospace}
+.chrono-lab{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.chrono-glass-foot{display:block;margin-top:4px;font-size:.82rem;color:var(--muted)}
+html[data-theme="dark"] .chrono-glass{background:rgba(17,24,58,.75);
+  border-color:rgba(47,53,80,.5)}
+html[data-theme="dark"] .chrono-num{color:#edf0f8}
+
 footer{border-top:1px solid var(--line)}
 """
 
@@ -795,6 +830,20 @@ var sombre=r.getAttribute("data-theme")==="dark";
 if(sombre){r.removeAttribute("data-theme");}else{r.setAttribute("data-theme","dark");}
 try{localStorage.setItem("theme",sombre?"light":"dark");}catch(e){}
 b.setAttribute("title",sombre?"Passer en mode sombre":"Passer en mode clair");});})();</script>"""
+
+CHRONO_JS = """<script>(function(){var e=document.querySelectorAll(".chrono-num,.chrono");if(!e.length)return;
+function pad(n){return n<10?"0"+n:""+n}
+function tick(){e.forEach(function(el){
+var t=el.getAttribute("data-target");if(!t)return;
+var d=Date.parse(t)-Date.now();if(d<0){el.textContent="—";return}
+var s=Math.floor(d/1000);var m=Math.floor(s/60);var hh=Math.floor(m/60);var dd=Math.floor(hh/24);
+var unit=el.getAttribute("data-unit");
+if(unit==="d")el.textContent=dd;
+else if(unit==="h")el.textContent=pad(hh%24);
+else if(unit==="m")el.textContent=pad(m%60);
+else if(unit==="s")el.textContent=pad(s%60);
+else el.textContent="J-"+dd;});
+} tick(); setInterval(tick,1000);})();</script>"""
 
 
 
@@ -1043,7 +1092,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <section id="perimetre" class="card">
   <span class="pill a">Périmètre</span>
   <div class="mets">
-    <div class="met"><span>Scrutin</span><b>{frd("2027-04-18")} {"(J−" + str((SCRUTIN_1 - TODAY).days) + ")" if SCRUTIN_1 else ""}</b></div>
+    <div class="met"><span>Premier tour</span><b>{frd("2027-04-18")} <span class="chrono" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}">—</span></b></div>
     <div class="met"><span>Sondages dans la source</span><b>{agg["total_polls_all"]}</b></div>
     <div class="met"><span>1<sup>er</sup> tour, {agg["window"]} derniers jours</span><b>{agg["polls_in_window"]}</b></div>
     <div class="met"><span>Scénario retenu</span><b>{agg["scenario"]} · {agg["scenario_size"]} candidats</b></div>
@@ -1056,7 +1105,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 
 <section id="tableau" class="card">
   <h2>Moyennes pondérées</h2>
-  <p class="small muted">Les barres sont proportionnelles à la moyenne. <strong>IC 95 %</strong> :
+  <p class="small muted" style="max-width:none">Les barres sont proportionnelles à la moyenne. <strong>IC 95 %</strong> :
   incertitude statistique de la moyenne. <strong>Amplitude</strong> : minimum et maximum observés
   parmi les sondages agrégés — c'est la dispersion réelle entre instituts, souvent plus parlante
   que l'intervalle.</p>
@@ -1071,14 +1120,14 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 
 <section id="evolution" class="card">
   <h2>Évolution, semaine par semaine</h2>
-  <p class="small muted">Série <strong>rétro-calculée</strong> : la méthode actuelle appliquée aux
+  <p class="small muted" style="max-width:none">Série <strong>rétro-calculée</strong> : la méthode actuelle appliquée aux
   sondages publiés à chaque échéance hebdomadaire — c'est ce que cette page aurait affiché, pas ce
   qu'elle affichait. Le scénario est verrouillé sur {agg["scenario"]} pour que les lignes restent
   comparables. Un écart inférieur à 1 point reste dans la marge : nous ne le commentons pas.</p>
   {mov_table(movs)}
   <p class="small" style="margin-top:14px"><strong>Mouvements sur 7 jours :</strong> {mov_line(movs)}.</p>
   <h3 style="margin-top:26px">Tendance, toutes listes confondues</h3>
-  <p class="small muted">Ici, chaque sondage du premier tour compte, quelle que soit la liste testée :
+  <p class="small muted" style="max-width:none">Ici, chaque sondage du premier tour compte, quelle que soit la liste testée :
   c'est un <strong>indicateur de direction</strong>. Les niveaux ne sont pas comparables à ceux du
   tableau ci-dessus (une liste de dix candidats ne suit pas la même arithmétique qu'une liste de
   quinze) — seule l'évolution compte, et elle est plus robuste car elle repose sur beaucoup plus
@@ -1094,7 +1143,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 
 <section id="comparaison" class="card">
   <h2>Comparaison : l'agrégation des sondages face à une prévision bayésienne</h2>
-  <p class="small">Un projet indépendant, <a
+  <p class="small" style="max-width:none">Un projet indépendant, <a
   href="https://github.com/whyalwaysrose/presidentielle-2027">whyalwaysrose/presidentielle-2027</a>
   (licence MIT), publie une prévision bayésienne hiérarchique de la même élection, nourrie de la
   <strong>même source de sondages</strong>, avec le choix inverse du nôtre : il <em>intègre</em>
@@ -1134,7 +1183,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 
 <section id="limites" class="card">
   <h2>Limites de la méthode</h2>
-  <div class="excl small">
+  <div class="excl small" style="max-width:none">
     <p style="margin:0 0 8px"><strong>Cette page n'est pas un modèle de prévision.</strong> Elle n'anticipe
     ni la participation, ni les reports de voix, ni les dynamiques de campagne, et ne calcule aucune
     probabilité de victoire.</p>
@@ -1161,7 +1210,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 
 <section id="mentions" class="card">
   <h2>Sources, traçabilité et mentions légales</h2>
-  <p class="small muted">Chaque sondage agrégé est nommé, daté et attribué. Les indications ci-dessous
+  <p class="small muted" style="max-width:none">Chaque sondage agrégé est nommé, daté et attribué. Les indications ci-dessous
   sont celles que la loi exige pour la publication des résultats d'un sondage :</p>
   {mentions_table(agg)}
   {legal_block(agg)}
@@ -1171,7 +1220,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <footer class="wrap">
   <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
 </footer>
-{THEME_JS}</body>
+{THEME_JS}{CHRONO_JS}</body>
 </html>
 """
 
@@ -1299,13 +1348,13 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 
 <header class="wrap hero">
   <span class="eyebrow">Observatoire des sondages · présidentielle 2027</span>
-  <h1>Les sondages de la présidentielle 2027, agrégés sans boule de cristal</h1>
+  <h1>Agrégation des sondages de la présidentielle 2027</h1>
   <p class="lede">Nous compilons les sondages publiés par les instituts, <strong>un scénario de
   candidatures à la fois</strong>, avec la méthode écrite noir sur blanc et les limites affichées à
   côté des chiffres. Pas de probabilité de victoire : une lecture sourcée, datée, discutable.</p>
   <div class="cta">
     <a class="btn" href="/observatoire/sondages/">Voir l'agrégation du jour</a>
-    <a class="btn2" href="#methode">Comment c'est calculé</a>
+    <a class="btn2" href="#methode">La méthode</a>
   </div>
 
   <div class="statgrid">
@@ -1316,11 +1365,19 @@ def render_landing(agg, movs=None, trends=None, fc=None):
       <span>sur {agg["agg_window"]} jours</span></div>
     <div class="stat"><span>Instituts couverts</span><b>{len(agg["instituts"])}</b>
       <span>{", ".join(agg["instituts"][:3])}</span></div>
-    <div class="stat"><span>Dernière enquête</span><b>{agg["last"][8:10]}.{agg["last"][5:7]}</b>
-      <span>période : {agg["first"][8:10]}.{agg["first"][5:7]} → {agg["last"][8:10]}.{agg["last"][5:7]}</span></div>
+    <div class="stat"><span>Dernière enquête</span><b>{agg["last"][8:10]}/{agg["last"][5:7]}/{agg["last"][0:4]}</b>
+      <span>période : {agg["first"][8:10]}/{agg["first"][5:7]}/{agg["first"][0:4]} → {agg["last"][8:10]}/{agg["last"][5:7]}/{agg["last"][0:4]}</span></div>
   </div>
-  <p class="small muted" style="margin-top:14px">Scrutin : <strong>dimanche 18 avril et dimanche
-  2 mai 2027</strong>{" — J−" + str((SCRUTIN_1 - TODAY).days) + " avant le premier tour" if SCRUTIN_1 else ""}.</p>
+  <div class="chrono-glass">
+      <span class="chrono-glass-label">Premier tour</span>
+      <div class="chrono-glass-units">
+        <div class="chrono-unit"><span class="chrono-num" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}" data-unit="d">--</span><span class="chrono-lab">jours</span></div>
+        <div class="chrono-unit"><span class="chrono-num" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}" data-unit="h">--</span><span class="chrono-lab">heures</span></div>
+        <div class="chrono-unit"><span class="chrono-num" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}" data-unit="m">--</span><span class="chrono-lab">minutes</span></div>
+        <div class="chrono-unit"><span class="chrono-num" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}" data-unit="s">--</span><span class="chrono-lab">secondes</span></div>
+      </div>
+      <span class="chrono-glass-foot">dimanche 18 avril 2027</span>
+    </div>
   <p class="small muted">Scénario retenu : {agg["scenario"]}
   ({agg["scenario_size"]} candidats) · {n_cand} candidats publiés · source : {agg["total_polls_all"]}
   sondages compilés, dont {agg["polls_in_window"]} sur les {agg["window"]} derniers jours.
@@ -1330,14 +1387,14 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 <main class="wrap">
 <section id="evolution" class="card">
   <h2>Évolution, semaine par semaine</h2>
-  <p class="small muted">Série <strong>rétro-calculée</strong> par la méthode actuelle, sur les sondages
+  <p class="small muted" style="max-width:none">Série <strong>rétro-calculée</strong> par la méthode actuelle, sur les sondages
   publiés à chaque échéance hebdomadaire (ce que la page aurait affiché, pas ce qu'elle affichait).
   Un écart inférieur à 1 point reste dans la marge et n'est pas commenté.</p>
   {mov_table(movs)}
   <p class="small" style="margin-top:14px"><strong>Mouvements sur 7 jours (scénario retenu) :</strong>
   {mov_line(movs)}.</p>
   <h3 style="margin-top:24px">Tendance, toutes listes confondues</h3>
-  <p class="small muted">Indicateur de direction : chaque sondage du premier tour compte, quelle que
+  <p class="small muted" style="max-width:none">Indicateur de direction : chaque sondage du premier tour compte, quelle que
   soit la liste testée. Les niveaux ne sont pas comparables à ceux du tableau ci-dessus ; seule
   l'évolution compte, et elle est plus robuste (beaucoup plus d'enquêtes).
   <a href="/observatoire/sondages/#evolution">Méthode et détail</a>.</p>
@@ -1427,7 +1484,7 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 
 <section id="comparaison" class="card">
   <h2>Comparaison avec une prévision bayésienne</h2>
-  <p class="small muted">Un projet MIT indépendant prévoit la même élection à partir des
+  <p class="small muted" style="max-width:none">Un projet MIT indépendant prévoit la même élection à partir des
   <strong>mêmes sondages</strong>, mais en intégrant l'incertitude sur la liste des candidats au lieu
   de verrouiller un scénario. En résumé : les deux lectures se rejoignent désormais sur tout le haut du
   tableau (aucun écart supérieur à 0,3 point sous le quatrième), et leurs intervalles restent dix fois
@@ -1439,7 +1496,7 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 
 <section id="limites" class="card">
   <h2>À lire avant de citer un chiffre</h2>
-  <div class="excl small">
+  <div class="excl small" style="max-width:none">
     <p style="margin:0 0 8px"><strong>Cette page n'est pas un modèle de prévision.</strong> Elle décrit
     ce que disent les sondages publiés, agrémenté d'une incertitude explicite — rien de plus.</p>
     <p style="margin:0">Une moyenne de sondages n'est pas un résultat, et une intention de vote n'est
@@ -1447,7 +1504,7 @@ def render_landing(agg, movs=None, trends=None, fc=None):
     le détail de ce qui peut être cité — sous quelle forme et à quelles conditions — se trouve dans la
     section <a href="/observatoire/sondages/#a-lire">Citer un chiffre</a>.</p>
   </div>
-  <ul class="tight small">
+  <ul class="tight small" style="max-width:none">
     <li><strong>Citez la moyenne, jamais un sondage</strong> : « moyenne des sondages publiés au
     {VALEURS["date_maj"]}, scénario {VALEURS["scenario"]} ({VALEURS["scenario_size"]} candidats),
     {VALEURS["polls_aggregated"]} enquêtes agrégées ».</li>
@@ -1465,7 +1522,7 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 <footer class="wrap">
   <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
 </footer>
-{THEME_JS}</body>
+{THEME_JS}{CHRONO_JS}</body>
 </html>
 """
 

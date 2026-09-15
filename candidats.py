@@ -24,10 +24,12 @@ STATUTS = [
     ("soutien", "Cités mais non candidats", "Ils ont dit ne pas être candidats — ou soutenir quelqu'un d'autre."),
 ]
 FAMILLES = {
-    "gauche": ("Gauche", "#8c2f39"), "extreme-gauche": ("Extrême gauche", "#6b1f26"),
-    "ecologiste": ("Écologiste", "#2f6b3f"), "centre": ("Centre", "#8a6a1f"),
-    "droite": ("Droite", "#2b4a7a"), "extreme-droite": ("Extrême droite", "#4a2f6b"),
-    "souverainiste": ("Souverainiste", "#5a4a2f"), "divers": ("Divers", "#5c6773"),
+    "extreme-gauche": ("Extrême gauche", "#6b1f26"),
+    "gauche": ("Gauche", "#8c2f39"),
+    "centre": ("Centre", "#8a6a1f"),
+    "droite": ("Droite", "#2b4a7a"),
+    "extreme-droite": ("Extrême droite", "#4a2f6b"),
+    "divers": ("Divers", "#5c6773"),
 }
 PILLS = {"declare": "Déclaré", "conditionnel": "Sous condition", "suspens": "En suspens",
          "retire": "Retiré", "soutien": "Non candidat"}
@@ -232,7 +234,7 @@ def presence_block():
                          f'<td class="num">{aucun}</td>'
                          f'<td class="num">{G.fr(round(100 * (a_seul + b_seul) / n, 1))} %</td></tr>')
         bloc_paires = f'''<h3 style="margin-top:26px">Un siège, deux noms</h3>
-  <p class="small muted">Trois conditions, mesurées et non supposées : chaque nom est testé
+  <p class="small muted" style="max-width:none">Trois conditions, mesurées et non supposées : chaque nom est testé
   <strong>seul</strong> dans au moins trois questionnaires, ils ne se croisent
   <strong>presque jamais</strong>, et à eux deux ils couvrent <strong>tout le champ</strong> de la
   fenêtre. C'est la signature d'un même siège occupé par alternance dans les scénarios des instituts.
@@ -244,12 +246,12 @@ def presence_block():
     <th class="num">Champ couvert</th></tr></thead>
     <tbody>{lignes_p}</tbody>
   </table></div>
-  <p class="small muted" style="margin-top:12px">Sur {n} questionnaires de la fenêtre,
+  <p class="small muted" style="margin-top:12px;max-width:none">Sur {n} questionnaires de la fenêtre,
   <strong>{'une paire remplit' if len(paires) == 1 else str(len(paires)) + ' paires remplissent'}
   </strong> ces trois conditions.</p>'''
     else:
         bloc_paires = ('<h3 style="margin-top:26px">Un siège, deux noms</h3>'
-                       '<p class="small muted">Aucune paire ne remplit aujourd\'hui les trois '
+                       '<p class="small muted" style="max-width:none">Aucune paire ne remplit aujourd\'hui les trois '
                        'conditions : deux noms testés seuls chacun de leur côté, presque jamais '
                        'ensemble, <em>et</em> couvrant tout le '
                        'champ. La situation peut changer au prochain sondage — la page est régénérée '
@@ -270,7 +272,7 @@ def presence_block():
                          f'<td class="num">{G.fr(round(100 * c[a] / len(f), 1))} %</td>'
                          f'<td class="num">{G.fr(round(100 * c[b] / len(f), 1))} %</td></tr>')
         bascule = f'''<h3 style="margin-top:26px">{a} et {b} : ce que la mesure raconte</h3>
-  <p class="small muted">Même fenêtre de 90 jours, quatre dates. Une « probabilité de candidature »
+  <p class="small muted" style="max-width:none">Même fenêtre de 90 jours, quatre dates. Une « probabilité de candidature »
   ne bougerait pas comme cela ; une mesure de ce que les instituts testent, si.</p>
   <div class="tblwrap"><table>
     <thead><tr><th>Fenêtre</th><th class="num">Questionnaires</th>
@@ -295,7 +297,7 @@ def presence_block():
 
   <h3 style="margin-top:26px">Part des questionnaires où le nom est testé</h3>
   <div class="pbars">{lignes}</div>
-  <p class="small muted" style="margin-top:10px">Lecture : sur les {n} questionnaires de premier tour
+  <p class="small muted" style="margin-top:10px;max-width:none">Lecture : sur les {n} questionnaires de premier tour
   publiés dans les {FENETRE} derniers jours, <strong>{presence_tri[0][0]}</strong> figure dans
   {presence_tri[0][1]}. La colonne de droite compare à la fenêtre de {FENETRE} jours précédente
   ({nprev} questionnaires).</p>
@@ -339,7 +341,7 @@ def render(d):
         rows = "".join(ligne(c) for c in sorted(par_statut[s], key=lambda c: c["nom"].split()[-1]))
         sections += f'''<section id="{s}" class="card">
   <h2>{titre} <span class="muted" style="font-size:.8em">({len(par_statut[s])})</span></h2>
-  <p class="small muted">{intro}</p>
+  <p class="small muted" style="max-width:none">{intro}</p>
   <div class="tblwrap"><table class="cand">
     <thead><tr><th>Candidat</th><th>Parti</th><th>Déclaration</th><th>Statut</th>
     <th>Officialisation<br>Journal officiel</th><th>Commentaire</th><th>Source</th></tr></thead>
@@ -386,7 +388,7 @@ condition, prétendants et retraits — chaque ligne sourcée, avec ce que l'off
     <div class="stat"><span>Déclarés en 2022</span><b>12</b><span>pour comparaison</span></div>
     <div class="stat"><span>Officialisations</span><b>0</b><span>aucune avant 2027</span></div>
   </div>
-  <p class="small muted" style="margin-top:14px">Vérifié le {G.frd(d["verifie_le"])} sur les sources
+  <p class="small muted" style="margin-top:14px;max-width:none">Vérifié le {G.frd(d["verifie_le"])} sur les sources
   listées en bas de page ({len(d["candidats"])} personnes recensées). Deux règles : jamais de date sans
   source, et un retrait reste affiché.</p>
 </header>
@@ -394,7 +396,7 @@ condition, prétendants et retraits — chaque ligne sourcée, avec ce que l'off
 <main class="wrap">
 <section class="card">
   <h2>Par où commencer</h2>
-  <p class="small muted">Les groupes ci-dessous ne sont pas des jugements : ils décrivent ce qui manque
+  <p class="small muted" style="max-width:none">Les groupes ci-dessous ne sont pas des jugements : ils décrivent ce qui manque
   à chaque candidature pour devenir une candidature au sens du Conseil constitutionnel.</p>
   <p style="margin-top:12px">{sommaire}</p>
   <div class="note-legale small" style="margin-top:18px">

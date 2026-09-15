@@ -11,6 +11,30 @@ chiffre qu'on ne peut plus citer.
 
 ## 15 septembre 2026
 
+**Nouveauté — Compte à rebours du premier tour, thème clair/sombre.**
+La page d'accueil affiche un chrono en temps réel jusqu'au 18 avril 2027 à 20 h (fermeture des
+bureaux), la page Agrégation un rappel compact « J−n ». Dates du scrutin au format français
+(jj/mm/aaaa) partout.
+
+**Correction — Prévision bayésienne : cache conservé en cas d'indisponibilité de la source.**
+La fonction de téléchargement (`_get_json`) avait disparu du générateur, ce qui affichait
+« indisponible » en permanence. Rétablie, et si la source externe ne répond plus, la page garde les
+dernières données avec leur date de mise à jour, au lieu de disparaître.
+
+**Présentation — Textes élargis à la pleine largeur des cartes.**
+Les phrases introductives de section (comparaison bayésienne, méthode, journal, rétro-test) ne sont
+plus contraintes à 36 caractères par ligne : elles occupent la carte, les notes techniques et les
+légendes restent étroites.
+
+**Présentation — Schéma du workflow zoomable.**
+Sur la page Workflow, un clic sur le schéma l'ouvre en plein écran : molette pour zoomer, glisser
+pour se déplacer, Échap pour fermer.
+
+**Données — Blocs politiques alignés sur la nomenclature officielle.**
+Les candidats sont classés selon les nuances politiques du ministère de l'Intérieur (extrême gauche,
+gauche, centre, droite, extrême droite). La France insoumise passe à l'extrême gauche, les écologistes
+rejoignent la gauche, les souverainistes sont répartis entre extrême droite et divers.
+
 **Nouveauté — Page « Workflow » : comment le site se fabrique.**
 Un schéma d'architecture, ses légendes et les réglages du rétro-test, intégrés au design du site
 (thème clair/sombre, navigation commune). La page est générée par `workflow.py` (versionné),

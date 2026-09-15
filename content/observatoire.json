@@ -5,6 +5,57 @@
   {
    "date": "2026-09-15",
    "nature": "nouveauté",
+   "titre": "Compte à rebours du premier tour, thème clair/sombre",
+   "texte": "La page d'accueil affiche un chrono en temps réel jusqu'au 18 avril 2027 à 20 h (fermeture des bureaux), la page Agrégation un rappel compact « J−n ». Dates du scrutin au format français (jj/mm/aaaa) partout.",
+   "pages": [
+    "accueil",
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "correction",
+   "titre": "Prévision bayésienne : cache conservé en cas d'indisponibilité de la source",
+   "texte": "La fonction de téléchargement (_get_json) avait disparu du générateur, ce qui affichait « indisponible » en permanence. Rétablie, et si la source externe ne répond plus, la page garde les dernières données avec leur date de mise à jour, au lieu de disparaître.",
+   "pages": [
+    "accueil",
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "présentation",
+   "titre": "Textes élargis à la pleine largeur des cartes",
+   "texte": "Les phrases introductives de section (comparaison bayésienne, méthode, journal, rétro-test) ne sont plus contraintes à 36 caractères par ligne : elles occupent la carte, les notes techniques et les légendes restent étroites.",
+   "pages": [
+    "accueil",
+    "agrégation",
+    "candidats",
+    "rétro-test",
+    "workflow"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "présentation",
+   "titre": "Schéma du workflow zoomable",
+   "texte": "Sur la page Workflow, un clic sur le schéma l'ouvre en plein écran : molette pour zoomer, glisser pour se déplacer, Échap pour fermer.",
+   "pages": [
+    "workflow"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "données",
+   "titre": "Blocs politiques alignés sur la nomenclature officielle",
+   "texte": "Les candidats sont classés selon les nuances politiques du ministère de l'Intérieur (extrême gauche, gauche, centre, droite, extrême droite). La France insoumise passe à l'extrême gauche, les écologistes rejoignent la gauche, les souverainistes sont répartis entre extrême droite et divers.",
+   "pages": [
+    "candidats"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "nouveauté",
    "titre": "Page « Workflow » : comment le site se fabrique",
    "texte": "Un schéma d'architecture, ses légendes et les réglages du rétro-test, intégrés au design du site (thème clair/sombre, navigation commune). La page est générée par workflow.py (versionné), le schéma utilise la palette de couleurs du site et bascule avec le thème.",
    "pages": [

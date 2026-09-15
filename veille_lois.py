@@ -200,6 +200,23 @@ def load_groupes(leg):
         return {}
 
 
+def dominante(pour, contre, abst):
+    """Position dominante d'un groupe, calculée sur ses voix exprimées.
+
+    Le champ `positionMajoritaire` publié par l'Assemblée est volontairement
+    écarté : il contredit ses propres décomptes nominatifs. Vérifié le 15/09/2026
+    sur le scrutin n° 8431, où le groupe Écologiste et Social y est donné
+    « contre » avec 19 voix pour, 7 contre et 7 abstentions — alors que la page
+    officielle du même scrutin l'affiche en « Pour ».
+    """
+    vals = [("pour", pour), ("contre", contre), ("abstention", abst)]
+    top = max(n for _, n in vals)
+    if top == 0:
+        return None
+    gagnants = [k for k, n in vals if n == top]
+    return gagnants[0] if len(gagnants) == 1 else "partage"
+
+
 def group_votes(s):
     """Vote de chaque groupe politique sur un scrutin (position + décompte)."""
     v = (s.get("ventilationVotes") or {}).get("organe") or {}
@@ -210,13 +227,17 @@ def group_votes(s):
     for g in groupes:
         vote = g.get("vote") or {}
         dec = vote.get("decompteVoix") or {}
+        pour = int(dec.get("pour") or 0)
+        contre = int(dec.get("contre") or 0)
+        abst = int(dec.get("abstentions") or 0)
         out.append({
             "ref": g.get("organeRef"),
             "membres": int(g.get("nombreMembresGroupe") or 0),
-            "position": (vote.get("positionMajoritaire") or "").lower(),
-            "pour": int(dec.get("pour") or 0),
-            "contre": int(dec.get("contre") or 0),
-            "abst": int(dec.get("abstentions") or 0),
+            "position_an": (vote.get("positionMajoritaire") or "").lower(),
+            "dominante": dominante(pour, contre, abst),
+            "pour": pour,
+            "contre": contre,
+            "abst": abst,
             "nv": int(dec.get("nonVotants") or 0),
         })
     out.sort(key=lambda x: -x["membres"])
@@ -443,8 +464,7 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
         "pour": ("pos-pour", "Pour"),
         "contre": ("pos-contre", "Contre"),
         "abstention": ("pos-abst", "Abstention"),
-        "nonvotant": ("pos-nv", "Non votant"),
-        "non-votant": ("pos-nv", "Non votant"),
+        "partage": ("pos-nv", "Partagé"),
     }
 
     def groupe_block(t):
@@ -460,7 +480,7 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
             sigle = info.get("sigle") or "—"
             nom = info.get("nom") or ""
             coul = info.get("couleur") or "#8D949A"
-            cls, lab = POS.get(g["position"], ("pos-nv", g["position"] or "—"))
+            cls, lab = POS.get(g["dominante"], ("pos-nv", "—"))
             exprime = g["pour"] + g["contre"] + g["abst"]
             participe = exprime + g["nv"]
 
@@ -489,13 +509,15 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
       de ses voix. La colonne « votants » rapporte les membres du groupe ayant pris part
       au vote à son effectif : les députés absents ne figurent dans aucun décompte.</p>
     <table>
-      <tr><th>Groupe</th><th>Position</th><th class="num">Votants</th><th class="num">Pour</th>
+      <tr><th>Groupe</th><th>Position dominante</th><th class="num">Votants</th><th class="num">Pour</th>
       <th class="num">Contre</th><th class="num">Abst.</th><th>Répartition</th></tr>
       {lignes}
     </table>
     <p class="small muted" style="max-width:none;margin-top:8px">
-      Position majoritaire = position dominante du groupe, sans préjuger des voix
-      divergentes, visibles dans les colonnes de décompte.</p>
+      « Position dominante » est calculée sur les voix exprimées du groupe (partagée en cas
+      d'égalité) — et non reprise du champ « position majoritaire » publié par l'Assemblée,
+      qui contredit ses propres décomptes. Un groupe qui se divise reste donc lisible ligne
+      par ligne dans les colonnes de décompte.</p>
   </details>"""
 
     cards = ""
@@ -617,6 +639,11 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
   <strong>Limite assumée :</strong> un texte dont l'intitulé ne dit rien du numérique peut contenir
   des dispositions qui le concernent — il échappe alors à cette veille. Le filtre porte sur le titre,
   pas sur le contenu article par article.<br>
+  <strong>Votes par groupe :</strong> ils viennent des décomptes nominatifs du scrutin, croisés avec
+  le référentiel des organes de l'Assemblée (noms et couleurs officielles des groupes). La position
+  affichée pour chaque groupe est recalculée à partir de ses voix exprimées : le champ « position
+  majoritaire » publié par l'Assemblée a été écarté après vérification, il contredit ses propres
+  décomptes nominatifs.<br>
   Page régénérée automatiquement chaque semaine.</p>
 </section>
 </main>

@@ -331,8 +331,7 @@ PAGE = f"""<!doctype html>
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· workflow</span></div>
   <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/sondages/">Agrégation</a>
-  <a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a>
-  <a href="#schema" style="font-weight:700;color:var(--ink)">Workflow</a></div>{G.THEME_BTN}
+  <a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a>{G.NAV_LOIS}<a href="#schema" style="font-weight:700;color:var(--ink)">Workflow</a></div>{G.THEME_BTN}
 </div></div>
 
 <main class="wrap">

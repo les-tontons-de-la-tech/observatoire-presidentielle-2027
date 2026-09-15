@@ -310,7 +310,7 @@ section.card table{{width:100%}}</style>
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· rétro-test 2022</span></div>
   <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/sondages/">Agrégation</a>
-  <a href="/observatoire/candidats/">Les candidats</a>{G.NAV_WORKFLOW}<a href="#resultats">Résultats</a><a href="#detail">Détail</a><a href="#lecons">Leçons</a></div>{G.THEME_BTN}
+  <a href="/observatoire/candidats/">Les candidats</a>{G.NAV_WORKFLOW}{G.NAV_LOIS}<a href="#resultats">Résultats</a><a href="#detail">Détail</a><a href="#lecons">Leçons</a></div>{G.THEME_BTN}
 </div></div>
 
 <header class="wrap">

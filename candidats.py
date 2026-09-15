@@ -371,7 +371,7 @@ condition, prétendants et retraits — chaque ligne sourcée, avec ce que l'off
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· les candidats</span></div>
   <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/sondages/">Agrégation</a>
-  <a href="/observatoire/backtest/">Rétro-test 2022</a>{G.NAV_WORKFLOW}<a href="#bulletin">Qui sera sur le bulletin ?</a></div>{G.THEME_BTN}
+  <a href="/observatoire/backtest/">Rétro-test 2022</a>{G.NAV_WORKFLOW}{G.NAV_LOIS}<a href="#bulletin">Qui sera sur le bulletin ?</a></div>{G.THEME_BTN}
 </div></div>
 
 <header class="wrap">

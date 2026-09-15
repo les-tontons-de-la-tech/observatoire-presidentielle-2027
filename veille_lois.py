@@ -687,8 +687,8 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
 </section>
 </main>
 
-<footer class="wrap small muted">
-  <p>Observatoire de la présidentielle 2027 · <a href="/observatoire/">dileviathan.fr/observatoire</a></p>
+<footer class="wrap">
+  <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
 </footer>
 {THEME_JS}</body>
 </html>"""

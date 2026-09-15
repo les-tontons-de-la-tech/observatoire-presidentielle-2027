@@ -29,6 +29,11 @@ os.makedirs(SITE, exist_ok=True)
 LEG_CUR = "17"
 LEG_REF = "16"
 URL_SCRUTINS = "https://data.assemblee-nationale.fr/static/openData/repository/{L}/loi/scrutins/Scrutins.json.zip"
+# Référentiel des organes (groupes politiques) : donne le nom et la couleur
+# officielle de chaque groupe, que les scrutins ne portent pas (organeRef seul).
+URL_ORGANES = ("https://data.assemblee-nationale.fr/static/openData/repository/{L}/amo/"
+               "deputes_actifs_mandats_actifs_organes/"
+               "AMO10_deputes_actifs_mandats_actifs_organes.json.zip")
 
 # ---------- périmètre éditorial ----------
 # Chaque thème : libellé + expression régulière appliquée au nom du texte de loi.
@@ -147,6 +152,77 @@ def load_scrutins(leg):
         return []
 
 
+def load_groupes(leg):
+    """Référentiel des groupes politiques d'une législature : organeRef → nom + couleur.
+
+    Les scrutins ne portent que des `organeRef` (PO845401) ; ce fichier donne le
+    libellé, le sigle et la couleur officielle associée par l'Assemblée.
+    """
+    cache_file = os.path.join(CACHE, f"groupes_L{leg}.json")
+    if os.path.exists(cache_file):
+        age_h = (datetime.now().timestamp() - os.path.getmtime(cache_file)) / 3600
+        if age_h < 24:
+            with open(cache_file, encoding="utf-8") as f:
+                return json.load(f)
+
+    url = URL_ORGANES.format(L=leg)
+    try:
+        print(f"  Téléchargement des groupes politiques L{leg}…")
+        req = urllib.request.Request(url, headers={"User-Agent": "observatoire-2027/1.0"})
+        with urllib.request.urlopen(req, timeout=300) as r:
+            raw = r.read()
+        z = zipfile.ZipFile(io.BytesIO(raw))
+        groupes = {}
+        for n in z.namelist():
+            if "/organe/" not in n:
+                continue
+            try:
+                o = json.load(z.open(n)).get("organe", {})
+            except Exception:
+                continue
+            if o.get("codeType") != "GP" or str(o.get("legislature")) != str(leg):
+                continue
+            groupes[o["uid"]] = {
+                "sigle": o.get("libelleAbrege") or "",
+                "nom": o.get("libelle") or "",
+                # Couleur officielle fournie par l'Assemblée nationale.
+                "couleur": o.get("couleurAssociee") or "#8D949A",
+            }
+        with open(cache_file, "w", encoding="utf-8") as f:
+            json.dump(groupes, f, ensure_ascii=False)
+        print(f"  ✅ {len(groupes)} groupes politiques L{leg}")
+        return groupes
+    except Exception as e:
+        print(f"  ❌ Échec groupes L{leg} : {e}")
+        if os.path.exists(cache_file):
+            with open(cache_file, encoding="utf-8") as f:
+                return json.load(f)
+        return {}
+
+
+def group_votes(s):
+    """Vote de chaque groupe politique sur un scrutin (position + décompte)."""
+    v = (s.get("ventilationVotes") or {}).get("organe") or {}
+    groupes = (v.get("groupes") or {}).get("groupe") or []
+    if isinstance(groupes, dict):
+        groupes = [groupes]
+    out = []
+    for g in groupes:
+        vote = g.get("vote") or {}
+        dec = vote.get("decompteVoix") or {}
+        out.append({
+            "ref": g.get("organeRef"),
+            "membres": int(g.get("nombreMembresGroupe") or 0),
+            "position": (vote.get("positionMajoritaire") or "").lower(),
+            "pour": int(dec.get("pour") or 0),
+            "contre": int(dec.get("contre") or 0),
+            "abst": int(dec.get("abstentions") or 0),
+            "nv": int(dec.get("nonVotants") or 0),
+        })
+    out.sort(key=lambda x: -x["membres"])
+    return out
+
+
 def theme_of(name):
     for libelle, pat in THEMES:
         if re.search(pat, name, re.I):
@@ -183,6 +259,7 @@ def build(scrutins):
             "votants": int((s.get("syntheseVote") or {}).get("nombreVotants") or 0),
             "lien": (f"https://www.assemblee-nationale.fr/dyn/{LEG_CUR}/scrutins/"
                      f"{s.get('numero')}") if s.get("numero") else "",
+            "groupes": group_votes(s),
         })
 
     textes = []
@@ -190,6 +267,9 @@ def build(scrutins):
         votes.sort(key=lambda v: v["date"], reverse=True)
         dates = [v["date"] for v in votes if v["date"]]
         final = next((v for v in votes if v["kind"] == "ensemble"), None)
+        # Vote retenu pour la ventilation par groupe : le vote sur l'ensemble s'il
+        # existe, sinon le scrutin le plus récent qui porte une ventilation.
+        groupe_vote = final or next((v for v in votes if v["groupes"]), None)
         textes.append({
             "nom": name,
             "theme": theme_of(name),
@@ -198,6 +278,7 @@ def build(scrutins):
             "date_min": min(dates) if dates else "",
             "date_max": max(dates) if dates else "",
             "final": final,
+            "groupe_vote": groupe_vote,
             "votes": votes,
         })
 
@@ -299,6 +380,20 @@ td.date{white-space:nowrap;color:var(--muted)}
   white-space:nowrap}
 .pill.adopte{background:color-mix(in srgb,var(--green) 12%,var(--paper));border-color:var(--green);color:var(--green)}
 .pill.rejete{background:color-mix(in srgb,var(--red) 12%,var(--paper));border-color:var(--red);color:var(--red)}
+.pill.pos-pour{background:color-mix(in srgb,var(--green) 14%,var(--paper));border-color:var(--green);color:var(--green)}
+.pill.pos-contre{background:color-mix(in srgb,var(--red) 14%,var(--paper));border-color:var(--red);color:var(--red)}
+.pill.pos-abst{background:color-mix(in srgb,var(--amber) 16%,var(--paper));border-color:var(--amber);color:var(--amber)}
+.pill.pos-nv{background:color-mix(in srgb,var(--muted) 10%,var(--paper));border-color:var(--line);color:var(--muted)}
+td.grp{border-left:4px solid var(--line);padding-left:10px}
+td.barcell{width:130px}
+.bar{display:flex;height:9px;border-radius:5px;overflow:hidden;background:var(--track);min-width:84px}
+.bar i{display:block;height:100%}
+.bar i.p{background:var(--green)}
+.bar i.c{background:var(--red)}
+.bar i.a{background:var(--amber)}
+details.gv{border-top:none;padding-top:0;margin-top:14px}
+details.gv summary{color:var(--ink);font-weight:600}
+@media(max-width:899px){.card{overflow-x:auto}}
 details{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
 summary{cursor:pointer;font-size:.85rem;color:var(--muted);list-style:none}
 summary::-webkit-details-marker{display:none}
@@ -337,12 +432,71 @@ def pill(sort):
     return f'<span class="pill">{sort or "—"}</span>'
 
 
-def render(textes, refs, n_total_cur, n_total_ref):
+def render(textes, refs, n_total_cur, n_total_ref, gmap):
     nb_scrutins = sum(t["nb"] for t in textes)
     periodes = [t["date_max"] for t in textes if t["date_max"]]
     p_max = max(periodes) if periodes else ""
     periodes_min = [t["date_min"] for t in textes if t["date_min"]]
     p_min = min(periodes_min) if periodes_min else ""
+
+    POS = {
+        "pour": ("pos-pour", "Pour"),
+        "contre": ("pos-contre", "Contre"),
+        "abstention": ("pos-abst", "Abstention"),
+        "nonvotant": ("pos-nv", "Non votant"),
+        "non-votant": ("pos-nv", "Non votant"),
+    }
+
+    def groupe_block(t):
+        """Ventilation du vote retenu par groupe politique."""
+        gv = t.get("groupe_vote")
+        if not gv or not gv.get("groupes"):
+            return ""
+        quoi = ("vote sur l'ensemble du texte" if gv["kind"] == "ensemble"
+                else "dernier scrutin enregistré")
+        lignes = ""
+        for g in gv["groupes"]:
+            info = gmap.get(g["ref"]) or {}
+            sigle = info.get("sigle") or "—"
+            nom = info.get("nom") or ""
+            coul = info.get("couleur") or "#8D949A"
+            cls, lab = POS.get(g["position"], ("pos-nv", g["position"] or "—"))
+            exprime = g["pour"] + g["contre"] + g["abst"]
+            participe = exprime + g["nv"]
+
+            def pc(x):
+                return round(100 * x / exprime) if exprime else 0
+
+            barre = (f'<span class="bar">'
+                     f'<i class="p" style="width:{pc(g["pour"])}%"></i>'
+                     f'<i class="c" style="width:{pc(g["contre"])}%"></i>'
+                     f'<i class="a" style="width:{pc(g["abst"])}%"></i></span>')
+            lignes += (
+                f'<tr><td class="grp" style="border-left-color:{coul}">'
+                f'<b>{sigle}</b> <span class="small muted">{nom}</span></td>'
+                f'<td><span class="pill {cls}">{lab}</span></td>'
+                f'<td class="num">{participe} <span class="muted">/ {g["membres"]}</span></td>'
+                f'<td class="num">{g["pour"] or "—"}</td>'
+                f'<td class="num">{g["contre"] or "—"}</td>'
+                f'<td class="num">{g["abst"] or "—"}</td>'
+                f'<td class="barcell">{barre}</td></tr>\n')
+
+        return f"""
+  <details open class="gv">
+    <summary>Vote par groupe politique</summary>
+    <p class="small muted" style="max-width:none;margin:8px 0 6px">
+      {quoi}, du {fr_date(gv["date"])}. Position majoritaire de chaque groupe et décompte
+      de ses voix. La colonne « votants » rapporte les membres du groupe ayant pris part
+      au vote à son effectif : les députés absents ne figurent dans aucun décompte.</p>
+    <table>
+      <tr><th>Groupe</th><th>Position</th><th class="num">Votants</th><th class="num">Pour</th>
+      <th class="num">Contre</th><th class="num">Abst.</th><th>Répartition</th></tr>
+      {lignes}
+    </table>
+    <p class="small muted" style="max-width:none;margin-top:8px">
+      Position majoritaire = position dominante du groupe, sans préjuger des voix
+      divergentes, visibles dans les colonnes de décompte.</p>
+  </details>"""
 
     cards = ""
     for t in textes:
@@ -371,6 +525,7 @@ def render(textes, refs, n_total_cur, n_total_ref):
   <div class="chips"><span class="chip">{t["theme"]}</span>
     <span class="chip">{t["nb"]} scrutin{"s" if t["nb"] > 1 else ""}</span></div>
   <p style="margin:0">{entete}</p>
+  {groupe_block(t)}
   <details>
     <summary>Voir les {t["nb"]} scrutins ({fr_date(t["date_min"])} → {fr_date(t["date_max"])})</summary>
     <table>
@@ -482,6 +637,7 @@ if __name__ == "__main__":
     print("=== Veille législative — Assemblée nationale ===")
     cur = load_scrutins(LEG_CUR)
     ref = load_scrutins(LEG_REF)
+    gmap = load_groupes(LEG_CUR)
 
     textes, n_total_cur = build(cur)
     refs = reference_texts(ref)
@@ -490,13 +646,14 @@ if __name__ == "__main__":
     print(f"  → {len(textes)} textes suivis, {sum(t['nb'] for t in textes)} scrutins (L{LEG_CUR})")
     print(f"  → {len(refs)} textes de référence (L{LEG_REF})")
 
-    render(textes, refs, n_total_cur, n_total_ref)
+    render(textes, refs, n_total_cur, n_total_ref, gmap)
 
     with open(os.path.join(DATA, "veille_lois.json"), "w", encoding="utf-8") as f:
         json.dump({
             "legislature": LEG_CUR,
             "date_generation": datetime.now().isoformat()[:19],
             "scrutins_total": n_total_cur,
+            "groupes": gmap,
             "textes": [{k: v for k, v in t.items() if k != "votes"} for t in textes],
             "texte_detail": {t["nom"]: t["votes"] for t in textes},
             "references": refs,

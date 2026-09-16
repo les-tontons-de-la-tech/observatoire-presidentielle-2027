@@ -509,7 +509,7 @@ def pill(sort):
     return f'<span class="pill">{sort or "—"}</span>'
 
 
-def bandeau_etat(dernier, auj=None):
+def bandeau_etat(dernier, auj=None, date_controle=""):
     """État de la veille : dernier scrutin publié et situation du Parlement.
 
     Sans ce bandeau, une période couverte qui s'arrête net se lit comme une veille en
@@ -545,12 +545,13 @@ def bandeau_etat(dernier, auj=None):
     return f"""
 <section class="{classe}">
   <p><b>Dernier scrutin publié : {fr_date(dernier)}</b> ({depuis}).</p>{situation}
-  <p class="small muted">Données ouvertes de l'Assemblée nationale, relevées à chaque
-  régénération. Le premier scrutin de la rentrée apparaîtra ici automatiquement.</p>
+  <p class="small muted">Données ouvertes de l'Assemblée nationale{f", relevées le {fr_date(date_controle)}" if date_controle else ""}.
+  Le premier scrutin de la rentrée apparaîtra ici automatiquement, sans intervention.</p>
 </section>"""
 
 
-def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None):
+def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
+           date_controle=""):
     nb_scrutins = sum(t["nb"] for t in textes)
     periodes = [t["date_max"] for t in textes if t["date_max"]]
     p_max = max(periodes) if periodes else ""
@@ -632,7 +633,7 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None):
       ne pas lire les colonnes « absents » et « non-votants » comme un vote.</p>
   </details>"""
 
-    bandeau = bandeau_etat(dernier_scrutin)
+    bandeau = bandeau_etat(dernier_scrutin, date_controle=date_controle)
 
     cards = ""
     for t in textes:
@@ -724,8 +725,12 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None):
     <div><b>{len(textes)}</b>textes suivis</div>
     <div><b>{nb_scrutins}</b>scrutins publics</div>
     <div><b>{n_total_cur}</b>scrutins au total dans la législature</div>
-    <div><b>{fr_date(p_min)} → {fr_date(p_max)}</b>période couverte</div>
+    <div><b>{fr_date(p_min)} → {fr_date(date_controle or p_max)}</b>période couverte</div>
   </div>
+  <p class="small muted" style="max-width:none;margin-top:12px">
+  La période couverte s'arrête à la date du dernier contrôle de la source, et non à celle du dernier
+  vote : elle dit jusqu'où les données ont été vérifiées. La date du dernier scrutin publié, elle,
+  figure dans le bandeau ci-dessus — quand le Parlement ne siège pas, les deux ne coïncident pas.</p>
   <div class="chips" style="margin-top:14px">{themes_chips}</div>
 </section>
 {cards}
@@ -817,8 +822,15 @@ if __name__ == "__main__":
     dates_cur = [d for d in dates_cur if d]
     dernier_scrutin = max(dates_cur) if dates_cur else ""
 
-    render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin)
+    # Date du dernier contrôle RÉEL de la source : celle du cache téléchargé. Si le cache a
+    # moins de 24 h, rien n'a été re-téléchargé — annoncer la date du jour serait faux.
+    cache_l17 = os.path.join(CACHE, f"scrutins_L{LEG_CUR}.json")
+    date_controle = (datetime.fromtimestamp(os.path.getmtime(cache_l17)).strftime("%Y-%m-%d")
+                     if os.path.exists(cache_l17) else "")
+
+    render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin, date_controle)
     print(f"  → dernier scrutin publié par la source : {dernier_scrutin or 'inconnu'}")
+    print(f"  → période couverte jusqu'au contrôle du : {date_controle or 'inconnu'}")
 
     with open(os.path.join(DATA, "veille_lois.json"), "w", encoding="utf-8") as f:
         json.dump({

@@ -24,6 +24,15 @@ jour tout seul, et disparaîtra quand les scrutins reprendront. Les commissions 
 session, mais leurs travaux ne donnent pas lieu à des scrutins publics : la page le précise, pour que
 l'absence de scrutin ne se confonde pas avec une absence de travail parlementaire.
 
+**Correction — « Période couverte » : la faire finir au dernier contrôle de la source.**
+La période couverte s'arrêtait à la date du dernier vote (21/07/2026), ce qui laissait croire que rien
+n'avait été vérifié depuis juillet. Elle s'arrête désormais à la date du dernier contrôle réel de la
+source, contrôlée aujourd'hui : « 20/11/2024 → 16/09/2026 ». La date employée est celle du cache
+réellement téléchargé, pas celle du jour — si le cache a moins de 24 heures, la source n'est pas
+re-téléchargée et annoncer un contrôle du jour serait faux. La date du dernier scrutin publié reste
+affichée dans le bandeau d'état : quand le Parlement ne siège pas, les deux dates ne coïncident pas,
+et la page le dit explicitement.
+
 **Correction — La veille législative ne se publiait plus depuis la migration du site vers le VPS B.**
 La tâche hebdomadaire ne lançait que le générateur. Depuis que le site statique et son conteneur vivent
 sur le VPS B, générer ne publie plus rien : la page se régénérait ici et n'atteignait le serveur que si

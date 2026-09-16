@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-16 18:00",
+ "generated": "2026-09-16 20:32",
  "total_polls_all": 256,
  "polls_in_window": 76,
  "scenario": "H42",
@@ -156,7 +156,7 @@
    "fichier": "10180-pres-toluna-harris-interactive-rtl-4-mai.pdf"
   }
  ],
- "total_intentions": 100.1,
+ "total_intentions": 100.0,
  "rows": [
   {
    "candidat": "Marine Le Pen",

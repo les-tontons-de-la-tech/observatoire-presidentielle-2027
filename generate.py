@@ -469,11 +469,13 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
 
     seuil = MIN_POLLS if min_polls is None else min_polls
     rows = []
+    somme_exacte = 0.0   # somme des moyennes NON arrondies (voir total_intentions plus bas)
     for name, vals in acc.items():
         if len(vals) < seuil:
             continue
         sw = sum(v[0] for v in vals)
         mean = sum(w * x for w, x, *_ in vals) / sw
+        somme_exacte += mean
         var = sum(w * (x - mean) ** 2 for w, x, *_ in vals) / sw
         n_eff = (sw ** 2) / sum(w ** 2 for w, *_ in vals)
         half = 1.96 * math.sqrt(var) / math.sqrt(n_eff) if n_eff > 1 else 0.0
@@ -514,7 +516,10 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
                       or [0]),
             fichier=p.get("filename") or "—")
             for p, _a, _d in sorted(scen_polls, key=lambda x: x[2], reverse=True)],
-        total_intentions=round(sum(r["intentions"] for r in rows), 1),
+        # Somme des moyennes exactes, et non des valeurs affichées : additionner dix nombres
+        # arrondis au dixième fait dériver le total (100,1 % affiché pour 100,0000 % exact), et
+        # un total d'intentions de vote qui dépasse 100 % n'a pas de sens à montrer.
+        total_intentions=round(somme_exacte, 1),
         rows=rows,
     )
 
@@ -1084,8 +1089,9 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
     <h3>Lecture rapide</h3>
     <ul class="small muted liste2">
       {"".join(f"<li>{w}</li>" for w in watch) or "<li>Pas assez de candidats pour comparer les écarts.</li>"}
-      <li>Total des intentions affichées : {fr(agg["total_intentions"])} % (les intentions des candidats
-      sous le seuil de {agg["min_polls"]} sondages ne sont pas affichées).</li>
+      <li>Total des intentions : {fr(agg["total_intentions"])} % (les intentions des candidats
+      sous le seuil de {agg["min_polls"]} sondages ne sont pas affichées ; chaque ligne étant arrondie
+      au dixième, leur somme peut s'en écarter d'un dixième).</li>
     </ul>
   </div>
 </section>

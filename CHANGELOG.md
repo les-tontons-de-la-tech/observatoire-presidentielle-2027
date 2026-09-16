@@ -11,6 +11,9 @@ chiffre qu'on ne peut plus citer.
 
 ## 16 septembre 2026
 
+**Correction — Total des intentions : 100 % au lieu de 100,1 %.**
+La page Agrégation annonçait « Total des intentions affichées : 100,1 % ». Le calcul additionnait les dix intentions telles qu'elles sont affichées, c'est-à-dire déjà arrondies au dixième : ces arrondis ne se compensaient pas et ajoutaient +0,099 point à la somme. Le total porte désormais sur les moyennes non arrondies, qui valent exactement 100,0000 %. Chaque ligne restant arrondie pour la lecture, leur somme peut s'écarter d'un dixième du total : la page le précise, et le libellé devient « Total des intentions », puisqu'il ne s'agit plus de la somme des valeurs affichées.
+
 **Correction — Veille législative : la page dit maintenant pourquoi elle s'arrête au 21 juillet.**
 La page affichait « période couverte : 20/11/2024 → 21/07/2026 » sans un mot d'explication. Un lecteur
 de septembre pouvait y voir une veille en panne. Vérification faite le 16/09 : le fichier des scrutins

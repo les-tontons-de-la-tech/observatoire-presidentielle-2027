@@ -35,6 +35,18 @@ URL_ORGANES = ("https://data.assemblee-nationale.fr/static/openData/repository/{
                "deputes_actifs_mandats_actifs_organes/"
                "AMO10_deputes_actifs_mandats_actifs_organes.json.zip")
 
+# ---------- situation du Parlement (faits datés, vérifiés) ----------
+# Relevé du 16/09/2026 : les scrutins publiés en données ouvertes s'arrêtent au
+# 21/07/2026, dernière séance de la session ordinaire 2025-2026. Le gouvernement a
+# renoncé à une session extraordinaire en septembre, et la session ordinaire 2026-2027
+# ouvre le 1er octobre 2026 (Le Monde, 3 septembre 2026). Contrôle effectué : le fichier
+# amont, réédité le 16/09/2026 à 10 h 26 GMT, est identique octet pour octet à celui de
+# la veille — la veille n'est donc pas en retard, le Parlement ne vote simplement pas.
+DERNIERE_SEANCE = "2026-07-21"
+OUVERTURE_SESSION = "2026-10-01"
+SOURCE_INTERSESSION = ("Le Monde, « Assemblée nationale : le gouvernement renonce à une "
+                       "session extraordinaire en septembre », 3 septembre 2026")
+
 # ---------- périmètre éditorial ----------
 # Chaque thème : libellé + expression régulière appliquée au nom du texte de loi.
 # Les scrutins sont ensuite regroupés par texte, pas listés en vrac.
@@ -448,6 +460,11 @@ summary:hover{color:var(--ink)}
 .stat{display:flex;gap:26px;flex-wrap:wrap;margin:4px 0 0}
 .stat div{font-size:.82rem;color:var(--muted)}
 .stat b{display:block;font-size:1.2rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.etat{background:var(--excl-bg);border:1px solid var(--line);border-left:4px solid var(--amber);
+  border-radius:12px;padding:14px 18px;margin:16px 0 0}
+.etat.ok{border-left-color:var(--green)}
+.etat>p{margin:0 0 8px;font-size:.9rem}
+.etat>p:last-child{margin-bottom:0}
 html[data-theme="dark"]{
   --bg:#0a1024;--paper:#11183a;--ink:#edf0f8;--muted:#9ba4b8;--line:#2f3550;
   --red:#e4584c;--red-text:#e4584c;--green:#4fbf95;--amber:#c8a84e;--blue:#6fa8dc;
@@ -469,6 +486,21 @@ def fr_date(iso):
     return f"{iso[8:10]}/{iso[5:7]}/{iso[:4]}"
 
 
+MOIS_FR = ("janvier", "février", "mars", "avril", "mai", "juin", "juillet",
+           "août", "septembre", "octobre", "novembre", "décembre")
+
+
+def fr_date_longue(iso):
+    """« 2026-10-01 » → « 1er octobre 2026 ». Pour la prose ; fr_date reste la forme courte."""
+    if not iso or len(iso) < 10:
+        return iso or ""
+    try:
+        jour, mois = int(iso[8:10]), int(iso[5:7])
+        return f"{'1er' if jour == 1 else jour} {MOIS_FR[mois - 1]} {iso[:4]}"
+    except (ValueError, IndexError):
+        return fr_date(iso)
+
+
 def pill(sort):
     if "adopt" in sort:
         return '<span class="pill adopte">Adopté</span>'
@@ -477,7 +509,48 @@ def pill(sort):
     return f'<span class="pill">{sort or "—"}</span>'
 
 
-def render(textes, refs, n_total_cur, n_total_ref, gmap):
+def bandeau_etat(dernier, auj=None):
+    """État de la veille : dernier scrutin publié et situation du Parlement.
+
+    Sans ce bandeau, une période couverte qui s'arrête net se lit comme une veille en
+    panne. Entre deux sessions, la page doit dire que l'Assemblée ne siège pas, et
+    jusqu'à quand.
+    """
+    if not dernier:
+        return ""
+    try:
+        d = datetime.strptime(dernier[:10], "%Y-%m-%d").date()
+        ouv = datetime.strptime(OUVERTURE_SESSION, "%Y-%m-%d").date()
+    except ValueError:
+        return ""
+    today = auj or datetime.now().date()
+    jours = (today - d).days
+    depuis = ("aujourd'hui" if jours == 0
+              else "hier" if jours == 1
+              else "il y a %d jours" % jours)
+
+    if today < ouv:
+        classe = "etat"
+        situation = f"""
+  <p>Le Parlement ne siège pas. La session ordinaire 2025-2026 s'est achevée le
+  {fr_date_longue(DERNIERE_SEANCE)}, le gouvernement a renoncé à convoquer une session
+  extraordinaire en septembre, et la session ordinaire 2026-2027 ouvre le
+  {fr_date_longue(OUVERTURE_SESSION)}. Entre ces deux dates, aucun scrutin public n'est prononcé :
+  il n'y a donc rien à ajouter ici. Les commissions peuvent se réunir hors session, mais
+  leurs travaux ne donnent pas lieu à des scrutins publics.</p>
+  <p class="small muted">Situation : {SOURCE_INTERSESSION}.</p>"""
+    else:
+        classe, situation = "etat ok", ""
+
+    return f"""
+<section class="{classe}">
+  <p><b>Dernier scrutin publié : {fr_date(dernier)}</b> ({depuis}).</p>{situation}
+  <p class="small muted">Données ouvertes de l'Assemblée nationale, relevées à chaque
+  régénération. Le premier scrutin de la rentrée apparaîtra ici automatiquement.</p>
+</section>"""
+
+
+def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None):
     nb_scrutins = sum(t["nb"] for t in textes)
     periodes = [t["date_max"] for t in textes if t["date_max"]]
     p_max = max(periodes) if periodes else ""
@@ -558,6 +631,8 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
       par ligne. Un député absent, ou présent sans voter, ne soutient ni ne rejette le texte :
       ne pas lire les colonnes « absents » et « non-votants » comme un vote.</p>
   </details>"""
+
+    bandeau = bandeau_etat(dernier_scrutin)
 
     cards = ""
     for t in textes:
@@ -640,6 +715,7 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap):
 </header>
 
 <main class="wrap">
+{bandeau}
 <section class="card">
   <h2>Législature en cours (depuis juillet 2024)</h2>
   <p class="small muted" style="max-width:none">Scrutins publics de la 17<sup>e</sup> législature
@@ -737,7 +813,12 @@ if __name__ == "__main__":
     if inconnus:
         print(f"  ⚠️  groupes non résolus : {sorted(inconnus)} — compléter ALIAS_GROUPES")
 
-    render(textes, refs, n_total_cur, n_total_ref, gmap)
+    dates_cur = [s.get("dateScrutin", "") for s in cur if isinstance(s, dict)]
+    dates_cur = [d for d in dates_cur if d]
+    dernier_scrutin = max(dates_cur) if dates_cur else ""
+
+    render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin)
+    print(f"  → dernier scrutin publié par la source : {dernier_scrutin or 'inconnu'}")
 
     with open(os.path.join(DATA, "veille_lois.json"), "w", encoding="utf-8") as f:
         json.dump({

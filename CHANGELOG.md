@@ -9,6 +9,28 @@ chiffre qu'on ne peut plus citer.
 
 ---
 
+## 16 septembre 2026
+
+**Correction — Veille législative : la page dit maintenant pourquoi elle s'arrête au 21 juillet.**
+La page affichait « période couverte : 20/11/2024 → 21/07/2026 » sans un mot d'explication. Un lecteur
+de septembre pouvait y voir une veille en panne. Vérification faite le 16/09 : le fichier des scrutins
+publié par l'Assemblée nationale a été réédité le matin même, et il est identique, octet pour octet, à
+celui de la veille — la source n'a rien de plus récent à offrir. Le Parlement ne siège pas : la session
+ordinaire 2025-2026 s'est achevée le 21 juillet 2026, le gouvernement a renoncé à convoquer une session
+extraordinaire en septembre, et la session ordinaire 2026-2027 ouvre le 1er octobre 2026
+(*Le Monde*, 3 septembre 2026). La page porte désormais un bandeau d'état qui affiche la date du dernier
+scrutin publié, le nombre de jours écoulés et cette explication, avec sa source. Le bandeau se met à
+jour tout seul, et disparaîtra quand les scrutins reprendront. Les commissions peuvent siéger hors
+session, mais leurs travaux ne donnent pas lieu à des scrutins publics : la page le précise, pour que
+l'absence de scrutin ne se confonde pas avec une absence de travail parlementaire.
+
+**Correction — La veille législative ne se publiait plus depuis la migration du site vers le VPS B.**
+La tâche hebdomadaire ne lançait que le générateur. Depuis que le site statique et son conteneur vivent
+sur le VPS B, générer ne publie plus rien : la page se régénérait ici et n'atteignait le serveur que si
+le cron quotidien passait derrière. La tâche exécute maintenant un script dédié
+(`veille_legislative_hebdo.sh`) qui génère, publie vers le VPS B et vérifie l'URL publique — l'état de
+la page se contrôle sur ce que voit le lecteur, plus sur un port local.
+
 ## 15 septembre 2026
 
 **Sources — Relevé des sources : aucun nouveau sondage depuis le 10 septembre.**

@@ -1,7 +1,16 @@
 {
  "_lisez_moi": "Textes rédigés de l'observatoire. Ce fichier est éditorial : il ne contient aucun chiffre calculé. Les chiffres viennent des scripts (generate.py, backtest2022.py, candidats.py) et de data/*.json. Toute modification ici doit être accompagnée d'une entrée de changelog datée.",
- "maj": "2026-09-15",
+ "maj": "2026-09-16",
  "changelog": [
+  {
+   "date": "2026-09-16",
+   "nature": "correction",
+   "titre": "Veille législative : la page dit maintenant pourquoi elle s'arrête au 21 juillet",
+   "texte": "La page affichait « période couverte : 20/11/2024 → 21/07/2026 » sans un mot d'explication, ce qui se lit comme une veille en panne. Vérification du 16/09 : le fichier des scrutins publié par l'Assemblée a été réédité le matin même et il est identique, octet pour octet, à celui de la veille — la source n'a donc rien de plus récent. Le Parlement ne siège pas : la session ordinaire 2025-2026 s'est achevée le 21 juillet 2026, le gouvernement a renoncé à une session extraordinaire en septembre, et la session ordinaire 2026-2027 ouvre le 1er octobre 2026 (Le Monde, 3 septembre 2026). Un bandeau affiche désormais la date du dernier scrutin publié, les jours écoulés et cette explication, avec sa source ; il disparaîtra de lui-même quand les scrutins reprendront. Les commissions peuvent siéger hors session, mais leurs travaux ne donnent pas lieu à des scrutins publics.",
+   "pages": [
+    "veille législative"
+   ]
+  },
   {
    "date": "2026-09-15",
    "nature": "sources",

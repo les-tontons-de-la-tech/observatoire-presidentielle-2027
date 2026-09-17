@@ -700,8 +700,9 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <meta name="description" content="{G.meta_description('/observatoire/lois/')}">
-<title>Veille législative — les textes « technologie et pouvoir » | Observatoire 2027</title>
+<title>{G.titre_court('/observatoire/lois/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/lois/">
+{G.meta_social('/observatoire/lois/')}
 {G.ld_json("/observatoire/lois/")}
 {G.matomo()}
 <style>{CSS}</style>

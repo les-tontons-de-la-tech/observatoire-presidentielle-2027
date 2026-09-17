@@ -320,8 +320,9 @@ def render(bt):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <meta name="description" content="{G.meta_description('/observatoire/backtest/')}">
-<title>Rétro-test 2022 — la méthode mise à l'épreuve</title>
+<title>{G.titre_court('/observatoire/backtest/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/backtest/">
+{G.meta_social('/observatoire/backtest/')}
 {G.ld_json("/observatoire/backtest/")}
 {G.matomo()}
 <style>{G.CSS}{G.DARK}

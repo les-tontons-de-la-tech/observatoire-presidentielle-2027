@@ -323,8 +323,9 @@ PAGE = f"""<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <meta name="description" content="{G.meta_description('/observatoire/workflow/')}">
-<title>Comment le site se fabrique — Observatoire présidentielle 2027</title>
+<title>{G.titre_court('/observatoire/workflow/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/workflow/">
+{G.meta_social('/observatoire/workflow/')}
 {G.ld_json("/observatoire/workflow/")}
 {G.matomo()}
 {G.THEME_HEAD}

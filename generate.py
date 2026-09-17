@@ -88,6 +88,55 @@ def meta_description(chemin):
     return PAGES_LD[chemin][1]
 
 
+def titre_court(chemin):
+    """Titre de la balise <title>, tenu sous 60 caractères.
+
+    Le nom complet de la page reste dans PAGES_LD (données structurées) et dans le <h1> :
+    seule la balise <title> est raccourcie, parce qu'au-delà d'une soixantaine de caractères
+    les moteurs en coupent la fin eux-mêmes, sans choisir où. Audit Ahrefs du 17/09/2026.
+    """
+    return TITRES_COURTS.get(chemin, PAGES_LD[chemin][0])
+
+
+TITRES_COURTS = {
+    "/observatoire/": "Présidentielle 2027 — observatoire des sondages",
+    "/observatoire/sondages/": "Présidentielle 2027 — agrégation des sondages",
+    "/observatoire/candidats/": "Les candidats à la présidentielle 2027",
+    "/observatoire/backtest/": "Rétro-test 2022 — la méthode à l'épreuve",
+    "/observatoire/lois/": "Veille législative — les textes numériques votés",
+    "/observatoire/workflow/": "Comment cet observatoire se fabrique",
+}
+
+
+def meta_social(chemin):
+    """Balises Open Graph et carte X d'une page de l'observatoire.
+
+    Audit Ahrefs du 17/09/2026 : les six pages n'avaient ni Open Graph ni carte X
+    (« Open Graph tags missing » et « X (Twitter) card missing »). Les valeurs viennent de
+    PAGES_LD — même source que la balise <meta> et les données structurées, pour que les
+    trois ne puissent pas diverger.
+    """
+    from html import escape
+    titre, description, _ = PAGES_LD[chemin]
+    url = SITE_URL + chemin
+    image = SITE_URL + "/images/og.jpg"
+    return "\n".join([
+        '<meta property="og:type" content="article">',
+        '<meta property="og:site_name" content="Diléviathan">',
+        '<meta property="og:locale" content="fr_FR">',
+        f'<meta property="og:url" content="{url}">',
+        f'<meta property="og:title" content="{escape(titre)}">',
+        f'<meta property="og:description" content="{escape(description)}">',
+        f'<meta property="og:image" content="{image}">',
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:title" content="{escape(titre)}">',
+        f'<meta name="twitter:description" content="{escape(description)}">',
+        f'<meta name="twitter:image" content="{image}">',
+    ])
+
+
 def ld_json(chemin):
     """Données structurées d'une page de l'observatoire.
 
@@ -1148,9 +1197,10 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="{meta_description('/observatoire/')}">
-<title>Présidentielle 2027 — agrégation des sondages, méthode et limites</title>
+<meta name="description" content="{meta_description('/observatoire/sondages/')}">
+<title>{titre_court('/observatoire/sondages/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/sondages/">
+{meta_social('/observatoire/sondages/')}
 {ld_json("/observatoire/sondages/")}
 {matomo()}
 <style>{CSS}{DARK}</style>
@@ -1440,9 +1490,10 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="Observatoire des sondages de la présidentielle 2027 : agrégation sourcée, méthode publiée, limites affichées.">
-<title>Présidentielle 2027 — observatoire des sondages, agrégation sourcée</title>
+<meta name="description" content="{meta_description('/observatoire/')}">
+<title>{titre_court('/observatoire/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/">
+{meta_social('/observatoire/')}
 {ld_json("/observatoire/")}
 {matomo()}
 <style>{CSS}{DARK}</style>

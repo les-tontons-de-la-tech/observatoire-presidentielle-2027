@@ -363,8 +363,9 @@ def render(d):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <meta name="description" content="{G.meta_description('/observatoire/candidats/')}">
-<title>Les candidats à la présidentielle 2027 — qui est déclaré, qui ne l'est pas</title>
+<title>{G.titre_court('/observatoire/candidats/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/candidats/">
+{G.meta_social('/observatoire/candidats/')}
 {G.ld_json("/observatoire/candidats/")}
 {G.matomo()}
 <style>{G.CSS}{CSS_PAGE}{G.DARK}</style>

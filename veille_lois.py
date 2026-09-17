@@ -12,8 +12,15 @@ Sources : data.assemblee-nationale.fr (licence ouverte / Etalab).
 """
 
 import json, os, re, urllib.request, zipfile, io
+import sys
 from datetime import datetime
 from collections import defaultdict, Counter
+
+# Réutilise les helpers partagés de l'observatoire (données structurées, mesure d'audience) :
+# une seule définition pour les six pages. Le chemin est ajouté explicitement pour que le
+# script fonctionne quel que soit le répertoire d'appel — le cron, lui, tourne depuis le dépôt.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import generate as G
 
 # ---------- chemins ----------
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -692,8 +699,11 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
+<meta name="description" content="{G.meta_description('/observatoire/lois/')}">
 <title>Veille législative — les textes « technologie et pouvoir » | Observatoire 2027</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/lois/">
+{G.ld_json("/observatoire/lois/")}
+{G.matomo()}
 <style>{CSS}</style>
 {THEME_HEAD}</head>
 <body>

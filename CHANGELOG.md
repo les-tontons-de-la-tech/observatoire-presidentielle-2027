@@ -9,6 +9,14 @@ chiffre qu'on ne peut plus citer.
 
 ---
 
+## 17 septembre 2026
+
+**Correction — Le rétro-test ne dit plus ce que les données ne montrent pas.**
+Une phrase du rétro-test annonçait « à l'échéance du », suivie d'une date vide, qu'aucun scénario n'atteignait trois enquêtes — la page serait donc restée vide. Vérification faite : les six échéances testées disposent de dix à douze enquêtes chacune, aucune n'a jamais manqué de matière. La phrase affirmait un cas qui ne s'est pas produit, à cause d'un gabarit qui gardait la formule même quand la liste des échéances concernées était vide. Elle dit maintenant ce que les données montrent, et rappelle que la fragilité reste entière : sur une campagne plus pauvre en sondages, le seuil de trois enquêtes ne serait pas atteint et l'agrégation se tairait.
+
+**Présentation — Les six pages déclarent leur auteur, leur éditeur et leur date.**
+Les six pages de l'observatoire ne portaient aucune donnée structurée : un moteur de réponse ne pouvait ni identifier qui écrit, ni dater la page, ni la rattacher au site. Chacune déclare désormais son auteur (Christophe Wiest), l'éditeur (Flying Kujira), la date de dernière modification et sa place dans le site. Deux pages qui n'avaient aucune description — Veille législative et Rétro-test 2022 — en ont une. L'observatoire est également mesuré à partir d'aujourd'hui : son audience était jusqu'ici invisible. Modification de forme uniquement : aucun chiffre ne change.
+
 ## 16 septembre 2026
 
 **Présentation — Balises canoniques sur les six pages de l'observatoire.**

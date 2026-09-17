@@ -362,10 +362,11 @@ def render(d):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="Qui est candidat à la présidentielle de 2027 : déclarés, candidatures sous
-condition, prétendants et retraits — chaque ligne sourcée, avec ce que l'officialisation exige.">
+<meta name="description" content="{G.meta_description('/observatoire/candidats/')}">
 <title>Les candidats à la présidentielle 2027 — qui est déclaré, qui ne l'est pas</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/candidats/">
+{G.ld_json("/observatoire/candidats/")}
+{G.matomo()}
 <style>{G.CSS}{CSS_PAGE}{G.DARK}</style>
 {G.THEME_HEAD}</head>
 <body>

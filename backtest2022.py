@@ -294,6 +294,24 @@ def render(bt):
     nc = [l["modes"]["recence"]["poids_non_candidats"] for l in bt["lignes"]]
     nc_max = max(nc) if nc else 0
     trous = [l["date"] for l in bt["lignes"] if l["modes"]["recence"]["n"] == 0]
+
+    # Cette phrase annonçait « à l'échéance du <vide> » : la liste des échéances sans
+    # assez d'enquêtes était vide, mais le gabarit gardait la formule quand même — et
+    # affirmait donc un cas qui ne s'est pas produit. Elle dit maintenant ce que les
+    # données montrent, dans un cas comme dans l'autre.
+    if trous:
+        phrase_trous = (
+            "à l'échéance du " + ", ".join(trous) + ", aucun scénario n'atteignait trois "
+            "enquêtes — la page serait restée vide. C'est honnête, mais c'est une "
+            "fragilité à assumer."
+        )
+    else:
+        phrase_trous = (
+            "sur chacune des " + str(len(bt["lignes"])) + " échéances de ce rétro-test, au moins "
+            "trois enquêtes étaient disponibles — la page ne serait jamais restée vide. La "
+            "fragilité reste entière : sur une campagne plus pauvre en sondages, le seuil de "
+            "trois enquêtes ne serait pas atteint, et l'agrégation se tairait."
+        )
     gain_dernier = round((r[2]["mae"] or 0) - (r[0]["mae"] or 0), 2)
     return f"""<!doctype html>
 <html lang="fr">
@@ -301,8 +319,11 @@ def render(bt):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
+<meta name="description" content="{G.meta_description('/observatoire/backtest/')}">
 <title>Rétro-test 2022 — la méthode mise à l'épreuve</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/backtest/">
+{G.ld_json("/observatoire/backtest/")}
+{G.matomo()}
 <style>{G.CSS}{G.DARK}
 /* Tables : largeur pleine dans les cartes */
 section.card table{{width:100%}}</style>
@@ -423,9 +444,7 @@ section.card table{{width:100%}}</style>
     (Montebourg, Bertrand, Philippot…) pesaient jusqu'à {G.fr1u(nc_max)} points de notre tableau en
     2021, contre {G.fr1u(r[0]["poids_non_candidats"])} au dernier point. Verrouiller un scénario revient
     à parier sur ce chiffre ; un modèle qui intègre le champ le paie autrement, en largeur d'intervalle.</li>
-    <li><strong>Notre méthode peut ne rien publier</strong> : à l'échéance du {", ".join(trous)}, aucun
-    scénario n'atteignait trois enquêtes — la page serait restée vide. C'est honnête, mais c'est une
-    fragilité à assumer.</li>
+    <li><strong>Notre méthode peut ne rien publier</strong> : {phrase_trous}</li>
     <li><strong>Ce chiffre ne se compare pas</strong> à celui de la prévision bayésienne (1,9 point sur
     les duels à J−31) : autre horizon, autre grandeur. Ce qui est comparable, c'est la discipline —
     désormais, nous publions notre erreur au lieu de l'affirmer.</li>

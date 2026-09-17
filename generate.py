@@ -54,6 +54,101 @@ IC_FLOOR = 1.0         # plancher de l'intervalle (± points) : anti-fausse pré
 TODAY = date.today()
 
 
+# ── Données structurées et mesure d'audience (17/09/2026) ────────────────────────────
+# Une seule source pour les six pages : le titre et la description d'une page servent à
+# la fois à ses données structurées et à sa balise <meta>. Deux textes divergents pour la
+# même page seraient exactement le genre d'incohérence qu'un audit reproche.
+SITE_URL = "https://dileviathan.fr"
+MATOMO_URL = "https://analytics.dileviathan.fr/"
+
+PAGES_LD = {
+    "/observatoire/": ("Présidentielle 2027 — observatoire des sondages, agrégation sourcée",
+        "Observatoire des sondages de la présidentielle 2027 : agrégation sourcée des enquêtes publiées, méthode publiée, limites affichées.",
+        "WebPage"),
+    "/observatoire/sondages/": ("Présidentielle 2027 — agrégation des sondages, méthode et limites",
+        "Moyenne de sondages de la présidentielle 2027 : pondération, intervalle, marges de chaque enquête, mentions légales et limites.",
+        "Article"),
+    "/observatoire/candidats/": ("Les candidats à la présidentielle 2027 — qui est déclaré, qui ne l'est pas",
+        "Qui est candidat à la présidentielle de 2027 : déclarés, candidatures sous condition, suspens, retraits, et ce qu'il reste à trancher.",
+        "Article"),
+    "/observatoire/backtest/": ("Rétro-test 2022 — la méthode mise à l'épreuve",
+        "La méthode d'agrégation rejouée sur la campagne de 2022 : erreur moyenne, grilles de sensibilité, et la décision qui en découle.",
+        "Article"),
+    "/observatoire/lois/": ("Veille législative — les textes « technologie et pouvoir »",
+        "Ce que le Parlement vote sur le numérique, les données et la surveillance : les scrutins publics de l'Assemblée nationale, par texte et par groupe.",
+        "Article"),
+    "/observatoire/workflow/": ("Comment ce site se fabrique",
+        "Comment l'observatoire se fabrique : sources, cache, calculs, pages statiques, publication et orchestration quotidienne, en un schéma.",
+        "TechArticle"),
+}
+
+
+def meta_description(chemin):
+    """Description de page, pour la balise <meta> comme pour les données structurées."""
+    return PAGES_LD[chemin][1]
+
+
+def ld_json(chemin):
+    """Données structurées d'une page de l'observatoire.
+
+    Le graphe est auto-portant : la page, le site, l'auteur et l'éditeur sont décrits ici,
+    et reliés par @id aux mêmes entités que celles déclarées par le site Next.js. C'est ce
+    qui permet à un moteur de rattacher cette page à une personne et à une organisation.
+    """
+    import json as _json
+    titre, description, type_page = PAGES_LD[chemin]
+    url = SITE_URL + chemin
+    graphe = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": type_page,
+                "@id": url + "#page",
+                "url": url,
+                "name": titre,
+                "description": description,
+                "inLanguage": "fr-FR",
+                "dateModified": TODAY.isoformat(),
+                "isPartOf": {"@id": SITE_URL + "/#website"},
+                "author": {"@id": SITE_URL + "/#person"},
+                "publisher": {"@id": SITE_URL + "/#organization"},
+            },
+            {"@type": "WebSite", "@id": SITE_URL + "/#website", "url": SITE_URL,
+             "name": "Diléviathan", "inLanguage": "fr-FR"},
+            {"@type": "Person", "@id": SITE_URL + "/#person", "name": "Christophe Wiest",
+             "url": SITE_URL + "/fr/a-propos"},
+            {"@type": "Organization", "@id": SITE_URL + "/#organization", "name": "Flying Kujira",
+             "url": SITE_URL},
+        ],
+    }
+    return ('<script type="application/ld+json">'
+            + _json.dumps(graphe, ensure_ascii=False, separators=(",", ":"))
+            + "</script>")
+
+
+def matomo():
+    """Mesure d'audience — site 1 en production, site 2 sur le bac à sable.
+
+    L'observatoire n'est aujourd'hui servi que sur dileviathan.fr (conteneur nginx
+    « simulation-poc », un seul jeu de fichiers : publier, c'est mettre en production).
+    Le garde-fou sur le nom d'hôte n'a donc pas d'effet aujourd'hui ; il évite que des
+    visites de bac à sable polluent les statistiques de production le jour où
+    l'observatoire sera aussi exposé sur dev.dileviathan.fr.
+    """
+    return """<script>
+(function(){
+  var u = '%s';
+  var id = (location.hostname.indexOf('dev.') === 0) ? 2 : 1;
+  window._paq = window._paq || [];
+  _paq.push(['setTrackerUrl', u + 'matomo.php']);
+  _paq.push(['setSiteId', id]);
+  _paq.push(['enableLinkTracking']);
+  var g = document.createElement('script'); g.async = true; g.src = u + 'matomo.js';
+  document.head.appendChild(g);
+})();
+</script>""" % MATOMO_URL
+
+
 def fetch(force=False):
     os.makedirs(DATA, exist_ok=True)
     cache = os.path.join(DATA, "polls.json")
@@ -1053,9 +1148,11 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="Moyenne de sondages de la présidentielle 2027 : pondération publiée, intervalle, marges de chaque enquête, mentions légales et limites affichées.">
+<meta name="description" content="{meta_description('/observatoire/')}">
 <title>Présidentielle 2027 — agrégation des sondages, méthode et limites</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/sondages/">
+{ld_json("/observatoire/sondages/")}
+{matomo()}
 <style>{CSS}{DARK}</style>
 {THEME_HEAD}</head>
 <body>
@@ -1346,6 +1443,8 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 <meta name="description" content="Observatoire des sondages de la présidentielle 2027 : agrégation sourcée, méthode publiée, limites affichées.">
 <title>Présidentielle 2027 — observatoire des sondages, agrégation sourcée</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/">
+{ld_json("/observatoire/")}
+{matomo()}
 <style>{CSS}{DARK}</style>
 {THEME_HEAD}</head>
 <body>

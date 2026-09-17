@@ -322,9 +322,11 @@ PAGE = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="Comment l'observatoire des sondages de la présidentielle 2027 se fabrique : sources, cache, calculs, pages statiques, publication et orchestration quotidienne — en un schéma.">
+<meta name="description" content="{G.meta_description('/observatoire/workflow/')}">
 <title>Comment le site se fabrique — Observatoire présidentielle 2027</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/workflow/">
+{G.ld_json("/observatoire/workflow/")}
+{G.matomo()}
 {G.THEME_HEAD}
 <style>{G.CSS}{G.DARK}{CSS_PAGE}</style>
 </head>

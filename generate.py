@@ -1055,6 +1055,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <meta name="robots" content="index, follow">
 <meta name="description" content="Moyenne de sondages de la présidentielle 2027 : pondération publiée, intervalle, marges de chaque enquête, mentions légales et limites affichées.">
 <title>Présidentielle 2027 — agrégation des sondages, méthode et limites</title>
+<link rel="canonical" href="https://dileviathan.fr/observatoire/sondages/">
 <style>{CSS}{DARK}</style>
 {THEME_HEAD}</head>
 <body>
@@ -1344,6 +1345,7 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 <meta name="robots" content="index, follow">
 <meta name="description" content="Observatoire des sondages de la présidentielle 2027 : agrégation sourcée, méthode publiée, limites affichées.">
 <title>Présidentielle 2027 — observatoire des sondages, agrégation sourcée</title>
+<link rel="canonical" href="https://dileviathan.fr/observatoire/">
 <style>{CSS}{DARK}</style>
 {THEME_HEAD}</head>
 <body>

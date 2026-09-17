@@ -302,6 +302,7 @@ def render(bt):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <title>Rétro-test 2022 — la méthode mise à l'épreuve</title>
+<link rel="canonical" href="https://dileviathan.fr/observatoire/backtest/">
 <style>{G.CSS}{G.DARK}
 /* Tables : largeur pleine dans les cartes */
 section.card table{{width:100%}}</style>

@@ -324,6 +324,7 @@ PAGE = f"""<!doctype html>
 <meta name="robots" content="index, follow">
 <meta name="description" content="Comment l'observatoire des sondages de la présidentielle 2027 se fabrique : sources, cache, calculs, pages statiques, publication et orchestration quotidienne — en un schéma.">
 <title>Comment le site se fabrique — Observatoire présidentielle 2027</title>
+<link rel="canonical" href="https://dileviathan.fr/observatoire/workflow/">
 {G.THEME_HEAD}
 <style>{G.CSS}{G.DARK}{CSS_PAGE}</style>
 </head>

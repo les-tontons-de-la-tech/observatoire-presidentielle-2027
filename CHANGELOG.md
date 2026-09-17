@@ -11,6 +11,9 @@ chiffre qu'on ne peut plus citer.
 
 ## 16 septembre 2026
 
+**Présentation — Balises canoniques sur les six pages de l'observatoire.**
+Les six pages de l'observatoire ne déclaraient aucune adresse canonique. Comme le serveur sert aussi bien /observatoire/ que /observatoire/index.html, les deux répondaient 200 avec le même contenu sans que rien n'indique à Google laquelle retenir : c'est l'une des causes de la ligne « Page en double sans URL canonique sélectionnée par l'utilisateur » du rapport d'indexation. Chaque page porte désormais, dans son en-tête, une canonique qui pointe vers sa propre adresse. Modification de forme uniquement : aucun chiffre, aucun texte de page n'a changé.
+
 **Correction — Total des intentions : 100 % au lieu de 100,1 %.**
 La page Agrégation annonçait « Total des intentions affichées : 100,1 % ». Le calcul additionnait les dix intentions telles qu'elles sont affichées, c'est-à-dire déjà arrondies au dixième : ces arrondis ne se compensaient pas et ajoutaient +0,099 point à la somme. Le total porte désormais sur les moyennes non arrondies, qui valent exactement 100,0000 %. Chaque ligne restant arrondie pour la lecture, leur somme peut s'écarter d'un dixième du total : la page le précise, et le libellé devient « Total des intentions », puisqu'il ne s'agit plus de la somme des valeurs affichées.
 

@@ -365,6 +365,7 @@ def render(d):
 <meta name="description" content="Qui est candidat à la présidentielle de 2027 : déclarés, candidatures sous
 condition, prétendants et retraits — chaque ligne sourcée, avec ce que l'officialisation exige.">
 <title>Les candidats à la présidentielle 2027 — qui est déclaré, qui ne l'est pas</title>
+<link rel="canonical" href="https://dileviathan.fr/observatoire/candidats/">
 <style>{G.CSS}{CSS_PAGE}{G.DARK}</style>
 {G.THEME_HEAD}</head>
 <body>

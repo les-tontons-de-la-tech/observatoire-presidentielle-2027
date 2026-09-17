@@ -416,7 +416,7 @@ PAGE = f"""<!doctype html>
 </main>
 
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
 </footer>
 {G.THEME_JS}
 <script>(function(){{

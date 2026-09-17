@@ -482,7 +482,7 @@ section.card table{{width:100%}}</style>
 </section>
 </main>
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
 </footer>
 {G.THEME_JS}</body>
 </html>

@@ -1323,7 +1323,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 </main>
 
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
 </footer>
 {THEME_JS}{CHRONO_JS}</body>
 </html>
@@ -1628,7 +1628,7 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 </main>
 
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales#observatoire-sondages">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
 </footer>
 {THEME_JS}{CHRONO_JS}</body>
 </html>

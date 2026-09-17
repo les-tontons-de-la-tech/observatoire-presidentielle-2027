@@ -61,25 +61,34 @@ def _entree(e, valeurs=None):
 
 
 def _corps(limite=None, valeurs=None):
-    """Entrées du journal, éventuellement tronquées, plus le reste à signaler."""
-    entrees = CONTENU.get("changelog") or []
+    """Entrées du journal, éventuellement tronquées, plus le reste à signaler.
+
+    L'auteur (17/09/2026) : le journal affiché sur le site ne porte que les mises à
+    jour de chiffres — intégration de nouvelles données (sondages, scrutins…). Les
+    entrées éditoriales (présentation, texte, correction, nouveauté, sources,
+    données) restent dans le JSON et le CHANGELOG, sans être affichées.
+    """
+    entrees = [e for e in (CONTENU.get("changelog") or [])
+               if e.get("nature") == "chiffres"]
     vues = entrees[:limite] if limite else entrees
     return "".join(_entree(e, valeurs) for e in vues), len(entrees) - len(vues)
 
 
 def changelog_bloc(limite=None, titre="Journal des mises à jour", note=None, valeurs=None):
     """Le journal. `limite` en garde les N plus récentes (résumé de la page d'accueil)."""
-    entrees = CONTENU.get("changelog") or []
-    if not entrees:
+    if not (CONTENU.get("changelog") or []):
         return ""
     corps, reste = _corps(limite, valeurs)
+    if not corps:
+        return ""
     suite = ""
     if reste:
         suite = (f'<p class="small muted" style="margin:12px 0 0">Les {reste} mises à jour plus '
                  f'anciennes figurent dans le journal complet, sur la page '
                  f'<a href="/observatoire/sondages/#a-lire">Agrégation</a>.</p>')
-    defaut = ("Chaque changement de chiffre, de texte ou de présentation est daté ici. Aucun chiffre "
-              "ne change sans une ligne dans ce journal.")
+    defaut = ("Les chiffres publiés évoluent à chaque intégration de nouvelles données — "
+              "sondages, scrutins de l'Assemblée. Chaque mise à jour est datée ici : aucun "
+              "chiffre ne change sans une ligne dans ce journal.")
     return (f'<section id="changelog" class="card">\n  <h2>{titre}</h2>\n'
             f'  <p class="small muted">{note or defaut}</p>\n  {corps}\n  {suite}\n</section>')
 
@@ -94,16 +103,22 @@ def a_lire_bloc(valeurs=None):
         items = "".join(f"<li>{_sub(x, valeurs)}</li>" for x in elements or [])
         return f'<h3 style="margin-top:22px">{titre}</h3><ul class="tight small">{items}</ul>'
 
+    corps_chiffres = _corps(None, valeurs)[0]
+    if not corps_chiffres:
+        corps_chiffres = ('<p class="small muted">Aucune mise à jour de chiffres pour le '
+                          'moment. Le journal se remplit à chaque intégration de nouvelles '
+                          'données.</p>')
     return (f'<section id="a-lire" class="card">\n  <h2>{c["titre"]}</h2>\n'
             f'  <p class="lede" style="font-size:1rem">{_sub(c["chapo"], valeurs)}</p>\n'
             f'  {liste(c["regles_titre"], c["regles"])}\n'
             f'  {liste(c["pieges_titre"], c["pieges"])}\n'
             f'  {liste(c["sources_titre"], c["sources"])}\n'
             f'  {liste(c["legal_titre"], c["legal"])}\n'
-            f'  <h3 style="margin-top:26px">Journal des mises à jour</h3>\n'
-            f'  <p class="small muted" style="max-width:none">Chaque changement de chiffre, de texte ou de présentation est '
-            f'daté. Aucun chiffre ne change sans une ligne ici.</p>\n'
-            f'  {_corps(None, valeurs)[0]}\n'
+            f'  <h3 style="margin-top:26px">Mises à jour des chiffres</h3>\n'
+            f'  <p class="small muted" style="max-width:none">Les chiffres publiés évoluent à chaque '
+            f'intégration de nouvelles données — sondages, scrutins de l&apos;Assemblée. Chaque mise à '
+            f'jour est datée ici : aucun chiffre ne change sans une ligne.</p>\n'
+            f'  {corps_chiffres}\n'
             f'  <div class="note-legale small" style="margin-top:22px">\n'
             f'    <p style="margin:0">{c["contact"]}</p>\n  </div>\n</section>')
 

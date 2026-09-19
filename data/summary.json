@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-18 18:00",
+ "generated": "2026-09-19 18:00",
  "total_polls_all": 256,
  "polls_in_window": 76,
  "scenario": "H42",
@@ -353,17 +353,17 @@
   "Nathalie Arthaud": 0.9,
   "Fabien Roussel": 2.8,
   "Jean-Luc Mélenchon": 16.0,
-  "Raphaël Glucksmann": 11.8,
   "Marine Tondelier": 3.9,
+  "Raphaël Glucksmann": 11.8,
   "Édouard Philippe": 17.3,
   "Bruno Retailleau": 8.3,
   "Nicolas Dupont-Aignan": 2.1,
   "Jordan Bardella": 34.9,
-  "Éric Zemmour": 3.8,
-  "Gabriel Attal": 11.0,
   "Sarah Knafo": 4.6,
+  "Gabriel Attal": 11.0,
   "François Hollande": 7.8,
   "Dominique de Villepin": 3.1,
+  "Éric Zemmour": 3.8,
   "Marine Le Pen": 34.0,
   "Olivier Faure": 4.8,
   "François Ruffin": 5.0,
@@ -372,7 +372,7 @@
  },
  "series": [
   {
-   "date": "2026-07-24",
+   "date": "2026-07-25",
    "weeks_ago": 8,
    "polls": 6,
    "rows": {
@@ -389,7 +389,7 @@
    }
   },
   {
-   "date": "2026-07-31",
+   "date": "2026-08-01",
    "weeks_ago": 7,
    "polls": 6,
    "rows": {
@@ -406,7 +406,7 @@
    }
   },
   {
-   "date": "2026-08-07",
+   "date": "2026-08-08",
    "weeks_ago": 6,
    "polls": 6,
    "rows": {
@@ -423,7 +423,7 @@
    }
   },
   {
-   "date": "2026-08-14",
+   "date": "2026-08-15",
    "weeks_ago": 5,
    "polls": 6,
    "rows": {
@@ -440,7 +440,7 @@
    }
   },
   {
-   "date": "2026-08-21",
+   "date": "2026-08-22",
    "weeks_ago": 4,
    "polls": 7,
    "rows": {
@@ -457,7 +457,7 @@
    }
   },
   {
-   "date": "2026-08-28",
+   "date": "2026-08-29",
    "weeks_ago": 3,
    "polls": 8,
    "rows": {
@@ -474,7 +474,7 @@
    }
   },
   {
-   "date": "2026-09-04",
+   "date": "2026-09-05",
    "weeks_ago": 2,
    "polls": 9,
    "rows": {
@@ -491,7 +491,7 @@
    }
   },
   {
-   "date": "2026-09-11",
+   "date": "2026-09-12",
    "weeks_ago": 1,
    "polls": 12,
    "rows": {
@@ -508,7 +508,7 @@
    }
   },
   {
-   "date": "2026-09-18",
+   "date": "2026-09-19",
    "weeks_ago": 0,
    "polls": 12,
    "rows": {

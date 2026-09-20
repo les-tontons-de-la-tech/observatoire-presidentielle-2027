@@ -9,6 +9,11 @@ chiffre qu'on ne peut plus citer.
 
 ---
 
+## 20 septembre 2026
+
+**Nouveauté — Un second rétro-test, sur la campagne 2017.**
+Le rétro-test 2022 mesurait la méthode sur la campagne qui avait servi à la régler. La même méthode est rejouée sur la campagne 2017, qu'elle n'a pas vue : 91 dates d'enquête reconstruites depuis la liste de sondages de Wikipédia (CC BY-SA), résultats officiels du ministère de l'Intérieur en Licence Ouverte, recoupés sur deux sources. À J-132, l'erreur moyenne est de 3,81 points, contre 3,83 pour 2022 au même horizon : la méthode tient. Le classement, lui, ne tient pas à cette distance, puisque le top 2 annoncé est François Fillon puis Emmanuel Macron, alors que les qualifiés furent Emmanuel Macron et Marine Le Pen. À J-10, l'erreur tombe à 1,26 point et le bon couple est retrouvé. À l'horizon où cet observatoire publie, l'équivalent de J-215, la page n'aurait rien affiché : 31 enquêtes dans la fenêtre, mais 2 seulement dans le champ de candidatures le plus testé, sous le seuil de trois enquêtes. Cette fragilité était annoncée, elle est désormais mesurée.
+
 ## 17 septembre 2026
 
 **Correction — Le rétro-test ne dit plus ce que les données ne montrent pas.**

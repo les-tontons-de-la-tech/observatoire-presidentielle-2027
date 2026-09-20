@@ -1,0 +1,3437 @@
+{
+ "genere": "2026-09-20 19:26",
+ "election": "2017-04-23",
+ "scrutin": "2017-04-23",
+ "source_sondages": "Wikipédia FR, « Liste de sondages sur l'élection présidentielle française de 2017 » (CC BY-SA), lue en wikitext",
+ "source_sondages_url": "https://fr.wikipedia.org/wiki/Liste_de_sondages_sur_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2017",
+ "source_resultat": "Résultats définitifs du 1er tour 2017, ministère de l'Intérieur (Licence Ouverte, data.gouv.fr) ; recoupés avec Wikipédia FR (CC BY-SA)",
+ "source_resultat_url": "https://static.data.gouv.fr/resources/election-presidentielle-des-23-avril-et-7-mai-2017-resultats-definitifs-du-1er-tour-1/20170427-100131/Presidentielle_2017_Resultats_Tour_1_c.xls",
+ "source_resultat_recoupement": "https://fr.wikipedia.org/wiki/R%C3%A9sultats_d%C3%A9taill%C3%A9s_de_l%27%C3%A9lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2017",
+ "source_resultat_verifie_le": "2026-09-20",
+ "exprimees": 36054394,
+ "votes_officiels": {
+  "Emmanuel Macron": 8656346,
+  "Marine Le Pen": 7678491,
+  "François Fillon": 7212995,
+  "Jean-Luc Mélenchon": 7059951,
+  "Benoît Hamon": 2291288,
+  "Nicolas Dupont-Aignan": 1695000,
+  "Jean Lassalle": 435301,
+  "Philippe Poutou": 394505,
+  "François Asselineau": 332547,
+  "Nathalie Arthaud": 232384,
+  "Jacques Cheminade": 65586
+ },
+ "resultat": {
+  "Emmanuel Macron": 24.01,
+  "Marine Le Pen": 21.3,
+  "François Fillon": 20.01,
+  "Jean-Luc Mélenchon": 19.58,
+  "Benoît Hamon": 6.36,
+  "Nicolas Dupont-Aignan": 4.7,
+  "Jean Lassalle": 1.21,
+  "Philippe Poutou": 1.09,
+  "François Asselineau": 0.92,
+  "Nathalie Arthaud": 0.64,
+  "Jacques Cheminade": 0.18
+ },
+ "perimetre": "enquêtes dont la date de fin d'enquête est postérieure au 01/01/2016",
+ "dernier_sondage": "2017-04-21",
+ "premier_sondage": "2016-01-15",
+ "nb_enquetes": 91,
+ "nb_sondages": 131,
+ "nb_hypotheses": 291,
+ "nb_instituts": 10,
+ "instituts": [
+  "BVA",
+  "Dedicated Research",
+  "Elabe",
+  "Harris Interactive",
+  "Ifop",
+  "Ipsos",
+  "Kantar Sofres",
+  "Odoxa",
+  "Opinion Way",
+  "Scan Research - Le Terrain"
+ ],
+ "valeurs_bornees": 65,
+ "lignes_bilan": {
+  "ligne sans intentions": 24,
+  "ligne de résultats officiels": 1,
+  "ligne de contexte": 23
+ },
+ "colonnes_ecartees": [
+  "Autres candidats"
+ ],
+ "controle": {
+  "cellules_de_date": 154,
+  "enquetes_reconstruites": 154,
+  "identiques": true
+ },
+ "lignes": [
+  {
+   "date": "2016-09-01",
+   "jours_avant": 234,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 4,
+     "publies": 7,
+     "mae": 1.95,
+     "biais": -1.65,
+     "max_err": 7.2,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": null,
+       "resultat": 24.01,
+       "erreur": null
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.4,
+       "resultat": 19.58,
+       "erreur": -7.2
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 4.8,
+       "resultat": 4.7,
+       "erreur": 0.1
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.3,
+       "resultat": 1.09,
+       "erreur": 0.2
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.9,
+       "resultat": 0.64,
+       "erreur": 0.3
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 53.1,
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 3,
+     "top2": [
+      "Alain Juppé",
+      "François Hollande"
+     ],
+     "top3": [
+      "Alain Juppé",
+      "François Hollande",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 4,
+     "publies": 7,
+     "mae": 1.95,
+     "biais": -1.6,
+     "max_err": 7.1,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": null,
+       "resultat": 24.01,
+       "erreur": null
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.5,
+       "resultat": 19.58,
+       "erreur": -7.1
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 4.8,
+       "resultat": 4.7,
+       "erreur": 0.1
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.3,
+       "resultat": 1.09,
+       "erreur": 0.2
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.64,
+       "erreur": 0.4
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 53.2,
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 3,
+     "top2": [
+      "Alain Juppé",
+      "François Hollande"
+     ],
+     "top3": [
+      "Alain Juppé",
+      "François Hollande",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 4,
+     "publies": 7,
+     "mae": 2.35,
+     "biais": -2.0,
+     "max_err": 8.6,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": null,
+       "resultat": 24.01,
+       "erreur": null
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 11.0,
+       "resultat": 19.58,
+       "erreur": -8.6
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 5.0,
+       "resultat": 4.7,
+       "erreur": 0.3
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.64,
+       "erreur": 0.4
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 56.0,
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 1,
+     "top2": [
+      "Alain Juppé",
+      "François Hollande"
+     ],
+     "top3": [
+      "Alain Juppé",
+      "François Hollande",
+      "Jean-Luc Mélenchon"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+   "scenario_taille": 7,
+   "publie": true
+  },
+  {
+   "date": "2016-10-01",
+   "jours_avant": 204,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 5,
+     "publies": 8,
+     "mae": 2.9,
+     "biais": 0.22,
+     "max_err": 7.1,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": null,
+       "resultat": 24.01,
+       "erreur": null
+      },
+      "Marine Le Pen": {
+       "estimation": 28.4,
+       "resultat": 21.3,
+       "erreur": 7.1
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 13.0,
+       "resultat": 19.58,
+       "erreur": -6.6
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 4.6,
+       "resultat": 4.7,
+       "erreur": -0.1
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.3,
+       "resultat": 1.09,
+       "erreur": 0.2
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.1,
+       "resultat": 0.64,
+       "erreur": 0.5
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 51.5,
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 10,
+     "top2": [
+      "Alain Juppé",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Alain Juppé",
+      "Marine Le Pen",
+      "François Hollande"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 5,
+     "publies": 8,
+     "mae": 3.02,
+     "biais": 0.1,
+     "max_err": 7.3,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": null,
+       "resultat": 24.01,
+       "erreur": null
+      },
+      "Marine Le Pen": {
+       "estimation": 27.8,
+       "resultat": 21.3,
+       "erreur": 6.5
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.3,
+       "resultat": 19.58,
+       "erreur": -7.3
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 5.0,
+       "resultat": 4.7,
+       "erreur": 0.3
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.5,
+       "resultat": 1.09,
+       "erreur": 0.4
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.2,
+       "resultat": 0.64,
+       "erreur": 0.6
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 52.3,
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 10,
+     "top2": [
+      "Alain Juppé",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Alain Juppé",
+      "Marine Le Pen",
+      "François Hollande"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 5,
+     "publies": 8,
+     "mae": 2.7,
+     "biais": 0.14,
+     "max_err": 6.7,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": null,
+       "resultat": 24.01,
+       "erreur": null
+      },
+      "Marine Le Pen": {
+       "estimation": 28.0,
+       "resultat": 21.3,
+       "erreur": 6.7
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 15.0,
+       "resultat": 19.58,
+       "erreur": -4.6
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.0,
+       "resultat": 4.7,
+       "erreur": -1.7
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.64,
+       "erreur": 0.4
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 52.0,
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 1,
+     "top2": [
+      "Alain Juppé",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Alain Juppé",
+      "Marine Le Pen",
+      "François Hollande"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+   "scenario_taille": 8,
+   "publie": true
+  },
+  {
+   "date": "2016-11-01",
+   "jours_avant": 173,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 5,
+     "publies": 9,
+     "mae": 3.36,
+     "biais": -3.2,
+     "max_err": 8.8,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 15.2,
+       "resultat": 24.01,
+       "erreur": -8.8
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.9,
+       "resultat": 19.58,
+       "erreur": -6.7
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.8,
+       "resultat": 4.7,
+       "erreur": -0.9
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.3,
+       "resultat": 1.09,
+       "erreur": 0.2
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.8,
+       "resultat": 0.64,
+       "erreur": 0.2
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 40.9,
+     "scenario": "Champ testé : Cécile Duflot / Emmanuel Macron / François Bayrou / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou",
+     "polls": 3,
+     "top2": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 5,
+     "publies": 9,
+     "mae": 3.18,
+     "biais": -3.1,
+     "max_err": 8.2,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 15.8,
+       "resultat": 24.01,
+       "erreur": -8.2
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.9,
+       "resultat": 19.58,
+       "erreur": -6.7
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.9,
+       "resultat": 4.7,
+       "erreur": -0.8
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.1,
+       "resultat": 1.09,
+       "erreur": 0.0
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.8,
+       "resultat": 0.64,
+       "erreur": 0.2
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 40.4,
+     "scenario": "Champ testé : Cécile Duflot / Emmanuel Macron / François Bayrou / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou",
+     "polls": 3,
+     "top2": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 5,
+     "publies": 9,
+     "mae": 3.92,
+     "biais": -3.4,
+     "max_err": 10.0,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 14.0,
+       "resultat": 24.01,
+       "erreur": -10.0
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": null,
+       "resultat": 20.01,
+       "erreur": null
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.0,
+       "resultat": 19.58,
+       "erreur": -7.6
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 4.0,
+       "resultat": 4.7,
+       "erreur": -0.7
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 2.0,
+       "resultat": 1.09,
+       "erreur": 0.9
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.64,
+       "erreur": 0.4
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 42.0,
+     "scenario": "Champ testé : Cécile Duflot / Emmanuel Macron / François Bayrou / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou",
+     "polls": 1,
+     "top2": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Cécile Duflot / Emmanuel Macron / François Bayrou / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou",
+   "scenario_taille": 9,
+   "publie": true
+  },
+  {
+   "date": "2016-12-01",
+   "jours_avant": 143,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 6,
+     "publies": 9,
+     "mae": 4.68,
+     "biais": -1.68,
+     "max_err": 9.7,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 14.3,
+       "resultat": 24.01,
+       "erreur": -9.7
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": 28.5,
+       "resultat": 20.01,
+       "erreur": 8.5
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.5,
+       "resultat": 19.58,
+       "erreur": -7.1
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.5,
+       "resultat": 4.7,
+       "erreur": -2.2
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.1,
+       "resultat": 0.64,
+       "erreur": 0.5
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 16.6,
+     "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 3,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "François Fillon",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 6,
+     "publies": 9,
+     "mae": 4.9,
+     "biais": -1.6,
+     "max_err": 9.7,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 14.3,
+       "resultat": 24.01,
+       "erreur": -9.7
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": 29.3,
+       "resultat": 20.01,
+       "erreur": 9.3
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.3,
+       "resultat": 19.58,
+       "erreur": -7.3
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.3,
+       "resultat": 4.7,
+       "erreur": -2.4
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.2,
+       "resultat": 0.64,
+       "erreur": 0.6
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 16.2,
+     "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 3,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "François Fillon",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 6,
+     "publies": 9,
+     "mae": 4.75,
+     "biais": -1.42,
+     "max_err": 10.0,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 16.0,
+       "resultat": 24.01,
+       "erreur": -8.0
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": 30.0,
+       "resultat": 20.01,
+       "erreur": 10.0
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.0,
+       "resultat": 19.58,
+       "erreur": -7.6
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 4.7,
+       "erreur": -2.7
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.5,
+       "resultat": 0.64,
+       "erreur": -0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 14.5,
+     "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 1,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "François Fillon",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+   "scenario_taille": 9,
+   "publie": true
+  },
+  {
+   "date": "2016-12-12",
+   "jours_avant": 132,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 7,
+     "publies": 11,
+     "mae": 3.81,
+     "biais": -1.3,
+     "max_err": 8.7,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 16.3,
+       "resultat": 24.01,
+       "erreur": -7.7
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": 28.7,
+       "resultat": 20.01,
+       "erreur": 8.7
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.0,
+       "resultat": 19.58,
+       "erreur": -7.6
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.2,
+       "resultat": 4.7,
+       "erreur": -2.5
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.7,
+       "resultat": 0.64,
+       "erreur": 0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.2,
+       "resultat": 0.18,
+       "erreur": 0.0
+      }
+     },
+     "poids_non_candidats": 14.9,
+     "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot",
+     "polls": 3,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "François Fillon",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 7,
+     "publies": 11,
+     "mae": 3.81,
+     "biais": -1.3,
+     "max_err": 8.7,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 16.3,
+       "resultat": 24.01,
+       "erreur": -7.7
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": 28.7,
+       "resultat": 20.01,
+       "erreur": 8.7
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.0,
+       "resultat": 19.58,
+       "erreur": -7.6
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.2,
+       "resultat": 4.7,
+       "erreur": -2.5
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.7,
+       "resultat": 0.64,
+       "erreur": 0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.2,
+       "resultat": 0.18,
+       "erreur": 0.0
+      }
+     },
+     "poids_non_candidats": 14.9,
+     "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot",
+     "polls": 3,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "François Fillon",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 7,
+     "publies": 11,
+     "mae": 3.74,
+     "biais": -1.46,
+     "max_err": 8.0,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 16.0,
+       "resultat": 24.01,
+       "erreur": -8.0
+      },
+      "Marine Le Pen": {
+       "estimation": null,
+       "resultat": 21.3,
+       "erreur": null
+      },
+      "François Fillon": {
+       "estimation": 28.0,
+       "resultat": 20.01,
+       "erreur": 8.0
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.5,
+       "resultat": 19.58,
+       "erreur": -7.1
+      },
+      "Benoît Hamon": {
+       "estimation": null,
+       "resultat": 6.36,
+       "erreur": null
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 4.7,
+       "erreur": -2.7
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 1.09,
+       "erreur": -0.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.5,
+       "resultat": 0.64,
+       "erreur": -0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.0,
+       "resultat": 0.18,
+       "erreur": -0.2
+      }
+     },
+     "poids_non_candidats": 16.0,
+     "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot",
+     "polls": 1,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "François Fillon",
+      "Emmanuel Macron",
+      "Jean-Luc Mélenchon"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot",
+   "scenario_taille": 11,
+   "publie": true
+  },
+  {
+   "date": "2017-02-01",
+   "jours_avant": 81,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 9,
+     "publies": 11,
+     "mae": 3.27,
+     "biais": -0.47,
+     "max_err": 9.6,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 19.8,
+       "resultat": 24.01,
+       "erreur": -4.2
+      },
+      "Marine Le Pen": {
+       "estimation": 24.9,
+       "resultat": 21.3,
+       "erreur": 3.6
+      },
+      "François Fillon": {
+       "estimation": 21.9,
+       "resultat": 20.01,
+       "erreur": 1.9
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.0,
+       "resultat": 19.58,
+       "erreur": -9.6
+      },
+      "Benoît Hamon": {
+       "estimation": 13.2,
+       "resultat": 6.36,
+       "erreur": 6.8
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.2,
+       "resultat": 4.7,
+       "erreur": -2.5
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.6,
+       "resultat": 1.09,
+       "erreur": -0.5
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.6,
+       "resultat": 0.64,
+       "erreur": -0.0
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.5,
+       "resultat": 0.18,
+       "erreur": 0.3
+      }
+     },
+     "poids_non_candidats": 6.9,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 3,
+     "top2": [
+      "Marine Le Pen",
+      "François Fillon"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "François Fillon",
+      "Emmanuel Macron"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 9,
+     "publies": 11,
+     "mae": 3.2,
+     "biais": -0.49,
+     "max_err": 9.4,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 19.7,
+       "resultat": 24.01,
+       "erreur": -4.3
+      },
+      "Marine Le Pen": {
+       "estimation": 25.0,
+       "resultat": 21.3,
+       "erreur": 3.7
+      },
+      "François Fillon": {
+       "estimation": 22.1,
+       "resultat": 20.01,
+       "erreur": 2.1
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.2,
+       "resultat": 19.58,
+       "erreur": -9.4
+      },
+      "Benoît Hamon": {
+       "estimation": 12.4,
+       "resultat": 6.36,
+       "erreur": 6.0
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.2,
+       "resultat": 4.7,
+       "erreur": -2.5
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.7,
+       "resultat": 1.09,
+       "erreur": -0.4
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.7,
+       "resultat": 0.64,
+       "erreur": 0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.5,
+       "resultat": 0.18,
+       "erreur": 0.3
+      }
+     },
+     "poids_non_candidats": 7.2,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 3,
+     "top2": [
+      "Marine Le Pen",
+      "François Fillon"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "François Fillon",
+      "Emmanuel Macron"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 9,
+     "publies": 11,
+     "mae": 3.73,
+     "biais": -0.27,
+     "max_err": 11.6,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 20.0,
+       "resultat": 24.01,
+       "erreur": -4.0
+      },
+      "Marine Le Pen": {
+       "estimation": 24.0,
+       "resultat": 21.3,
+       "erreur": 2.7
+      },
+      "François Fillon": {
+       "estimation": 21.0,
+       "resultat": 20.01,
+       "erreur": 1.0
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 9.0,
+       "resultat": 19.58,
+       "erreur": -10.6
+      },
+      "Benoît Hamon": {
+       "estimation": 18.0,
+       "resultat": 6.36,
+       "erreur": 11.6
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 4.7,
+       "erreur": -2.7
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.5,
+       "resultat": 1.09,
+       "erreur": -0.6
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.5,
+       "resultat": 0.64,
+       "erreur": -0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.5,
+       "resultat": 0.18,
+       "erreur": 0.3
+      }
+     },
+     "poids_non_candidats": 5.5,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 1,
+     "top2": [
+      "Marine Le Pen",
+      "François Fillon"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "François Fillon",
+      "Emmanuel Macron"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+   "scenario_taille": 11,
+   "publie": true
+  },
+  {
+   "date": "2017-03-01",
+   "jours_avant": 53,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 8,
+     "publies": 9,
+     "mae": 3.17,
+     "biais": 0.07,
+     "max_err": 8.6,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 21.7,
+       "resultat": 24.01,
+       "erreur": -2.3
+      },
+      "Marine Le Pen": {
+       "estimation": 25.7,
+       "resultat": 21.3,
+       "erreur": 4.4
+      },
+      "François Fillon": {
+       "estimation": 19.8,
+       "resultat": 20.01,
+       "erreur": -0.2
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.3,
+       "resultat": 19.58,
+       "erreur": -7.3
+      },
+      "Benoît Hamon": {
+       "estimation": 15.0,
+       "resultat": 6.36,
+       "erreur": 8.6
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.5,
+       "resultat": 4.7,
+       "erreur": -2.2
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.7,
+       "resultat": 1.09,
+       "erreur": -0.4
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.6,
+       "resultat": 0.64,
+       "erreur": -0.0
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 1.6,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 11,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "Emmanuel Macron",
+      "François Fillon"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 8,
+     "publies": 9,
+     "mae": 3.29,
+     "biais": 0.06,
+     "max_err": 8.9,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 21.9,
+       "resultat": 24.01,
+       "erreur": -2.1
+      },
+      "Marine Le Pen": {
+       "estimation": 25.8,
+       "resultat": 21.3,
+       "erreur": 4.5
+      },
+      "François Fillon": {
+       "estimation": 19.6,
+       "resultat": 20.01,
+       "erreur": -0.4
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 12.1,
+       "resultat": 19.58,
+       "erreur": -7.5
+      },
+      "Benoît Hamon": {
+       "estimation": 15.3,
+       "resultat": 6.36,
+       "erreur": 8.9
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.4,
+       "resultat": 4.7,
+       "erreur": -2.3
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.6,
+       "resultat": 1.09,
+       "erreur": -0.5
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.5,
+       "resultat": 0.64,
+       "erreur": -0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 1.6,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 11,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "Emmanuel Macron",
+      "François Fillon"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 8,
+     "publies": 9,
+     "mae": 3.16,
+     "biais": -0.09,
+     "max_err": 8.6,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 23.0,
+       "resultat": 24.01,
+       "erreur": -1.0
+      },
+      "Marine Le Pen": {
+       "estimation": 26.0,
+       "resultat": 21.3,
+       "erreur": 4.7
+      },
+      "François Fillon": {
+       "estimation": 21.0,
+       "resultat": 20.01,
+       "erreur": 1.0
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 11.0,
+       "resultat": 19.58,
+       "erreur": -8.6
+      },
+      "Benoît Hamon": {
+       "estimation": 13.0,
+       "resultat": 6.36,
+       "erreur": 6.6
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.0,
+       "resultat": 4.7,
+       "erreur": -1.7
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.0,
+       "resultat": 1.09,
+       "erreur": -1.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.0,
+       "resultat": 0.64,
+       "erreur": -0.6
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 2.0,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+     "polls": 1,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "Emmanuel Macron",
+      "François Fillon"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot",
+   "scenario_taille": 9,
+   "publie": true
+  },
+  {
+   "date": "2017-03-24",
+   "jours_avant": 30,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 8,
+     "publies": 8,
+     "mae": 3.0,
+     "biais": 0.3,
+     "max_err": 8.4,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 25.1,
+       "resultat": 24.01,
+       "erreur": 1.1
+      },
+      "Marine Le Pen": {
+       "estimation": 26.3,
+       "resultat": 21.3,
+       "erreur": 5.0
+      },
+      "François Fillon": {
+       "estimation": 20.0,
+       "resultat": 20.01,
+       "erreur": -0.0
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 11.2,
+       "resultat": 19.58,
+       "erreur": -8.4
+      },
+      "Benoît Hamon": {
+       "estimation": 13.4,
+       "resultat": 6.36,
+       "erreur": 7.0
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.8,
+       "resultat": 4.7,
+       "erreur": -1.9
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.6,
+       "resultat": 1.09,
+       "erreur": -0.5
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.7,
+       "resultat": 0.64,
+       "erreur": 0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 0,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 13,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "Emmanuel Macron",
+      "François Fillon"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 8,
+     "publies": 8,
+     "mae": 3.02,
+     "biais": 0.3,
+     "max_err": 8.5,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 25.1,
+       "resultat": 24.01,
+       "erreur": 1.1
+      },
+      "Marine Le Pen": {
+       "estimation": 26.3,
+       "resultat": 21.3,
+       "erreur": 5.0
+      },
+      "François Fillon": {
+       "estimation": 20.0,
+       "resultat": 20.01,
+       "erreur": -0.0
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 11.1,
+       "resultat": 19.58,
+       "erreur": -8.5
+      },
+      "Benoît Hamon": {
+       "estimation": 13.5,
+       "resultat": 6.36,
+       "erreur": 7.1
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.8,
+       "resultat": 4.7,
+       "erreur": -1.9
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.6,
+       "resultat": 1.09,
+       "erreur": -0.5
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.7,
+       "resultat": 0.64,
+       "erreur": 0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 0,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 13,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "Emmanuel Macron",
+      "François Fillon"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 8,
+     "publies": 8,
+     "mae": 3.14,
+     "biais": 0.29,
+     "max_err": 8.6,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 25.0,
+       "resultat": 24.01,
+       "erreur": 1.0
+      },
+      "Marine Le Pen": {
+       "estimation": 28.0,
+       "resultat": 21.3,
+       "erreur": 6.7
+      },
+      "François Fillon": {
+       "estimation": 20.0,
+       "resultat": 20.01,
+       "erreur": -0.0
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 11.0,
+       "resultat": 19.58,
+       "erreur": -8.6
+      },
+      "Benoît Hamon": {
+       "estimation": 12.0,
+       "resultat": 6.36,
+       "erreur": 5.6
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.0,
+       "resultat": 4.7,
+       "erreur": -1.7
+      },
+      "Jean Lassalle": {
+       "estimation": null,
+       "resultat": 1.21,
+       "erreur": null
+      },
+      "Philippe Poutou": {
+       "estimation": 0.0,
+       "resultat": 1.09,
+       "erreur": -1.1
+      },
+      "François Asselineau": {
+       "estimation": null,
+       "resultat": 0.92,
+       "erreur": null
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.64,
+       "erreur": 0.4
+      },
+      "Jacques Cheminade": {
+       "estimation": null,
+       "resultat": 0.18,
+       "erreur": null
+      }
+     },
+     "poids_non_candidats": 0,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 1,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "top3": [
+      "Marine Le Pen",
+      "Emmanuel Macron",
+      "François Fillon"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+   "scenario_taille": 8,
+   "publie": true
+  },
+  {
+   "date": "2017-04-13",
+   "jours_avant": 10,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 11,
+     "publies": 11,
+     "mae": 1.26,
+     "biais": 0.05,
+     "max_err": 3.5,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 24.5,
+       "resultat": 24.01,
+       "erreur": 0.5
+      },
+      "Marine Le Pen": {
+       "estimation": 24.2,
+       "resultat": 21.3,
+       "erreur": 2.9
+      },
+      "François Fillon": {
+       "estimation": 18.2,
+       "resultat": 20.01,
+       "erreur": -1.8
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 16.2,
+       "resultat": 19.58,
+       "erreur": -3.4
+      },
+      "Benoît Hamon": {
+       "estimation": 9.9,
+       "resultat": 6.36,
+       "erreur": 3.5
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.7,
+       "resultat": 4.7,
+       "erreur": -1.0
+      },
+      "Jean Lassalle": {
+       "estimation": 0.9,
+       "resultat": 1.21,
+       "erreur": -0.3
+      },
+      "Philippe Poutou": {
+       "estimation": 1.3,
+       "resultat": 1.09,
+       "erreur": 0.2
+      },
+      "François Asselineau": {
+       "estimation": 0.7,
+       "resultat": 0.92,
+       "erreur": -0.2
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.6,
+       "resultat": 0.64,
+       "erreur": -0.0
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.3,
+       "resultat": 0.18,
+       "erreur": 0.1
+      }
+     },
+     "poids_non_candidats": 0,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 35,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Marine Le Pen",
+      "François Fillon"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 11,
+     "publies": 11,
+     "mae": 1.3,
+     "biais": 0.03,
+     "max_err": 3.6,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 24.5,
+       "resultat": 24.01,
+       "erreur": 0.5
+      },
+      "Marine Le Pen": {
+       "estimation": 24.2,
+       "resultat": 21.3,
+       "erreur": 2.9
+      },
+      "François Fillon": {
+       "estimation": 18.2,
+       "resultat": 20.01,
+       "erreur": -1.8
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 16.0,
+       "resultat": 19.58,
+       "erreur": -3.6
+      },
+      "Benoît Hamon": {
+       "estimation": 10.0,
+       "resultat": 6.36,
+       "erreur": 3.6
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.7,
+       "resultat": 4.7,
+       "erreur": -1.0
+      },
+      "Jean Lassalle": {
+       "estimation": 0.8,
+       "resultat": 1.21,
+       "erreur": -0.4
+      },
+      "Philippe Poutou": {
+       "estimation": 1.2,
+       "resultat": 1.09,
+       "erreur": 0.1
+      },
+      "François Asselineau": {
+       "estimation": 0.7,
+       "resultat": 0.92,
+       "erreur": -0.2
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.7,
+       "resultat": 0.64,
+       "erreur": 0.1
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.3,
+       "resultat": 0.18,
+       "erreur": 0.1
+      }
+     },
+     "poids_non_candidats": 0,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 35,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Marine Le Pen",
+      "François Fillon"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 11,
+     "publies": 11,
+     "mae": 0.75,
+     "biais": 0.03,
+     "max_err": 1.7,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 23.0,
+       "resultat": 24.01,
+       "erreur": -1.0
+      },
+      "Marine Le Pen": {
+       "estimation": 22.5,
+       "resultat": 21.3,
+       "erreur": 1.2
+      },
+      "François Fillon": {
+       "estimation": 19.4,
+       "resultat": 20.01,
+       "erreur": -0.6
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 18.7,
+       "resultat": 19.58,
+       "erreur": -0.9
+      },
+      "Benoît Hamon": {
+       "estimation": 8.1,
+       "resultat": 6.36,
+       "erreur": 1.7
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 3.5,
+       "resultat": 4.7,
+       "erreur": -1.2
+      },
+      "Jean Lassalle": {
+       "estimation": 1.5,
+       "resultat": 1.21,
+       "erreur": 0.3
+      },
+      "Philippe Poutou": {
+       "estimation": 1.7,
+       "resultat": 1.09,
+       "erreur": 0.6
+      },
+      "François Asselineau": {
+       "estimation": 1.3,
+       "resultat": 0.92,
+       "erreur": 0.4
+      },
+      "Nathalie Arthaud": {
+       "estimation": 0.3,
+       "resultat": 0.64,
+       "erreur": -0.3
+      },
+      "Jacques Cheminade": {
+       "estimation": 0.3,
+       "resultat": 0.18,
+       "erreur": 0.1
+      }
+     },
+     "poids_non_candidats": 0,
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+     "polls": 4,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Marine Le Pen",
+      "François Fillon"
+     ]
+    }
+   },
+   "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+   "scenario_taille": 11,
+   "publie": true
+  }
+ ],
+ "sensibilite": [
+  {
+   "half_life": 15,
+   "mae": 1.16,
+   "biais": 0.04,
+   "max_err": 3.2
+  },
+  {
+   "half_life": 30,
+   "mae": 1.26,
+   "biais": 0.05,
+   "max_err": 3.5
+  },
+  {
+   "half_life": 60,
+   "mae": 1.28,
+   "biais": 0.03,
+   "max_err": 3.6
+  },
+  {
+   "half_life": 180,
+   "mae": 1.35,
+   "biais": 0.04,
+   "max_err": 3.7
+  }
+ ],
+ "grille_fenetre": [
+  {
+   "fenetre": 30,
+   "mae_moyenne": 3.14,
+   "couverture": "8/9",
+   "n_moyen": 7.4,
+   "polls_moyen": 11.1,
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 3.02,
+     "n": 5,
+     "polls": 11,
+     "non_cand": 52.1,
+     "top2": [
+      "Marine Le Pen",
+      "Nicolas Sarkozy"
+     ],
+     "scenario": "Champ testé : Cécile Duflot / François Bayrou / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou"
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.9,
+     "n": 5,
+     "polls": 10,
+     "non_cand": 51.5,
+     "top2": [
+      "Alain Juppé",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2016-11-01",
+     "mae": null,
+     "n": 0,
+     "polls": 0,
+     "non_cand": 0.0,
+     "top2": [],
+     "scenario": null
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.68,
+     "n": 6,
+     "polls": 3,
+     "non_cand": 16.6,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.81,
+     "n": 7,
+     "polls": 3,
+     "non_cand": 14.9,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot"
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.27,
+     "n": 9,
+     "polls": 3,
+     "non_cand": 6.9,
+     "top2": [
+      "Marine Le Pen",
+      "François Fillon"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11,
+     "non_cand": 1.6,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.0,
+     "n": 8,
+     "polls": 13,
+     "non_cand": 0,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.26,
+     "n": 11,
+     "polls": 35,
+     "non_cand": 0,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    }
+   ],
+   "ok": false
+  },
+  {
+   "fenetre": 60,
+   "mae_moyenne": 3.16,
+   "couverture": "9/9",
+   "n_moyen": 7.1,
+   "polls_moyen": 10.0,
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 3.02,
+     "n": 5,
+     "polls": 9,
+     "non_cand": 52.4,
+     "top2": [
+      "Alain Juppé",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.9,
+     "n": 5,
+     "polls": 10,
+     "non_cand": 51.5,
+     "top2": [
+      "Alain Juppé",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 3.36,
+     "n": 5,
+     "polls": 3,
+     "non_cand": 40.9,
+     "top2": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Cécile Duflot / Emmanuel Macron / François Bayrou / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou"
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.68,
+     "n": 6,
+     "polls": 3,
+     "non_cand": 16.6,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.81,
+     "n": 7,
+     "polls": 3,
+     "non_cand": 14.9,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot"
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.27,
+     "n": 9,
+     "polls": 3,
+     "non_cand": 6.9,
+     "top2": [
+      "Marine Le Pen",
+      "François Fillon"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11,
+     "non_cand": 1.6,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.0,
+     "n": 8,
+     "polls": 13,
+     "non_cand": 0,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.26,
+     "n": 11,
+     "polls": 35,
+     "non_cand": 0,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    }
+   ],
+   "ok": true
+  },
+  {
+   "fenetre": 90,
+   "mae_moyenne": 3.04,
+   "couverture": "9/9",
+   "n_moyen": 7.0,
+   "polls_moyen": 9.3,
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 1.95,
+     "n": 4,
+     "polls": 3,
+     "non_cand": 53.1,
+     "top2": [
+      "Alain Juppé",
+      "François Hollande"
+     ],
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.9,
+     "n": 5,
+     "polls": 10,
+     "non_cand": 51.5,
+     "top2": [
+      "Alain Juppé",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 3.36,
+     "n": 5,
+     "polls": 3,
+     "non_cand": 40.9,
+     "top2": [
+      "Nicolas Sarkozy",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Cécile Duflot / Emmanuel Macron / François Bayrou / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou"
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.68,
+     "n": 6,
+     "polls": 3,
+     "non_cand": 16.6,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.81,
+     "n": 7,
+     "polls": 3,
+     "non_cand": 14.9,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot"
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.27,
+     "n": 9,
+     "polls": 3,
+     "non_cand": 6.9,
+     "top2": [
+      "Marine Le Pen",
+      "François Fillon"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11,
+     "non_cand": 1.6,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.0,
+     "n": 8,
+     "polls": 13,
+     "non_cand": 0,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.26,
+     "n": 11,
+     "polls": 35,
+     "non_cand": 0,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    }
+   ],
+   "ok": true
+  },
+  {
+   "fenetre": 120,
+   "mae_moyenne": 2.97,
+   "couverture": "9/9",
+   "n_moyen": 7.0,
+   "polls_moyen": 10.3,
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 3.02,
+     "n": 5,
+     "polls": 11,
+     "non_cand": 52.1,
+     "top2": [
+      "Marine Le Pen",
+      "Nicolas Sarkozy"
+     ],
+     "scenario": "Champ testé : Cécile Duflot / François Bayrou / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou"
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.8,
+     "n": 5,
+     "polls": 11,
+     "non_cand": 52.4,
+     "top2": [
+      "Marine Le Pen",
+      "Nicolas Sarkozy"
+     ],
+     "scenario": "Champ testé : Cécile Duflot / François Bayrou / François Hollande / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou"
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 1.75,
+     "n": 4,
+     "polls": 3,
+     "non_cand": 51.9,
+     "top2": [
+      "Nicolas Sarkozy",
+      "François Bayrou"
+     ],
+     "scenario": "Champ testé : Cécile Duflot / François Bayrou / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Nicolas Sarkozy / Philippe Poutou"
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.68,
+     "n": 6,
+     "polls": 3,
+     "non_cand": 16.6,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Emmanuel Macron / François Bayrou / François Fillon / François Hollande / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.81,
+     "n": 7,
+     "polls": 3,
+     "non_cand": 14.9,
+     "top2": [
+      "François Fillon",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Arnaud Montebourg / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Sylvia Pinel / Yannick Jadot"
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.27,
+     "n": 9,
+     "polls": 3,
+     "non_cand": 6.9,
+     "top2": [
+      "Marine Le Pen",
+      "François Fillon"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Bayrou / François Fillon / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11,
+     "non_cand": 1.6,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou / Yannick Jadot"
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.0,
+     "n": 8,
+     "polls": 13,
+     "non_cand": 0,
+     "top2": [
+      "Marine Le Pen",
+      "Emmanuel Macron"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Fillon / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.26,
+     "n": 11,
+     "polls": 35,
+     "non_cand": 0,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou"
+    }
+   ],
+   "ok": true
+  }
+ ],
+ "grille_house": [
+  {
+   "fenetre": 60,
+   "house": false,
+   "libelle": "fenêtre 60 j, sans correction",
+   "mae_moyenne": 3.15,
+   "couverture": "9/9",
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 2.96,
+     "n": 5,
+     "polls": 9
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.84,
+     "n": 5,
+     "polls": 10
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 3.44,
+     "n": 5,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.6,
+     "n": 6,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.79,
+     "n": 7,
+     "polls": 3
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.3,
+     "n": 9,
+     "polls": 3
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.02,
+     "n": 8,
+     "polls": 13
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.25,
+     "n": 11,
+     "polls": 35
+    }
+   ]
+  },
+  {
+   "fenetre": 60,
+   "house": true,
+   "libelle": "fenêtre 60 j, effets de maison corrigés",
+   "mae_moyenne": 3.16,
+   "couverture": "9/9",
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 3.02,
+     "n": 5,
+     "polls": 9
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.9,
+     "n": 5,
+     "polls": 10
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 3.36,
+     "n": 5,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.68,
+     "n": 6,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.81,
+     "n": 7,
+     "polls": 3
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.27,
+     "n": 9,
+     "polls": 3
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.0,
+     "n": 8,
+     "polls": 13
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.26,
+     "n": 11,
+     "polls": 35
+    }
+   ]
+  },
+  {
+   "fenetre": 90,
+   "house": false,
+   "libelle": "fenêtre 90 j, sans correction",
+   "mae_moyenne": 3.04,
+   "couverture": "9/9",
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 1.95,
+     "n": 4,
+     "polls": 3
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.84,
+     "n": 5,
+     "polls": 10
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 3.44,
+     "n": 5,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.6,
+     "n": 6,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.79,
+     "n": 7,
+     "polls": 3
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.3,
+     "n": 9,
+     "polls": 3
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.02,
+     "n": 8,
+     "polls": 13
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.25,
+     "n": 11,
+     "polls": 35
+    }
+   ]
+  },
+  {
+   "fenetre": 90,
+   "house": true,
+   "libelle": "fenêtre 90 j, effets de maison corrigés",
+   "mae_moyenne": 3.04,
+   "couverture": "9/9",
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 1.95,
+     "n": 4,
+     "polls": 3
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.9,
+     "n": 5,
+     "polls": 10
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 3.36,
+     "n": 5,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.68,
+     "n": 6,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.81,
+     "n": 7,
+     "polls": 3
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.27,
+     "n": 9,
+     "polls": 3
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.0,
+     "n": 8,
+     "polls": 13
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.26,
+     "n": 11,
+     "polls": 35
+    }
+   ]
+  },
+  {
+   "fenetre": 120,
+   "house": true,
+   "libelle": "fenêtre 120 j, effets de maison corrigés",
+   "mae_moyenne": 2.97,
+   "couverture": "9/9",
+   "detail": [
+    {
+     "date": "2016-09-01",
+     "mae": 3.02,
+     "n": 5,
+     "polls": 11
+    },
+    {
+     "date": "2016-10-01",
+     "mae": 2.8,
+     "n": 5,
+     "polls": 11
+    },
+    {
+     "date": "2016-11-01",
+     "mae": 1.75,
+     "n": 4,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-01",
+     "mae": 4.68,
+     "n": 6,
+     "polls": 3
+    },
+    {
+     "date": "2016-12-12",
+     "mae": 3.81,
+     "n": 7,
+     "polls": 3
+    },
+    {
+     "date": "2017-02-01",
+     "mae": 3.27,
+     "n": 9,
+     "polls": 3
+    },
+    {
+     "date": "2017-03-01",
+     "mae": 3.17,
+     "n": 8,
+     "polls": 11
+    },
+    {
+     "date": "2017-03-24",
+     "mae": 3.0,
+     "n": 8,
+     "polls": 13
+    },
+    {
+     "date": "2017-04-13",
+     "mae": 1.26,
+     "n": 11,
+     "polls": 35
+    }
+   ]
+  }
+ ],
+ "meilleure": {
+  "fenetre": 120,
+  "house": true,
+  "mae": 2.97,
+  "couv": "9/9",
+  "ok": true
+ },
+ "horizon_2027": {
+  "date": "2016-09-20",
+  "metric": {
+   "mode": "Notre méthode",
+   "n": 0,
+   "mae": null,
+   "biais": null,
+   "max_err": null,
+   "publies": 0,
+   "detail": {},
+   "poids_non_candidats": 0.0,
+   "scenario": null,
+   "polls": 0,
+   "top2": [],
+   "top3": []
+  },
+  "densite": {
+   "date": "2016-09-20",
+   "jours_avant": 215,
+   "enquetes": 22,
+   "recentes": 4,
+   "premiere": "2016-01-15"
+  },
+  "polls_in_window": 31,
+  "polls_in_scenario": 2,
+  "scenario": "Champ testé : Alain Juppé / Cécile Duflot / François Hollande / Jacques Cheminade / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+  "scenario_taille": 9
+ },
+ "reference_2022": {
+  "date": "2021-11-29",
+  "mae": 3.83,
+  "n": 12,
+  "biais": -0.18,
+  "fenetre_90": 3.11,
+  "fenetre_60": 3.19,
+  "house_90_sans": 3.15,
+  "house_90_avec": 3.11
+ },
+ "densites": [
+  {
+   "date": "2016-09-20",
+   "jours_avant": 215,
+   "enquetes": 22,
+   "recentes": 4,
+   "premiere": "2016-01-15"
+  },
+  {
+   "date": "2016-12-12",
+   "jours_avant": 132,
+   "enquetes": 35,
+   "recentes": 10,
+   "premiere": "2016-01-15"
+  },
+  {
+   "date": "2017-03-24",
+   "jours_avant": 30,
+   "enquetes": 72,
+   "recentes": 21,
+   "premiere": "2016-01-15"
+  },
+  {
+   "date": "2017-04-13",
+   "jours_avant": 10,
+   "enquetes": 85,
+   "recentes": 21,
+   "premiere": "2016-01-15"
+  }
+ ],
+ "echeances_sans_publication": [],
+ "dernier": {
+  "date": "2017-04-13",
+  "jours_avant": 10,
+  "modes": [
+   {
+    "mode": "Notre méthode (fraîcheur + échantillon)",
+    "n": 11,
+    "publies": 11,
+    "mae": 1.26,
+    "biais": 0.05,
+    "max_err": 3.5,
+    "detail": {
+     "Emmanuel Macron": {
+      "estimation": 24.5,
+      "resultat": 24.01,
+      "erreur": 0.5
+     },
+     "Marine Le Pen": {
+      "estimation": 24.2,
+      "resultat": 21.3,
+      "erreur": 2.9
+     },
+     "François Fillon": {
+      "estimation": 18.2,
+      "resultat": 20.01,
+      "erreur": -1.8
+     },
+     "Jean-Luc Mélenchon": {
+      "estimation": 16.2,
+      "resultat": 19.58,
+      "erreur": -3.4
+     },
+     "Benoît Hamon": {
+      "estimation": 9.9,
+      "resultat": 6.36,
+      "erreur": 3.5
+     },
+     "Nicolas Dupont-Aignan": {
+      "estimation": 3.7,
+      "resultat": 4.7,
+      "erreur": -1.0
+     },
+     "Jean Lassalle": {
+      "estimation": 0.9,
+      "resultat": 1.21,
+      "erreur": -0.3
+     },
+     "Philippe Poutou": {
+      "estimation": 1.3,
+      "resultat": 1.09,
+      "erreur": 0.2
+     },
+     "François Asselineau": {
+      "estimation": 0.7,
+      "resultat": 0.92,
+      "erreur": -0.2
+     },
+     "Nathalie Arthaud": {
+      "estimation": 0.6,
+      "resultat": 0.64,
+      "erreur": -0.0
+     },
+     "Jacques Cheminade": {
+      "estimation": 0.3,
+      "resultat": 0.18,
+      "erreur": 0.1
+     }
+    },
+    "poids_non_candidats": 0,
+    "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+    "polls": 35,
+    "top2": [
+     "Emmanuel Macron",
+     "Marine Le Pen"
+    ],
+    "top3": [
+     "Emmanuel Macron",
+     "Marine Le Pen",
+     "François Fillon"
+    ]
+   },
+   {
+    "mode": "Poids égaux",
+    "n": 11,
+    "publies": 11,
+    "mae": 1.3,
+    "biais": 0.03,
+    "max_err": 3.6,
+    "detail": {
+     "Emmanuel Macron": {
+      "estimation": 24.5,
+      "resultat": 24.01,
+      "erreur": 0.5
+     },
+     "Marine Le Pen": {
+      "estimation": 24.2,
+      "resultat": 21.3,
+      "erreur": 2.9
+     },
+     "François Fillon": {
+      "estimation": 18.2,
+      "resultat": 20.01,
+      "erreur": -1.8
+     },
+     "Jean-Luc Mélenchon": {
+      "estimation": 16.0,
+      "resultat": 19.58,
+      "erreur": -3.6
+     },
+     "Benoît Hamon": {
+      "estimation": 10.0,
+      "resultat": 6.36,
+      "erreur": 3.6
+     },
+     "Nicolas Dupont-Aignan": {
+      "estimation": 3.7,
+      "resultat": 4.7,
+      "erreur": -1.0
+     },
+     "Jean Lassalle": {
+      "estimation": 0.8,
+      "resultat": 1.21,
+      "erreur": -0.4
+     },
+     "Philippe Poutou": {
+      "estimation": 1.2,
+      "resultat": 1.09,
+      "erreur": 0.1
+     },
+     "François Asselineau": {
+      "estimation": 0.7,
+      "resultat": 0.92,
+      "erreur": -0.2
+     },
+     "Nathalie Arthaud": {
+      "estimation": 0.7,
+      "resultat": 0.64,
+      "erreur": 0.1
+     },
+     "Jacques Cheminade": {
+      "estimation": 0.3,
+      "resultat": 0.18,
+      "erreur": 0.1
+     }
+    },
+    "poids_non_candidats": 0,
+    "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+    "polls": 35,
+    "top2": [
+     "Emmanuel Macron",
+     "Marine Le Pen"
+    ],
+    "top3": [
+     "Emmanuel Macron",
+     "Marine Le Pen",
+     "François Fillon"
+    ]
+   },
+   {
+    "mode": "Dernière enquête seule",
+    "n": 11,
+    "publies": 11,
+    "mae": 0.75,
+    "biais": 0.03,
+    "max_err": 1.7,
+    "detail": {
+     "Emmanuel Macron": {
+      "estimation": 23.0,
+      "resultat": 24.01,
+      "erreur": -1.0
+     },
+     "Marine Le Pen": {
+      "estimation": 22.5,
+      "resultat": 21.3,
+      "erreur": 1.2
+     },
+     "François Fillon": {
+      "estimation": 19.4,
+      "resultat": 20.01,
+      "erreur": -0.6
+     },
+     "Jean-Luc Mélenchon": {
+      "estimation": 18.7,
+      "resultat": 19.58,
+      "erreur": -0.9
+     },
+     "Benoît Hamon": {
+      "estimation": 8.1,
+      "resultat": 6.36,
+      "erreur": 1.7
+     },
+     "Nicolas Dupont-Aignan": {
+      "estimation": 3.5,
+      "resultat": 4.7,
+      "erreur": -1.2
+     },
+     "Jean Lassalle": {
+      "estimation": 1.5,
+      "resultat": 1.21,
+      "erreur": 0.3
+     },
+     "Philippe Poutou": {
+      "estimation": 1.7,
+      "resultat": 1.09,
+      "erreur": 0.6
+     },
+     "François Asselineau": {
+      "estimation": 1.3,
+      "resultat": 0.92,
+      "erreur": 0.4
+     },
+     "Nathalie Arthaud": {
+      "estimation": 0.3,
+      "resultat": 0.64,
+      "erreur": -0.3
+     },
+     "Jacques Cheminade": {
+      "estimation": 0.3,
+      "resultat": 0.18,
+      "erreur": 0.1
+     }
+    },
+    "poids_non_candidats": 0,
+    "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+    "polls": 4,
+    "top2": [
+     "Emmanuel Macron",
+     "Marine Le Pen"
+    ],
+    "top3": [
+     "Emmanuel Macron",
+     "Marine Le Pen",
+     "François Fillon"
+    ]
+   }
+  ]
+ },
+ "reference": {
+  "mode": "Notre méthode",
+  "n": 11,
+  "publies": 11,
+  "mae": 1.26,
+  "biais": 0.05,
+  "max_err": 3.5,
+  "detail": {
+   "Emmanuel Macron": {
+    "estimation": 24.5,
+    "resultat": 24.01,
+    "erreur": 0.5
+   },
+   "Marine Le Pen": {
+    "estimation": 24.2,
+    "resultat": 21.3,
+    "erreur": 2.9
+   },
+   "François Fillon": {
+    "estimation": 18.2,
+    "resultat": 20.01,
+    "erreur": -1.8
+   },
+   "Jean-Luc Mélenchon": {
+    "estimation": 16.2,
+    "resultat": 19.58,
+    "erreur": -3.4
+   },
+   "Benoît Hamon": {
+    "estimation": 9.9,
+    "resultat": 6.36,
+    "erreur": 3.5
+   },
+   "Nicolas Dupont-Aignan": {
+    "estimation": 3.7,
+    "resultat": 4.7,
+    "erreur": -1.0
+   },
+   "Jean Lassalle": {
+    "estimation": 0.9,
+    "resultat": 1.21,
+    "erreur": -0.3
+   },
+   "Philippe Poutou": {
+    "estimation": 1.3,
+    "resultat": 1.09,
+    "erreur": 0.2
+   },
+   "François Asselineau": {
+    "estimation": 0.7,
+    "resultat": 0.92,
+    "erreur": -0.2
+   },
+   "Nathalie Arthaud": {
+    "estimation": 0.6,
+    "resultat": 0.64,
+    "erreur": -0.0
+   },
+   "Jacques Cheminade": {
+    "estimation": 0.3,
+    "resultat": 0.18,
+    "erreur": 0.1
+   }
+  },
+  "poids_non_candidats": 0,
+  "scenario": "Champ testé : Benoît Hamon / Emmanuel Macron / François Asselineau / François Fillon / Jacques Cheminade / Jean Lassalle / Jean-Luc Mélenchon / Marine Le Pen / Nathalie Arthaud / Nicolas Dupont-Aignan / Philippe Poutou",
+  "polls": 35,
+  "top2": [
+   "Emmanuel Macron",
+   "Marine Le Pen"
+  ],
+  "top3": [
+   "Emmanuel Macron",
+   "Marine Le Pen",
+   "François Fillon"
+  ]
+ }
+}

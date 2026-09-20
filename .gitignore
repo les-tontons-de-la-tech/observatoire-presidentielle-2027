@@ -2,6 +2,8 @@
 # (La compilation MieuxVoter pèse ~900 Ko et change chaque jour ; on cite sa source, on ne la recopie pas.)
 data/polls.json
 data/polls2022.json
+data/polls2017.json
+data/wiki_sondages2017.wikitext
 data/forecast_bayes.json
 
 # Scrutins de l'Assemblée nationale — ~26 Mo par législature, rechargés chaque semaine.

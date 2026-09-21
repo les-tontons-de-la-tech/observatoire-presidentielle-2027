@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-20 21:46",
+ "generated": "2026-09-21 15:31",
  "scenario": "H42",
  "window": 90,
  "polls_window": 76,
@@ -192,7 +192,7 @@
   },
   {
    "candidat": "Nicolas Dupont-Aignan",
-   "parti": "",
+   "parti": "Debout la France",
    "intentions": 2.3,
    "intention7": 2.3,
    "delta7": 0.0,
@@ -345,7 +345,7 @@
   },
   {
    "candidat": "Gabriel Attal",
-   "parti": "La République En Marche",
+   "parti": "Renaissance",
    "intentions": 11.0,
    "n": 64,
    "intention7": 11.0,
@@ -450,7 +450,7 @@
   },
   {
    "candidat": "Sarah Knafo",
-   "parti": "",
+   "parti": "Reconquête",
    "intentions": 4.6,
    "n": 9,
    "intention7": 4.6,

@@ -328,6 +328,14 @@ def presence_block():
 
 
 def render(d):
+    # Date de régénération, comme sur l'accueil et l'agrégation. Elle vient du résumé de
+    # l'agrégation, écrit par generate.py dans le même passage : les deux pages ne peuvent pas
+    # afficher deux dates différentes.
+    try:
+        _s = json.load(open(os.path.join(DATA, "summary.json"), encoding="utf-8"))
+        gen = G.frdate(_s["generated"]) if _s.get("generated") else "date inconnue"
+    except Exception:
+        gen = "date inconnue"
     par_statut = {s: [c for c in d["candidats"] if c["statut"] == s] for s, _, _ in STATUTS}
     sc = d["scrutins"]
     t1, t2 = G.frd(sc["premier_tour"]), G.frd(sc["second_tour"])
@@ -383,7 +391,7 @@ def render(d):
   <p class="lede">Une déclaration de candidature n'est pas une candidature. Le scrutin aura lieu les
   <strong>{t1}</strong> et <strong>{t2}</strong> 2027 ; la liste officielle des candidats sera arrêtée
   par le Conseil constitutionnel et publiée au Journal officiel quelques semaines avant le premier
-  tour. D'ici là, tout est déclaratif — et nous le disons ligne par ligne.</p>
+  tour. D'ici là, tout est déclaratif — et nous le disons ligne par ligne. Page régénérée le {gen} (heure de Paris).</p>
   <div class="statgrid">
     <div class="stat"><span>Déclarés</span><b>{len(par_statut["declare"])}</b><span>candidature annoncée</span></div>
     <div class="stat"><span>Sous condition</span><b>{len(par_statut["conditionnel"])}</b>

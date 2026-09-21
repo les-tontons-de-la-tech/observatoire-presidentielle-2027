@@ -22,6 +22,7 @@ import os
 import pathlib
 import re
 import sys
+import time
 import unicodedata
 import urllib.error
 import urllib.request
@@ -78,6 +79,32 @@ def analyser(page):
         if re.match(r"^(?:[A-ZÉÈÀÂÎÔÛ][\w'’\-\.]+ ){1,3}[A-ZÉÈÀÂÎÔÛ][\w'’\-]+$", t):
             noms.add(t)
     return date, noms
+
+
+def dater_verification():
+    """Pose la date du jour comme date de vérification du fichier de référence.
+
+    Cette date dit quand la liste a été **contrôlée**, pas quand la source a changé : elle doit
+    donc avancer même quand le contrôle ne trouve rien. Sans cela, la page afficherait
+    indéfiniment la date du dernier changement, ce qui se lit comme un abandon.
+
+    Écriture ciblée sur la seule valeur, avec remplacement atomique : le fichier est tenu à la
+    main, on ne le reformate pas. Seule cette date est touchée, jamais une ligne de candidat.
+    """
+    jour = time.strftime("%Y-%m-%d")
+    brut = REFERENCE.read_text(encoding="utf-8")
+    nouveau, n = re.subn(
+        r'("verifie_le"\s*:\s*")[^"]*(")',
+        lambda m: m.group(1) + jour + m.group(2),
+        brut,
+        count=1,
+    )
+    if n == 0 or nouveau == brut:
+        return False
+    tmp = REFERENCE.with_suffix(".tmp")
+    tmp.write_text(nouveau, encoding="utf-8")
+    os.replace(tmp, REFERENCE)
+    return True
 
 
 def lire_etat():
@@ -144,7 +171,11 @@ def main():
         return 0
 
     if date == precedent_date and not ajoutes and not retires:
-        return 0  # rien de neuf : silence complet, c'est le mode normal
+        # Rien de neuf, mais le contrôle a bien eu lieu : la date de vérification du fichier
+        # avance, sans un mot. Un contrôle muet qui laisse la date immobile se lit comme un
+        # abandon, alors que la liste est bel et bien surveillée.
+        dater_verification()
+        return 0  # silence complet, c'est le mode normal
 
     print("Veille candidats 2027 — la source a bougé")
     if date and date != precedent_date:

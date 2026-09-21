@@ -427,7 +427,7 @@ def render(d):
     régénérée par script ; elle ne peut pas dériver du fichier.</li>
     <li><strong>Rythme</strong> : vérification hebdomadaire de la liste de référence, et mise à jour
     immédiate à chaque événement — déclaration, retrait, résultat de primaire, investiture. Le premier
-    jalon connu est la primaire socialiste des 10 et 11 octobre 2026.</li>
+    jalon connu est la primaire socialiste des 9 et 10 octobre 2026.</li>
     <li><strong>Jalons suivants</strong> : décret de convocation des électeurs, ouverture du recueil des
     parrainages, publication de la liste par le Conseil constitutionnel — c'est à ce moment que la
     colonne « officialisation » se remplira, pour de bon, sur tout le tableau.</li>

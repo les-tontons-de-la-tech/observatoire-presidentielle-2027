@@ -273,12 +273,12 @@
       "nom": "Philippe Brun",
       "parti": "Parti socialiste",
       "famille": "gauche",
-      "statut": "conditionnel",
+      "statut": "retire",
       "date_declaration": "2026-07-10",
       "precision": "mois",
-      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-      "source_label": "LCP, juillet 2026",
-      "commentaire": "candidat à la primaire socialiste."
+      "source": "https://www.ladepeche.fr/2026/09/16/presidentielle-2027-accuse-de-violences-le-depute-philippe-brun-suspendu-par-le-parti-socialiste-ne-participera-pas-a-la-primaire-13553652.php",
+      "source_label": "La Dépêche, 16/09/2026",
+      "commentaire": "suspendu à titre conservatoire par le Parti socialiste après les accusations d'une militante : harcèlement, violences physiques, emploi familial d'un proche. Écarté de la primaire ; il conteste les faits et a lui-même porté plainte."
     },
     {
       "nom": "Jérôme Guedj",

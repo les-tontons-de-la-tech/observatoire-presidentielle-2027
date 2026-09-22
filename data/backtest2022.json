@@ -1,5 +1,5 @@
 {
- "genere": "2026-09-17 16:03",
+ "genere": "2026-09-22 19:32",
  "source_sondages": "Bkolenc/sondages_presidentielle2022_ebra (MIT)",
  "source_resultat": "Résultats officiels du 1er tour 2022 — ministère de l'Intérieur, archives des résultats électoraux (France entière) ; recoupés avec Wikipédia FR, CC BY-SA",
  "source_resultat_url": "https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2022/FE.php",
@@ -1470,7 +1470,7 @@
      "n": 12,
      "publies": 13,
      "mae": 3.73,
-     "biais": -0.18,
+     "biais": -0.17,
      "max_err": 13.4,
      "detail": {
       "Emmanuel Macron": {
@@ -1554,7 +1554,7 @@
   {
    "half_life": 15,
    "mae": 3.81,
-   "biais": -0.18,
+   "biais": -0.17,
    "max_err": 13.6
   },
   {
@@ -1616,7 +1616,7 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 3.57,
+     "mae": 3.58,
      "n": 12,
      "polls": 3,
      "non_cand": 3.7,
@@ -2304,7 +2304,7 @@
     "n": 12,
     "publies": 13,
     "mae": 3.73,
-    "biais": -0.18,
+    "biais": -0.17,
     "max_err": 13.4,
     "detail": {
      "Emmanuel Macron": {

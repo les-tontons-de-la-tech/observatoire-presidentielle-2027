@@ -242,19 +242,39 @@ def matomo():
 </script>""" % MATOMO_URL
 
 
+def _sondages(payload):
+    """La forme du jeu de données amont a changé le 22/09/2026.
+
+    C'était une liste de sondages ; c'est désormais un objet qui les range sous la clé « polls »,
+    à côté de la source, des règles d'usage et des hypothèses. On accepte les deux formes, et on
+    écarte en le disant toute entrée qui n'est pas exploitable : une ligne douteuse ne doit pas
+    faire tomber l'agrégation du jour.
+    """
+    if isinstance(payload, dict):
+        arr = payload.get("polls") or []
+        if not arr:
+            raise SystemExit(f"Charge amont sans liste de sondages : clés {sorted(payload)}")
+    else:
+        arr = payload
+    bons = [p for p in arr if isinstance(p, dict)]
+    if len(bons) != len(arr):
+        print(f"⚠ {len(arr) - len(bons)} entrée(s) de sondage ignorée(s) : format inattendu")
+    return bons
+
+
 def fetch(force=False):
     os.makedirs(DATA, exist_ok=True)
     cache = os.path.join(DATA, "polls.json")
     if not force and os.path.exists(cache):
         age_h = (datetime.now().timestamp() - os.path.getmtime(cache)) / 3600
         if age_h < 12:
-            return json.load(open(cache, encoding="utf-8"))
+            return _sondages(json.load(open(cache, encoding="utf-8")))
     req = urllib.request.Request(SRC, headers={"User-Agent": "poc-agregateur-2027"})
     with urllib.request.urlopen(req, timeout=60) as r:
         raw = r.read().decode("utf-8")
     json.loads(raw)  # validation
     open(cache, "w", encoding="utf-8").write(raw)
-    return json.loads(raw)
+    return _sondages(json.loads(raw))
 
 
 FORECAST_URL = ("https://raw.githubusercontent.com/whyalwaysrose/presidentielle-2027/"

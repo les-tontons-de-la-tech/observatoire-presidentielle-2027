@@ -150,7 +150,9 @@ def presence_block():
     import collections
     import itertools
 
-    P = json.load(open(os.path.join(DATA, "polls.json"), encoding="utf-8"))
+    # La liste des sondages est rangée sous « polls » dans le fichier amont depuis le 22/09/2026 ;
+    # la normalisation vit dans generate.py, déjà importé ici : une seule implémentation à tenir.
+    P = G._sondages(json.load(open(os.path.join(DATA, "polls.json"), encoding="utf-8")))
     tour1 = [p for p in P if str(p.get("tour", "")).lower().startswith("1")]
     if not tour1:
         return ""

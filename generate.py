@@ -83,9 +83,53 @@ PAGES_LD = {
 }
 
 
+DESC_MIN = 120
+DESC_MAX = 160
+
+
+def couper_description(texte, maxi=DESC_MAX, mini=DESC_MIN):
+    """Ramène une description sous la limite que les moteurs affichent, sans la charcuter.
+
+    Deux règles, dans cet ordre :
+      1. si un point de fin de phrase tombe au-delà de `mini`, on coupe là — la phrase reste
+         entière, et c'est la coupe la moins visible ;
+      2. sinon on coupe au dernier mot entier, et on l'annonce par des points de suspension.
+
+    Jamais de coupe au caractère : « … transférabilit » ne se lit pas. Mêmes bornes que
+    `couperDescription()` côté site (`src/lib/seo.ts`, DESC_MIN/DESC_MAX) : une seule
+    définition de « ce qui tient », des deux côtés.
+    """
+    texte = " ".join(texte.split())  # les coupures nettes dépendent d'espaces normalisés
+    if len(texte) <= maxi:
+        return texte
+    tranche = texte[:maxi]
+    fin = max(tranche.rfind(". "), tranche.rfind("! "), tranche.rfind("? "), tranche.rfind("» "))
+    # Cas de bord trouvé par le contrôle : si la phrase se termine pile au dernier caractère
+    # de la tranche, le motif « point + espace » n'y figure pas — on coupait alors au mot avec
+    # ellipse alors que la phrase tenait entière. On regarde donc aussi le bord.
+    if tranche and tranche[-1] in ".!?»":
+        fin = maxi - 1
+    if fin >= mini:
+        return tranche[: fin + 1].strip()
+    coupe = tranche.rfind(" ")
+    if coupe <= 0:
+        coupe = maxi - 1
+    return tranche[:coupe].rstrip(" ,;:.") + "…"
+
+
 def meta_description(chemin):
-    """Description de page, pour la balise <meta> comme pour les données structurées."""
-    return PAGES_LD[chemin][1]
+    """Description de la balise <meta>, tenue entre 120 et 160 caractères.
+
+    Le texte de l'auteur reste intégral dans PAGES_LD : il alimente les données structurées et
+    reste la source du JSON-LD. Seule la balise <meta> — ce que le moteur affiche et tronque à
+    sa façon — est ramenée sous la limite, exactement comme `titre_court()` le fait pour
+    <title>. Audit Ahrefs du 17/09/2026 (« Meta description too long »), resté ouvert sur
+    /observatoire/backtest2017/ parce que cette fonction était un simple passe-plat.
+
+    La borne basse est un objectif d'écriture, pas une contrainte de code : on ne complète pas
+    une description trop courte, on ne l'invente pas — c'est à l'auteur de l'écrire.
+    """
+    return couper_description(PAGES_LD[chemin][1])
 
 
 def titre_court(chemin):

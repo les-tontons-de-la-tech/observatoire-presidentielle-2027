@@ -43,8 +43,7 @@ PAGE = "/observatoire/backtest2017/"
 G.PAGES_LD[PAGE] = (
     "Rétro-test 2017 : la méthode mise à l'épreuve hors échantillon",
     "La méthode d'agrégation de l'observatoire rejouée sur la campagne 2017, réglages gelés : "
-    "erreur moyenne par échéance, couverture, effet des deux réglages, et ce que cela dit de leur "
-    "transférabilité.",
+    "erreur moyenne, couverture et transférabilité.",
     "Article")
 G.TITRES_COURTS[PAGE] = "Rétro-test 2017 : la méthode à l'épreuve"
 

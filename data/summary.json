@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-23 18:00",
+ "generated": "2026-09-24 18:00",
  "total_polls_all": 256,
  "polls_in_window": 68,
  "scenario": "H67",
@@ -355,26 +355,25 @@
   "Nathalie Arthaud": 0.9,
   "Fabien Roussel": 2.8,
   "Jean-Luc Mélenchon": 16.0,
-  "Marine Tondelier": 3.9,
   "Raphaël Glucksmann": 11.8,
+  "Marine Tondelier": 3.9,
   "Édouard Philippe": 17.3,
-  "Dominique de Villepin": 3.1,
   "Bruno Retailleau": 8.3,
   "Nicolas Dupont-Aignan": 2.1,
   "Jordan Bardella": 34.8,
   "Éric Zemmour": 3.8,
-  "François Hollande": 7.8,
   "Marine Le Pen": 34.0,
-  "Olivier Faure": 4.8,
-  "Sarah Knafo": 4.2,
   "Gabriel Attal": 11.0,
-  "François Ruffin": 5.0,
+  "Dominique de Villepin": 3.1,
+  "François Hollande": 7.8,
+  "François Ruffin": 4.9,
+  "Olivier Faure": 4.8,
   "David Lisnard": 2.8,
   "Karim Bouamrane": 0.8
  },
  "series": [
   {
-   "date": "2026-07-29",
+   "date": "2026-07-30",
    "weeks_ago": 8,
    "polls": 3,
    "rows": {
@@ -392,7 +391,7 @@
    }
   },
   {
-   "date": "2026-08-05",
+   "date": "2026-08-06",
    "weeks_ago": 7,
    "polls": 3,
    "rows": {
@@ -410,7 +409,7 @@
    }
   },
   {
-   "date": "2026-08-12",
+   "date": "2026-08-13",
    "weeks_ago": 6,
    "polls": 3,
    "rows": {
@@ -428,7 +427,7 @@
    }
   },
   {
-   "date": "2026-08-19",
+   "date": "2026-08-20",
    "weeks_ago": 5,
    "polls": 4,
    "rows": {
@@ -446,7 +445,7 @@
    }
   },
   {
-   "date": "2026-08-26",
+   "date": "2026-08-27",
    "weeks_ago": 4,
    "polls": 5,
    "rows": {
@@ -464,7 +463,7 @@
    }
   },
   {
-   "date": "2026-09-02",
+   "date": "2026-09-03",
    "weeks_ago": 3,
    "polls": 6,
    "rows": {
@@ -482,17 +481,17 @@
    }
   },
   {
-   "date": "2026-09-09",
+   "date": "2026-09-10",
    "weeks_ago": 2,
-   "polls": 8,
+   "polls": 9,
    "rows": {
-    "Marine Le Pen": 33.8,
-    "Jean-Luc Mélenchon": 15.4,
+    "Marine Le Pen": 33.6,
+    "Jean-Luc Mélenchon": 15.5,
     "Édouard Philippe": 14.3,
-    "Raphaël Glucksmann": 10.4,
-    "Gabriel Attal": 7.3,
-    "Bruno Retailleau": 6.9,
-    "Éric Zemmour": 3.6,
+    "Raphaël Glucksmann": 10.2,
+    "Gabriel Attal": 7.4,
+    "Bruno Retailleau": 7.0,
+    "Éric Zemmour": 3.8,
     "Marine Tondelier": 3.4,
     "Fabien Roussel": 2.4,
     "Nicolas Dupont-Aignan": 1.8,
@@ -500,7 +499,7 @@
    }
   },
   {
-   "date": "2026-09-16",
+   "date": "2026-09-17",
    "weeks_ago": 1,
    "polls": 9,
    "rows": {
@@ -518,7 +517,7 @@
    }
   },
   {
-   "date": "2026-09-23",
+   "date": "2026-09-24",
    "weeks_ago": 0,
    "polls": 9,
    "rows": {

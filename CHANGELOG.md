@@ -10,7 +10,7 @@ chiffre qu'on ne peut plus citer.
 ---
 
 
-## 2026 septembre 22
+## 22 septembre 2026
 
 **Correction — La date du premier tour de la primaire était fausse d'un jour.**
 La page annonçait la primaire socialiste les 10 et 11 octobre. Deux sources nationales, La Croix du 26 août et La Dépêche du 16 septembre, donnent les 9-10 et 16-17 octobre : le premier tour se tient les 9 et 10. La date était fausse aux deux endroits où elle figurait, dans le commentaire d'une candidature et dans la section de méthode ; les deux sont corrigés. Aucun autre chiffre ne change.
@@ -28,7 +28,7 @@ L'accueil et l'agrégation portaient déjà la date de leur dernière régénér
 Sept pages déclarent leur description aux moteurs de recherche. Six passaient par chance sous la limite d'affichage, et celle du rétro-test 2017 la dépassait. Les descriptions sont désormais ramenées sous la limite, en coupant de préférence à la fin d'une phrase. Modification de forme uniquement : aucun chiffre ni texte de page ne change.
 
 
-## 2026 septembre 21
+## 21 septembre 2026
 
 **Nouveauté — La liste des candidatures est contrôlée chaque semaine.**
 Cette liste est tenue à la main, et rien ne surveillait ses sources. Une vérification hebdomadaire contrôle désormais la page de référence citée par le fichier, sa date de mise à jour et les noms qu'elle cite, et ne parle que si quelque chose a bougé. Elle ne modifie jamais la liste : elle signale, l'auteur tranche. La page affiche la date de ce contrôle, qui avance d'elle même chaque semaine quand rien n'a changé.

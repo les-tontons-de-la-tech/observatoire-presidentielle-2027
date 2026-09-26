@@ -1,254 +1,290 @@
 {
-  "_lisez_moi": "Textes rédigés de l'observatoire. Ce fichier est éditorial : il ne contient aucun chiffre calculé. Les chiffres viennent des scripts (generate.py, backtest2022.py, candidats.py) et de data/*.json. Toute modification ici doit être accompagnée d'une entrée de changelog datée.",
-  "maj": "2026-09-17",
-  "changelog": [
-    {
-      "date": "2026-09-20",
-      "nature": "nouveauté",
-      "titre": "Un second rétro-test, sur la campagne 2017",
-      "texte": "Le rétro-test 2022 mesurait la méthode sur la campagne qui avait servi à la régler. La même méthode est rejouée sur la campagne 2017, qu'elle n'a pas vue : 91 dates d'enquête reconstruites depuis la liste de sondages de Wikipédia (CC BY-SA), résultats officiels du ministère de l'Intérieur en Licence Ouverte, recoupés sur deux sources. À J-132, l'erreur moyenne est de 3,81 points, contre 3,83 pour 2022 au même horizon : la méthode tient. Le classement, lui, ne tient pas à cette distance, puisque le top 2 annoncé est François Fillon puis Emmanuel Macron, alors que les qualifiés furent Emmanuel Macron et Marine Le Pen. À J-10, l'erreur tombe à 1,26 point et le bon couple est retrouvé. À l'horizon où cet observatoire publie, l'équivalent de J-215, la page n'aurait rien affiché : 31 enquêtes dans la fenêtre, mais 2 seulement dans le champ de candidatures le plus testé, sous le seuil de trois enquêtes. Cette fragilité était annoncée, elle est désormais mesurée."
-    },
-    {
-      "date": "2026-09-17",
-      "nature": "correction",
-      "titre": "Le rétro-test ne dit plus ce que les données ne montrent pas",
-      "texte": "Une phrase du rétro-test annonçait « à l'échéance du », suivie d'une date vide, qu'aucun scénario n'atteignait trois enquêtes — la page serait donc restée vide. Vérification faite : les six échéances testées disposent de dix à douze enquêtes chacune, aucune n'a jamais manqué de matière. La phrase affirmait un cas qui ne s'est pas produit, à cause d'un gabarit qui gardait la formule même quand la liste des échéances concernées était vide. Elle dit maintenant ce que les données montrent, et rappelle que la fragilité reste entière : sur une campagne plus pauvre en sondages, le seuil de trois enquêtes ne serait pas atteint et l'agrégation se tairait."
-    },
-    {
-      "date": "2026-09-17",
-      "nature": "présentation",
-      "titre": "Les six pages déclarent leur auteur, leur éditeur et leur date",
-      "texte": "Les six pages de l'observatoire ne portaient aucune donnée structurée : un moteur de réponse ne pouvait ni identifier qui écrit, ni dater la page, ni la rattacher au site. Chacune déclare désormais son auteur (Christophe Wiest), l'éditeur (Flying Kujira), la date de dernière modification et sa place dans le site. Deux pages qui n'avaient aucune description — Veille législative et Rétro-test 2022 — en ont une. L'observatoire est également mesuré à partir d'aujourd'hui : son audience était jusqu'ici invisible. Modification de forme uniquement : aucun chiffre ne change."
-    },
-    {
-      "date": "2026-09-16",
-      "nature": "présentation",
-      "titre": "Balises canoniques sur les six pages de l'observatoire",
-      "texte": "Les six pages de l'observatoire ne déclaraient aucune adresse canonique. Comme le serveur sert aussi bien /observatoire/ que /observatoire/index.html, les deux répondaient 200 avec le même contenu sans que rien n'indique à Google laquelle retenir : c'est l'une des causes de la ligne « Page en double sans URL canonique sélectionnée par l'utilisateur » du rapport d'indexation. Chaque page porte désormais, dans son en-tête, une canonique qui pointe vers sa propre adresse. Modification de forme uniquement : aucun chiffre, aucun texte de page n'a changé.",
-      "pages": [
-        "accueil",
-        "agrégation",
-        "candidats",
-        "rétro-test",
-        "veille législative",
-        "workflow"
-      ]
-    },
-    {
-      "date": "2026-09-16",
-      "nature": "correction",
-      "titre": "Total des intentions : 100 % au lieu de 100,1 %",
-      "texte": "La page Agrégation annonçait « Total des intentions affichées : 100,1 % ». Le calcul additionnait les dix intentions telles qu'elles sont affichées, c'est-à-dire déjà arrondies au dixième : ces arrondis ne se compensaient pas et ajoutaient +0,099 point à la somme. Le total porte désormais sur les moyennes non arrondies, qui valent exactement 100,0000 %. Chaque ligne restant arrondie pour la lecture, leur somme peut s'écarter d'un dixième du total : la page le précise, et le libellé devient « Total des intentions », puisqu'il ne s'agit plus de la somme des valeurs affichées.",
-      "pages": [
-        "agrégation"
-      ]
-    },
-    {
-      "date": "2026-09-16",
-      "nature": "correction",
-      "titre": "Veille législative : la page dit maintenant pourquoi elle s'arrête au 21 juillet",
-      "texte": "La page affichait « période couverte : 20/11/2024 → 21/07/2026 » sans un mot d'explication, ce qui se lit comme une veille en panne. Vérification du 16/09 : le fichier des scrutins publié par l'Assemblée a été réédité le matin même et il est identique, octet pour octet, à celui de la veille — la source n'a donc rien de plus récent. Le Parlement ne siège pas : la session ordinaire 2025-2026 s'est achevée le 21 juillet 2026, le gouvernement a renoncé à une session extraordinaire en septembre, et la session ordinaire 2026-2027 ouvre le 1er octobre 2026 (Le Monde, 3 septembre 2026). Un bandeau affiche désormais la date du dernier scrutin publié, les jours écoulés et cette explication, avec sa source ; il disparaîtra de lui-même quand les scrutins reprendront. Les commissions peuvent siéger hors session, mais leurs travaux ne donnent pas lieu à des scrutins publics. La période couverte s'arrête maintenant à la date du dernier contrôle de la source et non à celle du dernier vote : elle dit jusqu'où les données ont été vérifiées. Le dernier scrutin publié reste affiché séparément, dans le bandeau. Les deux dates ne coïncident pas tant que le Parlement ne siège pas, et la page l'explique.",
-      "pages": [
-        "veille législative"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "sources",
-      "titre": "Relevé des sources : aucun nouveau sondage depuis le 10 septembre",
-      "texte": "Les deux sources ont été vérifiées le 15/09. La compilation des sondages compte toujours 233 enquêtes, la plus récente datant du 10/09 (OpinionWay) : cinq jours sans nouveau terrain, et la semaine du 14/09 n'a encore rien produit. L'automatisation quotidienne de la source a bien tourné et n'a rien trouvé. Sa prévision bayésienne est recalculée chaque jour, mais son terrain s'arrête au 10/09 : elle ne bouge donc pas. La page n'est pas figée par une panne, elle l'est par le calendrier politique.",
-      "pages": [
-        "agrégation"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "nouveauté",
-      "titre": "Page « Veille législative » : ce que le Parlement vote",
-      "texte": "Une nouvelle page suit les textes de loi du périmètre technopolitique — numérique, intelligence artificielle, données, surveillance, cybersécurité, médias — dans la législature en cours. Les scrutins publics de l'Assemblée nationale sont regroupés par texte de loi, avec leur vote final et le détail de chaque scrutin. 6 textes et 99 scrutins retenus, dont 92 tenus en 2026 ; les textes de la législature précédente (loi SREN, majorité numérique) restent listés en référence.",
-      "pages": [
-        "veille législative"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "chiffres",
-      "titre": "Vote par groupe politique sur chaque texte, chaque député compté",
-      "texte": "Chaque texte porte la ventilation du vote par groupe, avec la position, les voix pour, contre, les abstentions, les non-votants et les absents — la somme égale l'effectif du groupe, vérifié ligne par ligne. La barre de répartition est tracée sur l'effectif et non sur les seuls votants : sur le vote du 21 juillet 2026, le Rassemblement national compte 17 participants sur 122 membres et 105 absents, ce que la barre rend visible. Les noms et couleurs des groupes sont ceux du référentiel officiel de l'Assemblée.",
-      "pages": [
-        "veille législative"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "correction",
-      "titre": "Position des groupes recalculée : le champ de l'Assemblée contredit ses propres décomptes",
-      "texte": "Le champ « position majoritaire » publié par l'Assemblée donne le groupe Écologiste et Social « contre » avec 19 voix pour, 7 contre et 7 abstentions, là où sa propre page affiche « Pour » ; le Rassemblement national y est donné « contre » avec 2 contre pour 14 abstentions. La position affichée est donc recalculée à partir des voix exprimées de chaque groupe, et le motif est écrit sur la page.",
-      "pages": [
-        "veille législative"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "nouveauté",
-      "titre": "Compte à rebours du premier tour, thème clair/sombre",
-      "texte": "La page d'accueil affiche un chrono en temps réel jusqu'au 18 avril 2027 à 20 h (fermeture des bureaux), la page Agrégation un rappel compact « J−n ». Dates du scrutin au format français (jj/mm/aaaa) partout.",
-      "pages": [
-        "accueil",
-        "agrégation"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "correction",
-      "titre": "Prévision bayésienne : cache conservé en cas d'indisponibilité de la source",
-      "texte": "La fonction de téléchargement (_get_json) avait disparu du générateur, ce qui affichait « indisponible » en permanence. Rétablie, et si la source externe ne répond plus, la page garde les dernières données avec leur date de mise à jour, au lieu de disparaître.",
-      "pages": [
-        "accueil",
-        "agrégation"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "présentation",
-      "titre": "Textes élargis à la pleine largeur des cartes",
-      "texte": "Les phrases introductives de section (comparaison bayésienne, méthode, journal, rétro-test) ne sont plus contraintes à 36 caractères par ligne : elles occupent la carte, les notes techniques et les légendes restent étroites.",
-      "pages": [
-        "accueil",
-        "agrégation",
-        "candidats",
-        "rétro-test",
-        "workflow"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "présentation",
-      "titre": "Schéma du workflow zoomable",
-      "texte": "Sur la page Workflow, un clic sur le schéma l'ouvre en plein écran : molette pour zoomer, glisser pour se déplacer, Échap pour fermer.",
-      "pages": [
-        "workflow"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "données",
-      "titre": "Blocs politiques alignés sur la nomenclature officielle",
-      "texte": "Les candidats sont classés selon les nuances politiques du ministère de l'Intérieur (extrême gauche, gauche, centre, droite, extrême droite). La France insoumise passe à l'extrême gauche, les écologistes rejoignent la gauche, les souverainistes sont répartis entre extrême droite et divers.",
-      "pages": [
-        "candidats"
-      ]
-    },
-    {
-      "date": "2026-09-15",
-      "nature": "nouveauté",
-      "titre": "Page « Workflow » : comment le site se fabrique",
-      "texte": "Un schéma d'architecture, ses légendes et les réglages du rétro-test, intégrés au design du site (thème clair/sombre, navigation commune). La page est générée par workflow.py (versionné), le schéma utilise la palette de couleurs du site et bascule avec le thème.",
-      "pages": [
-        "agrégation"
-      ]
-    },
-    {
-      "date": "2026-09-14",
-      "nature": "chiffres",
-      "titre": "Fenêtre de sélection portée à 90 jours, effets de maison corrigés",
-      "texte": "Deux réglages mesurés sur la campagne 2022, et retenus parce qu'ils réduisent l'erreur : la fenêtre passe de 60 à 90 jours (elle supprime l'échéance de septembre 2021 où la page ne publiait rien) et chaque institut est corrigé de son écart moyen au consensus des autres. Erreur moyenne sur six échéances : 3,19 → 3,11 point. À J−132 seule, elle reste de 3,8 points — le gain est réel mais faible, et le dire fait partie du résultat.",
-      "pages": [
-        "agrégation",
-        "rétro-test"
-      ]
-    },
-    {
-      "date": "2026-09-14",
-      "nature": "chiffres",
-      "titre": "Dates du scrutin fixées et vérifiées",
-      "texte": "Le premier tour aura lieu le dimanche 18 avril 2027 et le second le dimanche 2 mai 2027 (Conseil des ministres du 1er juillet 2026). La page affiche désormais l'échéance et se suspend automatiquement la veille et le jour du vote, conformément à l'article 11 de la loi du 19 juillet 1977.",
-      "pages": [
-        "accueil",
-        "agrégation",
-        "candidats"
-      ]
-    },
-    {
-      "date": "2026-09-14",
-      "nature": "nouveauté",
-      "titre": "Page « Les candidats » et section « Qui sera sur le bulletin ? »",
-      "texte": "Trente-huit personnes recensées, chaque ligne portant sa source et sa date de vérification ; un retrait reste affiché, barré. S'y ajoute une mesure, et non un modèle : la part des questionnaires publiés qui testent réellement chaque nom. Elle produit un résultat vérifiable — une seule paire de noms se partage un même siège sans jamais se croiser, Marine Le Pen et Jordan Bardella, avec une bascule complète entre mars et septembre 2026.",
-      "pages": [
-        "candidats"
-      ]
-    },
-    {
-      "date": "2026-09-14",
-      "nature": "texte",
-      "titre": "Vocabulaire de source clarifié",
-      "texte": "Les colonnes qui attribuaient les chiffres à « notre agrégation » disent maintenant d'où vient la matière : « MieuxVoter » pour la compilation des sondages, « Estimation MieuxVoter » et « Prévision bayésienne » dans le rétro-test. La distinction est explicite : la compilation est leur, la moyenne pondérée est calculée ici.",
-      "pages": [
-        "agrégation",
-        "rétro-test"
-      ]
-    },
-    {
-      "date": "2026-09-14",
-      "nature": "texte",
-      "titre": "Section « À lire avant de citer un chiffre »",
-      "texte": "Publiée sur cette page : ce qui peut être cité, sous quelle forme, et ce qui serait faux. Une moyenne de sondages n'est pas un sondage, et une probabilité de second tour n'est pas une intention de vote.",
-      "pages": [
-        "agrégation"
-      ]
-    },
-    {
-      "date": "2026-09-14",
-      "nature": "présentation",
-      "titre": "Thème clair et sombre, lecture sur téléphone et tablette",
-      "texte": "Les quatre pages adoptent le thème du site, avec mémorisation du choix. Contrastes vérifiés dans les deux thèmes : aucun texte sous le seuil AA. Sur téléphone, l'en-tête tient sur une ligne, les tableaux se transforment en fiches et la mesure de lecture passe de 88 à 70 signes par ligne.",
-      "pages": [
-        "accueil",
-        "agrégation",
-        "rétro-test",
-        "candidats"
-      ]
-    }
-  ],
-  "a_lire": {
-    "titre": "À lire avant de citer un chiffre",
-    "chapo": "Cette page ne publie pas de sondages. Elle publie la moyenne de sondages publiés ailleurs, calculée ici. Ce que vous pouvez en citer, sous quelle forme, et ce qui serait faux.",
-    "regles_titre": "Citer correctement",
-    "regles": [
-      "Citez la moyenne, jamais un sondage : « moyenne des sondages publiés au {{date_maj}}, scénario {{scenario}} ({{scenario_size}} candidats), {{polls_aggregated}} enquêtes agrégées sur une fenêtre de {{window}} jours ». Aucun institut n'a publié ce chiffre : il est calculé ici.",
-      "Citez l'intervalle avec le niveau : « {{tete_nom}} {{tete_val}} % [{{tete_ic}}] », et non « {{tete_val}} % ». Un chiffre nu laisse croire à une précision que la moyenne n'a pas.",
-      "N'écrivez pas « selon un sondage ». Cette page n'interroge personne : elle agrège des enquêtes déjà publiées, dont la liste, les marges et les commanditaires sont affichés plus bas.",
-      "Sous un point d'écart, nous ne commentons pas : l'écart est dans la marge. Ne le commentez pas non plus.",
-      "N'attribuez pas la moyenne à la source : MieuxVoter publie la compilation des sondages ; la pondération, elle, est faite ici et sa méthode est publiée.",
-      "Ne mélangez jamais deux natures de chiffres : intentions de vote (ici), probabilités de second tour et de victoire (prévision bayésienne, clairement séparée), cotes de marchés (nous n'en publions pas)."
-    ],
-    "pieges_titre": "Les pièges du chiffre",
-    "pieges": [
-      "Le scénario est verrouillé : un candidat retenu dans le scénario n'est pas une prédiction de candidature, et un candidat absent n'a pas « 0 % » — il n'est simplement pas testé dans cette liste.",
-      "Un nom testé dans une minorité de questionnaires peut être une candidature très sérieuse, et un nom testé dans tous peut ne jamais se déclarer : cette mesure décrit ce que les instituts jugent plausible, pas ce qui va se produire.",
-      "La marge d'erreur des instituts n'est pas intégrée à la moyenne. Un intervalle de moyenne ne remplace pas la marge d'un sondage.",
-      "Les effets de maison sont corrigés, mais en 2022 les instituts se trompaient surtout ensemble : corriger un écart entre instituts ne corrige pas un aveuglement collectif.",
-      "Le rétro-test porte sur le premier tour et s'arrête à J−132, faute de compilation libre couvrant janvier à avril 2022. Ce qu'il démontre vaut à cette distance, pas à dix jours du vote.",
-      "Le premier tour n'annonce pas le second : la qualification dépend des reports, de la participation et des alliances, que cette page ne modélise pas."
-    ],
-    "sources_titre": "Sources",
-    "sources": [
-      "Sondages : compilation MieuxVoter/presidentielle2027, licence MIT — les enquêtes elles-mêmes appartiennent à leurs instituts.",
-      "Résultats de 2022 : ministère de l'Intérieur (archives des résultats électorales), recoupés avec Wikipédia — 12 scores concordants, 35 132 947 suffrages exprimés.",
-      "Candidatures : recensement de La Chaîne parlementaire, complété pour chaque date par la source de première main citée sur la page des candidats.",
-      "Liste officielle des candidats : Conseil constitutionnel, publiée au Journal officiel — c'est le seul document qui fait foi.",
-      "Prévision bayésienne citée pour comparaison : whyalwaysrose/presidentielle-2027, licence MIT.",
-      "Code de calcul : le générateur est public — les-tontons-de-la-tech/observatoire-presidentielle-2027 (licence MIT). Méthode, calculs et journal de ses révisions y sont lisibles ligne à ligne."
-    ],
-    "legal_titre": "Cadre légal",
-    "legal": [
-      "Loi n° 77-808 du 19 juillet 1977 relative à la publication et à la diffusion de certains sondages d'opinion : l'article 2 impose de mentionner l'organisme, le commanditaire et l'acheteur, le nombre de personnes interrogées, les dates et la marge d'erreur ; l'article 3 impose le dépôt d'une notice.",
-      "Loi organique n° 2021-335 du 29 mars 2021 : marges d'erreur obligatoires pour les sondages liés à l'élection présidentielle.",
-      "Article 11 : aucune publication, diffusion ni commentaire de sondage la veille et le jour du scrutin. Cette page s'y conforme automatiquement.",
-      "Article 12 : 75 000 € d'amende, y compris pour usage impropre du mot « sondage » — raison de plus pour appeler un chiffre ce qu'il est.",
-      "Nous ne sommes pas un institut de sondage et nous ne réalisons aucune enquête : nous agrégeons des enquêtes publiées et nous citons nos sources."
-    ],
-    "contact": "Une correction à signaler, une source manquante, un chiffre qui vous paraît faux : christophe@dileviathan.fr. Les corrections de fond sont datées dans le journal des mises à jour.",
-    "_jetons": "Les {{ }} sont remplis au rendu par generate.py (contenu.py::a_lire_bloc) : date_maj, scenario, scenario_size, polls_aggregated, window, tete_nom, tete_val, tete_ic."
+ "_lisez_moi": "Textes rédigés de l'observatoire. Ce fichier est éditorial : il ne contient aucun chiffre calculé. Les chiffres viennent des scripts (generate.py, backtest2022.py, candidats.py) et de data/*.json. Toute modification ici doit être accompagnée d'une entrée de changelog datée.",
+ "maj": "2026-09-17",
+ "changelog": [
+  {
+   "date": "2026-09-22",
+   "nature": "correction",
+   "titre": "La date du premier tour de la primaire était fausse d'un jour",
+   "texte": "La page annonçait la primaire socialiste les 10 et 11 octobre. Deux sources nationales, La Croix du 26 août et La Dépêche du 16 septembre, donnent les 9-10 et 16-17 octobre : le premier tour se tient les 9 et 10. La date était fausse aux deux endroits où elle figurait, dans le commentaire d'une candidature et dans la section de méthode ; les deux sont corrigés. Aucun autre chiffre ne change."
+  },
+  {
+   "date": "2026-09-22",
+   "nature": "correction",
+   "titre": "Deux candidatures de la liste ne correspondaient plus à la source",
+   "texte": "Philippe Brun et Fabien Verdier étaient donnés candidats à la primaire socialiste. Le premier a été suspendu par le Parti socialiste et écarté de la primaire ; le second n'a pas réuni assez de parrainages et a été écarté également. Les deux lignes passent au statut retiré, avec leur situation en commentaire et une source datée. Leur date de déclaration reste dans l'histoire de la liste : ce qui a changé est leur situation, pas leur parcours."
+  },
+  {
+   "date": "2026-09-22",
+   "nature": "correction",
+   "titre": "La collecte des sondages accepte la nouvelle forme du jeu de données amont",
+   "texte": "Le jeu de données de Mieux Voter rangeait la liste des sondages à la racine du fichier ; il la range désormais sous une clé « polls », à côté de la source et des hypothèses. La collecte lisait le document entier comme une liste : l'agrégation a échoué un passage, et la page des candidats a cessé d'être réécrite sans que rien ne le signale. La collecte accepte maintenant les deux formes, et écarte en le disant toute entrée inexploitable. Les chiffres publiés n'ont pas changé."
+  },
+  {
+   "date": "2026-09-22",
+   "nature": "présentation",
+   "titre": "La page des candidats affiche sa date de régénération",
+   "texte": "L'accueil et l'agrégation portaient déjà la date de leur dernière régénération ; la page des candidats était la seule à ne pas dire sa fraîcheur. Elle l'affiche désormais, et la date s'écrit toute seule à chaque passage, depuis le même horodatage que les autres pages."
+  },
+  {
+   "date": "2026-09-22",
+   "nature": "présentation",
+   "titre": "Les descriptions des pages sont bornées",
+   "texte": "Sept pages déclarent leur description aux moteurs de recherche. Six passaient par chance sous la limite d'affichage, et celle du rétro-test 2017 la dépassait. Les descriptions sont désormais ramenées sous la limite, en coupant de préférence à la fin d'une phrase. Modification de forme uniquement : aucun chiffre ni texte de page ne change."
+  },
+  {
+   "date": "2026-09-21",
+   "nature": "nouveauté",
+   "titre": "La liste des candidatures est contrôlée chaque semaine",
+   "texte": "Cette liste est tenue à la main, et rien ne surveillait ses sources. Une vérification hebdomadaire contrôle désormais la page de référence citée par le fichier, sa date de mise à jour et les noms qu'elle cite, et ne parle que si quelque chose a bougé. Elle ne modifie jamais la liste : elle signale, l'auteur tranche. La page affiche la date de ce contrôle, qui avance d'elle même chaque semaine quand rien n'a changé."
+  },
+  {
+   "date": "2026-09-20",
+   "nature": "nouveauté",
+   "titre": "Un second rétro-test, sur la campagne 2017",
+   "texte": "Le rétro-test 2022 mesurait la méthode sur la campagne qui avait servi à la régler. La même méthode est rejouée sur la campagne 2017, qu'elle n'a pas vue : 91 dates d'enquête reconstruites depuis la liste de sondages de Wikipédia (CC BY-SA), résultats officiels du ministère de l'Intérieur en Licence Ouverte, recoupés sur deux sources. À J-132, l'erreur moyenne est de 3,81 points, contre 3,83 pour 2022 au même horizon : la méthode tient. Le classement, lui, ne tient pas à cette distance, puisque le top 2 annoncé est François Fillon puis Emmanuel Macron, alors que les qualifiés furent Emmanuel Macron et Marine Le Pen. À J-10, l'erreur tombe à 1,26 point et le bon couple est retrouvé. À l'horizon où cet observatoire publie, l'équivalent de J-215, la page n'aurait rien affiché : 31 enquêtes dans la fenêtre, mais 2 seulement dans le champ de candidatures le plus testé, sous le seuil de trois enquêtes. Cette fragilité était annoncée, elle est désormais mesurée."
+  },
+  {
+   "date": "2026-09-17",
+   "nature": "correction",
+   "titre": "Le rétro-test ne dit plus ce que les données ne montrent pas",
+   "texte": "Une phrase du rétro-test annonçait « à l'échéance du », suivie d'une date vide, qu'aucun scénario n'atteignait trois enquêtes — la page serait donc restée vide. Vérification faite : les six échéances testées disposent de dix à douze enquêtes chacune, aucune n'a jamais manqué de matière. La phrase affirmait un cas qui ne s'est pas produit, à cause d'un gabarit qui gardait la formule même quand la liste des échéances concernées était vide. Elle dit maintenant ce que les données montrent, et rappelle que la fragilité reste entière : sur une campagne plus pauvre en sondages, le seuil de trois enquêtes ne serait pas atteint et l'agrégation se tairait."
+  },
+  {
+   "date": "2026-09-17",
+   "nature": "présentation",
+   "titre": "Les six pages déclarent leur auteur, leur éditeur et leur date",
+   "texte": "Les six pages de l'observatoire ne portaient aucune donnée structurée : un moteur de réponse ne pouvait ni identifier qui écrit, ni dater la page, ni la rattacher au site. Chacune déclare désormais son auteur (Christophe Wiest), l'éditeur (Flying Kujira), la date de dernière modification et sa place dans le site. Deux pages qui n'avaient aucune description — Veille législative et Rétro-test 2022 — en ont une. L'observatoire est également mesuré à partir d'aujourd'hui : son audience était jusqu'ici invisible. Modification de forme uniquement : aucun chiffre ne change."
+  },
+  {
+   "date": "2026-09-16",
+   "nature": "présentation",
+   "titre": "Balises canoniques sur les six pages de l'observatoire",
+   "texte": "Les six pages de l'observatoire ne déclaraient aucune adresse canonique. Comme le serveur sert aussi bien /observatoire/ que /observatoire/index.html, les deux répondaient 200 avec le même contenu sans que rien n'indique à Google laquelle retenir : c'est l'une des causes de la ligne « Page en double sans URL canonique sélectionnée par l'utilisateur » du rapport d'indexation. Chaque page porte désormais, dans son en-tête, une canonique qui pointe vers sa propre adresse. Modification de forme uniquement : aucun chiffre, aucun texte de page n'a changé.",
+   "pages": [
+    "accueil",
+    "agrégation",
+    "candidats",
+    "rétro-test",
+    "veille législative",
+    "workflow"
+   ]
+  },
+  {
+   "date": "2026-09-16",
+   "nature": "correction",
+   "titre": "Total des intentions : 100 % au lieu de 100,1 %",
+   "texte": "La page Agrégation annonçait « Total des intentions affichées : 100,1 % ». Le calcul additionnait les dix intentions telles qu'elles sont affichées, c'est-à-dire déjà arrondies au dixième : ces arrondis ne se compensaient pas et ajoutaient +0,099 point à la somme. Le total porte désormais sur les moyennes non arrondies, qui valent exactement 100,0000 %. Chaque ligne restant arrondie pour la lecture, leur somme peut s'écarter d'un dixième du total : la page le précise, et le libellé devient « Total des intentions », puisqu'il ne s'agit plus de la somme des valeurs affichées.",
+   "pages": [
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-16",
+   "nature": "correction",
+   "titre": "Veille législative : la page dit maintenant pourquoi elle s'arrête au 21 juillet",
+   "texte": "La page affichait « période couverte : 20/11/2024 → 21/07/2026 » sans un mot d'explication, ce qui se lit comme une veille en panne. Vérification du 16/09 : le fichier des scrutins publié par l'Assemblée a été réédité le matin même et il est identique, octet pour octet, à celui de la veille — la source n'a donc rien de plus récent. Le Parlement ne siège pas : la session ordinaire 2025-2026 s'est achevée le 21 juillet 2026, le gouvernement a renoncé à une session extraordinaire en septembre, et la session ordinaire 2026-2027 ouvre le 1er octobre 2026 (Le Monde, 3 septembre 2026). Un bandeau affiche désormais la date du dernier scrutin publié, les jours écoulés et cette explication, avec sa source ; il disparaîtra de lui-même quand les scrutins reprendront. Les commissions peuvent siéger hors session, mais leurs travaux ne donnent pas lieu à des scrutins publics. La période couverte s'arrête maintenant à la date du dernier contrôle de la source et non à celle du dernier vote : elle dit jusqu'où les données ont été vérifiées. Le dernier scrutin publié reste affiché séparément, dans le bandeau. Les deux dates ne coïncident pas tant que le Parlement ne siège pas, et la page l'explique.",
+   "pages": [
+    "veille législative"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "sources",
+   "titre": "Relevé des sources : aucun nouveau sondage depuis le 10 septembre",
+   "texte": "Les deux sources ont été vérifiées le 15/09. La compilation des sondages compte toujours 233 enquêtes, la plus récente datant du 10/09 (OpinionWay) : cinq jours sans nouveau terrain, et la semaine du 14/09 n'a encore rien produit. L'automatisation quotidienne de la source a bien tourné et n'a rien trouvé. Sa prévision bayésienne est recalculée chaque jour, mais son terrain s'arrête au 10/09 : elle ne bouge donc pas. La page n'est pas figée par une panne, elle l'est par le calendrier politique.",
+   "pages": [
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "nouveauté",
+   "titre": "Page « Veille législative » : ce que le Parlement vote",
+   "texte": "Une nouvelle page suit les textes de loi du périmètre technopolitique — numérique, intelligence artificielle, données, surveillance, cybersécurité, médias — dans la législature en cours. Les scrutins publics de l'Assemblée nationale sont regroupés par texte de loi, avec leur vote final et le détail de chaque scrutin. 6 textes et 99 scrutins retenus, dont 92 tenus en 2026 ; les textes de la législature précédente (loi SREN, majorité numérique) restent listés en référence.",
+   "pages": [
+    "veille législative"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "chiffres",
+   "titre": "Vote par groupe politique sur chaque texte, chaque député compté",
+   "texte": "Chaque texte porte la ventilation du vote par groupe, avec la position, les voix pour, contre, les abstentions, les non-votants et les absents — la somme égale l'effectif du groupe, vérifié ligne par ligne. La barre de répartition est tracée sur l'effectif et non sur les seuls votants : sur le vote du 21 juillet 2026, le Rassemblement national compte 17 participants sur 122 membres et 105 absents, ce que la barre rend visible. Les noms et couleurs des groupes sont ceux du référentiel officiel de l'Assemblée.",
+   "pages": [
+    "veille législative"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "correction",
+   "titre": "Position des groupes recalculée : le champ de l'Assemblée contredit ses propres décomptes",
+   "texte": "Le champ « position majoritaire » publié par l'Assemblée donne le groupe Écologiste et Social « contre » avec 19 voix pour, 7 contre et 7 abstentions, là où sa propre page affiche « Pour » ; le Rassemblement national y est donné « contre » avec 2 contre pour 14 abstentions. La position affichée est donc recalculée à partir des voix exprimées de chaque groupe, et le motif est écrit sur la page.",
+   "pages": [
+    "veille législative"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "nouveauté",
+   "titre": "Compte à rebours du premier tour, thème clair/sombre",
+   "texte": "La page d'accueil affiche un chrono en temps réel jusqu'au 18 avril 2027 à 20 h (fermeture des bureaux), la page Agrégation un rappel compact « J−n ». Dates du scrutin au format français (jj/mm/aaaa) partout.",
+   "pages": [
+    "accueil",
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "correction",
+   "titre": "Prévision bayésienne : cache conservé en cas d'indisponibilité de la source",
+   "texte": "La fonction de téléchargement (_get_json) avait disparu du générateur, ce qui affichait « indisponible » en permanence. Rétablie, et si la source externe ne répond plus, la page garde les dernières données avec leur date de mise à jour, au lieu de disparaître.",
+   "pages": [
+    "accueil",
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "présentation",
+   "titre": "Textes élargis à la pleine largeur des cartes",
+   "texte": "Les phrases introductives de section (comparaison bayésienne, méthode, journal, rétro-test) ne sont plus contraintes à 36 caractères par ligne : elles occupent la carte, les notes techniques et les légendes restent étroites.",
+   "pages": [
+    "accueil",
+    "agrégation",
+    "candidats",
+    "rétro-test",
+    "workflow"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "présentation",
+   "titre": "Schéma du workflow zoomable",
+   "texte": "Sur la page Workflow, un clic sur le schéma l'ouvre en plein écran : molette pour zoomer, glisser pour se déplacer, Échap pour fermer.",
+   "pages": [
+    "workflow"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "données",
+   "titre": "Blocs politiques alignés sur la nomenclature officielle",
+   "texte": "Les candidats sont classés selon les nuances politiques du ministère de l'Intérieur (extrême gauche, gauche, centre, droite, extrême droite). La France insoumise passe à l'extrême gauche, les écologistes rejoignent la gauche, les souverainistes sont répartis entre extrême droite et divers.",
+   "pages": [
+    "candidats"
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "nature": "nouveauté",
+   "titre": "Page « Workflow » : comment le site se fabrique",
+   "texte": "Un schéma d'architecture, ses légendes et les réglages du rétro-test, intégrés au design du site (thème clair/sombre, navigation commune). La page est générée par workflow.py (versionné), le schéma utilise la palette de couleurs du site et bascule avec le thème.",
+   "pages": [
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "nature": "chiffres",
+   "titre": "Fenêtre de sélection portée à 90 jours, effets de maison corrigés",
+   "texte": "Deux réglages mesurés sur la campagne 2022, et retenus parce qu'ils réduisent l'erreur : la fenêtre passe de 60 à 90 jours (elle supprime l'échéance de septembre 2021 où la page ne publiait rien) et chaque institut est corrigé de son écart moyen au consensus des autres. Erreur moyenne sur six échéances : 3,19 → 3,11 point. À J−132 seule, elle reste de 3,8 points — le gain est réel mais faible, et le dire fait partie du résultat.",
+   "pages": [
+    "agrégation",
+    "rétro-test"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "nature": "chiffres",
+   "titre": "Dates du scrutin fixées et vérifiées",
+   "texte": "Le premier tour aura lieu le dimanche 18 avril 2027 et le second le dimanche 2 mai 2027 (Conseil des ministres du 1er juillet 2026). La page affiche désormais l'échéance et se suspend automatiquement la veille et le jour du vote, conformément à l'article 11 de la loi du 19 juillet 1977.",
+   "pages": [
+    "accueil",
+    "agrégation",
+    "candidats"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "nature": "nouveauté",
+   "titre": "Page « Les candidats » et section « Qui sera sur le bulletin ? »",
+   "texte": "Trente-huit personnes recensées, chaque ligne portant sa source et sa date de vérification ; un retrait reste affiché, barré. S'y ajoute une mesure, et non un modèle : la part des questionnaires publiés qui testent réellement chaque nom. Elle produit un résultat vérifiable — une seule paire de noms se partage un même siège sans jamais se croiser, Marine Le Pen et Jordan Bardella, avec une bascule complète entre mars et septembre 2026.",
+   "pages": [
+    "candidats"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "nature": "texte",
+   "titre": "Vocabulaire de source clarifié",
+   "texte": "Les colonnes qui attribuaient les chiffres à « notre agrégation » disent maintenant d'où vient la matière : « MieuxVoter » pour la compilation des sondages, « Estimation MieuxVoter » et « Prévision bayésienne » dans le rétro-test. La distinction est explicite : la compilation est leur, la moyenne pondérée est calculée ici.",
+   "pages": [
+    "agrégation",
+    "rétro-test"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "nature": "texte",
+   "titre": "Section « À lire avant de citer un chiffre »",
+   "texte": "Publiée sur cette page : ce qui peut être cité, sous quelle forme, et ce qui serait faux. Une moyenne de sondages n'est pas un sondage, et une probabilité de second tour n'est pas une intention de vote.",
+   "pages": [
+    "agrégation"
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "nature": "présentation",
+   "titre": "Thème clair et sombre, lecture sur téléphone et tablette",
+   "texte": "Les quatre pages adoptent le thème du site, avec mémorisation du choix. Contrastes vérifiés dans les deux thèmes : aucun texte sous le seuil AA. Sur téléphone, l'en-tête tient sur une ligne, les tableaux se transforment en fiches et la mesure de lecture passe de 88 à 70 signes par ligne.",
+   "pages": [
+    "accueil",
+    "agrégation",
+    "rétro-test",
+    "candidats"
+   ]
   }
+ ],
+ "a_lire": {
+  "titre": "À lire avant de citer un chiffre",
+  "chapo": "Cette page ne publie pas de sondages. Elle publie la moyenne de sondages publiés ailleurs, calculée ici. Ce que vous pouvez en citer, sous quelle forme, et ce qui serait faux.",
+  "regles_titre": "Citer correctement",
+  "regles": [
+   "Citez la moyenne, jamais un sondage : « moyenne des sondages publiés au {{date_maj}}, scénario {{scenario}} ({{scenario_size}} candidats), {{polls_aggregated}} enquêtes agrégées sur une fenêtre de {{window}} jours ». Aucun institut n'a publié ce chiffre : il est calculé ici.",
+   "Citez l'intervalle avec le niveau : « {{tete_nom}} {{tete_val}} % [{{tete_ic}}] », et non « {{tete_val}} % ». Un chiffre nu laisse croire à une précision que la moyenne n'a pas.",
+   "N'écrivez pas « selon un sondage ». Cette page n'interroge personne : elle agrège des enquêtes déjà publiées, dont la liste, les marges et les commanditaires sont affichés plus bas.",
+   "Sous un point d'écart, nous ne commentons pas : l'écart est dans la marge. Ne le commentez pas non plus.",
+   "N'attribuez pas la moyenne à la source : MieuxVoter publie la compilation des sondages ; la pondération, elle, est faite ici et sa méthode est publiée.",
+   "Ne mélangez jamais deux natures de chiffres : intentions de vote (ici), probabilités de second tour et de victoire (prévision bayésienne, clairement séparée), cotes de marchés (nous n'en publions pas)."
+  ],
+  "pieges_titre": "Les pièges du chiffre",
+  "pieges": [
+   "Le scénario est verrouillé : un candidat retenu dans le scénario n'est pas une prédiction de candidature, et un candidat absent n'a pas « 0 % » — il n'est simplement pas testé dans cette liste.",
+   "Un nom testé dans une minorité de questionnaires peut être une candidature très sérieuse, et un nom testé dans tous peut ne jamais se déclarer : cette mesure décrit ce que les instituts jugent plausible, pas ce qui va se produire.",
+   "La marge d'erreur des instituts n'est pas intégrée à la moyenne. Un intervalle de moyenne ne remplace pas la marge d'un sondage.",
+   "Les effets de maison sont corrigés, mais en 2022 les instituts se trompaient surtout ensemble : corriger un écart entre instituts ne corrige pas un aveuglement collectif.",
+   "Le rétro-test porte sur le premier tour et s'arrête à J−132, faute de compilation libre couvrant janvier à avril 2022. Ce qu'il démontre vaut à cette distance, pas à dix jours du vote.",
+   "Le premier tour n'annonce pas le second : la qualification dépend des reports, de la participation et des alliances, que cette page ne modélise pas."
+  ],
+  "sources_titre": "Sources",
+  "sources": [
+   "Sondages : compilation MieuxVoter/presidentielle2027, licence MIT — les enquêtes elles-mêmes appartiennent à leurs instituts.",
+   "Résultats de 2022 : ministère de l'Intérieur (archives des résultats électorales), recoupés avec Wikipédia — 12 scores concordants, 35 132 947 suffrages exprimés.",
+   "Candidatures : recensement de La Chaîne parlementaire, complété pour chaque date par la source de première main citée sur la page des candidats.",
+   "Liste officielle des candidats : Conseil constitutionnel, publiée au Journal officiel — c'est le seul document qui fait foi.",
+   "Prévision bayésienne citée pour comparaison : whyalwaysrose/presidentielle-2027, licence MIT.",
+   "Code de calcul : le générateur est public — les-tontons-de-la-tech/observatoire-presidentielle-2027 (licence MIT). Méthode, calculs et journal de ses révisions y sont lisibles ligne à ligne."
+  ],
+  "legal_titre": "Cadre légal",
+  "legal": [
+   "Loi n° 77-808 du 19 juillet 1977 relative à la publication et à la diffusion de certains sondages d'opinion : l'article 2 impose de mentionner l'organisme, le commanditaire et l'acheteur, le nombre de personnes interrogées, les dates et la marge d'erreur ; l'article 3 impose le dépôt d'une notice.",
+   "Loi organique n° 2021-335 du 29 mars 2021 : marges d'erreur obligatoires pour les sondages liés à l'élection présidentielle.",
+   "Article 11 : aucune publication, diffusion ni commentaire de sondage la veille et le jour du scrutin. Cette page s'y conforme automatiquement.",
+   "Article 12 : 75 000 € d'amende, y compris pour usage impropre du mot « sondage » — raison de plus pour appeler un chiffre ce qu'il est.",
+   "Nous ne sommes pas un institut de sondage et nous ne réalisons aucune enquête : nous agrégeons des enquêtes publiées et nous citons nos sources."
+  ],
+  "contact": "Une correction à signaler, une source manquante, un chiffre qui vous paraît faux : christophe@dileviathan.fr. Les corrections de fond sont datées dans le journal des mises à jour.",
+  "_jetons": "Les {{ }} sont remplis au rendu par generate.py (contenu.py::a_lire_bloc) : date_maj, scenario, scenario_size, polls_aggregated, window, tete_nom, tete_val, tete_ic."
+ }
 }

@@ -9,6 +9,30 @@ chiffre qu'on ne peut plus citer.
 
 ---
 
+
+## 2026 septembre 22
+
+**Correction — La date du premier tour de la primaire était fausse d'un jour.**
+La page annonçait la primaire socialiste les 10 et 11 octobre. Deux sources nationales, La Croix du 26 août et La Dépêche du 16 septembre, donnent les 9-10 et 16-17 octobre : le premier tour se tient les 9 et 10. La date était fausse aux deux endroits où elle figurait, dans le commentaire d'une candidature et dans la section de méthode ; les deux sont corrigés. Aucun autre chiffre ne change.
+
+**Correction — Deux candidatures de la liste ne correspondaient plus à la source.**
+Philippe Brun et Fabien Verdier étaient donnés candidats à la primaire socialiste. Le premier a été suspendu par le Parti socialiste et écarté de la primaire ; le second n'a pas réuni assez de parrainages et a été écarté également. Les deux lignes passent au statut retiré, avec leur situation en commentaire et une source datée. Leur date de déclaration reste dans l'histoire de la liste : ce qui a changé est leur situation, pas leur parcours.
+
+**Correction — La collecte des sondages accepte la nouvelle forme du jeu de données amont.**
+Le jeu de données de Mieux Voter rangeait la liste des sondages à la racine du fichier ; il la range désormais sous une clé « polls », à côté de la source et des hypothèses. La collecte lisait le document entier comme une liste : l'agrégation a échoué un passage, et la page des candidats a cessé d'être réécrite sans que rien ne le signale. La collecte accepte maintenant les deux formes, et écarte en le disant toute entrée inexploitable. Les chiffres publiés n'ont pas changé.
+
+**Présentation — La page des candidats affiche sa date de régénération.**
+L'accueil et l'agrégation portaient déjà la date de leur dernière régénération ; la page des candidats était la seule à ne pas dire sa fraîcheur. Elle l'affiche désormais, et la date s'écrit toute seule à chaque passage, depuis le même horodatage que les autres pages.
+
+**Présentation — Les descriptions des pages sont bornées.**
+Sept pages déclarent leur description aux moteurs de recherche. Six passaient par chance sous la limite d'affichage, et celle du rétro-test 2017 la dépassait. Les descriptions sont désormais ramenées sous la limite, en coupant de préférence à la fin d'une phrase. Modification de forme uniquement : aucun chiffre ni texte de page ne change.
+
+
+## 2026 septembre 21
+
+**Nouveauté — La liste des candidatures est contrôlée chaque semaine.**
+Cette liste est tenue à la main, et rien ne surveillait ses sources. Une vérification hebdomadaire contrôle désormais la page de référence citée par le fichier, sa date de mise à jour et les noms qu'elle cite, et ne parle que si quelque chose a bougé. Elle ne modifie jamais la liste : elle signale, l'auteur tranche. La page affiche la date de ce contrôle, qui avance d'elle même chaque semaine quand rien n'a changé.
+
 ## 20 septembre 2026
 
 **Nouveauté — Un second rétro-test, sur la campagne 2017.**

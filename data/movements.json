@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-25 18:00",
+ "generated": "2026-09-26 18:00",
  "scenario": "H42",
  "window": 90,
  "polls_window": 71,
@@ -327,8 +327,8 @@
    "parti": "Place Publique",
    "intentions": 11.8,
    "n": 83,
-   "intention7": 11.9,
-   "delta7": -0.1,
+   "intention7": 11.8,
+   "delta7": 0.0,
    "intention28": 12.0,
    "delta28": -0.2,
    "serie": [
@@ -339,7 +339,7 @@
     12.0,
     12.0,
     11.8,
-    11.9,
+    11.8,
     11.8
    ]
   },

@@ -1,5 +1,5 @@
 {
- "genere": "2026-09-25 18:00",
+ "genere": "2026-09-26 18:00",
  "election": "2017-04-23",
  "scrutin": "2017-04-23",
  "source_sondages": "Wikipédia FR, « Liste de sondages sur l'élection présidentielle française de 2017 » (CC BY-SA), lue en wikitext",
@@ -1518,7 +1518,7 @@
      "n": 8,
      "publies": 9,
      "mae": 3.17,
-     "biais": 0.07,
+     "biais": 0.08,
      "max_err": 8.6,
      "detail": {
       "Emmanuel Macron": {

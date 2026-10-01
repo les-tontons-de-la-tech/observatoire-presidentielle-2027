@@ -607,6 +607,18 @@ def corrected_values(poll, h):
     return out
 
 
+def _scenario_precedent():
+    """Signature du scénario du dernier relevé publié (data/summary.json), pour départager une égalité.
+
+    Lecture tolérante : fichier absent ou illisible = aucune préférence, la règle du maximum s'applique.
+    """
+    try:
+        with open(os.path.join(DATA, "summary.json"), encoding="utf-8") as f:
+            return tuple(json.load(f).get("scenario_sign") or ())
+    except Exception:
+        return ()
+
+
 def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight_mode="recence",
               min_polls=None, scenario_window=None, house_correction=None):
     """Agrégation. `as_of` = date de référence (rétro-calcul) ; `scenario_sign` = verrouille le
@@ -650,8 +662,15 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
             recent = defaultdict(list)
             for item in r1:
                 recent[signature(item[0])].append(item)
+        # Départage : le plus de sondages, puis la plus grande fraîcheur — et, à égalité
+        # stricte, la liste du relevé précédent. Sans ce troisième critère, `max()` tranche
+        # sur l'ordre interne des données : le 29/09/2026 les deux listes de dix noms
+        # comptaient 10 sondages chacune et la page a changé de tableau pour un tirage.
+        # Ne s'applique qu'au relevé du jour : un point rétro-calculé garde la règle du maximum.
+        precedent = _scenario_precedent() if as_of is None else ()
         scen_sign, scen_recent = max(recent.items(),
-                                     key=lambda kv: (len(kv[1]), max(-x[1] for x in kv[1])))
+                                     key=lambda kv: (len(kv[1]), max(-x[1] for x in kv[1]),
+                                                     tuple(kv[0]) == precedent))
         scenario = scen_recent[0][0]["hypothese"]
 
     # 3. Agrégation : tous les sondages de ce scénario dans la fenêtre longue,
@@ -1118,6 +1137,42 @@ def mov_table(movs):
             + body + '</table>')
 
 
+def _fiches_candidats():
+    """Fiches de data/candidats2027.json (nom, parti, statut, date_declaration…). Vide si illisible."""
+    try:
+        with open(os.path.join(DATA, "candidats2027.json"), encoding="utf-8") as f:
+            return (json.load(f) or {}).get("candidats") or []
+    except Exception:
+        return []
+
+
+def hors_scenario(movs, trends, maxi=6):
+    """Les candidats **déclarés** que le tableau du scénario ne peut pas montrer.
+
+    Le tableau « semaine par semaine » suit la liste de noms retenue : un candidat absent de cette
+    liste n'y apparaît pas, même suivi depuis des mois. La ligne existe pour qu'une absence de tableau
+    ne se lise pas comme un effacement — mais elle ne garde que les candidatures déclarées, recoupées
+    avec data/candidats2027.json (statut « declare ») : un nom testé par les instituts n'est pas pour
+    autant une candidature. Les valeurs viennent de l'indicateur toutes listes.
+    """
+    fiches = _fiches_candidats()
+    dedans = {m["candidat"] for m in movs}
+    absents = [t for t in trends if t["candidat"] not in dedans
+               and ((_match_forecast(t["candidat"], fiches) or {}).get("statut") == "declare")]
+    if not absents:
+        return ""
+    montres = " · ".join(f'{t["candidat"]} <strong>{fr1u(t["intentions"])}</strong>' for t in absents[:maxi])
+    reste = len(absents) - maxi
+    if reste > 0:
+        montres += f" et {reste} autre{'s' if reste > 1 else ''}"
+    suite = ("Ces noms ne sont pas testés dans la liste retenue par les questionnaires les plus récents : "
+             "leur suivi est celui du tableau « toutes listes » ci-dessous." if len(absents) > 1 else
+             "Il n'est pas testé dans la liste retenue par les questionnaires les plus récents : "
+             "son suivi est celui du tableau « toutes listes » ci-dessous.")
+    return ('<p class="small" style="max-width:none;margin-top:12px"><strong>Hors scénario aujourd\'hui, '
+            f'parmi les candidats déclarés :</strong> {montres}. {suite}</p>')
+
+
 def mov_line(movs):
     def pick(field):
         return sorted([m for m in movs if isinstance(m[field], (int, float)) and abs(m[field]) >= 1.0],
@@ -1338,12 +1393,15 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 </section>
 
 <section id="evolution" class="card">
-  <h2>Évolution, semaine par semaine</h2>
+  <h2>Évolution, semaine par semaine — scénario {agg["scenario"]} ({agg["scenario_size"]} noms)</h2>
   <p class="small muted" style="max-width:none">Série <strong>rétro-calculée</strong> : la méthode actuelle appliquée aux
   sondages publiés à chaque échéance hebdomadaire — c'est ce que cette page aurait affiché, pas ce
   qu'elle affichait. Le scénario est verrouillé sur {agg["scenario"]} pour que les lignes restent
-  comparables. Un écart inférieur à 1 point reste dans la marge : nous ne le commentons pas.</p>
+  comparables. Un nom absent de cette liste ne disparaît pas de la page : la ligne « hors scénario »
+  et le tableau « toutes listes » ci-dessous le suivent. Un écart inférieur à 1 point reste dans la
+  marge : nous ne le commentons pas.</p>
   {mov_table(movs)}
+  {hors_scenario(movs, trends)}
   <p class="small" style="margin-top:14px"><strong>Mouvements sur 7 jours :</strong> {mov_line(movs)}.</p>
   <h3 style="margin-top:26px">Tendance, toutes listes confondues</h3>
   <p class="small muted" style="max-width:none">Ici, chaque sondage du premier tour compte, quelle que soit la liste testée :
@@ -1609,11 +1667,14 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 
 <main class="wrap">
 <section id="evolution" class="card">
-  <h2>Évolution, semaine par semaine</h2>
+  <h2>Évolution, semaine par semaine — scénario {agg["scenario"]} ({agg["scenario_size"]} noms)</h2>
   <p class="small muted" style="max-width:none">Série <strong>rétro-calculée</strong> par la méthode actuelle, sur les sondages
   publiés à chaque échéance hebdomadaire (ce que la page aurait affiché, pas ce qu'elle affichait).
-  Un écart inférieur à 1 point reste dans la marge et n'est pas commenté.</p>
+  Un nom absent de cette liste ne disparaît pas de la page : la ligne « hors scénario » et le tableau
+  « toutes listes » ci-dessous le suivent. Un écart inférieur à 1 point reste dans la marge et n'est
+  pas commenté.</p>
   {mov_table(movs)}
+  {hors_scenario(movs, trends)}
   <p class="small" style="margin-top:14px"><strong>Mouvements sur 7 jours (scénario retenu) :</strong>
   {mov_line(movs)}.</p>
   <h3 style="margin-top:24px">Tendance, toutes listes confondues</h3>

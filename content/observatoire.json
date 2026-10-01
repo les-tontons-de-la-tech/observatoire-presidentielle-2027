@@ -3,6 +3,12 @@
  "maj": "2026-09-17",
  "changelog": [
   {
+   "date": "2026-10-01",
+   "nature": "présentation",
+   "titre": "Le tableau par semaine dit quel scénario il suit — et les noms qui en sortent restent affichés",
+   "texte": "Le tableau « Évolution, semaine par semaine » suit la liste de noms que les questionnaires les plus récents testent : un nom que cette liste ne teste plus en sortait sans explication — Édouard Philippe le 30 septembre, quand un sondage YouGov a porté la liste sans lui à 11 enquêtes contre 10 pour la liste avec lui. Le titre du tableau nomme désormais le scénario retenu, une ligne « hors scénario aujourd'hui » affiche la valeur toutes listes des noms absents — limitée aux candidatures déclarées, recoupées avec data/candidats2027.json — et une égalité stricte entre deux listes est départagée par le relevé précédent, non par l'ordre interne des données."
+  },
+  {
    "date": "2026-09-22",
    "nature": "correction",
    "titre": "La date du premier tour de la primaire était fausse d'un jour",

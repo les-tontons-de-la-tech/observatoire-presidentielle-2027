@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-30 18:00",
+ "generated": "2026-10-01 11:03",
  "scenario": "H44",
  "window": 90,
  "polls_window": 82,
@@ -10,8 +10,8 @@
    "candidat": "Marine Le Pen",
    "parti": "Rassemblement National",
    "intentions": 34.2,
-   "intention7": 34.1,
-   "delta7": 0.1,
+   "intention7": 34.2,
+   "delta7": 0.0,
    "intention28": 35.0,
    "delta28": -0.8,
    "serie": [
@@ -20,14 +20,14 @@
     35.3,
     35.1,
     35.0,
-    34.6,
+    34.5,
     33.9,
-    34.1,
+    34.2,
     34.2
    ],
    "mini8": 33.9,
    "maxi8": 35.3,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Jean-Luc Mélenchon",
@@ -43,21 +43,21 @@
     15.1,
     15.7,
     15.5,
-    15.6,
+    15.8,
     16.4,
     16.5,
     16.5
    ],
    "mini8": 14.3,
    "maxi8": 16.5,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Gabriel Attal",
    "parti": "Renaissance",
    "intentions": 13.7,
-   "intention7": 13.9,
-   "delta7": -0.2,
+   "intention7": 13.7,
+   "delta7": 0.0,
    "intention28": 14.5,
    "delta28": -0.8,
    "serie": [
@@ -66,14 +66,14 @@
     14.9,
     14.6,
     14.5,
-    14.0,
-    13.8,
     13.9,
+    13.8,
+    13.7,
     13.7
    ],
    "mini8": 13.7,
    "maxi8": 15.0,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Raphaël Glucksmann",
@@ -96,14 +96,14 @@
    ],
    "mini8": 11.7,
    "maxi8": 13.1,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Bruno Retailleau",
    "parti": "Les Républicains",
    "intentions": 10.0,
-   "intention7": 9.9,
-   "delta7": 0.1,
+   "intention7": 10.0,
+   "delta7": 0.0,
    "intention28": 9.5,
    "delta28": 0.5,
    "serie": [
@@ -112,21 +112,21 @@
     10.1,
     9.5,
     9.5,
-    10.1,
+    10.0,
     9.9,
-    9.9,
+    10.0,
     10.0
    ],
    "mini8": 9.5,
    "maxi8": 10.5,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Éric Zemmour",
    "parti": "Reconquête",
    "intentions": 4.2,
-   "intention7": 4.1,
-   "delta7": 0.1,
+   "intention7": 4.2,
+   "delta7": 0.0,
    "intention28": 3.4,
    "delta28": 0.8,
    "serie": [
@@ -135,21 +135,21 @@
     3.9,
     3.6,
     3.4,
-    3.8,
     4.0,
-    4.1,
+    4.0,
+    4.2,
     4.2
    ],
    "mini8": 3.4,
    "maxi8": 4.3,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Marine Tondelier",
    "parti": "Europe Écologie Les Verts",
    "intentions": 3.4,
-   "intention7": 3.5,
-   "delta7": -0.1,
+   "intention7": 3.4,
+   "delta7": 0.0,
    "intention28": 3.5,
    "delta28": -0.1,
    "serie": [
@@ -158,14 +158,14 @@
     3.4,
     3.2,
     3.5,
-    3.8,
+    3.7,
     3.5,
-    3.5,
+    3.4,
     3.4
    ],
    "mini8": 3.2,
-   "maxi8": 3.8,
-   "polls7": 14
+   "maxi8": 3.7,
+   "polls7": 15
   },
   {
    "candidat": "Fabien Roussel",
@@ -181,14 +181,14 @@
     2.7,
     2.9,
     2.8,
-    2.5,
+    2.4,
     2.5,
     2.5,
     2.5
    ],
-   "mini8": 2.5,
+   "mini8": 2.4,
    "maxi8": 3.1,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Nicolas Dupont-Aignan",
@@ -211,7 +211,7 @@
    ],
    "mini8": 1.8,
    "maxi8": 2.2,
-   "polls7": 14
+   "polls7": 15
   },
   {
    "candidat": "Nathalie Arthaud",
@@ -234,7 +234,7 @@
    ],
    "mini8": 0.7,
    "maxi8": 0.9,
-   "polls7": 14
+   "polls7": 15
   }
  ],
  "trends": [
@@ -264,8 +264,8 @@
    "parti": "Rassemblement National",
    "intentions": 34.0,
    "n": 95,
-   "intention7": 33.9,
-   "delta7": 0.1,
+   "intention7": 34.0,
+   "delta7": 0.0,
    "intention28": 34.0,
    "delta28": 0.0,
    "serie": [
@@ -276,7 +276,7 @@
     34.0,
     34.0,
     33.8,
-    33.9,
+    34.0,
     34.0
    ]
   },
@@ -285,8 +285,8 @@
    "parti": "Horizon",
    "intentions": 16.7,
    "n": 85,
-   "intention7": 16.9,
-   "delta7": -0.2,
+   "intention7": 16.7,
+   "delta7": 0.0,
    "intention28": 17.8,
    "delta28": -1.1,
    "serie": [
@@ -295,9 +295,9 @@
     17.6,
     17.7,
     17.8,
-    17.5,
+    17.3,
     17.4,
-    16.9,
+    16.7,
     16.7
    ]
   },
@@ -306,19 +306,19 @@
    "parti": "La France Insoumise",
    "intentions": 16.4,
    "n": 125,
-   "intention7": 16.3,
-   "delta7": 0.1,
+   "intention7": 16.4,
+   "delta7": 0.0,
    "intention28": 15.8,
    "delta28": 0.6,
    "serie": [
     14.6,
     14.6,
     15.2,
-    15.8,
-    15.8,
     15.9,
+    15.8,
+    16.0,
     16.2,
-    16.3,
+    16.4,
     16.4
    ]
   },
@@ -327,8 +327,8 @@
    "parti": "Place Publique",
    "intentions": 11.3,
    "n": 90,
-   "intention7": 11.5,
-   "delta7": -0.2,
+   "intention7": 11.3,
+   "delta7": 0.0,
    "intention28": 12.0,
    "delta28": -0.7,
    "serie": [
@@ -337,9 +337,9 @@
     10.6,
     11.9,
     12.0,
-    12.0,
+    11.8,
     11.9,
-    11.5,
+    11.3,
     11.3
    ]
   },
@@ -348,19 +348,19 @@
    "parti": "Renaissance",
    "intentions": 10.9,
    "n": 69,
-   "intention7": 11.0,
-   "delta7": -0.1,
-   "intention28": 11.9,
-   "delta28": -1.0,
+   "intention7": 10.9,
+   "delta7": 0.0,
+   "intention28": 11.8,
+   "delta28": -0.9,
    "serie": [
-    12.3,
+    12.4,
     12.4,
     12.3,
     12.3,
-    11.9,
-    11.1,
-    11.1,
+    11.8,
     11.0,
+    11.1,
+    10.9,
     10.9
    ]
   },
@@ -374,12 +374,12 @@
    "intention28": 8.3,
    "delta28": 0.0,
    "serie": [
-    9.1,
+    9.2,
     9.2,
     8.7,
     8.7,
     8.3,
-    8.4,
+    8.3,
     8.3,
     8.3,
     8.3
@@ -400,7 +400,7 @@
     7.8,
     8.5,
     8.3,
-    8.3,
+    7.8,
     7.8,
     7.4,
     7.4
@@ -432,8 +432,8 @@
    "parti": "Reconquête",
    "intentions": 4.1,
    "n": 124,
-   "intention7": 4.0,
-   "delta7": 0.1,
+   "intention7": 4.1,
+   "delta7": 0.0,
    "intention28": 3.6,
    "delta28": 0.5,
    "serie": [
@@ -444,7 +444,7 @@
     3.6,
     3.8,
     3.8,
-    4.0,
+    4.1,
     4.1
    ]
   },
@@ -484,7 +484,7 @@
     3.6,
     3.5,
     3.6,
-    4.0,
+    3.9,
     3.8,
     3.8,
     3.8

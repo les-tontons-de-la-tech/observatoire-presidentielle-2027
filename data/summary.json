@@ -1,7 +1,7 @@
 {
- "generated": "2026-10-01 18:00",
- "total_polls_all": 282,
- "polls_in_window": 82,
+ "generated": "2026-10-02 18:00",
+ "total_polls_all": 292,
+ "polls_in_window": 92,
  "scenario": "H44",
  "scenario_sign": [
   "Bruno Retailleau",
@@ -16,8 +16,8 @@
   "Éric Zemmour"
  ],
  "scenario_size": 10,
- "polls_in_scenario": 11,
- "polls_aggregated": 15,
+ "polls_in_scenario": 12,
+ "polls_aggregated": 16,
  "window": 90,
  "agg_window": 180,
  "half_life": 30,
@@ -27,7 +27,7 @@
  "scenario_window": 90,
  "house_correction": true,
  "first": "2026-04-30",
- "last": "2026-09-24",
+ "last": "2026-09-29",
  "instituts": [
   "Cluster17",
   "Harris Interactive",
@@ -37,6 +37,16 @@
   "YouGov"
  ],
  "polls_detail": [
+  {
+   "institut": "IFOP",
+   "commanditaire": "LCI, Le Figaro, Sud Radio",
+   "debut": "2026-09-25",
+   "fin": "2026-09-29",
+   "echantillon": 1527,
+   "population": "représentatif de la population française âgée de 18 ans et plus",
+   "marge": 3.3,
+   "fichier": "10284-pres-barometre-election-presidentielle-v6-ifop-le-figaro-30-septembre.pdf"
+  },
   {
    "institut": "Harris Interactive",
    "commanditaire": "M6, RTL",
@@ -198,10 +208,10 @@
    "haut": 35.2,
    "mini": 30.9,
    "maxi": 36.1,
-   "amplitude": 5.2,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "amplitude": 5.3,
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -214,15 +224,15 @@
   {
    "candidat": "Jean-Luc Mélenchon",
    "parti": "La France Insoumise",
-   "intentions": 16.5,
-   "bas": 15.5,
-   "haut": 17.5,
-   "mini": 11.7,
-   "maxi": 18.7,
-   "amplitude": 6.9,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "intentions": 16.4,
+   "bas": 15.4,
+   "haut": 17.4,
+   "mini": 11.6,
+   "maxi": 18.6,
+   "amplitude": 7.0,
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -235,15 +245,15 @@
   {
    "candidat": "Gabriel Attal",
    "parti": "Renaissance",
-   "intentions": 13.7,
-   "bas": 12.7,
-   "haut": 14.7,
-   "mini": 12.2,
-   "maxi": 16.2,
+   "intentions": 13.8,
+   "bas": 12.8,
+   "haut": 14.8,
+   "mini": 12.3,
+   "maxi": 16.3,
    "amplitude": 4.0,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -256,15 +266,15 @@
   {
    "candidat": "Raphaël Glucksmann",
    "parti": "Place Publique",
-   "intentions": 12.5,
-   "bas": 11.5,
-   "haut": 13.5,
+   "intentions": 12.4,
+   "bas": 11.4,
+   "haut": 13.4,
    "mini": 10.1,
-   "maxi": 14.1,
-   "amplitude": 4.0,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "maxi": 14.3,
+   "amplitude": 4.2,
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -283,9 +293,9 @@
    "mini": 8.2,
    "maxi": 14.1,
    "amplitude": 5.9,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -304,9 +314,9 @@
    "mini": 2.4,
    "maxi": 5.5,
    "amplitude": 3.1,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -319,15 +329,15 @@
   {
    "candidat": "Marine Tondelier",
    "parti": "Europe Écologie Les Verts",
-   "intentions": 3.4,
-   "bas": 2.4,
-   "haut": 4.4,
+   "intentions": 3.5,
+   "bas": 2.5,
+   "haut": 4.5,
    "mini": 2.9,
-   "maxi": 4.3,
-   "amplitude": 1.4,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "maxi": 4.4,
+   "amplitude": 1.5,
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -343,12 +353,12 @@
    "intentions": 2.5,
    "bas": 1.5,
    "haut": 3.5,
-   "mini": 1.8,
-   "maxi": 4.3,
-   "amplitude": 2.5,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "mini": 1.9,
+   "maxi": 4.2,
+   "amplitude": 2.4,
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -365,11 +375,11 @@
    "bas": 1.2,
    "haut": 3.2,
    "mini": 1.1,
-   "maxi": 3.2,
+   "maxi": 3.1,
    "amplitude": 2.0,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -382,15 +392,15 @@
   {
    "candidat": "Nathalie Arthaud",
    "parti": "Lutte Ouvrière",
-   "intentions": 0.7,
+   "intentions": 0.8,
    "bas": 0.0,
-   "haut": 1.7,
+   "haut": 1.8,
    "mini": 0.5,
-   "maxi": 1.1,
-   "amplitude": 0.6,
-   "n": 15,
-   "neff": 8.2,
-   "dernier": "2026-09-24",
+   "maxi": 1.0,
+   "amplitude": 0.5,
+   "n": 16,
+   "neff": 9.2,
+   "dernier": "2026-09-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
@@ -402,28 +412,28 @@
   }
  ],
  "all_lists": {
-  "Nathalie Arthaud": 0.9,
+  "Nathalie Arthaud": 0.8,
   "Fabien Roussel": 2.7,
-  "Jean-Luc Mélenchon": 16.4,
+  "Jean-Luc Mélenchon": 16.3,
   "Raphaël Glucksmann": 11.3,
-  "Marine Tondelier": 3.8,
-  "Édouard Philippe": 16.7,
+  "Marine Tondelier": 3.9,
+  "Édouard Philippe": 17.5,
   "Bruno Retailleau": 8.3,
-  "Nicolas Dupont-Aignan": 2.2,
+  "Nicolas Dupont-Aignan": 2.0,
   "Jordan Bardella": 34.8,
-  "Éric Zemmour": 4.1,
+  "Éric Zemmour": 4.0,
   "Marine Le Pen": 34.0,
-  "Gabriel Attal": 10.9,
-  "Dominique de Villepin": 2.9,
-  "François Hollande": 7.4,
-  "François Ruffin": 4.0,
-  "Olivier Faure": 4.8,
-  "David Lisnard": 3.1,
+  "Gabriel Attal": 11.0,
+  "Dominique de Villepin": 2.8,
+  "François Hollande": 7.5,
+  "François Ruffin": 3.7,
+  "Olivier Faure": 4.6,
+  "David Lisnard": 3.2,
   "Karim Bouamrane": 0.8
  },
  "series": [
   {
-   "date": "2026-08-06",
+   "date": "2026-08-07",
    "weeks_ago": 8,
    "polls": 6,
    "rows": {
@@ -440,7 +450,7 @@
    }
   },
   {
-   "date": "2026-08-13",
+   "date": "2026-08-14",
    "weeks_ago": 7,
    "polls": 6,
    "rows": {
@@ -457,7 +467,7 @@
    }
   },
   {
-   "date": "2026-08-20",
+   "date": "2026-08-21",
    "weeks_ago": 6,
    "polls": 7,
    "rows": {
@@ -474,7 +484,7 @@
    }
   },
   {
-   "date": "2026-08-27",
+   "date": "2026-08-28",
    "weeks_ago": 5,
    "polls": 8,
    "rows": {
@@ -491,7 +501,7 @@
    }
   },
   {
-   "date": "2026-09-03",
+   "date": "2026-09-04",
    "weeks_ago": 4,
    "polls": 9,
    "rows": {
@@ -508,7 +518,7 @@
    }
   },
   {
-   "date": "2026-09-10",
+   "date": "2026-09-11",
    "weeks_ago": 3,
    "polls": 12,
    "rows": {
@@ -525,7 +535,7 @@
    }
   },
   {
-   "date": "2026-09-17",
+   "date": "2026-09-18",
    "weeks_ago": 2,
    "polls": 13,
    "rows": {
@@ -542,7 +552,7 @@
    }
   },
   {
-   "date": "2026-09-24",
+   "date": "2026-09-25",
    "weeks_ago": 1,
    "polls": 15,
    "rows": {
@@ -559,20 +569,20 @@
    }
   },
   {
-   "date": "2026-10-01",
+   "date": "2026-10-02",
    "weeks_ago": 0,
-   "polls": 15,
+   "polls": 16,
    "rows": {
     "Marine Le Pen": 34.2,
-    "Jean-Luc Mélenchon": 16.5,
-    "Gabriel Attal": 13.7,
-    "Raphaël Glucksmann": 12.5,
+    "Jean-Luc Mélenchon": 16.4,
+    "Gabriel Attal": 13.8,
+    "Raphaël Glucksmann": 12.4,
     "Bruno Retailleau": 10.0,
     "Éric Zemmour": 4.2,
-    "Marine Tondelier": 3.4,
+    "Marine Tondelier": 3.5,
     "Fabien Roussel": 2.5,
     "Nicolas Dupont-Aignan": 2.2,
-    "Nathalie Arthaud": 0.7
+    "Nathalie Arthaud": 0.8
    }
   }
  ]

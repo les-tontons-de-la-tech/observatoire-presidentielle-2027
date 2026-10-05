@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-04 18:00",
+ "generated": "2026-10-05 18:00",
  "total_polls_all": 292,
  "polls_in_window": 92,
  "scenario": "H44",
@@ -433,7 +433,7 @@
  },
  "series": [
   {
-   "date": "2026-08-09",
+   "date": "2026-08-10",
    "weeks_ago": 8,
    "polls": 6,
    "rows": {
@@ -450,7 +450,7 @@
    }
   },
   {
-   "date": "2026-08-16",
+   "date": "2026-08-17",
    "weeks_ago": 7,
    "polls": 6,
    "rows": {
@@ -467,7 +467,7 @@
    }
   },
   {
-   "date": "2026-08-23",
+   "date": "2026-08-24",
    "weeks_ago": 6,
    "polls": 7,
    "rows": {
@@ -484,7 +484,7 @@
    }
   },
   {
-   "date": "2026-08-30",
+   "date": "2026-08-31",
    "weeks_ago": 5,
    "polls": 8,
    "rows": {
@@ -501,7 +501,7 @@
    }
   },
   {
-   "date": "2026-09-06",
+   "date": "2026-09-07",
    "weeks_ago": 4,
    "polls": 9,
    "rows": {
@@ -518,7 +518,7 @@
    }
   },
   {
-   "date": "2026-09-13",
+   "date": "2026-09-14",
    "weeks_ago": 3,
    "polls": 12,
    "rows": {
@@ -535,16 +535,16 @@
    }
   },
   {
-   "date": "2026-09-20",
+   "date": "2026-09-21",
    "weeks_ago": 2,
-   "polls": 13,
+   "polls": 14,
    "rows": {
-    "Marine Le Pen": 33.9,
-    "Jean-Luc Mélenchon": 16.4,
-    "Gabriel Attal": 13.8,
-    "Raphaël Glucksmann": 13.1,
+    "Marine Le Pen": 34.1,
+    "Jean-Luc Mélenchon": 16.5,
+    "Gabriel Attal": 13.9,
+    "Raphaël Glucksmann": 12.5,
     "Bruno Retailleau": 9.9,
-    "Éric Zemmour": 4.0,
+    "Éric Zemmour": 4.1,
     "Marine Tondelier": 3.5,
     "Fabien Roussel": 2.5,
     "Nicolas Dupont-Aignan": 2.2,
@@ -552,7 +552,7 @@
    }
   },
   {
-   "date": "2026-09-27",
+   "date": "2026-09-28",
    "weeks_ago": 1,
    "polls": 15,
    "rows": {
@@ -569,7 +569,7 @@
    }
   },
   {
-   "date": "2026-10-04",
+   "date": "2026-10-05",
    "weeks_ago": 0,
    "polls": 16,
    "rows": {

@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-05 18:00",
+ "generated": "2026-10-06 18:00",
  "scenario": "H44",
  "window": 90,
  "polls_window": 92,
@@ -17,7 +17,7 @@
    "serie": [
     34.5,
     34.5,
-    35.3,
+    35.1,
     35.1,
     35.0,
     34.5,
@@ -26,77 +26,77 @@
     34.2
    ],
    "mini8": 34.1,
-   "maxi8": 35.3,
-   "polls7": 15
+   "maxi8": 35.1,
+   "polls7": 16
   },
   {
    "candidat": "Jean-Luc Mélenchon",
    "parti": "La France Insoumise",
    "intentions": 16.4,
-   "intention7": 16.5,
-   "delta7": -0.1,
+   "intention7": 16.4,
+   "delta7": 0.0,
    "intention28": 15.5,
    "delta28": 0.9,
    "serie": [
     14.3,
     14.3,
-    15.1,
+    15.7,
     15.7,
     15.5,
     15.8,
     16.5,
-    16.5,
+    16.4,
     16.4
    ],
    "mini8": 14.3,
    "maxi8": 16.5,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Gabriel Attal",
    "parti": "Renaissance",
    "intentions": 13.8,
-   "intention7": 13.7,
-   "delta7": 0.1,
+   "intention7": 13.8,
+   "delta7": 0.0,
    "intention28": 14.5,
    "delta28": -0.7,
    "serie": [
     15.0,
     15.0,
-    14.9,
+    14.6,
     14.6,
     14.5,
     13.9,
     13.9,
-    13.7,
+    13.8,
     13.8
    ],
-   "mini8": 13.7,
+   "mini8": 13.8,
    "maxi8": 15.0,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Raphaël Glucksmann",
    "parti": "Place Publique",
    "intentions": 12.4,
-   "intention7": 12.5,
-   "delta7": -0.1,
+   "intention7": 12.4,
+   "delta7": 0.0,
    "intention28": 13.1,
    "delta28": -0.7,
    "serie": [
     11.9,
     11.9,
-    11.7,
+    12.7,
     12.7,
     13.1,
     12.9,
     12.5,
-    12.5,
+    12.4,
     12.4
    ],
-   "mini8": 11.7,
+   "mini8": 11.9,
    "maxi8": 13.1,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Bruno Retailleau",
@@ -109,7 +109,7 @@
    "serie": [
     10.5,
     10.5,
-    10.1,
+    9.5,
     9.5,
     9.5,
     10.0,
@@ -119,7 +119,7 @@
    ],
    "mini8": 9.5,
    "maxi8": 10.5,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Éric Zemmour",
@@ -132,7 +132,7 @@
    "serie": [
     4.3,
     4.3,
-    3.9,
+    3.6,
     3.6,
     3.4,
     4.0,
@@ -142,30 +142,30 @@
    ],
    "mini8": 3.4,
    "maxi8": 4.3,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Marine Tondelier",
    "parti": "Europe Écologie Les Verts",
    "intentions": 3.5,
-   "intention7": 3.4,
-   "delta7": 0.1,
+   "intention7": 3.5,
+   "delta7": 0.0,
    "intention28": 3.5,
    "delta28": 0.0,
    "serie": [
     3.5,
     3.5,
-    3.4,
+    3.2,
     3.2,
     3.5,
     3.7,
     3.5,
-    3.4,
+    3.5,
     3.5
    ],
    "mini8": 3.2,
    "maxi8": 3.7,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Fabien Roussel",
@@ -178,7 +178,7 @@
    "serie": [
     3.1,
     3.1,
-    2.7,
+    2.9,
     2.9,
     2.8,
     2.4,
@@ -188,7 +188,7 @@
    ],
    "mini8": 2.4,
    "maxi8": 3.1,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Nicolas Dupont-Aignan",
@@ -201,7 +201,7 @@
    "serie": [
     1.9,
     1.9,
-    2.0,
+    1.8,
     1.8,
     2.0,
     2.0,
@@ -211,30 +211,30 @@
    ],
    "mini8": 1.8,
    "maxi8": 2.2,
-   "polls7": 15
+   "polls7": 16
   },
   {
    "candidat": "Nathalie Arthaud",
    "parti": "Lutte Ouvrière",
    "intentions": 0.8,
-   "intention7": 0.7,
-   "delta7": 0.1,
+   "intention7": 0.8,
+   "delta7": 0.0,
    "intention28": 0.7,
    "delta28": 0.1,
    "serie": [
     0.9,
     0.9,
-    0.9,
+    0.8,
     0.8,
     0.7,
     0.7,
     0.7,
-    0.7,
+    0.8,
     0.8
    ],
    "mini8": 0.7,
    "maxi8": 0.9,
-   "polls7": 15
+   "polls7": 16
   }
  ],
  "trends": [
@@ -271,8 +271,8 @@
    "serie": [
     33.8,
     33.8,
-    34.6,
     34.3,
+    33.8,
     34.0,
     34.0,
     33.9,
@@ -285,19 +285,19 @@
    "parti": "Horizon",
    "intentions": 17.5,
    "n": 93,
-   "intention7": 16.7,
-   "delta7": 0.8,
+   "intention7": 17.5,
+   "delta7": 0.0,
    "intention28": 17.7,
    "delta28": -0.2,
    "serie": [
     17.9,
     17.9,
-    17.6,
-    17.8,
+    17.7,
+    17.7,
     17.7,
     17.3,
     16.9,
-    16.7,
+    17.5,
     17.5
    ]
   },
@@ -306,19 +306,19 @@
    "parti": "La France Insoumise",
    "intentions": 16.3,
    "n": 135,
-   "intention7": 16.4,
-   "delta7": -0.1,
+   "intention7": 16.3,
+   "delta7": 0.0,
    "intention28": 15.8,
    "delta28": 0.5,
    "serie": [
     14.6,
     14.6,
-    15.2,
-    15.5,
+    15.8,
+    15.8,
     15.8,
     16.0,
     16.3,
-    16.4,
+    16.3,
     16.3
    ]
   },
@@ -334,8 +334,8 @@
    "serie": [
     10.7,
     10.7,
-    10.6,
-    12.0,
+    11.9,
+    11.9,
     12.0,
     11.8,
     11.5,
@@ -348,19 +348,19 @@
    "parti": "Renaissance",
    "intentions": 11.0,
    "n": 73,
-   "intention7": 10.9,
-   "delta7": 0.1,
+   "intention7": 11.0,
+   "delta7": 0.0,
    "intention28": 11.6,
    "delta28": -0.6,
    "serie": [
     12.4,
     12.4,
     12.3,
-    12.0,
+    12.1,
     11.6,
     11.0,
     11.0,
-    10.9,
+    11.0,
     11.0
    ]
   },
@@ -390,19 +390,19 @@
    "parti": "Parti Socialiste",
    "intentions": 7.5,
    "n": 27,
-   "intention7": 7.4,
-   "delta7": 0.1,
+   "intention7": 7.5,
+   "delta7": 0.0,
    "intention28": 8.3,
    "delta28": -0.8,
    "serie": [
     7.6,
     7.6,
-    7.8,
+    8.5,
     8.3,
     8.3,
     7.8,
     7.4,
-    7.4,
+    7.5,
     7.5
    ]
   },
@@ -411,8 +411,8 @@
    "parti": "Parti Socialiste",
    "intentions": 4.6,
    "n": 12,
-   "intention7": 4.8,
-   "delta7": -0.2,
+   "intention7": 4.6,
+   "delta7": 0.0,
    "intention28": 4.3,
    "delta28": 0.3,
    "serie": [
@@ -423,7 +423,7 @@
     4.3,
     4.8,
     4.8,
-    4.8,
+    4.6,
     4.6
    ]
   },
@@ -432,19 +432,19 @@
    "parti": "Reconquête",
    "intentions": 4.0,
    "n": 134,
-   "intention7": 4.1,
-   "delta7": -0.1,
+   "intention7": 4.0,
+   "delta7": 0.0,
    "intention28": 3.5,
    "delta28": 0.5,
    "serie": [
     3.9,
     3.9,
-    3.8,
+    3.6,
     3.7,
     3.5,
     3.8,
     4.0,
-    4.1,
+    4.0,
     4.0
    ]
   },
@@ -453,19 +453,19 @@
    "parti": "Europe Écologie Les Verts",
    "intentions": 3.9,
    "n": 120,
-   "intention7": 3.8,
-   "delta7": 0.1,
+   "intention7": 3.9,
+   "delta7": 0.0,
    "intention28": 3.6,
    "delta28": 0.3,
    "serie": [
     3.7,
     3.7,
-    3.6,
     3.5,
+    3.4,
     3.6,
     3.9,
     3.8,
-    3.8,
+    3.9,
     3.9
    ]
   },
@@ -474,19 +474,19 @@
    "parti": "La France Insoumise",
    "intentions": 3.7,
    "n": 8,
-   "intention7": 4.0,
-   "delta7": -0.3,
+   "intention7": 3.7,
+   "delta7": 0.0,
    "intention28": 5.0,
    "delta28": -1.3,
    "serie": [
     5.1,
     5.1,
     5.1,
-    5.5,
+    5.0,
     5.0,
     5.0,
     4.0,
-    4.0,
+    3.7,
     3.7
    ]
   }

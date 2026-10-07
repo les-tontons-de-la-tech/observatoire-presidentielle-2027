@@ -236,6 +236,10 @@ def matomo():
   _paq.push(['setTrackerUrl', u + 'matomo.php']);
   _paq.push(['setSiteId', id]);
   _paq.push(['enableLinkTracking']);
+  // Sans cet ordre, Matomo ne compte AUCUNE vue : le script se charge, aucune requête
+  // vers matomo.php n'est émise, et rien ne le signale. Zéro vue silencieux, constaté
+  // du 14/09 au 07/10/2026. Ne pas le retirer.
+  _paq.push(['trackPageView']);
   var g = document.createElement('script'); g.async = true; g.src = u + 'matomo.js';
   document.head.appendChild(g);
 })();

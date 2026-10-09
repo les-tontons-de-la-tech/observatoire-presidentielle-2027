@@ -1,7 +1,7 @@
 {
- "generated": "2026-10-08 18:00",
+ "generated": "2026-10-09 18:00",
  "total_polls_all": 293,
- "polls_in_window": 82,
+ "polls_in_window": 75,
  "scenario": "H67",
  "scenario_sign": [
   "Bruno Retailleau",
@@ -17,7 +17,7 @@
   "Éric Zemmour"
  ],
  "scenario_size": 11,
- "polls_in_scenario": 11,
+ "polls_in_scenario": 10,
  "polls_aggregated": 13,
  "window": 90,
  "agg_window": 180,
@@ -30,7 +30,6 @@
  "first": "2026-05-28",
  "last": "2026-09-29",
  "instituts": [
-  "ELABE",
   "Harris Interactive",
   "IFOP",
   "Ipsos BVA",
@@ -425,7 +424,7 @@
  },
  "series": [
   {
-   "date": "2026-08-13",
+   "date": "2026-08-14",
    "weeks_ago": 8,
    "polls": 3,
    "rows": {
@@ -443,7 +442,7 @@
    }
   },
   {
-   "date": "2026-08-20",
+   "date": "2026-08-21",
    "weeks_ago": 7,
    "polls": 4,
    "rows": {
@@ -461,7 +460,7 @@
    }
   },
   {
-   "date": "2026-08-27",
+   "date": "2026-08-28",
    "weeks_ago": 6,
    "polls": 5,
    "rows": {
@@ -479,7 +478,7 @@
    }
   },
   {
-   "date": "2026-09-03",
+   "date": "2026-09-04",
    "weeks_ago": 5,
    "polls": 6,
    "rows": {
@@ -497,25 +496,25 @@
    }
   },
   {
-   "date": "2026-09-10",
+   "date": "2026-09-11",
    "weeks_ago": 4,
-   "polls": 9,
+   "polls": 10,
    "rows": {
-    "Marine Le Pen": 33.6,
-    "Jean-Luc Mélenchon": 15.5,
-    "Édouard Philippe": 14.3,
-    "Raphaël Glucksmann": 10.2,
-    "Gabriel Attal": 7.4,
+    "Marine Le Pen": 33.8,
+    "Jean-Luc Mélenchon": 15.6,
+    "Édouard Philippe": 14.2,
+    "Raphaël Glucksmann": 10.0,
+    "Gabriel Attal": 7.3,
     "Bruno Retailleau": 7.0,
-    "Éric Zemmour": 3.8,
-    "Marine Tondelier": 3.4,
-    "Fabien Roussel": 2.4,
-    "Nicolas Dupont-Aignan": 1.8,
+    "Éric Zemmour": 3.9,
+    "Marine Tondelier": 3.3,
+    "Fabien Roussel": 2.3,
+    "Nicolas Dupont-Aignan": 1.9,
     "Nathalie Arthaud": 0.7
    }
   },
   {
-   "date": "2026-09-17",
+   "date": "2026-09-18",
    "weeks_ago": 3,
    "polls": 10,
    "rows": {
@@ -533,7 +532,7 @@
    }
   },
   {
-   "date": "2026-09-24",
+   "date": "2026-09-25",
    "weeks_ago": 2,
    "polls": 12,
    "rows": {
@@ -551,7 +550,7 @@
    }
   },
   {
-   "date": "2026-10-01",
+   "date": "2026-10-02",
    "weeks_ago": 1,
    "polls": 13,
    "rows": {
@@ -569,7 +568,7 @@
    }
   },
   {
-   "date": "2026-10-08",
+   "date": "2026-10-09",
    "weeks_ago": 0,
    "polls": 13,
    "rows": {

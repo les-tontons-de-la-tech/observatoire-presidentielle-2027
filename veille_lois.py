@@ -531,10 +531,6 @@ def bandeau_etat(dernier, auj=None, date_controle=""):
     except ValueError:
         return ""
     today = auj or datetime.now().date()
-    jours = (today - d).days
-    depuis = ("aujourd'hui" if jours == 0
-              else "hier" if jours == 1
-              else "il y a %d jours" % jours)
 
     if today < ouv:
         classe = "etat"
@@ -551,9 +547,9 @@ def bandeau_etat(dernier, auj=None, date_controle=""):
 
     return f"""
 <section class="{classe}">
-  <p><b>Dernier scrutin publié : {fr_date(dernier)}</b> ({depuis}).</p>{situation}
+  <p><b>Dernier scrutin publié : {fr_date(dernier)}</b>.</p>{situation}
   <p class="small muted">Données ouvertes de l'Assemblée nationale{f", relevées le {fr_date(date_controle)}" if date_controle else ""}.
-  Le premier scrutin de la rentrée apparaîtra ici automatiquement, sans intervention.</p>
+  Le premier scrutin de la rentrée apparaîtra ici automatiquement, sans intervention. Actualisation chaque lundi.</p>
 </section>"""
 
 

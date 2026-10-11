@@ -1,5 +1,5 @@
 {
-  "verifie_le": "2026-10-05",
+  "verifie_le": "2026-10-11",
   "scrutins": {
     "premier_tour": "2027-04-18",
     "second_tour": "2027-05-02",
@@ -216,47 +216,47 @@
     },
     {
       "nom": "Raphaël Glucksmann",
-      "parti": "Place publique / primaire socialiste",
+      "parti": "Place publique",
       "famille": "gauche",
-      "statut": "conditionnel",
+      "statut": "declare",
       "date_declaration": "2026-08-23",
       "precision": "jour",
-      "source": "https://lcp.fr/actualites/presidentielle-2027-raphael-glucksmann-officialise-sa-candidature-et-participera-a-la",
-      "source_label": "LCP, 23/08/2026",
-      "commentaire": "candidat à la primaire du camp social-démocrate (premier tour les 9 et 10 octobre 2026)."
+      "source": "https://www.bfmtv.com/politique/elections/presidentielle/raphael-glucksmann-largement-elu-des-le-premier-tour-de-la-primaire-de-la-gauche-sociale-democrate_AV-202610110303.html",
+      "source_label": "BFM TV, 11/10/2026",
+      "commentaire": "élu dès le premier tour de la primaire du camp social-démocrate, le 11 octobre 2026, avec 66 % des voix (79 613 voix sur les 120 307 votants, 140 282 inscrits). Il est le candidat de la gauche sociale-démocrate."
     },
     {
       "nom": "Olivier Faure",
       "parti": "Parti socialiste",
       "famille": "gauche",
-      "statut": "conditionnel",
+      "statut": "soutien",
       "date_declaration": "2026-08-30",
       "precision": "jour",
-      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-      "source_label": "LCP, 30/08/2026",
-      "commentaire": "candidat à la primaire socialiste."
+      "source": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-du-parti-socialiste-et-de-place-publique-la-gauche-sociale-democrate-choisit-son-candidat-pour-la-presidentielle-2027-plus-de-100-00-votants-pour-l-heure-recenses_LN-202610110078.html",
+      "source_label": "BFM TV (direct), 11/10/2026",
+      "commentaire": "arrivé deuxième de la primaire (14,43 %) ; il a félicité Raphaël Glucksmann : « Nous avons désormais un candidat, à nous tous et toutes de forcer un esprit de victoire. »"
     },
     {
       "nom": "Ségolène Royal",
       "parti": "Parti socialiste",
       "famille": "gauche",
-      "statut": "conditionnel",
+      "statut": "soutien",
       "date_declaration": "2026-07-10",
       "precision": "jour",
-      "source": "https://lcp.fr/actualites/presidentielle-2027-segolene-royal-annonce-sa-candidature-a-la-primaire-socialiste",
-      "source_label": "LCP, 10/07/2026",
-      "commentaire": "candidate à la primaire socialiste."
+      "source": "https://www.latribune.fr/article/la-tribune-dimanche/politique/2266887398757114/presidentielle-raphael-glucksmann-remporte-largement-la-primaire-sociale-democrate-des-le-premier-tour",
+      "source_label": "La Tribune, 11/10/2026",
+      "commentaire": "arrivée troisième de la primaire (7,62 %) ; dit sa déception et se dit prête à « aider à ce rassemblement à gauche ». Soutien implicite, à confirmer."
     },
     {
       "nom": "Emmanuel Maurel",
       "parti": "Gauche républicaine et socialiste",
       "famille": "gauche",
-      "statut": "conditionnel",
+      "statut": "soutien",
       "date_declaration": "2026-09-04",
       "precision": "jour",
-      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-      "source_label": "LCP, 04/09/2026",
-      "commentaire": "candidat à la primaire socialiste."
+      "source": "https://www.latribune.fr/article/la-tribune-dimanche/politique/2266887398757114/presidentielle-raphael-glucksmann-remporte-largement-la-primaire-sociale-democrate-des-le-premier-tour",
+      "source_label": "La Tribune, 11/10/2026",
+      "commentaire": "arrivé quatrième de la primaire (5,92 %) ; « félicite Raphaël Glucksmann pour sa très large victoire, qui l'oblige et qui nous oblige » et lui apporte un « soutien loyal et exigeant »."
     },
     {
       "nom": "Fabien Verdier",
@@ -284,12 +284,12 @@
       "nom": "Jérôme Guedj",
       "parti": "Parti socialiste",
       "famille": "gauche",
-      "statut": "conditionnel",
+      "statut": "soutien",
       "date_declaration": "2026-07-10",
       "precision": "mois",
-      "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-      "source_label": "LCP, juillet 2026",
-      "commentaire": "candidat à la primaire socialiste."
+      "source": "https://www.latribune.fr/article/la-tribune-dimanche/politique/2266887398757114/presidentielle-raphael-glucksmann-remporte-largement-la-primaire-sociale-democrate-des-le-premier-tour",
+      "source_label": "La Tribune, 11/10/2026",
+      "commentaire": "arrivé cinquième de la primaire (5,83 %) ; « La primaire, désormais, elle est derrière nous. Le vote est clair », et appelle à partir en campagne pour la gauche."
     },
     {
       "nom": "Marine Tondelier",

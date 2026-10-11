@@ -10,6 +10,10 @@ chiffre qu'on ne peut plus citer.
 ---
 
 
+## 11 octobre 2026
+
+**DONNÉES — Raphaël Glucksmann remporte la primaire sociale-démocrate et devient candidat.** Élu dès le premier tour le 11 octobre 2026 avec 66 % des voix (79 613 voix sur les 120 307 votants annoncés par la commission d'organisation, pour 140 282 inscrits), il passe du statut conditionnel au statut déclaré : la condition de la primaire est remplie. Les quatre autres candidats de la primaire, Olivier Faure, Ségolène Royal, Emmanuel Maurel et Jérôme Guedj, passent au statut de soutien, chacun avec la déclaration qui le documente. Le contrôle de cohérence est net : les comptes officiels des cinq candidats totalisent exactement les 120 307 votants recensés. Sources : BFM TV (11/10/2026) et La Tribune (11/10/2026). La date de contrôle de la liste passe au 11 octobre 2026. Aucun chiffre de sondage ne change.
+
 ## 1er octobre 2026
 
 **PRÉSENTATION — Le tableau par semaine dit quel scénario il suit.** Le tableau « Évolution, semaine par semaine » suit la liste de noms que les questionnaires les plus récents testent : un nom que cette liste ne teste plus en sortait sans explication — Édouard Philippe le 30 septembre, quand un sondage YouGov a porté la liste sans lui à 11 enquêtes contre 10 pour la liste avec lui. Le titre du tableau nomme désormais le scénario retenu, une ligne « hors scénario aujourd'hui » affiche la valeur toutes listes des noms absents — limitée aux candidatures déclarées, recoupées avec data/candidats2027.json — et une égalité stricte entre deux listes est départagée par le relevé précédent, non par l'ordre interne des données. Aucun chiffre ne change.

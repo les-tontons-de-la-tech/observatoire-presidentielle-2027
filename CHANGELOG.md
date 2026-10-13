@@ -10,6 +10,10 @@ chiffre qu'on ne peut plus citer.
 ---
 
 
+## 12 octobre 2026
+
+**DONNÉES — Gilles Platret entre dans la liste des candidats.** Gilles Platret, 53 ans, maire divers droite de Chalon-sur-Saône depuis 2014 et conseiller régional de Bourgogne-Franche-Comté, a lancé le 8 octobre 2026 au soir, lors de la réunion publique « Parlons de la France » à Chalon-sur-Saône, une démarche qui doit le conduire à être candidat. Ce soir-là, il n'a pas prononcé le mot « candidat » (« ce que je viens de dire ce soir, c'est que je lançais le chemin ») ; son communiqué du lendemain parle d'« une démarche qui doit le conduire à être candidat », et la presse retient une candidature annoncée. La ligne le classe en candidature déclarée, la nuance figure dans son commentaire. Ancien vice-président des Républicains jusqu'en 2023, il siège parmi les divers droite depuis 2024. Il lui reste à réunir les 500 parrainages d'élus : il annonce un tour de France. Sources : BFM TV (09/10/2026), France 3 Bourgogne-Franche-Comté (09/10/2026), CNEWS (10/10/2026). Aucun chiffre de sondage ne change, et aucun sondage publié à ce jour ne teste son nom.
+
 ## 11 octobre 2026
 
 **DONNÉES — Raphaël Glucksmann remporte la primaire sociale-démocrate et devient candidat.** Élu dès le premier tour le 11 octobre 2026 avec 66 % des voix (79 613 voix sur les 120 307 votants annoncés par la commission d'organisation, pour 140 282 inscrits), il passe du statut conditionnel au statut déclaré : la condition de la primaire est remplie. Les quatre autres candidats de la primaire, Olivier Faure, Ségolène Royal, Emmanuel Maurel et Jérôme Guedj, passent au statut de soutien, chacun avec la déclaration qui le documente. Le contrôle de cohérence est net : les comptes officiels des cinq candidats totalisent exactement les 120 307 votants recensés. Sources : BFM TV (11/10/2026) et La Tribune (11/10/2026). La date de contrôle de la liste passe au 11 octobre 2026. Aucun chiffre de sondage ne change.

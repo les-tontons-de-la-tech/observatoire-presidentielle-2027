@@ -10,6 +10,10 @@ chiffre qu'on ne peut plus citer.
 ---
 
 
+## 14 octobre 2026
+
+**DONNÉES — Natacha Polony entre dans la liste des candidats.** Natacha Polony, 51 ans, essayiste, ancienne directrice de la rédaction de Marianne et directrice de la revue L'Audace !, a annoncé sa candidature le 14 octobre 2026 au matin, en exclusivité sur France Inter : « Nous sommes dans le chaos, la situation m'oblige, donc oui je suis candidate à l'élection présidentielle. » Elle avait lancé son mouvement début septembre 2026 pour « tous les orphelins de la politique » et déposé le 29 septembre les statuts de son association de financement électorale. La ligne la classe en candidature déclarée et la range dans la gauche, ses références revendiquées étant le « gaullisme social » de Philippe Séguin et la gauche républicaine de Jean-Pierre Chevènement. Sources : France Inter, L'invité de 7h50 (14/10/2026) ; Le Figaro (14/10/2026) ; La Nouvelle République (30/08/2026). Aucun chiffre de sondage ne change, et aucun sondage publié à ce jour ne teste son nom.
+
 ## 12 octobre 2026
 
 **DONNÉES — Gilles Platret entre dans la liste des candidats.** Gilles Platret, 53 ans, maire divers droite de Chalon-sur-Saône depuis 2014 et conseiller régional de Bourgogne-Franche-Comté, a lancé le 8 octobre 2026 au soir, lors de la réunion publique « Parlons de la France » à Chalon-sur-Saône, une démarche qui doit le conduire à être candidat. Ce soir-là, il n'a pas prononcé le mot « candidat » (« ce que je viens de dire ce soir, c'est que je lançais le chemin ») ; son communiqué du lendemain parle d'« une démarche qui doit le conduire à être candidat », et la presse retient une candidature annoncée. La ligne le classe en candidature déclarée, la nuance figure dans son commentaire. Ancien vice-président des Républicains jusqu'en 2023, il siège parmi les divers droite depuis 2024. Il lui reste à réunir les 500 parrainages d'élus : il annonce un tour de France. Sources : BFM TV (09/10/2026), France 3 Bourgogne-Franche-Comté (09/10/2026), CNEWS (10/10/2026). Aucun chiffre de sondage ne change, et aucun sondage publié à ce jour ne teste son nom.

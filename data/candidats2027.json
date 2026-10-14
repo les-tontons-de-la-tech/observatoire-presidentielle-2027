@@ -1,5 +1,5 @@
 {
- "verifie_le": "2026-10-12",
+ "verifie_le": "2026-10-14",
  "scrutins": {
   "premier_tour": "2027-04-18",
   "second_tour": "2027-05-02",
@@ -15,9 +15,9 @@
   },
   {
    "niveau": "consolidation presse",
-   "quoi": "recensement des déclarations et des prétendants, mis à jour au fil de l'eau",
-   "url": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "note": "LCP (Assemblée nationale), recensement des déclarations et des prétendants, mis à jour au fil de l'eau ; décomptes relevés le 06/09/2026 : 34 « déclarés ou putatifs », dont 16 « déjà en lice »"
+   "quoi": "dossier de suivi de la présidentielle 2027, articles publiés au fil de l'eau",
+   "url": "https://lcp.fr/dossiers/presidentielle-2027-434148",
+   "note": "LCP (Assemblée nationale). La veille hebdomadaire du lundi lit la date de modification du dossier et les titres qui y sont publiés ; elle signale, l'auteur tranche. Une personne citée dans un titre n'est pas une candidature."
   },
   {
    "niveau": "primaire",

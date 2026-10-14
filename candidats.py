@@ -361,6 +361,8 @@ def render(d):
 
     bulletin = presence_block()
 
+    sans_date = sum(1 for c in d["candidats"] if not c["date_declaration"])
+
     demi = ""
     for src in d["sources_reference"]:
         lien = f' — <a href="{src["url"]}">{src["url"].split("/")[2]}</a>' if src["url"] else ""
@@ -445,8 +447,9 @@ def render(d):
     candidats par popularité et n'anticipe aucune investiture. Les sondages sont sur la page
     <a href="/observatoire/sondages/">Agrégation</a>, où ils sont agrégés séparément.</li>
     <li><strong>Limites assumées</strong> : pour plusieurs candidatures, la presse n'a pas établi de date
-    précise — la colonne affiche alors le mois (« ≈ avril 2026 ») plutôt qu'un jour inventé ; et huit
-    personnes de la liste de référence n'ont, à ce jour, aucune date documentée.</li>
+    précise — la colonne affiche alors le mois (« ≈ avril 2026 ») plutôt qu'un jour inventé ; et
+    {sans_date} personnes de la liste n'ont aucune date, leur situation n'étant pas une candidature
+    déclarée (candidature sous condition ou en suspens).</li>
   </ul>
 </section>
 </main>

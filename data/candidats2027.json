@@ -153,77 +153,77 @@
    "parti": "Lutte ouvrière",
    "famille": "extreme-gauche",
    "statut": "declare",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "date de déclaration non documentée par la source consultée."
+   "date_declaration": "2025-12-08",
+   "precision": "jour",
+   "source": "https://www.bfmtv.com/politique/election-presidentielle-2027-nathalie-arthaud-annonce-sa-candidature-pour-lutte-ouvriere_AD-202512080393.html",
+   "source_label": "BFM TV, 08/12/2025",
+   "commentaire": "porte-parole de Lutte ouvrière ; elle a annoncé le 8 décembre 2025 sa candidature à la présidentielle de 2027, sa quatrième depuis 2012."
   },
   {
    "nom": "Nicolas Dupont-Aignan",
    "parti": "Debout la France",
    "famille": "extreme-droite",
    "statut": "declare",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "date de déclaration non documentée par la source consultée."
+   "date_declaration": "2025-03-08",
+   "precision": "jour",
+   "source": "https://www.lefigaro.fr/politique/nicolas-dupont-aignan-se-declare-candidat-a-la-prochaine-election-presidentielle-20250308",
+   "source_label": "Le Figaro, 08/03/2025",
+   "commentaire": "président de Debout la France ; il a annoncé sa candidature le 8 mars 2025 devant ses militants réunis à Yerres, pour la quatrième fois consécutive."
   },
   {
    "nom": "Florian Philippot",
    "parti": "Les Patriotes",
    "famille": "extreme-droite",
    "statut": "declare",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "date de déclaration non documentée par la source consultée."
+   "date_declaration": "2026-05-09",
+   "precision": "jour",
+   "source": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-le-president-des-patriotes-florian-philippot-annonce-etre-candidat-a-l-elysee_AN-202605090155.html",
+   "source_label": "BFM TV, 09/05/2026",
+   "commentaire": "président des Patriotes ; il a annoncé le 9 mai 2026 être candidat, en précisant qu'il se rangerait derrière une candidature souverainiste plus rassembleuse, notamment si Philippe de Villiers se présentait."
   },
   {
    "nom": "François Asselineau",
    "parti": "Union populaire républicaine",
    "famille": "divers",
    "statut": "declare",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "date de déclaration non documentée par la source consultée."
+   "date_declaration": "2026-03-21",
+   "precision": "jour",
+   "source": "https://www.lopinion.fr/politique/edouard-philippe-bruno-retailleau-jerome-guedj-qui-sont-les-candidats-a-lelection-presidentielle-2027",
+   "source_label": "L'Opinion, 14/10/2026",
+   "commentaire": "président de l'Union populaire républicaine ; il a annoncé sa candidature le 21 mars 2026, lors du 19e anniversaire de son parti à Paris."
   },
   {
    "nom": "Clara Egger",
    "parti": "Solution démocratique",
    "famille": "divers",
    "statut": "declare",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "date de déclaration non documentée par la source consultée."
+   "date_declaration": "2026-04-20",
+   "precision": "jour",
+   "source": "https://www.lopinion.fr/politique/edouard-philippe-bruno-retailleau-jerome-guedj-qui-sont-les-candidats-a-lelection-presidentielle-2027",
+   "source_label": "L'Opinion, 14/10/2026",
+   "commentaire": "présidente de Solution démocratique ; sa candidature a été annoncée le 20 avril 2026, le communiqué publié sur le site du parti étant horodaté la veille au soir."
   },
   {
    "nom": "Antoine Mikolajczak",
    "parti": "Équinoxe",
    "famille": "divers",
    "statut": "declare",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "date de déclaration non documentée par la source consultée."
+   "date_declaration": "2026-06-27",
+   "precision": "jour",
+   "source": "https://www.larep.fr/saint-pere-sur-loire-45600/actualites/presidentielle-2027-le-parti-equinoxe-et-antoine-mikolajczak-lancent-leur-campagne-dans-un-village-du-loiret_15011694/",
+   "source_label": "La République du Centre, 27/06/2026",
+   "commentaire": "candidat du parti Équinoxe ; sa candidature a été annoncée le 27 juin 2026 à Saint-Père-sur-Loire, dans le Loiret, au lancement de la campagne du parti."
   },
   {
    "nom": "Francis Lalanne",
    "parti": "France Libre",
    "famille": "divers",
    "statut": "declare",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "date de déclaration non documentée par la source consultée."
+   "date_declaration": "2026-08-19",
+   "precision": "jour",
+   "source": "https://www.cnews.fr/france/2026-08-19/presidentielle-2027-francis-lalanne-se-porte-officiellement-candidat-1906812",
+   "source_label": "CNEWS, 19/08/2026",
+   "commentaire": "soutenu par le mouvement France Libre ; il a annoncé sa candidature dans un communiqué du 19 août 2026 et a ouvert sa campagne par un meeting à Paris."
   },
   {
    "nom": "Raphaël Glucksmann",
@@ -318,11 +318,11 @@
    "parti": "Les Écologistes",
    "famille": "gauche",
    "statut": "conditionnel",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "investie par son parti ; maintient sa candidature après l'échec de la primaire de la gauche."
+   "date_declaration": "2025-10-22",
+   "precision": "jour",
+   "source": "https://www.lefigaro.fr/elections/presidentielles/candidats/presidentielle-2027-marine-tondelier-candidate-du-parti-les-ecologistes-20261013",
+   "source_label": "Le Figaro, 13/10/2026",
+   "commentaire": "elle s'est déclarée candidate le 22 octobre 2025 dans un entretien au Nouvel Obs et a été investie par Les Écologistes le 8 décembre 2025 ; après la victoire de Raphaël Glucksmann à la primaire de la gauche, le 11 octobre 2026, elle n'a pas annoncé de ralliement."
   },
   {
    "nom": "François Ruffin",
@@ -339,12 +339,12 @@
    "nom": "Clémentine Autain",
    "parti": "L'Après",
    "famille": "extreme-gauche",
-   "statut": "conditionnel",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "candidature liée à la tenue d'une primaire de la gauche non-mélenchoniste."
+   "statut": "retire",
+   "date_declaration": "2025-06-14",
+   "precision": "jour",
+   "source": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-la-deputee-ecologiste-clementine-autain-dit-prendre-acte-de-l-echec-de-la-primaire-unitaire-a-gauche-et-renonce-a-etre-candidate_AN-202607110279.html",
+   "source_label": "BFM TV, 11/07/2026",
+   "commentaire": "elle avait annoncé le 14 juin 2025, dans La Tribune Dimanche, sa candidature dans le cadre d'une primaire de la gauche non-mélenchoniste, puis y a renoncé le 11 juillet 2026 en prenant acte de l'échec de la primaire unitaire."
   },
   {
    "nom": "Lydie Massard",
@@ -419,9 +419,9 @@
    "statut": "suspens",
    "date_declaration": "",
    "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "pas officiellement candidat ; une centaine de personnes travaillent à la recherche des 500 parrainages."
+   "source": "https://www.radiofrance.fr/franceinfo/podcasts/8h30-franceinfo/8h30-franceinfo-du-mardi-29-septembre-2026-4945658",
+   "source_label": "franceinfo, 29/09/2026",
+   "commentaire": "pas candidat déclaré : il a répété le 29 septembre 2026 sur franceinfo qu'il était encore trop tôt pour se déclarer, estimant que « le jeu va se décanter » dans les prochains mois."
   },
   {
    "nom": "Olivier Becht",
@@ -439,33 +439,33 @@
    "parti": "Générations",
    "famille": "gauche",
    "statut": "retire",
-   "date_declaration": "2026-05-01",
-   "precision": "mois",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "candidature annoncée puis retirée le 7 juillet 2026 : « prenant acte qu'il n'y aura pas de primaire et donc que ma candidature à la primaire n'a plus de sens »."
+   "date_declaration": "2026-05-14",
+   "precision": "jour",
+   "source": "https://www.lemonde.fr/politique/article/2026/07/07/le-depute-benjamin-lucas-landy-retire-sa-candidature-a-la-primaire-unitaire-de-la-gauche_6721467_823448.html",
+   "source_label": "Le Monde, 07/07/2026",
+   "commentaire": "candidat à la primaire de la gauche annoncé le 14 mai 2026, puis retrait annoncé le 7 juillet 2026 au Parisien : « Je prends acte qu'il n'y aura pas de primaire et donc que ma candidature à la primaire n'a plus de sens »."
   },
   {
    "nom": "Gérald Darmanin",
    "parti": "Renaissance",
    "famille": "centre",
    "statut": "soutien",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "non candidat : a officialisé le 17 août 2026 son soutien à Édouard Philippe."
+   "date_declaration": "2026-08-17",
+   "precision": "jour",
+   "source": "https://www.lefigaro.fr/elections/presidentielles/presidentielles-2027-gerald-darmanin-apporte-son-soutien-a-edouard-philippe-20260817",
+   "source_label": "Le Figaro, 17/08/2026",
+   "commentaire": "non candidat : il a annoncé le 17 août 2026 dans un entretien à La Voix du Nord qu'il ne se présenterait pas et apportait son soutien à Édouard Philippe, ne voulant pas « rajouter de la division »."
   },
   {
    "nom": "Sarah Knafo",
    "parti": "Reconquête",
    "famille": "extreme-droite",
    "statut": "soutien",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373",
-   "source_label": "LCP, 06/09/2026",
-   "commentaire": "non candidate : « Je souhaite qu'Éric Zemmour soit notre candidat » (Journal du Dimanche)."
+   "date_declaration": "2026-05-09",
+   "precision": "jour",
+   "source": "https://www.lejdd.fr/politique/sarah-knafo-eurodeputee-reconquete-je-souhaite-queric-zemmour-soit-notre-candidat-173520",
+   "source_label": "Le Journal du Dimanche, 09/05/2026",
+   "commentaire": "non candidate : dans un entretien au Journal du Dimanche publié le 9 mai 2026, elle a déclaré souhaiter qu'Éric Zemmour soit le candidat de Reconquête : « Je souhaite qu'Éric Zemmour soit notre candidat »."
   }
  ]
 }

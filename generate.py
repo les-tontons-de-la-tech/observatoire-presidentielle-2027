@@ -18,7 +18,7 @@ Méthode (volontairement simple et publiée) :
   - fenêtre de sélection du scénario et correction des effets de maison validées
     par le rétro-test 2022 (backtest2022.py), pas choisies au feeling.
 """
-import json, math, os, urllib.request
+import json, math, os, csv, urllib.request
 from collections import defaultdict
 from datetime import date, datetime, timedelta
 
@@ -1815,6 +1815,52 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 """
 
 
+def ecrire_dataset(agg):
+    """Jeux de données machine de l'agrégation (19/10/2026, audit GEO).
+
+    Pour citer un chiffre, un agent devait télécharger 76 Ko de HTML et reconstruire le
+    tableau. Ces deux fichiers disent exactement la même chose que la page, avec leur date
+    de calcul, l'unité de chaque colonne et le lien vers la méthode : c'est ce qui rend le
+    chiffre citable sans scraping. Le CSV a une ligne par candidat, séparateur virgule.
+    """
+    lignes = [dict(
+        nom=r["candidat"], parti=r["parti"],
+        moyenne_pct=r["intentions"], ic95_bas_pct=r["bas"], ic95_haut_pct=r["haut"],
+        min_pct=r["mini"], max_pct=r["maxi"], amplitude_pct=r["amplitude"],
+        sondages=r["n"], n_effectif=r["neff"], dernier_sondage=r["dernier"],
+        instituts=r.get("instituts") or [],
+    ) for r in agg["rows"]]
+    doc = dict(
+        genere_le=TODAY.isoformat(),
+        calcule_le=agg["generated"],
+        page_html=SITE_URL + "/observatoire/sondages/",
+        methode_url=SITE_URL + "/observatoire/workflow/",
+        limites_url=SITE_URL + "/observatoire/sondages/",
+        unites="points de pourcentage (sauf sondages et n_effectif) ; n_effectif = effectif "
+               "corrigé des poids ; sondages = nombre d'enquêtes agrégées pour ce candidat",
+        scenario=agg["scenario"], fenetre_jours=agg["agg_window"],
+        demi_vie_jours=agg["half_life"], sondages_agreges=agg["polls_aggregated"],
+        premier_sondage=agg["first"], dernier_sondage=agg["last"],
+        candidats=lignes,
+    )
+    dossier = os.path.join(SITE, "sondages")
+    os.makedirs(dossier, exist_ok=True)
+    with open(os.path.join(dossier, "donnees.json"), "w", encoding="utf-8") as f:
+        json.dump(doc, f, ensure_ascii=False, indent=1)
+    colonnes = ["nom", "parti", "moyenne_pct", "ic95_bas_pct", "ic95_haut_pct",
+                "min_pct", "max_pct", "amplitude_pct", "sondages", "n_effectif",
+                "dernier_sondage", "calcule_le", "instituts"]
+    with open(os.path.join(dossier, "donnees.csv"), "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(colonnes)
+        for l in lignes:
+            w.writerow([l["nom"], l["parti"], l["moyenne_pct"], l["ic95_bas_pct"],
+                        l["ic95_haut_pct"], l["min_pct"], l["max_pct"], l["amplitude_pct"],
+                        l["sondages"], l["n_effectif"], l["dernier_sondage"],
+                        agg["generated"], "; ".join(l["instituts"])])
+    print(f"  -> {os.path.join(dossier, 'donnees.json')} et donnees.csv ({len(lignes)} candidats)")
+
+
 def main():
     sus = suspension_legale()
     if sus:
@@ -1857,6 +1903,7 @@ def main():
         render_sondages(agg, movs, trends, fc))
     json.dump(agg, open(os.path.join(DATA, "summary.json"), "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
+    ecrire_dataset(agg)
     print(f"sondages source : {agg['total_polls_all']} | fenêtre : {agg['polls_in_window']} | "
           f"scénario {agg['scenario']} : {agg['polls_in_scenario']} sondages")
     for m in movs:

@@ -461,11 +461,37 @@ def render(d):
 """
 
 
+def ecrire_dataset(d):
+    """La liste des candidats en JSON (19/10/2026, audit GEO).
+
+    Même contenu que la page, une ligne par personne, avec le statut, la date de
+    déclaration et la source qui la soutient. Une page HTML de 90 Ko pour quarante
+    lignes n'est pas une donnée : c'est un document. Le JSON en est une.
+    """
+    champs = ("nom", "parti", "famille", "statut", "date_declaration", "precision",
+              "source", "source_label", "commentaire")
+    doc = dict(
+        genere_le=G.TODAY.isoformat(),
+        verifie_le=d.get("verifie_le"),
+        page_html=G.SITE_URL + "/observatoire/candidats/",
+        methode_url=G.SITE_URL + "/observatoire/workflow/",
+        scrutins=d.get("scrutins"),
+        unites="statut : declare, conditionnel, suspens, soutien, retire ; date_declaration "
+               "au format AAAA-MM-JJ quand elle est documentée, sinon null",
+        candidats=[{c: e.get(c) for c in champs} for e in d["candidats"]],
+    )
+    chemin = os.path.join(SITE, "candidats", "donnees.json")
+    with open(chemin, "w", encoding="utf-8") as f:
+        json.dump(doc, f, ensure_ascii=False, indent=1)
+    print(f"  -> {chemin} ({len(doc['candidats'])} personnes)")
+
+
 def main():
     d = json.load(open(os.path.join(DATA, "candidats2027.json"), encoding="utf-8"))
     os.makedirs(os.path.join(SITE, "candidats"), exist_ok=True)
     html = render(d)
     open(os.path.join(SITE, "candidats", "index.html"), "w", encoding="utf-8").write(html)
+    ecrire_dataset(d)
     par = {s: sum(1 for c in d["candidats"] if c["statut"] == s) for s, _, _ in STATUTS}
     print(f"page candidats : {len(d['candidats'])} personnes " + " · ".join(f"{k}={v}" for k, v in par.items()))
     print(f"  -> {os.path.join(SITE, 'candidats', 'index.html')} ({len(html)} caractères)")

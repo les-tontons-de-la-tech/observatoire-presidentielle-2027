@@ -698,6 +698,8 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
 <meta name="description" content="{G.meta_description('/observatoire/lois/')}">
 <title>{G.titre_court('/observatoire/lois/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/lois/">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/lois/">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/lois/">
 {G.meta_social('/observatoire/lois/')}
 {G.ld_json("/observatoire/lois/")}
 {G.matomo()}

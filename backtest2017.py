@@ -822,6 +822,8 @@ def render(bt):
 <meta name="description" content="{G.meta_description('/observatoire/backtest2017/')}">
 <title>{G.titre_court('/observatoire/backtest2017/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/backtest2017/">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/backtest2017/">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/backtest2017/">
 {G.meta_social('/observatoire/backtest2017/')}
 {G.ld_json("/observatoire/backtest2017/")}
 {G.matomo()}

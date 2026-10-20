@@ -377,6 +377,8 @@ def render(d):
 <meta name="description" content="{G.meta_description('/observatoire/candidats/')}">
 <title>{G.titre_court('/observatoire/candidats/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/candidats/">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/candidats/">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/candidats/">
 {G.meta_social('/observatoire/candidats/')}
 {G.ld_json("/observatoire/candidats/")}
 {G.matomo()}

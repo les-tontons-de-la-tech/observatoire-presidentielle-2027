@@ -325,6 +325,8 @@ PAGE = f"""<!doctype html>
 <meta name="description" content="{G.meta_description('/observatoire/workflow/')}">
 <title>{G.titre_court('/observatoire/workflow/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/workflow/">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/workflow/">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/workflow/">
 {G.meta_social('/observatoire/workflow/')}
 {G.ld_json("/observatoire/workflow/")}
 {G.matomo()}

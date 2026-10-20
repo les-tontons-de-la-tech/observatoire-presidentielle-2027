@@ -1363,6 +1363,8 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <meta name="description" content="{meta_description('/observatoire/sondages/')}">
 <title>{titre_court('/observatoire/sondages/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/sondages/">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/sondages/">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/sondages/">
 {meta_social('/observatoire/sondages/')}
 {ld_json("/observatoire/sondages/")}
 {matomo()}
@@ -1659,6 +1661,8 @@ def render_landing(agg, movs=None, trends=None, fc=None):
 <meta name="description" content="{meta_description('/observatoire/')}">
 <title>{titre_court('/observatoire/')}</title>
 <link rel="canonical" href="https://dileviathan.fr/observatoire/">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/">
 {meta_social('/observatoire/')}
 {ld_json("/observatoire/")}
 {matomo()}

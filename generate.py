@@ -86,6 +86,41 @@ PAGES_LD = {
 DESC_MIN = 120
 DESC_MAX = 160
 
+# ── Le jeu de données machine de l'agrégation ──────────────────────────────────────────────
+# Il est écrit par ecrire_dataset() en même temps que la page ; ici, on ne fait que le DÉCLARER.
+# Un `Dataset` sans `distribution` ne dit rien de vérifiable : l'export existe depuis le
+# 19/10/2026 (JSON + CSV), c'est lui qu'on pointe, et pas une URL à venir.
+DATASET_ID = SITE_URL + "/observatoire/sondages/#dataset"
+DATASET_LD = {
+    "@type": "Dataset",
+    "@id": DATASET_ID,
+    "name": "Agrégation des sondages de la présidentielle 2027",
+    "description": "Moyenne pondérée des enquêtes publiées pour l'élection présidentielle de "
+                   "2027, candidat par candidat : intention de vote, intervalle de confiance à "
+                   "95 %, amplitude, effectif corrigé des poids et instituts contributeurs.",
+    "url": SITE_URL + "/observatoire/sondages/",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": True,
+    "license": SITE_URL + "/fr/mentions-legales",
+    "creator": {"@id": SITE_URL + "/#person"},
+    "publisher": {"@id": SITE_URL + "/#organization"},
+    "variableMeasured": [
+        "intention de vote (points de pourcentage)",
+        "intervalle de confiance à 95 % (points de pourcentage)",
+        "nombre d'enquêtes agrégées",
+        "effectif corrigé des poids (milliers)",
+    ],
+    "distribution": [
+        {"@type": "DataDownload", "encodingFormat": "application/json",
+         "contentUrl": SITE_URL + "/observatoire/sondages/donnees.json"},
+        {"@type": "DataDownload", "encodingFormat": "text/csv",
+         "contentUrl": SITE_URL + "/observatoire/sondages/donnees.csv"},
+    ],
+}
+# Pages qui portent le jeu de données : l'accueil de l'observatoire (par où l'on entre) et la
+# page qui l'affiche. Ailleurs, le nœud serait du bruit.
+PAGES_DATASET = ("/observatoire/", "/observatoire/sondages/")
+
 
 def couper_description(texte, maxi=DESC_MAX, mini=DESC_MIN):
     """Ramène une description sous la limite que les moteurs affichent, sans la charcuter.
@@ -214,6 +249,11 @@ def ld_json(chemin):
              "url": SITE_URL},
         ],
     }
+    # Le jeu de données est une entité à part de la page : on l'ajoute au graphe plutôt que de
+    # changer le type de la page, pour que « ceci est un article qui décrit un jeu de données »
+    # reste lisible. Même @id sur les deux pages qui le portent : une seule entité, pas deux.
+    if chemin in PAGES_DATASET:
+        graphe["@graph"].append(dict(DATASET_LD, dateModified=TODAY.isoformat()))
     return ('<script type="application/ld+json">'
             + _json.dumps(graphe, ensure_ascii=False, separators=(",", ":"))
             + "</script>")

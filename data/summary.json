@@ -1,7 +1,7 @@
 {
- "generated": "2026-10-22 18:00",
+ "generated": "2026-10-23 18:00",
  "total_polls_all": 304,
- "polls_in_window": 82,
+ "polls_in_window": 80,
  "scenario": "H44",
  "scenario_sign": [
   "Bruno Retailleau",
@@ -464,7 +464,7 @@
  },
  "series": [
   {
-   "date": "2026-08-27",
+   "date": "2026-08-28",
    "weeks_ago": 8,
    "polls": 8,
    "rows": {
@@ -481,7 +481,7 @@
    }
   },
   {
-   "date": "2026-09-03",
+   "date": "2026-09-04",
    "weeks_ago": 7,
    "polls": 9,
    "rows": {
@@ -498,7 +498,7 @@
    }
   },
   {
-   "date": "2026-09-10",
+   "date": "2026-09-11",
    "weeks_ago": 6,
    "polls": 12,
    "rows": {
@@ -515,7 +515,7 @@
    }
   },
   {
-   "date": "2026-09-17",
+   "date": "2026-09-18",
    "weeks_ago": 5,
    "polls": 13,
    "rows": {
@@ -532,7 +532,7 @@
    }
   },
   {
-   "date": "2026-09-24",
+   "date": "2026-09-25",
    "weeks_ago": 4,
    "polls": 15,
    "rows": {
@@ -549,7 +549,7 @@
    }
   },
   {
-   "date": "2026-10-01",
+   "date": "2026-10-02",
    "weeks_ago": 3,
    "polls": 16,
    "rows": {
@@ -566,7 +566,7 @@
    }
   },
   {
-   "date": "2026-10-08",
+   "date": "2026-10-09",
    "weeks_ago": 2,
    "polls": 18,
    "rows": {
@@ -583,7 +583,7 @@
    }
   },
   {
-   "date": "2026-10-15",
+   "date": "2026-10-16",
    "weeks_ago": 1,
    "polls": 18,
    "rows": {
@@ -600,7 +600,7 @@
    }
   },
   {
-   "date": "2026-10-22",
+   "date": "2026-10-23",
    "weeks_ago": 0,
    "polls": 18,
    "rows": {

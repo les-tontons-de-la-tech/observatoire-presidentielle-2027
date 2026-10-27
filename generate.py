@@ -1089,9 +1089,17 @@ html[data-theme="dark"] .btn{background:#c0362c}
 # Seul JavaScript de l'observatoire : le sélecteur de thème. Aucune dépendance, aucune requête.
 # 1) avant le premier rendu, pour éviter le flash ; 2) au clic, et la préférence est mémorisée
 #    dans la même clé que le site (« theme »), pour que le choix suive d'une page à l'autre.
+# Suivi d'erreurs — GlitchTip auto-hébergé, projet « Diléviathan ».
+# Client @sentry/browser (MIT) servi par notre domaine (/observatoire/vendor/) : aucun appel
+# vers sentry.io. La clé du DSN s'écrit SANS tirets, sinon le SDK la refuse.
+GLITCH_HEAD = (
+    '<script src="/observatoire/vendor/sentry-10.38.0.min.js" defer></script>'
+    '<script src="/observatoire/vendor/glitchtip-init.js" defer></script>'
+)
+
 THEME_HEAD = """<script>(function(){try{var c=localStorage.getItem("theme");
 if(c==="dark"||(!c&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches))
-{document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>"""
+{document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>""" + GLITCH_HEAD
 
 THEME_BTN = """<button type="button" class="themebtn" id="themebtn" aria-label="Changer le thème"
   title="Passer en mode clair ou sombre">&#9681;</button>"""

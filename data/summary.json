@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-26 18:00",
+ "generated": "2026-10-27 17:52",
  "total_polls_all": 304,
  "polls_in_window": 80,
  "scenario": "H44",
@@ -464,7 +464,7 @@
  },
  "series": [
   {
-   "date": "2026-08-31",
+   "date": "2026-09-01",
    "weeks_ago": 8,
    "polls": 8,
    "rows": {
@@ -481,7 +481,7 @@
    }
   },
   {
-   "date": "2026-09-07",
+   "date": "2026-09-08",
    "weeks_ago": 7,
    "polls": 9,
    "rows": {
@@ -498,7 +498,7 @@
    }
   },
   {
-   "date": "2026-09-14",
+   "date": "2026-09-15",
    "weeks_ago": 6,
    "polls": 12,
    "rows": {
@@ -515,7 +515,7 @@
    }
   },
   {
-   "date": "2026-09-21",
+   "date": "2026-09-22",
    "weeks_ago": 5,
    "polls": 14,
    "rows": {
@@ -532,24 +532,24 @@
    }
   },
   {
-   "date": "2026-09-28",
+   "date": "2026-09-29",
    "weeks_ago": 4,
-   "polls": 15,
+   "polls": 16,
    "rows": {
     "Marine Le Pen": 34.2,
-    "Jean-Luc Mélenchon": 16.5,
-    "Gabriel Attal": 13.7,
-    "Raphaël Glucksmann": 12.5,
+    "Jean-Luc Mélenchon": 16.4,
+    "Gabriel Attal": 13.8,
+    "Raphaël Glucksmann": 12.4,
     "Bruno Retailleau": 10.0,
     "Éric Zemmour": 4.2,
-    "Marine Tondelier": 3.4,
+    "Marine Tondelier": 3.5,
     "Fabien Roussel": 2.5,
     "Nicolas Dupont-Aignan": 2.2,
-    "Nathalie Arthaud": 0.7
+    "Nathalie Arthaud": 0.8
    }
   },
   {
-   "date": "2026-10-05",
+   "date": "2026-10-06",
    "weeks_ago": 3,
    "polls": 16,
    "rows": {
@@ -566,7 +566,7 @@
    }
   },
   {
-   "date": "2026-10-12",
+   "date": "2026-10-13",
    "weeks_ago": 2,
    "polls": 18,
    "rows": {
@@ -583,7 +583,7 @@
    }
   },
   {
-   "date": "2026-10-19",
+   "date": "2026-10-20",
    "weeks_ago": 1,
    "polls": 18,
    "rows": {
@@ -600,7 +600,7 @@
    }
   },
   {
-   "date": "2026-10-26",
+   "date": "2026-10-27",
    "weeks_ago": 0,
    "polls": 18,
    "rows": {

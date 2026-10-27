@@ -374,10 +374,6 @@ def reference_texts(scrutins):
 # RENDU
 # ========================================================================
 
-THEME_HEAD = """<script>(function(){try{var c=localStorage.getItem("theme");
-if(c==="dark"||(!c&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches))
-{document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>"""
-
 THEME_BTN = """<button type="button" class="themebtn" id="themebtn" aria-label="Changer le thème"
   title="Passer en mode clair ou sombre">&#9681;</button>"""
 
@@ -704,7 +700,7 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
 {G.ld_json("/observatoire/lois/")}
 {G.matomo()}
 <style>{CSS}</style>
-{THEME_HEAD}</head>
+{G.THEME_HEAD}</head>
 <body>
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· veille législative</span></div>

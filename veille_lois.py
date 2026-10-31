@@ -74,6 +74,24 @@ THEMES = [
      r"médias|audiovisuel|presse|droits voisins|radiodiffusion|publicité"),
 ]
 
+# ---------- scrutins suivis à la main ----------
+# Le filtre automatique lit le NOM DU TEXTE. Or un amendement au projet de loi de
+# finances n'y entre jamais : le nom du texte ne parle ni de numérique, ni de données,
+# alors que l'amendement, lui, crée une taxe sur les données.
+# Ces scrutins sont donc suivis nommément. La source reste la donnée ouverte de
+# l'Assemblée (aucun chiffre n'est saisi à la main) : seule la SÉLECTION est
+# éditoriale, elle est déclarée ici avec sa raison, et la page la signale.
+SUIVIS = {
+    "9336": {
+        "theme": "Fiscalité des données",
+        "pourquoi": ("Amendement n° 1358 de M. Lhardit (Socialistes et apparentés) créant une taxe de "
+                     "5,5 centimes par gigaoctet transmis aux particuliers, adopté contre l'avis du "
+                     "gouvernement et du rapporteur général, dans le cadre du projet de loi de finances "
+                     "pour 2027. Le texte n'est pas voté : le vote solennel sur la première partie est "
+                     "inscrit au 3 novembre 2026."),
+    },
+}
+
 # Extraction du nom du texte de loi depuis le titre d'un scrutin.
 # Ex. « l'amendement n° 80 de Mme Belluco ... de la proposition de loi visant à
 # protéger les mineurs ... (première lecture). » → « proposition de loi visant à
@@ -297,7 +315,9 @@ def build(scrutins):
         name, nature = law_name(titre)
         if not name:
             continue
-        if not theme_of(name):
+        suivi = SUIVIS.get(str(s.get("numero")))
+        theme = (suivi or {}).get("theme") or theme_of(name)
+        if not theme:
             continue
         decompte = (s.get("syntheseVote") or {}).get("decompte") or {}
         par_texte[name].append({
@@ -308,6 +328,8 @@ def build(scrutins):
             "objet": short_objet(titre),
             "kind": vote_kind(titre),
             "sort": ((s.get("sort") or {}).get("code") or "").lower(),
+            "suivi": bool(suivi),
+            "theme_suivi": theme,
             "pour": int(decompte.get("pour") or 0),
             "contre": int(decompte.get("contre") or 0),
             "abst": int(decompte.get("abstentions") or 0),
@@ -325,9 +347,12 @@ def build(scrutins):
         # Vote retenu pour la ventilation par groupe : le vote sur l'ensemble s'il
         # existe, sinon le scrutin le plus récent qui porte une ventilation.
         groupe_vote = final or next((v for v in votes if v["groupes"]), None)
+        suivi_v = next((v for v in votes if v.get("suivi")), None)
         textes.append({
             "nom": name,
-            "theme": theme_of(name),
+            "theme": theme_of(name) or (suivi_v["theme_suivi"] if suivi_v else None),
+            "suivi": bool(suivi_v),
+            "pourquoi": (SUIVIS.get(str(suivi_v["numero"]), {}) or {}).get("pourquoi") if suivi_v else None,
             "nature": "projet" if name.startswith("projet") else "proposition",
             "nb": len(votes),
             "date_min": min(dates) if dates else "",
@@ -655,12 +680,16 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
                        f'<td class="num">{v["contre"]}</td>'
                        f'<td class="num">{v["abst"]}</td></tr>\n')
 
+        badge = ' <span class="chip">suivi éditorial</span>' if t.get("suivi") else ""
+        note = (f'<p class="small muted" style="max-width:none">{t["pourquoi"]}</p>'
+                if t.get("pourquoi") else "")
         cards += f"""
 <section class="card">
   <h2>{t["nom"]}</h2>
   <div class="chips"><span class="chip">{t["theme"]}</span>
-    <span class="chip">{t["nb"]} scrutin{"s" if t["nb"] > 1 else ""}</span></div>
+    <span class="chip">{t["nb"]} scrutin{"s" if t["nb"] > 1 else ""}</span>{badge}</div>
   <p style="margin:0">{entete}</p>
+  {note}
   {groupe_block(t)}
   <details>
     <summary>Voir les {t["nb"]} scrutins ({fr_date(t["date_min"])} → {fr_date(t["date_max"])})</summary>

@@ -19,3 +19,9 @@ __pycache__/
 *.bak
 *.bak-*
 .DS_Store
+
+# Données de travail de la veille législative : régénérées et complétées chaque jour.
+# L'instantané compressé (.gz) est versionné ; le fichier courant ne l'est pas.
+data/lois_votes/dispositifs.jsonl
+data/lois_votes/notices_scrutins.json
+data/lois_votes/explications.json

@@ -192,6 +192,58 @@ d'un scrutin — l'article 11 de la loi du 19 juillet 1977 interdit alors toute 
 ou commentaire de sondage, et un avis remplace le contenu. La suspension se teste en simulant une date
 de scrutin, sans attendre 2027.
 
+## Veille législative — les lois votées (2 novembre 2026)
+
+La page `/observatoire/lois/` remplace l'ancienne veille restreinte au numérique, qui suivait 7 textes.
+Elle suit **244 textes** et **9 260 scrutins publics** de la 17e législature, du 14 octobre 2024 au
+30 octobre 2026, dont 187 textes ayant fait l'objet d'un vote sur l'ensemble (182 adoptés, 5 rejetés).
+
+**Ce que porte chaque carte.** Le vote sur l'ensemble quand il existe ; à défaut, le dernier scrutin
+voté. La ventilation par groupe politique : position dominante, pour, contre, abstentions, non-votants,
+absents, effectif, et une barre de répartition. Puis la liste complète des scrutins du texte — date,
+objet, sort, décompte — chaque objet renvoyant à la page officielle du scrutin.
+
+**Deux règles de calcul qui ne sont pas négociables.**
+
+- « Position dominante » est recalculée depuis les décomptes nominatifs, jamais reprise du champ
+  `positionMajoritaire` publié par l'Assemblée, qui contredit ses propres chiffres (vérifié sur le
+  scrutin 8431 : groupe Écologiste et Social donné « contre » avec 19 voix pour).
+- La somme des voix des groupes égale la synthèse officielle du scrutin : contrôlé sur 227 votes sur
+  227 lors de la construction.
+
+**Classement par scrutin, pas par texte.** Un titre de loi ne dit pas ce que ses amendements touchent :
+le projet de loi de finances pour 2027 contient un amendement créant une taxe sur les flux de données
+numériques. Chaque scrutin est donc classé d'après le **dispositif officiel de son amendement**, lu sur
+assemblee-nationale.fr ; à défaut seulement, d'après le titre du texte. La grille compte 13 thèmes et
+62 sujets. Sur un dispositif, seules les expressions du domaine sont employées : le vocabulaire de
+titre — où « données », « région » ou « mer » désignent vraiment le sujet dans un intitulé de six
+lignes — produit du bruit sur 2 500 caractères de droit, et y faisait entrer des textes sur la
+restitution de biens culturels.
+
+**Notices.** Chaque vote mis en avant porte une notice de 1 à 3 phrases, rédigée à partir du seul
+dispositif officiel, avec interdiction d'ajouter un chiffre, une date ou un nom absent de la source ;
+le modèle doit répondre « VIDE » s'il ne peut pas dire ce que fait la mesure, et 12 textes sont dans ce
+cas. Le résultat du vote est ajouté par le programme, pas par le modèle : il ne peut donc pas être
+faux. Au 2 novembre 2026, 787 notices par scrutin existent ; un scrutin dont l'amendement n'a pas
+encore été lu n'en reçoit pas, plutôt qu'une notice approximative.
+
+**Mise à jour quotidienne.** Chaque jour à 06:50 (Europe/Paris),
+`scripts/veille_votes_quotidien.sh` enchaîne : moisson des amendements nouveaux — 400 scrutins au plus
+par passage, les plus récents d'abord —, rédaction des notices manquantes, rendu, publication vers le
+VPS B, puis contrôle HTTP de la page publiée. Sortie vide = succès ; un contrôle impossible est traité
+comme un incident, jamais comme un silence. Le cron hebdomadaire du lundi appelle le même générateur,
+pour que les deux chemins ne puissent pas diverger.
+
+**Fichiers.** `veille_votes.py` (rendu), `moisson_amendements.py` (dispositifs des amendements),
+`notices_scrutins.py` (notices), `grille.py` (13 thèmes, 62 sujets, vocabulaire de titre),
+`data/lois_votes/` (dispositifs lus, notices ; l'instantané `.gz` est versionné, le fichier de travail
+ne l'est pas).
+
+**Limites assumées.** Les 41 textes « Autres textes » n'ont ni commission saisie ni vocabulaire de
+politique publique identifiable : ils sont réunis sur une page dédiée plutôt que rangés au hasard. Le
+stock ancien de scrutins non lus se résorbe de 400 par jour ; seuls les scrutins récents sont garantis
+lus le jour même.
+
 ## Vérifications faites (14/09/2026)
 
 - Routes : `/observatoire/`, `/observatoire/sondages/`, `/observatoire/candidats/`,

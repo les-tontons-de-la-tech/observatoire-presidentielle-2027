@@ -58,7 +58,7 @@ def appel(item):
         data=json.dumps(corps).encode(),
         headers={"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"})
     try:
-        with urllib.request.urlopen(req, timeout=120) as r:
+        with urllib.request.urlopen(req, timeout=60) as r:
             d = json.load(r)
         txt = (d["choices"][0]["message"]["content"] or "").strip()
         txt = re.sub(r'^["«\s]+|["»\s]+$', "", txt)
@@ -101,13 +101,28 @@ def main():
             continue
         a_faire.append((num, html.unescape(d["dispositif"]), d.get("titre") or ""))
 
+    # Plafond quotidien : une notice coûte un appel de modèle. Sans borne, un premier
+    # passage sur un stock de 2 500 amendements dure vingt minutes et dépasse la fenêtre
+    # du cron. Le stock se résorbe, les nouveaux passent toujours en premier.
+    plafond = 400
+    for i, a in enumerate(sys.argv):
+        if a == "--max" and i + 1 < len(sys.argv):
+            plafond = int(sys.argv[i + 1])
+    a_faire = a_faire[:plafond]
+
     print(f"  {len(a_faire)} scrutins à rédiger"
           + (" (affichés seulement)" if mode_affiches else ""))
 
+    # Écriture au fur et à mesure : une interruption ne doit pas perdre les notices déjà
+    # payées. On écrit tous les 25 résultats, pas à la fin.
+    faits = 0
     with ThreadPoolExecutor(max_workers=8) as ex:
         for num, resume in ex.map(appel, a_faire):
             if resume is not None:
                 deja[num] = resume
+            faits += 1
+            if faits % 25 == 0:
+                json.dump(deja, open(F_NOTICES, "w", encoding="utf-8"), ensure_ascii=False)
     json.dump(deja, open(F_NOTICES, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"  {sum(1 for v in deja.values() if v)} notices par scrutin disponibles")
     for num, r in list(deja.items())[:3]:

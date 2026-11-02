@@ -229,8 +229,9 @@ encore été lu n'en reçoit pas, plutôt qu'une notice approximative.
 
 **Mise à jour quotidienne.** Chaque jour à 06:50 (Europe/Paris),
 `scripts/veille_votes_quotidien.sh` enchaîne : moisson des amendements nouveaux — 400 scrutins au plus
-par passage, les plus récents d'abord —, rédaction des notices manquantes, rendu, publication vers le
-VPS B, puis contrôle HTTP de la page publiée. Sortie vide = succès ; un contrôle impossible est traité
+par passage, les plus récents d'abord —, rédaction des notices manquantes — 400 au plus par passage,
+écrites au fur et à mesure pour qu'une interruption ne perde rien —, rendu, publication vers le VPS B,
+puis contrôle HTTP de la page publiée. Sortie vide = succès ; un contrôle impossible est traité
 comme un incident, jamais comme un silence. Le cron hebdomadaire du lundi appelle le même générateur,
 pour que les deux chemins ne puissent pas diverger.
 

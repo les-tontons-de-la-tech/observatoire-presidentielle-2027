@@ -25,7 +25,9 @@ pas de réseau, et la distinction compte pour savoir quoi réparer.
 Le fichier de référence n'est jamais modifié, hors sa date de contrôle : la liste est un travail
 éditorial. La veille signale, l'auteur tranche.
 """
+import csv
 import html
+import io
 import json
 import os
 import pathlib
@@ -41,6 +43,13 @@ ETAT = pathlib.Path("/root/.hermes/data/veille_candidats_etat.json")
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/120 Safari/537.36")
 ECHECS_AVANT_ALERTE = 3
+
+# Liste amont de MieuxVoter : la seule source publique qui porte, nom par nom, une date
+# d'annonce de candidature ET une date de retrait. Elle ne remplace pas notre liste (la nôtre
+# est éditoriale, avec des statuts que l'amont n'a pas), elle sert de contrôle d'écart.
+AMONT_CSV = ("https://raw.githubusercontent.com/MieuxVoter/presidentielle2027/"
+             "HEAD/candidats.csv")
+SEUIL_VERIFICATION_JOURS = 21
 
 # Un nom de personne : deux à quatre mots, tous commençant par une majuscule. Les déterminants
 # et les mots de liaison sont exclus, sinon « La France » ou « Face à » passeraient pour des noms.
@@ -161,6 +170,85 @@ def dater_verification():
     return True
 
 
+def lire_amont():
+    """Liste amont de MieuxVoter : noms, dates d'annonce et dates de retrait.
+
+    Lecture seule. Retourne None quand l'amont est illisible : un écart qu'on n'a pas pu
+    mesurer ne doit pas s'afficher comme un écart nul.
+    """
+    try:
+        brut = telecharger(AMONT_CSV)
+    except (urllib.error.URLError, urllib.error.HTTPError, OSError):
+        return None
+    lignes = list(csv.DictReader(io.StringIO(brut)))
+    return lignes or None
+
+
+def ecart_amont(reference):
+    """Compare notre liste éditoriale à l'amont : retraits, noms absents, contradictions."""
+    amont = lire_amont()
+    if amont is None:
+        return None
+    notres = {cle(c["nom"]): c for c in reference.get("candidats", [])}
+    retraits, absents, muets = [], [], [0]
+    for r in amont:
+        nom = (r.get("complete_name") or "").strip()
+        if not nom:
+            continue
+        if r.get("retrait_candidature"):
+            retraits.append((nom, r["retrait_candidature"]))
+        if cle(nom) not in notres:
+            # Un nom sans date d'annonce est une hypothèse de la liste amont, pas une
+            # candidature : le compter, ne pas l'énumérer. Seul l'annoncé manque vraiment.
+            if r.get("annonce_candidature"):
+                absents.append((nom, r["annonce_candidature"]))
+            else:
+                muets[0] += 1
+    contradictions = [
+        (nom, date) for nom, date in retraits
+        if cle(nom) in notres and notres[cle(nom)].get("statut") == "declare"
+    ]
+    return {"total": len(amont), "retraits": retraits, "absents": absents,
+            "sans_date": muets[0], "contradictions": contradictions}
+
+
+def jours_depuis(date_iso):
+    try:
+        j = time.mktime(time.strptime(date_iso, "%Y-%m-%d"))
+    except (TypeError, ValueError):
+        return None
+    return int((time.time() - j) / 86400)
+
+
+def afficher_controle(reference, ecart):
+    """Contrôle d'écart et d'ancienneté, au même endroit dans les deux modes de sortie."""
+    age = jours_depuis(reference.get("verifie_le", ""))
+    if age is not None and age > SEUIL_VERIFICATION_JOURS:
+        print(f"  ⚠ liste vérifiée il y a {age} jours (seuil {SEUIL_VERIFICATION_JOURS}) : "
+              "à reprendre avant de la croire à jour")
+    if ecart is None:
+        print("  écart amont non mesuré : liste MieuxVoter illisible")
+        return
+    print(f"  écart amont (MieuxVoter, {ecart['total']} noms) :")
+    if ecart["retraits"]:
+        print("    retraits documentés en amont ({}) : {}".format(
+            len(ecart["retraits"]),
+            ", ".join(f"{n} ({d})" for n, d in ecart["retraits"])))
+    if ecart["absents"]:
+        montre = ecart["absents"][:12]
+        print("    annoncés en amont et absents de notre liste ({}) : {}".format(
+            len(ecart["absents"]),
+            ", ".join(f"{n} ({d})" for n, d in montre)
+            + ("…" if len(ecart["absents"]) > 12 else "")))
+    if ecart["sans_date"]:
+        print(f"    noms amont sans date d'annonce, non retenus ({ecart['sans_date']})")
+    if ecart["contradictions"]:
+        print("    contradictions (nous « declare », retrait en amont) : " + ", ".join(
+            f"{n} ({d})" for n, d in ecart["contradictions"]))
+    if not (ecart["retraits"] or ecart["absents"] or ecart["contradictions"]):
+        print("    aucun écart avec l'amont")
+
+
 def lire_etat():
     try:
         return json.loads(ETAT.read_text(encoding="utf-8"))
@@ -198,6 +286,7 @@ def main():
     if not articles:
         return signaler_echec(etat, url, "page illisible : plus aucun article reconnu dans la grille")
 
+    ecart = ecart_amont(reference)
     notre_liste = {c["nom"] for c in reference.get("candidats", [])}
     cles_notre = {cle(n): n for n in notre_liste}
     premier_passage = "articles" not in etat
@@ -224,6 +313,7 @@ def main():
                 print(f"    - {n}  (tout n'est pas une candidature)")
         else:
             print("  aucune personne citée dans ces titres n'est absente de notre liste")
+        afficher_controle(reference, ecart)
         print(f"  {url}")
         return 0
 
@@ -252,6 +342,7 @@ def main():
               + ("…" if len(disparus) > 4 else ""))
     print(f"  notre liste : data/candidats2027.json ({len(notre_liste)} lignes, "
           f"vérifiée le {reference.get('verifie_le', '?')})")
+    afficher_controle(reference, ecart)
     print("  → à mettre à jour si une déclaration est réelle ; la page est régénérée et le fichier "
           "commité au passage de 18h.")
     print(f"  {url}")

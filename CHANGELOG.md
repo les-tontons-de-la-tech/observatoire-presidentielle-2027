@@ -9,6 +9,9 @@ chiffre qu'on ne peut plus citer.
 
 ---
 
+## 3 novembre 2026
+
+**VEILLE — La liste des candidats est confrontée à la liste amont de MieuxVoter, et son ancienneté est mesurée.** La veille hebdomadaire ne lisait qu'une source, le dossier de LCP : elle signalait les articles parus sans jamais dire si notre fichier divergeait d'une autre liste publique, ni depuis quand il n'avait pas été vérifié. Elle lit désormais `candidats.csv` du dépôt MieuxVoter/presidentielle2027 (72 noms, avec dates d'annonce et de retrait) et affiche à chaque passage : les retraits documentés en amont, les personnes annoncées là-bas et absentes de notre liste, et les contradictions, c'est-à-dire une ligne déclarée chez nous que l'amont date comme retirée. Une liste vérifiée depuis plus de 21 jours est signalée comme telle. Le contrôle est en lecture seule : le fichier éditorial n'est jamais modifié par la veille. Mesure du 3 novembre : aucun candidat annoncé en amont ne manque à notre liste, sept retraits sont documentés en amont (Jordan Bardella 07/07, Gérald Darmanin 25/08, François Bayrou 06/03, Laurent Wauquiez 01/07, Clémentine Autain 11/07, Sandrine Rousseau 30/06, Philippe Poutou 10/04), aucune contradiction. La date de vérification du fichier n'avançait qu'aux semaines sans changement : elle se lit maintenant avec son ancienneté, pas comme une promesse.
 
 ## 2 novembre 2026
 

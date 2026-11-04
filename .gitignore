@@ -25,3 +25,6 @@ __pycache__/
 data/lois_votes/dispositifs.jsonl
 data/lois_votes/notices_scrutins.json
 data/lois_votes/explications.json
+
+# Sorties d'import de sondages : artefacts de travail, pas des données publiées
+data/imports/

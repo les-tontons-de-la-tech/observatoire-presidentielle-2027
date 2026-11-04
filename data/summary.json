@@ -1,23 +1,24 @@
 {
- "generated": "2026-11-04 18:00",
- "total_polls_all": 304,
- "polls_in_window": 80,
- "scenario": "H44",
+ "generated": "2026-11-04 22:35",
+ "total_polls_all": 328,
+ "polls_in_window": 104,
+ "scenario": "H42",
  "scenario_sign": [
   "Bruno Retailleau",
   "Fabien Roussel",
-  "Gabriel Attal",
   "Jean-Luc Mélenchon",
   "Marine Le Pen",
   "Marine Tondelier",
   "Nathalie Arthaud",
   "Nicolas Dupont-Aignan",
   "Raphaël Glucksmann",
+  "Édouard Philippe",
   "Éric Zemmour"
  ],
  "scenario_size": 10,
- "polls_in_scenario": 12,
- "polls_aggregated": 17,
+ "polls_in_scenario": 15,
+ "polls_aggregated": 20,
+ "imports": 4,
  "window": 90,
  "agg_window": 180,
  "half_life": 30,
@@ -27,17 +28,60 @@
  "scenario_window": 90,
  "house_correction": true,
  "first": "2026-05-27",
- "last": "2026-10-08",
+ "last": "2026-10-29",
  "instituts": [
   "Cluster17",
   "Harris Interactive",
   "IFOP",
   "Ipsos BVA",
   "ODOXA",
-  "OpinionWay",
-  "YouGov"
+  "OpinionWay"
  ],
  "polls_detail": [
+  {
+   "institut": "IFOP",
+   "commanditaire": "LCI",
+   "debut": "2026-10-27",
+   "fin": "2026-10-29",
+   "echantillon": 1501,
+   "population": "inscrits sur les listes électorales",
+   "marge": 2.44,
+   "fichier": "10352-pres-iv-ifop-lci-3-novembre.pdf",
+   "importe": true
+  },
+  {
+   "institut": "Cluster17",
+   "commanditaire": "Politico",
+   "debut": "2026-10-19",
+   "fin": "2026-10-22",
+   "echantillon": 2817,
+   "population": "inscrits sur les listes électorales",
+   "marge": 1.74,
+   "fichier": "10339-pres-iv-cluster17-politico-26-octobre.pdf",
+   "importe": true
+  },
+  {
+   "institut": "Ipsos BVA",
+   "commanditaire": "Le Parisien",
+   "debut": "2026-10-21",
+   "fin": "2026-10-22",
+   "echantillon": 1500,
+   "population": "inscrits sur les listes électorales",
+   "marge": 2.39,
+   "fichier": "10338-pres-iv-ipsos-bva-le-parisien-24-octobre.pdf",
+   "importe": true
+  },
+  {
+   "institut": "Harris Interactive",
+   "commanditaire": "M6 & RTL",
+   "debut": "2026-10-19",
+   "fin": "2026-10-21",
+   "echantillon": 2094,
+   "population": "inscrits sur les listes électorales",
+   "marge": 2.04,
+   "fichier": "10332-pres-iv-toluna-harris-interactive-23-octobre.pdf",
+   "importe": true
+  },
   {
    "institut": "Harris Interactive",
    "commanditaire": "M6, RTL",
@@ -45,8 +89,9 @@
    "fin": "2026-10-08",
    "echantillon": 2348,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 2.65,
-   "fichier": "10305-pres-iv-toluna-harris-interactive-12-octobre.pdf"
+   "marge": 2.64,
+   "fichier": "10305-pres-iv-toluna-harris-interactive-12-octobre.pdf",
+   "importe": false
   },
   {
    "institut": "ODOXA",
@@ -55,8 +100,9 @@
    "fin": "2026-10-07",
    "echantillon": 12005,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 1.11,
-   "fichier": "10310-pres-iv-odoxa-14-octobre.pdf"
+   "marge": 1.09,
+   "fichier": "10310-pres-iv-odoxa-14-octobre.pdf",
+   "importe": false
   },
   {
    "institut": "IFOP",
@@ -65,8 +111,9 @@
    "fin": "2026-09-29",
    "echantillon": 1527,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 3.3,
-   "fichier": "10284-pres-barometre-election-presidentielle-v6-ifop-le-figaro-30-septembre.pdf"
+   "marge": 3.22,
+   "fichier": "10284-pres-barometre-election-presidentielle-v6-ifop-le-figaro-30-septembre.pdf",
+   "importe": false
   },
   {
    "institut": "Harris Interactive",
@@ -75,18 +122,9 @@
    "fin": "2026-09-24",
    "echantillon": 2334,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 2.7,
-   "fichier": "10277-pres-toluna-harris-interactive-rtl-28-septembre.pdf"
-  },
-  {
-   "institut": "YouGov",
-   "commanditaire": "Le HuffPost",
-   "debut": "2026-09-17",
-   "fin": "2026-09-21",
-   "echantillon": 1103,
-   "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 3.69,
-   "fichier": "10270-pres-iv-yougov-huffpost-23-septembre.pdf"
+   "marge": 2.67,
+   "fichier": "10277-pres-toluna-harris-interactive-rtl-28-septembre.pdf",
+   "importe": false
   },
   {
    "institut": "Cluster17",
@@ -96,7 +134,8 @@
    "echantillon": 2045,
    "population": "représentatif de la population française âgée de 18 ans et plus",
    "marge": 2.47,
-   "fichier": "10273-pres-iv-cluster17-politico-24-septembre.pdf"
+   "fichier": "10273-pres-iv-cluster17-politico-24-septembre.pdf",
+   "importe": false
   },
   {
    "institut": "Harris Interactive",
@@ -105,8 +144,9 @@
    "fin": "2026-09-10",
    "echantillon": 2358,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 2.59,
-   "fichier": "10263-pres-iv-toluna-harris-interactive-rtl-14-septembre.pdf"
+   "marge": 2.56,
+   "fichier": "10263-pres-iv-toluna-harris-interactive-rtl-14-septembre.pdf",
+   "importe": false
   },
   {
    "institut": "Ipsos BVA",
@@ -115,8 +155,9 @@
    "fin": "2026-09-09",
    "echantillon": 13060,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 0.97,
-   "fichier": "10262-pres-enquete-electorale-ipsos-bva-le-monde-13-septembre.pdf"
+   "marge": 0.96,
+   "fichier": "10262-pres-enquete-electorale-ipsos-bva-le-monde-13-septembre.pdf",
+   "importe": false
   },
   {
    "institut": "OpinionWay",
@@ -126,7 +167,8 @@
    "echantillon": 1001,
    "population": "représentatif de la population française âgée de 18 ans et plus",
    "marge": 3.51,
-   "fichier": "10259-pres-presitrack-v2-opinionway-les-echos-10-septembre.pdf"
+   "fichier": "10259-pres-presitrack-v2-opinionway-les-echos-10-septembre.pdf",
+   "importe": false
   },
   {
    "institut": "Ipsos BVA",
@@ -135,8 +177,9 @@
    "fin": "2026-09-02",
    "echantillon": 1500,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 2.96,
-   "fichier": "10250-pres-iv-ipsos-bva-le-parisien-5-septembre.pdf"
+   "marge": 2.94,
+   "fichier": "10250-pres-iv-ipsos-bva-le-parisien-5-septembre.pdf",
+   "importe": false
   },
   {
    "institut": "IFOP",
@@ -145,8 +188,9 @@
    "fin": "2026-08-25",
    "echantillon": 1800,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 3.08,
-   "fichier": "10242-pres-barometre-election-pres-iv-v5-ifop-26-aout.pdf"
+   "marge": 3.04,
+   "fichier": "10242-pres-barometre-election-pres-iv-v5-ifop-26-aout.pdf",
+   "importe": false
   },
   {
    "institut": "Harris Interactive",
@@ -155,8 +199,9 @@
    "fin": "2026-08-19",
    "echantillon": 2114,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 2.25,
-   "fichier": "10239-pres-toluna-harris-interactive-rtl-24-aout.pdf"
+   "marge": 2.23,
+   "fichier": "10239-pres-toluna-harris-interactive-rtl-24-aout.pdf",
+   "importe": false
   },
   {
    "institut": "Harris Interactive",
@@ -165,8 +210,9 @@
    "fin": "2026-07-08",
    "echantillon": 1837,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 2.36,
-   "fichier": "10223-pres-iv-toluna-harris-interactive-rtl-8-juillet.pdf"
+   "marge": 2.33,
+   "fichier": "10223-pres-iv-toluna-harris-interactive-rtl-8-juillet.pdf",
+   "importe": false
   },
   {
    "institut": "IFOP",
@@ -175,8 +221,9 @@
    "fin": "2026-07-08",
    "echantillon": 1075,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 3.76,
-   "fichier": "10222-pres-ifop-le-figaro-8-juillet.pdf"
+   "marge": 3.77,
+   "fichier": "10222-pres-ifop-le-figaro-8-juillet.pdf",
+   "importe": false
   },
   {
    "institut": "IFOP",
@@ -185,8 +232,9 @@
    "fin": "2026-06-24",
    "echantillon": 1539,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 3.22,
-   "fichier": "10211-pres-iv-ifop-le-figaro-25-juin.pdf"
+   "marge": 3.23,
+   "fichier": "10211-pres-iv-ifop-le-figaro-25-juin.pdf",
+   "importe": false
   },
   {
    "institut": "OpinionWay",
@@ -195,8 +243,9 @@
    "fin": "2026-06-11",
    "echantillon": 1001,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 3.58,
-   "fichier": "10205-pres-iv-opinionway-jdd-13-juin.pdf"
+   "marge": 3.53,
+   "fichier": "10205-pres-iv-opinionway-jdd-13-juin.pdf",
+   "importe": false
   },
   {
    "institut": "Harris Interactive",
@@ -205,251 +254,242 @@
    "fin": "2026-05-27",
    "echantillon": 2068,
    "population": "représentatif de la population française âgée de 18 ans et plus",
-   "marge": 2.19,
-   "fichier": "10192-pres-toluna-harris-interactive-29-mai.pdf"
+   "marge": 2.17,
+   "fichier": "10192-pres-toluna-harris-interactive-29-mai.pdf",
+   "importe": false
   }
  ],
- "total_intentions": 99.9,
+ "total_intentions": 100.0,
  "rows": [
   {
    "candidat": "Marine Le Pen",
    "parti": "Rassemblement National",
-   "intentions": 35.1,
-   "bas": 34.1,
-   "haut": 36.1,
-   "mini": 31.2,
-   "maxi": 36.8,
-   "amplitude": 5.6,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "intentions": 34.6,
+   "bas": 33.6,
+   "haut": 35.6,
+   "mini": 30.6,
+   "maxi": 36.5,
+   "amplitude": 5.9,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   },
   {
    "candidat": "Jean-Luc Mélenchon",
    "parti": "La France Insoumise",
-   "intentions": 16.9,
-   "bas": 15.9,
-   "haut": 17.9,
-   "mini": 13.8,
-   "maxi": 18.7,
-   "amplitude": 4.8,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "intentions": 17.1,
+   "bas": 16.1,
+   "haut": 18.1,
+   "mini": 12.1,
+   "maxi": 18.2,
+   "amplitude": 6.1,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   },
   {
-   "candidat": "Gabriel Attal",
-   "parti": "Renaissance",
-   "intentions": 13.0,
-   "bas": 12.0,
-   "haut": 14.0,
-   "mini": 11.9,
-   "maxi": 16.3,
-   "amplitude": 4.4,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "candidat": "Édouard Philippe",
+   "parti": "Horizon",
+   "intentions": 17.1,
+   "bas": 16.1,
+   "haut": 18.1,
+   "mini": 14.9,
+   "maxi": 20.9,
+   "amplitude": 6.0,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   },
   {
    "candidat": "Raphaël Glucksmann",
    "parti": "Place Publique",
-   "intentions": 11.9,
-   "bas": 10.9,
-   "haut": 12.9,
-   "mini": 10.1,
-   "maxi": 14.1,
-   "amplitude": 4.1,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "intentions": 11.4,
+   "bas": 10.4,
+   "haut": 12.4,
+   "mini": 9.1,
+   "maxi": 13.5,
+   "amplitude": 4.4,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   },
   {
    "candidat": "Bruno Retailleau",
    "parti": "Les Républicains",
-   "intentions": 9.8,
-   "bas": 8.8,
-   "haut": 10.8,
-   "mini": 8.2,
-   "maxi": 14.0,
-   "amplitude": 5.8,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "intentions": 7.7,
+   "bas": 6.7,
+   "haut": 8.7,
+   "mini": 7.0,
+   "maxi": 11.2,
+   "amplitude": 4.2,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   },
   {
    "candidat": "Éric Zemmour",
    "parti": "Reconquête",
-   "intentions": 4.3,
-   "bas": 3.3,
-   "haut": 5.3,
-   "mini": 2.4,
-   "maxi": 5.5,
-   "amplitude": 3.1,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "intentions": 4.2,
+   "bas": 3.2,
+   "haut": 5.2,
+   "mini": 3.0,
+   "maxi": 6.2,
+   "amplitude": 3.2,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   },
   {
    "candidat": "Marine Tondelier",
    "parti": "Europe Écologie Les Verts",
-   "intentions": 3.5,
-   "bas": 2.5,
-   "haut": 4.5,
-   "mini": 2.9,
-   "maxi": 4.0,
-   "amplitude": 1.2,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "intentions": 3.0,
+   "bas": 2.0,
+   "haut": 4.0,
+   "mini": 2.3,
+   "maxi": 4.9,
+   "amplitude": 2.6,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
-   ]
-  },
-  {
-   "candidat": "Fabien Roussel",
-   "parti": "Parti Communiste Français",
-   "intentions": 2.3,
-   "bas": 1.3,
-   "haut": 3.3,
-   "mini": 1.8,
-   "maxi": 4.2,
-   "amplitude": 2.4,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
-   "instituts": [
-    "Cluster17",
-    "Harris Interactive",
-    "IFOP",
-    "Ipsos BVA",
-    "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   },
   {
    "candidat": "Nicolas Dupont-Aignan",
    "parti": "Debout la France",
-   "intentions": 2.1,
-   "bas": 1.1,
-   "haut": 3.1,
+   "intentions": 2.3,
+   "bas": 1.3,
+   "haut": 3.3,
    "mini": 1.1,
    "maxi": 3.1,
    "amplitude": 2.0,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
+   ]
+  },
+  {
+   "candidat": "Fabien Roussel",
+   "parti": "Parti Communiste Français",
+   "intentions": 2.0,
+   "bas": 1.0,
+   "haut": 3.0,
+   "mini": 1.4,
+   "maxi": 3.4,
+   "amplitude": 2.0,
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
+   "instituts": [
+    "Cluster17",
+    "Harris Interactive",
+    "IFOP",
+    "Ipsos BVA",
+    "ODOXA",
+    "OpinionWay"
    ]
   },
   {
    "candidat": "Nathalie Arthaud",
    "parti": "Lutte Ouvrière",
-   "intentions": 0.8,
+   "intentions": 0.7,
    "bas": 0.0,
-   "haut": 1.8,
-   "mini": 0.5,
-   "maxi": 1.0,
+   "haut": 1.7,
+   "mini": 0.4,
+   "maxi": 0.9,
    "amplitude": 0.5,
-   "n": 17,
-   "neff": 8.5,
-   "dernier": "2026-10-08",
+   "n": 20,
+   "neff": 11.6,
+   "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
     "Harris Interactive",
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay",
-    "YouGov"
+    "OpinionWay"
    ]
   }
  ],
  "all_lists": {
-  "Nathalie Arthaud": 0.9,
-  "Fabien Roussel": 2.6,
-  "Jean-Luc Mélenchon": 16.7,
-  "Marine Tondelier": 3.8,
-  "Raphaël Glucksmann": 11.0,
-  "Édouard Philippe": 17.2,
-  "Bruno Retailleau": 8.2,
-  "Nicolas Dupont-Aignan": 2.0,
+  "Nathalie Arthaud": 0.8,
+  "Fabien Roussel": 2.3,
+  "Jean-Luc Mélenchon": 16.8,
+  "Marine Tondelier": 3.3,
+  "Raphaël Glucksmann": 12.1,
+  "Édouard Philippe": 16.2,
+  "Bruno Retailleau": 7.8,
+  "Nicolas Dupont-Aignan": 2.1,
   "Jordan Bardella": 34.8,
-  "Éric Zemmour": 4.1,
-  "Gabriel Attal": 10.8,
-  "Marine Le Pen": 34.6,
-  "Dominique de Villepin": 2.8,
-  "François Hollande": 7.4,
-  "François Ruffin": 3.7,
+  "Éric Zemmour": 4.2,
+  "Gabriel Attal": 9.8,
+  "Marine Le Pen": 34.3,
+  "Dominique de Villepin": 2.3,
+  "François Hollande": 7.3,
+  "François Ruffin": 3.5,
   "Olivier Faure": 4.6,
-  "David Lisnard": 3.2,
+  "David Lisnard": 6.1,
   "Karim Bouamrane": 0.8
  },
  "series": [
@@ -458,16 +498,16 @@
    "weeks_ago": 8,
    "polls": 11,
    "rows": {
-    "Marine Le Pen": 34.6,
+    "Marine Le Pen": 33.8,
+    "Édouard Philippe": 18.2,
     "Jean-Luc Mélenchon": 15.6,
-    "Gabriel Attal": 14.0,
-    "Raphaël Glucksmann": 12.9,
-    "Bruno Retailleau": 10.1,
-    "Marine Tondelier": 3.8,
-    "Éric Zemmour": 3.8,
-    "Fabien Roussel": 2.5,
-    "Nicolas Dupont-Aignan": 2.0,
-    "Nathalie Arthaud": 0.7
+    "Raphaël Glucksmann": 11.3,
+    "Bruno Retailleau": 8.3,
+    "Éric Zemmour": 3.9,
+    "Marine Tondelier": 3.5,
+    "Fabien Roussel": 2.4,
+    "Nicolas Dupont-Aignan": 2.2,
+    "Nathalie Arthaud": 0.8
    }
   },
   {
@@ -475,84 +515,84 @@
    "weeks_ago": 7,
    "polls": 13,
    "rows": {
-    "Marine Le Pen": 33.9,
-    "Jean-Luc Mélenchon": 16.4,
-    "Gabriel Attal": 13.8,
-    "Raphaël Glucksmann": 13.1,
-    "Bruno Retailleau": 9.9,
+    "Marine Le Pen": 33.3,
+    "Édouard Philippe": 18.2,
+    "Jean-Luc Mélenchon": 16.3,
+    "Raphaël Glucksmann": 11.3,
+    "Bruno Retailleau": 8.1,
     "Éric Zemmour": 4.0,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.5,
-    "Nicolas Dupont-Aignan": 2.2,
+    "Marine Tondelier": 3.3,
+    "Fabien Roussel": 2.4,
+    "Nicolas Dupont-Aignan": 2.4,
     "Nathalie Arthaud": 0.7
    }
   },
   {
    "date": "2026-09-23",
    "weeks_ago": 6,
-   "polls": 14,
+   "polls": 13,
    "rows": {
-    "Marine Le Pen": 34.1,
-    "Jean-Luc Mélenchon": 16.5,
-    "Gabriel Attal": 13.9,
-    "Raphaël Glucksmann": 12.5,
-    "Bruno Retailleau": 9.9,
-    "Éric Zemmour": 4.1,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.5,
-    "Nicolas Dupont-Aignan": 2.2,
+    "Marine Le Pen": 33.3,
+    "Édouard Philippe": 18.2,
+    "Jean-Luc Mélenchon": 16.3,
+    "Raphaël Glucksmann": 11.3,
+    "Bruno Retailleau": 8.1,
+    "Éric Zemmour": 4.0,
+    "Marine Tondelier": 3.3,
+    "Fabien Roussel": 2.4,
+    "Nicolas Dupont-Aignan": 2.4,
     "Nathalie Arthaud": 0.7
    }
   },
   {
    "date": "2026-09-30",
    "weeks_ago": 5,
-   "polls": 16,
+   "polls": 15,
    "rows": {
-    "Marine Le Pen": 34.2,
+    "Marine Le Pen": 33.4,
+    "Édouard Philippe": 18.4,
     "Jean-Luc Mélenchon": 16.4,
-    "Gabriel Attal": 13.8,
-    "Raphaël Glucksmann": 12.4,
-    "Bruno Retailleau": 10.0,
-    "Éric Zemmour": 4.2,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.5,
-    "Nicolas Dupont-Aignan": 2.2,
-    "Nathalie Arthaud": 0.8
+    "Raphaël Glucksmann": 11.2,
+    "Bruno Retailleau": 8.1,
+    "Éric Zemmour": 4.0,
+    "Marine Tondelier": 3.3,
+    "Fabien Roussel": 2.3,
+    "Nicolas Dupont-Aignan": 2.3,
+    "Nathalie Arthaud": 0.7
    }
   },
   {
    "date": "2026-10-07",
    "weeks_ago": 4,
-   "polls": 17,
+   "polls": 16,
    "rows": {
-    "Marine Le Pen": 35.1,
-    "Jean-Luc Mélenchon": 16.9,
-    "Gabriel Attal": 13.1,
-    "Raphaël Glucksmann": 12.0,
-    "Bruno Retailleau": 9.8,
-    "Éric Zemmour": 4.3,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.4,
-    "Nicolas Dupont-Aignan": 2.1,
-    "Nathalie Arthaud": 0.8
+    "Marine Le Pen": 34.3,
+    "Édouard Philippe": 18.0,
+    "Jean-Luc Mélenchon": 16.8,
+    "Raphaël Glucksmann": 10.7,
+    "Bruno Retailleau": 7.7,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.2,
+    "Fabien Roussel": 2.2,
+    "Nicolas Dupont-Aignan": 2.2,
+    "Nathalie Arthaud": 0.7
    }
   },
   {
    "date": "2026-10-14",
    "weeks_ago": 3,
-   "polls": 18,
+   "polls": 17,
    "rows": {
-    "Marine Le Pen": 35.1,
+    "Marine Le Pen": 34.4,
+    "Édouard Philippe": 18.0,
     "Jean-Luc Mélenchon": 16.9,
-    "Gabriel Attal": 13.0,
-    "Raphaël Glucksmann": 11.9,
-    "Bruno Retailleau": 9.8,
-    "Éric Zemmour": 4.3,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.3,
-    "Nicolas Dupont-Aignan": 2.1,
-    "Nathalie Arthaud": 0.8
+    "Raphaël Glucksmann": 10.7,
+    "Bruno Retailleau": 7.7,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.2,
+    "Fabien Roussel": 2.2,
+    "Nicolas Dupont-Aignan": 2.2,
+    "Nathalie Arthaud": 0.7
    }
   },
   {
@@ -560,50 +600,50 @@
    "weeks_ago": 2,
    "polls": 18,
    "rows": {
-    "Marine Le Pen": 35.1,
-    "Jean-Luc Mélenchon": 16.9,
-    "Gabriel Attal": 13.0,
-    "Raphaël Glucksmann": 11.9,
-    "Bruno Retailleau": 9.8,
-    "Éric Zemmour": 4.3,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.3,
-    "Nicolas Dupont-Aignan": 2.1,
-    "Nathalie Arthaud": 0.8
+    "Marine Le Pen": 34.4,
+    "Édouard Philippe": 17.9,
+    "Jean-Luc Mélenchon": 16.8,
+    "Raphaël Glucksmann": 10.9,
+    "Bruno Retailleau": 7.7,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.1,
+    "Fabien Roussel": 2.2,
+    "Nicolas Dupont-Aignan": 2.2,
+    "Nathalie Arthaud": 0.7
    }
   },
   {
    "date": "2026-10-28",
    "weeks_ago": 1,
-   "polls": 17,
+   "polls": 19,
    "rows": {
-    "Marine Le Pen": 35.1,
-    "Jean-Luc Mélenchon": 16.9,
-    "Gabriel Attal": 13.0,
-    "Raphaël Glucksmann": 11.9,
-    "Bruno Retailleau": 9.8,
-    "Éric Zemmour": 4.3,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.3,
-    "Nicolas Dupont-Aignan": 2.1,
-    "Nathalie Arthaud": 0.8
+    "Marine Le Pen": 34.3,
+    "Édouard Philippe": 17.4,
+    "Jean-Luc Mélenchon": 17.0,
+    "Raphaël Glucksmann": 11.3,
+    "Bruno Retailleau": 7.7,
+    "Éric Zemmour": 4.2,
+    "Marine Tondelier": 3.0,
+    "Nicolas Dupont-Aignan": 2.2,
+    "Fabien Roussel": 2.1,
+    "Nathalie Arthaud": 0.7
    }
   },
   {
    "date": "2026-11-04",
    "weeks_ago": 0,
-   "polls": 17,
+   "polls": 20,
    "rows": {
-    "Marine Le Pen": 35.1,
-    "Jean-Luc Mélenchon": 16.9,
-    "Gabriel Attal": 13.0,
-    "Raphaël Glucksmann": 11.9,
-    "Bruno Retailleau": 9.8,
-    "Éric Zemmour": 4.3,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.3,
-    "Nicolas Dupont-Aignan": 2.1,
-    "Nathalie Arthaud": 0.8
+    "Marine Le Pen": 34.6,
+    "Jean-Luc Mélenchon": 17.1,
+    "Édouard Philippe": 17.1,
+    "Raphaël Glucksmann": 11.4,
+    "Bruno Retailleau": 7.7,
+    "Éric Zemmour": 4.2,
+    "Marine Tondelier": 3.0,
+    "Nicolas Dupont-Aignan": 2.3,
+    "Fabien Roussel": 2.0,
+    "Nathalie Arthaud": 0.7
    }
   }
  ]

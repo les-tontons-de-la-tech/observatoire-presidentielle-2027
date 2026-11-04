@@ -306,19 +306,61 @@ def _sondages(payload):
     return bons
 
 
+OVERLAY = os.path.join(DATA, "polls_importes.json")
+IDS_IMPORTES = set()  # poll_id des enquêtes ajoutées par notre extraction, pour les signaler
+
+
+def _identite_sondage(p):
+    """Clé de dédoublonnage : institut + dates de terrain + hypothèse.
+
+    Le poll_id seul ne suffit pas : deux producteurs peuvent numéroter différemment la
+    même enquête. Cette clé-là dit la même chose dans les deux formats.
+    """
+    return (str(p.get("institut") or p.get("nom_institut") or "").strip().lower(),
+            str(p.get("debut_enquete") or ""), str(p.get("fin_enquete") or ""),
+            str(p.get("hypothese") or ""))
+
+
+def _avec_imports(sondages):
+    """Ajoute les enquêtes extraites par nos soins que l'amont n'a pas encore intégrées.
+
+    L'amont gagne toujours : dès qu'il publie la même enquête (même identité, ou même
+    poll_id), notre ligne est écartée. Le jour où MieuxVoter reprend son intégration,
+    l'apport disparaît de lui-même et la chaîne redevient exactement la sienne. C'est ce
+    qui rend ce mécanisme réversible : l'import ne remplace pas la source, il comble le
+    trou tant qu'il existe.
+    """
+    if os.environ.get("OBS_SANS_IMPORT") == "1" or not os.path.exists(OVERLAY):
+        return sondages
+    try:
+        importes = json.load(open(OVERLAY, encoding="utf-8"))
+    except (ValueError, OSError):
+        print("⚠ polls_importes.json illisible : chaîne amont seule")
+        return sondages
+    importes = importes.get("polls", importes) if isinstance(importes, dict) else importes
+    ids = {p.get("poll_id") for p in sondages}
+    identites = {_identite_sondage(p) for p in sondages}
+    gardes = [p for p in importes
+              if p.get("poll_id") not in ids and _identite_sondage(p) not in identites]
+    if gardes:
+        IDS_IMPORTES.update(p.get("poll_id") for p in gardes if p.get("poll_id"))
+        print(f"imports locaux : {len(gardes)} enquête(s) ajoutée(s) à la source amont")
+    return sondages + gardes
+
+
 def fetch(force=False):
     os.makedirs(DATA, exist_ok=True)
     cache = os.path.join(DATA, "polls.json")
     if not force and os.path.exists(cache):
         age_h = (datetime.now().timestamp() - os.path.getmtime(cache)) / 3600
         if age_h < 12:
-            return _sondages(json.load(open(cache, encoding="utf-8")))
+            return _avec_imports(_sondages(json.load(open(cache, encoding="utf-8"))))
     req = urllib.request.Request(SRC, headers={"User-Agent": "poc-agregateur-2027"})
     with urllib.request.urlopen(req, timeout=60) as r:
         raw = r.read().decode("utf-8")
     json.loads(raw)  # validation
     open(cache, "w", encoding="utf-8").write(raw)
-    return _sondages(json.loads(raw))
+    return _avec_imports(_sondages(json.loads(raw)))
 
 
 FORECAST_URL = ("https://raw.githubusercontent.com/whyalwaysrose/presidentielle-2027/"
@@ -771,6 +813,7 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
         scenario_size=len(scen_sign),
         polls_in_scenario=len(scen_recent),
         polls_aggregated=len(scen_polls),
+        imports=sum(1 for p, _a, _d in scen_polls if p.get("poll_id") in IDS_IMPORTES),
         window=SCENARIO_WINDOW, agg_window=AGG_WINDOW, half_life=HALF_LIFE,
         min_polls=seuil, ic_floor=IC_FLOOR, weight_mode=weight_mode,
         scenario_window=swin, house_correction=bool(hcorr),
@@ -785,7 +828,8 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
             population=p.get("population") or "",
             marge=max([abs(float(c.get("erreur_sup") or 0)) for c in (p.get("candidats") or [])]
                       or [0]),
-            fichier=p.get("filename") or "—")
+            fichier=p.get("filename") or "—",
+            importe=p.get("poll_id") in IDS_IMPORTES)
             for p, _a, _d in sorted(scen_polls, key=lambda x: x[2], reverse=True)],
         # Somme des moyennes exactes, et non des valeurs affichées : additionner dix nombres
         # arrondis au dixième fait dériver le total (100,1 % affiché pour 100,0000 % exact), et
@@ -1505,7 +1549,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
   les limites de l'exercice : notre pondération par fraîcheur n'apporte rien face à la dernière
   enquête seule, et les biais collectifs des instituts subsistent.</p>
   <p class="small">Données : <a href="https://github.com/MieuxVoter/presidentielle2027">MieuxVoter/presidentielle2027</a>
-  (licence MIT), flux JSON brut, 1<sup>er</sup> tour uniquement. Le document est régénéré par un
+  (licence MIT), flux JSON brut, 1<sup>er</sup> tour uniquement{" ; les enquêtes que cette compilation n'a pas encore intégrées sont extraites par nos soins des notices de la Commission des sondages et signalées par † dans le tableau des sondages" if agg.get("imports") else ""}. Le document est régénéré par un
   script, sans retouche manuelle des chiffres ; la méthode ci-dessus est la spécification exacte du
   code qui produit la page.</p>
 </section>
@@ -1563,7 +1607,7 @@ def mentions_table(agg):
     if not det:
         return '<p class="small muted">Aucun sondage dans la fenêtre d\'agrégation.</p>'
     trs = "".join(
-        f'<tr><td class="small">{d["institut"]}</td>'
+        f'<tr><td class="small">{d["institut"]}{" †" if d.get("importe") else ""}</td>'
         f'<td class="small">{d["commanditaire"]}</td>'
         f'<td class="num small">{frd(d["debut"])}<br>→ {frd(d["fin"])}</td>'
         f'<td class="num">{fr(d["echantillon"])}</td>'
@@ -1577,7 +1621,10 @@ def mentions_table(agg):
         + trs + '</table>\n'
         f'<p class="small muted" style="margin-top:10px">{len(det)} sondages agrégés, du '
         f'{frd(agg["first"])} au {frd(agg["last"])}. La colonne « marge » reprend l\'écart indiqué par '
-        'l\'institut pour le candidat le mieux placé de son enquête.</p>')
+        'l\'institut pour le candidat le mieux placé de son enquête.</p>'
+        + ('<p class="small muted">† enquête extraite par nos soins de la notice publiée par la '
+           'Commission des sondages, que la compilation amont n\'avait pas encore intégrée.</p>'
+           if any(d.get("importe") for d in det) else ''))
 
 
 def legal_block(agg):
@@ -1746,9 +1793,11 @@ def render_landing(agg, movs=None, trends=None, fc=None):
   <h2>Trois principes</h2>
   <div class="cards">
     <div class="card2"><h3>Une source unique, citée</h3>
-      <p>Les données viennent d'une seule compilation publique et vérifiable —
-      <a href="https://github.com/MieuxVoter/presidentielle2027">MieuxVoter/presidentielle2027</a>,
-      licence MIT — jamais d'un chiffre repris de seconde main sans origine.</p></div>
+      <p>Les données viennent de la compilation publique et vérifiable
+      <a href="https://github.com/MieuxVoter/presidentielle2027">MieuxVoter/presidentielle2027</a>
+      (licence MIT) ; les enquêtes qu'elle n'a pas encore intégrées sont extraites par nos soins des
+      notices officielles de la Commission des sondages. Jamais d'un chiffre repris de seconde main
+      sans origine.</p></div>
     <div class="card2"><h3>Un scénario à la fois</h3>
       <p>Un sondage ne vaut que pour la liste de candidats qu'il teste. Nous retenons le scénario le
       plus testé récemment et nous ignorons les autres, plutôt que de moyenner des configurations
@@ -1791,7 +1840,10 @@ def render_landing(agg, movs=None, trends=None, fc=None):
   <h2>La méthode, en clair</h2>
   <ol class="steps">
     <li><strong>Collecte.</strong> Nous lisons le flux public de la compilation MieuxVoter
-    (CSV et JSON), premier tour uniquement.</li>
+    (CSV et JSON), premier tour uniquement. Quand une notice publiée par la Commission des sondages
+    n'y figure pas encore, nous l'extrayons nous-mêmes et la fusionnons sans doublon — même institut,
+    mêmes dates de terrain, même hypothèse ; la compilation reste prioritaire, et l'apport disparaît
+    d'elle-même dès qu'elle rattrape l'enquête.</li>
     <li><strong>Choix du scénario.</strong> Le scénario retenu est celui qui compte le plus de
     sondages sur les {agg["window"]} derniers jours — les listes de candidats bougent encore.</li>
     <li><strong>Pondération.</strong> Chaque sondage pèse selon son âge (demi-vie de

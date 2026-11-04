@@ -3,6 +3,12 @@
  "maj": "2026-09-17",
  "changelog": [
   {
+   "date": "2026-11-04",
+   "nature": "chiffres",
+   "titre": "Sept notices extraites, la page repasse du 8 au 29 octobre",
+   "texte": "La compilation amont n'avait plus intégré d'enquête depuis le 16 octobre et servait toujours celle du 8. Les sept notices parues depuis ont été extraites des documents de la Commission des sondages : OpinionWay (13-14 et 21-22 octobre), ELABE (14-16), Harris Interactive (19-21), Cluster17 (19-22), Ipsos BVA (21-22) et IFOP (27-29), soit 24 tableaux d'intentions de vote sur six instituts. Quatre portent le scénario agrégé et font passer la dernière enquête du 8 au 29 octobre. Chaque tableau somme à 100,0 et chaque nom a été rapproché de notre liste de candidats avant écriture ; trois duels de second tour ont été écartés. Les enquêtes ainsi ajoutées vivent dans une couche locale que la compilation amont écarte dès qu'elle publie la même enquête : l'apport s'efface de lui-même le jour où elle reprend, et elles portent † dans le tableau des sondages."
+  },
+  {
    "date": "2026-10-14",
    "nature": "données",
    "titre": "Treize lignes de candidats reçoivent leur date et leur source",
@@ -305,7 +311,7 @@
   ],
   "sources_titre": "Sources",
   "sources": [
-   "Sondages : compilation MieuxVoter/presidentielle2027, licence MIT — les enquêtes elles-mêmes appartiennent à leurs instituts.",
+   "Sondages : compilation MieuxVoter/presidentielle2027 (licence MIT), complétée pour les enquêtes non encore intégrées par notre extraction des notices de la Commission des sondages — les enquêtes elles-mêmes appartiennent à leurs instituts.",
    "Résultats de 2022 : ministère de l'Intérieur (archives des résultats électorales), recoupés avec Wikipédia — 12 scores concordants, 35 132 947 suffrages exprimés.",
    "Candidatures : recensement de La Chaîne parlementaire, complété pour chaque date par la source de première main citée sur la page des candidats.",
    "Liste officielle des candidats : Conseil constitutionnel, publiée au Journal officiel — c'est le seul document qui fait foi.",

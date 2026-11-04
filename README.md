@@ -27,6 +27,23 @@ python3 candidats.py       # page des candidats + section « qui sera sur le bul
 python3 digest.py          # le message du cron (aperçu)
 ```
 
+### Couche locale d'import
+
+Quand la compilation amont prend du retard, les enquêtes publiées entre-temps sont extraites des
+notices de la Commission des sondages et stockées dans `data/polls_importes.json`. `generate.py`
+fusionne cette couche au flux amont à chaque rendu :
+
+- la compilation **gagne toujours** : une enquête déjà présente chez elle (même institut, mêmes
+  dates, même hypothèse, ou même `poll_id`) n'est jamais doublée ;
+- une enquête publiée plus tard par l'amont **écarte automatiquement** la nôtre : l'apport disparaît
+  sans intervention ;
+- les enquêtes importées portent † dans le tableau des sondages, et la page dit qui a produit quoi ;
+- pour revenir strictement à l'amont : `OBS_SANS_IMPORT=1 python3 generate.py`.
+
+`integrer_tables.py` construit cette couche depuis les tableaux extraits (JSON dans
+`cache/sondages/`) : il refuse une table dont la somme s'écarte de 100, qui compte moins de six
+candidats, ou qui cite un nom absent de `candidats.csv`.
+
 Aucune dépendance : ni `pip install`, ni build. Les textes rédigés vivent dans
 `content/observatoire.json` (journal des mises à jour inclus) ; les chiffres ne sont jamais saisis
 à la main — voir `CHANGELOG.md` pour la règle.
@@ -35,8 +52,10 @@ Aucune dépendance : ni `pip install`, ni build. Les textes rédigés vivent dan
 
 ## Sourcing : une source pour les chiffres, des couches séparées pour le reste
 
-**Règle** : les intentions de vote viennent d'**une seule** compilation licite — mélanger deux jeux de
-sondages reviendrait à compter deux fois les mêmes enquêtes. Les autres sources sont des **couches
+**Règle** : les intentions de vote viennent d'**une seule** compilation licite, complétée le cas
+échéant par notre extraction des notices officielles — jamais par un second jeu de sondages
+concurrent. Les deux apports sont fusionnés sans doublon (institut + dates de terrain + hypothèse),
+et la compilation reste prioritaire : voir « Couche locale d'import » ci-dessous. Les autres sources sont des **couches
 séparées et étiquetées**, jamais additionnées.
 
 | Source | Nature | Licence | Usage |

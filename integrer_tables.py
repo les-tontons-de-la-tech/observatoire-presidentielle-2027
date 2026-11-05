@@ -84,8 +84,10 @@ def identite(r: dict) -> tuple:
 
 def main() -> int:
     base = json.loads(REFERENCE.read_text(encoding="utf-8"))["polls"]
+    # Identité = institut + dates + hypothèse (l'hypothèse étant attribuée sur l'ensemble des
+    # candidats testés). Le poll_id ne sert pas : l'amont le partage entre plusieurs tableaux
+    # d'une même enquête, et s'en servir ferait sauter des tableaux légitimes.
     deja = {identite(p) for p in base}
-    deja |= {(p.get("poll_id") or "") for p in base}
     cands = candidats_amont()
     hyps = hypotheses_amont()
     prochain = max(int(h["id"][1:]) for h in hyps if h["id"][1:].isdigit()) + 1
@@ -100,7 +102,6 @@ def main() -> int:
     # déjà intégrées, exactement comme celles de la source amont.
     for r in anciens:
         deja.add(identite(r))
-        deja.add(r.get("poll_id") or "")
 
     refuses, gardes = [], []
     for f in sorted(SOURCE.glob("*.json")):
@@ -162,10 +163,10 @@ def main() -> int:
                         "second_round": c.get("second_round", ""),
                         "intentions": valeur, "erreur_sup": sup, "erreur_inf": inf,
                     })
-                if identite(rec) in deja or poll_id in deja:
+                if identite(rec) in deja:
                     refuses.append((f.name, f"{institut} {debut}", f"table {i+1} : déjà intégrée ({poll_id})"))
                     continue
-                deja.add(identite(rec)); deja.add(poll_id)
+                deja.add(identite(rec))
                 records.append(rec); gardes.append(rec)
 
     SORTIE.write_text(json.dumps(records, ensure_ascii=False, indent=1), encoding="utf-8")

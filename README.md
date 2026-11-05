@@ -33,8 +33,10 @@ Quand la compilation amont prend du retard, les enquêtes publiées entre-temps 
 notices de la Commission des sondages et stockées dans `data/polls_importes.json`. `generate.py`
 fusionne cette couche au flux amont à chaque rendu :
 
-- la compilation **gagne toujours** : une enquête déjà présente chez elle (même institut, mêmes
-  dates, même hypothèse, ou même `poll_id`) n'est jamais doublée ;
+- la compilation **gagne toujours** : une enquête déjà présente chez elle n'est jamais doublée.
+  L'identité d'un tableau se lit sur l'institut, les dates de terrain et **l'ensemble des
+  candidats testés** — jamais sur le `poll_id` ni sur le numéro d'hypothèse, que les deux
+  producteurs numérotent différemment (et que l'amont partage parfois entre plusieurs tableaux) ;
 - une enquête publiée plus tard par l'amont **écarte automatiquement** la nôtre : l'apport disparaît
   sans intervention ;
 - les enquêtes importées portent † dans le tableau des sondages, et la page dit qui a produit quoi ;

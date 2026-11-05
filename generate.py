@@ -310,15 +310,26 @@ OVERLAY = os.path.join(DATA, "polls_importes.json")
 IDS_IMPORTES = set()  # poll_id des enquêtes ajoutées par notre extraction, pour les signaler
 
 
-def _identite_sondage(p):
-    """Clé de dédoublonnage : institut + dates de terrain + hypothèse.
+def _cle_nom(nom):
+    """Nom de candidat ramené à une forme comparable (accents, casse, tirets, espaces)."""
+    import unicodedata
+    n = unicodedata.normalize("NFKD", str(nom or ""))
+    n = "".join(c for c in n if not unicodedata.combining(c)).lower().replace("-", " ")
+    return " ".join(n.split())
 
-    Le poll_id seul ne suffit pas : deux producteurs peuvent numéroter différemment la
-    même enquête. Cette clé-là dit la même chose dans les deux formats.
+
+def _identite_sondage(p):
+    """Clé de dédoublonnage : institut + dates de terrain + ensemble des candidats testés.
+
+    Ni le poll_id ni le numéro d'hypothèse ne peuvent servir : l'amont réutilise le même
+    poll_id pour plusieurs tableaux d'une même enquête (sept hypothèses partagent un seul
+    identifiant chez OpinionWay), et sa numérotation H… ne coïncide pas avec la nôtre.
+    L'ensemble des candidats testés, lui, décrit le tableau lui-même.
     """
+    noms = frozenset(_cle_nom(c.get("candidat") or c.get("complete_name") or "")
+                     for c in (p.get("candidats") or []))
     return (str(p.get("institut") or p.get("nom_institut") or "").strip().lower(),
-            str(p.get("debut_enquete") or ""), str(p.get("fin_enquete") or ""),
-            str(p.get("hypothese") or ""))
+            str(p.get("debut_enquete") or ""), str(p.get("fin_enquete") or ""), noms)
 
 
 def _avec_imports(sondages):
@@ -338,10 +349,30 @@ def _avec_imports(sondages):
         print("⚠ polls_importes.json illisible : chaîne amont seule")
         return sondages
     importes = importes.get("polls", importes) if isinstance(importes, dict) else importes
-    ids = {p.get("poll_id") for p in sondages}
     identites = {_identite_sondage(p) for p in sondages}
+    # Pas de test sur poll_id : il n'est pas unique dans la source (plusieurs tableaux d'une
+    # même enquête le partagent), et s'en servir écartait un tableau légitime.
+    #
+    # Cas résiduel : le même tableau chez eux et chez nous, mais ils impriment un candidat
+    # sous 1 % (« <1 % ») que notre extraction n'a pas retenu faute de valeur numérique.
+    # Nos noms forment alors un sous-ensemble des leurs, avec les mêmes chiffres : c'est la
+    # même enquête, on garde la leur.
+    par_enquete = {}
+    for p in sondages:
+        k = (str(p.get("institut") or "").strip().lower(), p.get("debut_enquete"), p.get("fin_enquete"))
+        par_enquete.setdefault(k, []).append({
+            _cle_nom(c.get("candidat") or ""): c.get("intentions") for c in (p.get("candidats") or [])})
+
+    def _deja_chez_eux(p):
+        k = (str(p.get("institut") or "").strip().lower(), p.get("debut_enquete"), p.get("fin_enquete"))
+        nous = {_cle_nom(c.get("candidat") or ""): c.get("intentions") for c in (p.get("candidats") or [])}
+        for leur in par_enquete.get(k, []):
+            if nous and set(nous) <= set(leur) and all(leur[n] == v for n, v in nous.items()):
+                return True
+        return False
+
     gardes = [p for p in importes
-              if p.get("poll_id") not in ids and _identite_sondage(p) not in identites]
+              if _identite_sondage(p) not in identites and not _deja_chez_eux(p)]
     if gardes:
         IDS_IMPORTES.update(p.get("poll_id") for p in gardes if p.get("poll_id"))
         print(f"imports locaux : {len(gardes)} enquête(s) ajoutée(s) à la source amont")
@@ -1991,6 +2022,8 @@ def main():
     # Lecture « toutes listes » complète (le tableau de tendance n'en affiche que douze) :
     # sert à la comparaison avec la prévision bayésienne, candidat par candidat.
     agg["all_lists"] = {k: v["intentions"] for k, v in trend_point(polls, TODAY).items()}
+    # Nombre d'enquêtes de la couche locale réellement utilisées (celles que l'amont n'a pas).
+    agg["imports_total"] = len(IDS_IMPORTES)
     json.dump(dict(generated=agg["generated"], scenario=agg["scenario"], window=agg["window"],
                    polls_window=agg["polls_in_window"], polls_agg=agg["polls_aggregated"],
                    last=agg["last"], movs=movs, trends=trends),

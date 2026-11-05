@@ -1,7 +1,7 @@
 {
- "generated": "2026-11-04 22:35",
- "total_polls_all": 328,
- "polls_in_window": 104,
+ "generated": "2026-11-05 18:00",
+ "total_polls_all": 348,
+ "polls_in_window": 112,
  "scenario": "H42",
  "scenario_sign": [
   "Bruno Retailleau",
@@ -16,9 +16,9 @@
   "Éric Zemmour"
  ],
  "scenario_size": 10,
- "polls_in_scenario": 15,
- "polls_aggregated": 20,
- "imports": 4,
+ "polls_in_scenario": 17,
+ "polls_aggregated": 22,
+ "imports": 3,
  "window": 90,
  "agg_window": 180,
  "half_life": 30,
@@ -35,7 +35,8 @@
   "IFOP",
   "Ipsos BVA",
   "ODOXA",
-  "OpinionWay"
+  "OpinionWay",
+  "YouGov"
  ],
  "polls_detail": [
   {
@@ -43,11 +44,11 @@
    "commanditaire": "LCI",
    "debut": "2026-10-27",
    "fin": "2026-10-29",
-   "echantillon": 1501,
-   "population": "inscrits sur les listes électorales",
-   "marge": 2.44,
+   "echantillon": 1650,
+   "population": "représentatif de la population française âgée de 18 ans et plus",
+   "marge": 3.08,
    "fichier": "10352-pres-iv-ifop-lci-3-novembre.pdf",
-   "importe": true
+   "importe": false
   },
   {
    "institut": "Cluster17",
@@ -81,6 +82,28 @@
    "marge": 2.04,
    "fichier": "10332-pres-iv-toluna-harris-interactive-23-octobre.pdf",
    "importe": true
+  },
+  {
+   "institut": "YouGov",
+   "commanditaire": "Le HuffPost",
+   "debut": "2026-10-12",
+   "fin": "2026-10-15",
+   "echantillon": 1094,
+   "population": "représentatif de la population française âgée de 18 ans et plus",
+   "marge": 3.6,
+   "fichier": "10323-pres-iv-yougov-le-huffpost-18-octobre.pdf",
+   "importe": false
+  },
+  {
+   "institut": "OpinionWay",
+   "commanditaire": "Les Echos, Radio Classique",
+   "debut": "2026-10-13",
+   "fin": "2026-10-14",
+   "echantillon": 1001,
+   "population": "représentatif de la population française âgée de 18 ans et plus",
+   "marge": 3.46,
+   "fichier": "10318-pres-presitrack-v3-opinionway-15-octobre.pdf",
+   "importe": false
   },
   {
    "institut": "Harris Interactive",
@@ -259,19 +282,19 @@
    "importe": false
   }
  ],
- "total_intentions": 100.0,
+ "total_intentions": 99.9,
  "rows": [
   {
    "candidat": "Marine Le Pen",
    "parti": "Rassemblement National",
-   "intentions": 34.6,
-   "bas": 33.6,
-   "haut": 35.6,
-   "mini": 30.6,
-   "maxi": 36.5,
+   "intentions": 34.8,
+   "bas": 33.8,
+   "haut": 35.8,
+   "mini": 30.8,
+   "maxi": 36.6,
    "amplitude": 5.9,
-   "n": 20,
-   "neff": 11.6,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -279,20 +302,21 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
    "candidat": "Jean-Luc Mélenchon",
    "parti": "La France Insoumise",
-   "intentions": 17.1,
-   "bas": 16.1,
-   "haut": 18.1,
-   "mini": 12.1,
-   "maxi": 18.2,
-   "amplitude": 6.1,
-   "n": 20,
-   "neff": 11.6,
+   "intentions": 16.9,
+   "bas": 15.9,
+   "haut": 17.9,
+   "mini": 11.9,
+   "maxi": 18.1,
+   "amplitude": 6.2,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -300,20 +324,21 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
    "candidat": "Édouard Philippe",
    "parti": "Horizon",
-   "intentions": 17.1,
-   "bas": 16.1,
-   "haut": 18.1,
-   "mini": 14.9,
-   "maxi": 20.9,
-   "amplitude": 6.0,
-   "n": 20,
-   "neff": 11.6,
+   "intentions": 16.4,
+   "bas": 15.4,
+   "haut": 17.4,
+   "mini": 14.1,
+   "maxi": 20.4,
+   "amplitude": 6.3,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -321,20 +346,21 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
    "candidat": "Raphaël Glucksmann",
    "parti": "Place Publique",
-   "intentions": 11.4,
-   "bas": 10.4,
-   "haut": 12.4,
+   "intentions": 11.9,
+   "bas": 10.9,
+   "haut": 12.9,
    "mini": 9.1,
-   "maxi": 13.5,
-   "amplitude": 4.4,
-   "n": 20,
-   "neff": 11.6,
+   "maxi": 14.1,
+   "amplitude": 5.0,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -342,20 +368,21 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
    "candidat": "Bruno Retailleau",
    "parti": "Les Républicains",
-   "intentions": 7.7,
-   "bas": 6.7,
-   "haut": 8.7,
-   "mini": 7.0,
-   "maxi": 11.2,
+   "intentions": 7.5,
+   "bas": 6.5,
+   "haut": 8.5,
+   "mini": 6.9,
+   "maxi": 11.0,
    "amplitude": 4.2,
-   "n": 20,
-   "neff": 11.6,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -363,20 +390,21 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
    "candidat": "Éric Zemmour",
    "parti": "Reconquête",
-   "intentions": 4.2,
-   "bas": 3.2,
-   "haut": 5.2,
+   "intentions": 4.1,
+   "bas": 3.1,
+   "haut": 5.1,
    "mini": 3.0,
-   "maxi": 6.2,
+   "maxi": 6.1,
    "amplitude": 3.2,
-   "n": 20,
-   "neff": 11.6,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -384,20 +412,21 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
    "candidat": "Marine Tondelier",
    "parti": "Europe Écologie Les Verts",
-   "intentions": 3.0,
-   "bas": 2.0,
-   "haut": 4.0,
-   "mini": 2.3,
-   "maxi": 4.9,
-   "amplitude": 2.6,
-   "n": 20,
-   "neff": 11.6,
+   "intentions": 3.3,
+   "bas": 2.3,
+   "haut": 4.3,
+   "mini": 2.5,
+   "maxi": 5.1,
+   "amplitude": 2.7,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -405,7 +434,8 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
@@ -417,8 +447,8 @@
    "mini": 1.1,
    "maxi": 3.1,
    "amplitude": 2.0,
-   "n": 20,
-   "neff": 11.6,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -426,20 +456,21 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
    "candidat": "Fabien Roussel",
    "parti": "Parti Communiste Français",
-   "intentions": 2.0,
-   "bas": 1.0,
-   "haut": 3.0,
-   "mini": 1.4,
-   "maxi": 3.4,
+   "intentions": 2.2,
+   "bas": 1.2,
+   "haut": 3.2,
+   "mini": 1.2,
+   "maxi": 3.2,
    "amplitude": 2.0,
-   "n": 20,
-   "neff": 11.6,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -447,7 +478,8 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   },
   {
@@ -456,11 +488,11 @@
    "intentions": 0.7,
    "bas": 0.0,
    "haut": 1.7,
-   "mini": 0.4,
+   "mini": 0.2,
    "maxi": 0.9,
-   "amplitude": 0.5,
-   "n": 20,
-   "neff": 11.6,
+   "amplitude": 0.6,
+   "n": 22,
+   "neff": 13.4,
    "dernier": "2026-10-29",
    "instituts": [
     "Cluster17",
@@ -468,50 +500,51 @@
     "IFOP",
     "Ipsos BVA",
     "ODOXA",
-    "OpinionWay"
+    "OpinionWay",
+    "YouGov"
    ]
   }
  ],
  "all_lists": {
   "Nathalie Arthaud": 0.8,
   "Fabien Roussel": 2.3,
-  "Jean-Luc Mélenchon": 16.8,
-  "Marine Tondelier": 3.3,
-  "Raphaël Glucksmann": 12.1,
-  "Édouard Philippe": 16.2,
+  "Jean-Luc Mélenchon": 16.7,
+  "Marine Tondelier": 3.5,
+  "Raphaël Glucksmann": 12.3,
+  "Édouard Philippe": 15.9,
   "Bruno Retailleau": 7.8,
   "Nicolas Dupont-Aignan": 2.1,
   "Jordan Bardella": 34.8,
   "Éric Zemmour": 4.2,
-  "Gabriel Attal": 9.8,
-  "Marine Le Pen": 34.3,
-  "Dominique de Villepin": 2.3,
-  "François Hollande": 7.3,
-  "François Ruffin": 3.5,
+  "Gabriel Attal": 9.6,
+  "Marine Le Pen": 34.4,
+  "Dominique de Villepin": 2.2,
+  "François Hollande": 7.4,
+  "François Ruffin": 3.2,
   "Olivier Faure": 4.6,
-  "David Lisnard": 6.1,
-  "Karim Bouamrane": 0.8
+  "David Lisnard": 6.0,
+  "Karim Bouamrane": 0.7
  },
  "series": [
   {
-   "date": "2026-09-09",
+   "date": "2026-09-10",
    "weeks_ago": 8,
-   "polls": 11,
+   "polls": 12,
    "rows": {
     "Marine Le Pen": 33.8,
-    "Édouard Philippe": 18.2,
-    "Jean-Luc Mélenchon": 15.6,
-    "Raphaël Glucksmann": 11.3,
-    "Bruno Retailleau": 8.3,
-    "Éric Zemmour": 3.9,
-    "Marine Tondelier": 3.5,
-    "Fabien Roussel": 2.4,
-    "Nicolas Dupont-Aignan": 2.2,
+    "Édouard Philippe": 18.1,
+    "Jean-Luc Mélenchon": 15.7,
+    "Raphaël Glucksmann": 11.2,
+    "Bruno Retailleau": 8.2,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.4,
+    "Fabien Roussel": 2.5,
+    "Nicolas Dupont-Aignan": 2.3,
     "Nathalie Arthaud": 0.8
    }
   },
   {
-   "date": "2026-09-16",
+   "date": "2026-09-17",
    "weeks_ago": 7,
    "polls": 13,
    "rows": {
@@ -528,24 +561,24 @@
    }
   },
   {
-   "date": "2026-09-23",
+   "date": "2026-09-24",
    "weeks_ago": 6,
-   "polls": 13,
+   "polls": 14,
    "rows": {
-    "Marine Le Pen": 33.3,
-    "Édouard Philippe": 18.2,
-    "Jean-Luc Mélenchon": 16.3,
-    "Raphaël Glucksmann": 11.3,
+    "Marine Le Pen": 33.4,
+    "Édouard Philippe": 18.0,
+    "Jean-Luc Mélenchon": 16.4,
+    "Raphaël Glucksmann": 11.2,
     "Bruno Retailleau": 8.1,
     "Éric Zemmour": 4.0,
     "Marine Tondelier": 3.3,
     "Fabien Roussel": 2.4,
     "Nicolas Dupont-Aignan": 2.4,
-    "Nathalie Arthaud": 0.7
+    "Nathalie Arthaud": 0.8
    }
   },
   {
-   "date": "2026-09-30",
+   "date": "2026-10-01",
    "weeks_ago": 5,
    "polls": 15,
    "rows": {
@@ -562,25 +595,8 @@
    }
   },
   {
-   "date": "2026-10-07",
+   "date": "2026-10-08",
    "weeks_ago": 4,
-   "polls": 16,
-   "rows": {
-    "Marine Le Pen": 34.3,
-    "Édouard Philippe": 18.0,
-    "Jean-Luc Mélenchon": 16.8,
-    "Raphaël Glucksmann": 10.7,
-    "Bruno Retailleau": 7.7,
-    "Éric Zemmour": 4.1,
-    "Marine Tondelier": 3.2,
-    "Fabien Roussel": 2.2,
-    "Nicolas Dupont-Aignan": 2.2,
-    "Nathalie Arthaud": 0.7
-   }
-  },
-  {
-   "date": "2026-10-14",
-   "weeks_ago": 3,
    "polls": 17,
    "rows": {
     "Marine Le Pen": 34.4,
@@ -596,53 +612,70 @@
    }
   },
   {
-   "date": "2026-10-21",
-   "weeks_ago": 2,
-   "polls": 18,
-   "rows": {
-    "Marine Le Pen": 34.4,
-    "Édouard Philippe": 17.9,
-    "Jean-Luc Mélenchon": 16.8,
-    "Raphaël Glucksmann": 10.9,
-    "Bruno Retailleau": 7.7,
-    "Éric Zemmour": 4.1,
-    "Marine Tondelier": 3.1,
-    "Fabien Roussel": 2.2,
-    "Nicolas Dupont-Aignan": 2.2,
-    "Nathalie Arthaud": 0.7
-   }
-  },
-  {
-   "date": "2026-10-28",
-   "weeks_ago": 1,
+   "date": "2026-10-15",
+   "weeks_ago": 3,
    "polls": 19,
    "rows": {
-    "Marine Le Pen": 34.3,
-    "Édouard Philippe": 17.4,
-    "Jean-Luc Mélenchon": 17.0,
-    "Raphaël Glucksmann": 11.3,
-    "Bruno Retailleau": 7.7,
-    "Éric Zemmour": 4.2,
-    "Marine Tondelier": 3.0,
+    "Marine Le Pen": 34.6,
+    "Édouard Philippe": 17.2,
+    "Jean-Luc Mélenchon": 16.6,
+    "Raphaël Glucksmann": 11.4,
+    "Bruno Retailleau": 7.5,
+    "Éric Zemmour": 4.0,
+    "Marine Tondelier": 3.5,
+    "Fabien Roussel": 2.3,
     "Nicolas Dupont-Aignan": 2.2,
-    "Fabien Roussel": 2.1,
+    "Nathalie Arthaud": 0.6
+   }
+  },
+  {
+   "date": "2026-10-22",
+   "weeks_ago": 2,
+   "polls": 22,
+   "rows": {
+    "Marine Le Pen": 34.5,
+    "Édouard Philippe": 16.8,
+    "Jean-Luc Mélenchon": 16.7,
+    "Raphaël Glucksmann": 11.8,
+    "Bruno Retailleau": 7.6,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.2,
+    "Nicolas Dupont-Aignan": 2.3,
+    "Fabien Roussel": 2.2,
+    "Nathalie Arthaud": 0.6
+   }
+  },
+  {
+   "date": "2026-10-29",
+   "weeks_ago": 1,
+   "polls": 22,
+   "rows": {
+    "Marine Le Pen": 34.8,
+    "Jean-Luc Mélenchon": 16.9,
+    "Édouard Philippe": 16.4,
+    "Raphaël Glucksmann": 11.9,
+    "Bruno Retailleau": 7.5,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.3,
+    "Nicolas Dupont-Aignan": 2.3,
+    "Fabien Roussel": 2.2,
     "Nathalie Arthaud": 0.7
    }
   },
   {
-   "date": "2026-11-04",
+   "date": "2026-11-05",
    "weeks_ago": 0,
-   "polls": 20,
+   "polls": 22,
    "rows": {
-    "Marine Le Pen": 34.6,
-    "Jean-Luc Mélenchon": 17.1,
-    "Édouard Philippe": 17.1,
-    "Raphaël Glucksmann": 11.4,
-    "Bruno Retailleau": 7.7,
-    "Éric Zemmour": 4.2,
-    "Marine Tondelier": 3.0,
+    "Marine Le Pen": 34.8,
+    "Jean-Luc Mélenchon": 16.9,
+    "Édouard Philippe": 16.4,
+    "Raphaël Glucksmann": 11.9,
+    "Bruno Retailleau": 7.5,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.3,
     "Nicolas Dupont-Aignan": 2.3,
-    "Fabien Roussel": 2.0,
+    "Fabien Roussel": 2.2,
     "Nathalie Arthaud": 0.7
    }
   }

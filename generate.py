@@ -387,9 +387,22 @@ def fetch(force=False):
         if age_h < 12:
             return _avec_imports(_sondages(json.load(open(cache, encoding="utf-8"))))
     req = urllib.request.Request(SRC, headers={"User-Agent": "poc-agregateur-2027"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        raw = r.read().decode("utf-8")
-    json.loads(raw)  # validation
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            raw = r.read().decode("utf-8")
+        json.loads(raw)  # validation
+    except Exception as e:  # réseau, 404, réponse illisible
+        # La source est la base, pas une condition de survie : si elle est injoignable, on
+        # republie le dernier état connu plutôt que de laisser la page se figer sans le dire.
+        # Le cache est daté dans le message, pour que la péremption reste visible.
+        if os.path.exists(cache):
+            age = (datetime.now().timestamp() - os.path.getmtime(cache)) / 3600
+            quand = datetime.fromtimestamp(os.path.getmtime(cache)).strftime("%d/%m/%Y %H:%M")
+            print(f"⚠ source amont injoignable ({type(e).__name__}) : reprise du cache "
+                  f"du {quand} ({age:.0f} h)")
+            return _avec_imports(_sondages(json.load(open(cache, encoding="utf-8"))))
+        raise SystemExit(f"Source amont injoignable ({type(e).__name__}) et aucun cache local : "
+                         "rien à publier, la page reste en l'état.")
     open(cache, "w", encoding="utf-8").write(raw)
     return _avec_imports(_sondages(json.loads(raw)))
 

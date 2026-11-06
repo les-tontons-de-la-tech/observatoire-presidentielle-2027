@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-05 18:00",
+ "generated": "2026-11-06 18:00",
  "scenario": "H42",
  "window": 90,
- "polls_window": 112,
- "polls_agg": 22,
+ "polls_window": 125,
+ "polls_agg": 23,
  "last": "2026-10-29",
  "movs": [
   {
@@ -21,22 +21,22 @@
     33.4,
     34.4,
     34.6,
-    34.5,
+    34.7,
     34.8,
     34.8
    ],
    "mini8": 33.3,
    "maxi8": 34.8,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Jean-Luc Mélenchon",
    "parti": "La France Insoumise",
-   "intentions": 16.9,
-   "intention7": 16.9,
+   "intentions": 16.8,
+   "intention7": 16.8,
    "delta7": 0.0,
    "intention28": 16.9,
-   "delta28": 0.0,
+   "delta28": -0.1,
    "serie": [
     15.7,
     16.3,
@@ -44,22 +44,22 @@
     16.4,
     16.9,
     16.6,
-    16.7,
-    16.9,
-    16.9
+    16.8,
+    16.8,
+    16.8
    ],
    "mini8": 15.7,
    "maxi8": 16.9,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Édouard Philippe",
    "parti": "Horizon",
-   "intentions": 16.4,
-   "intention7": 16.4,
+   "intentions": 16.3,
+   "intention7": 16.3,
    "delta7": 0.0,
    "intention28": 18.0,
-   "delta28": -1.6,
+   "delta28": -1.7,
    "serie": [
     18.1,
     18.2,
@@ -67,22 +67,22 @@
     18.4,
     18.0,
     17.2,
-    16.8,
-    16.4,
-    16.4
+    16.5,
+    16.3,
+    16.3
    ],
-   "mini8": 16.4,
+   "mini8": 16.3,
    "maxi8": 18.4,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Raphaël Glucksmann",
    "parti": "Place Publique",
-   "intentions": 11.9,
-   "intention7": 11.9,
+   "intentions": 12.0,
+   "intention7": 12.0,
    "delta7": 0.0,
    "intention28": 10.7,
-   "delta28": 1.2,
+   "delta28": 1.3,
    "serie": [
     11.2,
     11.3,
@@ -90,13 +90,13 @@
     11.2,
     10.7,
     11.4,
-    11.8,
-    11.9,
-    11.9
+    12.1,
+    12.0,
+    12.0
    ],
    "mini8": 10.7,
-   "maxi8": 11.9,
-   "polls7": 22
+   "maxi8": 12.1,
+   "polls7": 23
   },
   {
    "candidat": "Bruno Retailleau",
@@ -119,16 +119,16 @@
    ],
    "mini8": 7.5,
    "maxi8": 8.2,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Éric Zemmour",
    "parti": "Reconquête",
-   "intentions": 4.1,
-   "intention7": 4.1,
+   "intentions": 4.0,
+   "intention7": 4.0,
    "delta7": 0.0,
    "intention28": 4.1,
-   "delta28": 0.0,
+   "delta28": -0.1,
    "serie": [
     4.1,
     4.0,
@@ -136,22 +136,22 @@
     4.0,
     4.1,
     4.0,
-    4.1,
-    4.1,
-    4.1
+    4.0,
+    4.0,
+    4.0
    ],
    "mini8": 4.0,
    "maxi8": 4.1,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Marine Tondelier",
    "parti": "Europe Écologie Les Verts",
-   "intentions": 3.3,
-   "intention7": 3.3,
+   "intentions": 3.2,
+   "intention7": 3.2,
    "delta7": 0.0,
    "intention28": 3.2,
-   "delta28": 0.1,
+   "delta28": 0.0,
    "serie": [
     3.4,
     3.3,
@@ -160,12 +160,12 @@
     3.2,
     3.5,
     3.2,
-    3.3,
-    3.3
+    3.2,
+    3.2
    ],
    "mini8": 3.2,
    "maxi8": 3.5,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Nicolas Dupont-Aignan",
@@ -182,13 +182,13 @@
     2.3,
     2.2,
     2.2,
-    2.3,
+    2.2,
     2.3,
     2.3
    ],
    "mini8": 2.2,
    "maxi8": 2.4,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Fabien Roussel",
@@ -211,16 +211,16 @@
    ],
    "mini8": 2.2,
    "maxi8": 2.5,
-   "polls7": 22
+   "polls7": 23
   },
   {
    "candidat": "Nathalie Arthaud",
    "parti": "Lutte Ouvrière",
-   "intentions": 0.7,
-   "intention7": 0.7,
+   "intentions": 0.6,
+   "intention7": 0.6,
    "delta7": 0.0,
    "intention28": 0.7,
-   "delta28": 0.0,
+   "delta28": -0.1,
    "serie": [
     0.8,
     0.7,
@@ -229,12 +229,12 @@
     0.7,
     0.6,
     0.6,
-    0.7,
-    0.7
+    0.6,
+    0.6
    ],
    "mini8": 0.6,
    "maxi8": 0.8,
-   "polls7": 22
+   "polls7": 23
   }
  ],
  "trends": [
@@ -262,138 +262,138 @@
   {
    "candidat": "Marine Le Pen",
    "parti": "Rassemblement National",
-   "intentions": 34.4,
-   "n": 143,
-   "intention7": 34.4,
+   "intentions": 34.6,
+   "n": 156,
+   "intention7": 34.6,
    "delta7": 0.0,
    "intention28": 34.6,
-   "delta28": -0.2,
+   "delta28": 0.0,
    "serie": [
     34.0,
     33.8,
     34.1,
     34.0,
     34.6,
-    34.7,
-    34.3,
-    34.4,
-    34.4
+    34.5,
+    34.5,
+    34.6,
+    34.6
    ]
   },
   {
    "candidat": "Jean-Luc Mélenchon",
    "parti": "La France Insoumise",
-   "intentions": 16.7,
-   "n": 171,
-   "intention7": 16.7,
+   "intentions": 16.8,
+   "n": 184,
+   "intention7": 16.8,
    "delta7": 0.0,
    "intention28": 16.7,
-   "delta28": 0.0,
+   "delta28": 0.1,
    "serie": [
     16.0,
     16.2,
     16.4,
     16.3,
     16.7,
-    16.4,
     16.6,
-    16.7,
-    16.7
+    16.8,
+    16.8,
+    16.8
    ]
   },
   {
    "candidat": "Édouard Philippe",
    "parti": "Horizon",
-   "intentions": 15.9,
-   "n": 119,
-   "intention7": 15.9,
+   "intentions": 15.6,
+   "n": 128,
+   "intention7": 15.6,
    "delta7": 0.0,
    "intention28": 17.2,
-   "delta28": -1.3,
+   "delta28": -1.6,
    "serie": [
-    17.3,
+    17.2,
     17.3,
     16.6,
     17.4,
     17.2,
     16.5,
-    16.1,
-    15.9,
-    15.9
+    15.8,
+    15.6,
+    15.6
    ]
   },
   {
    "candidat": "Raphaël Glucksmann",
    "parti": "Place Publique",
-   "intentions": 12.3,
-   "n": 126,
-   "intention7": 12.3,
+   "intentions": 12.5,
+   "n": 138,
+   "intention7": 12.5,
    "delta7": 0.0,
    "intention28": 11.0,
-   "delta28": 1.3,
+   "delta28": 1.5,
    "serie": [
-    11.8,
+    11.7,
     11.8,
     11.3,
     11.3,
     11.0,
-    11.4,
-    12.3,
-    12.3,
-    12.3
+    12.2,
+    12.6,
+    12.5,
+    12.5
    ]
   },
   {
    "candidat": "Gabriel Attal",
    "parti": "Renaissance",
-   "intentions": 9.6,
-   "n": 94,
-   "intention7": 9.6,
+   "intentions": 9.3,
+   "n": 101,
+   "intention7": 9.3,
    "delta7": 0.0,
    "intention28": 10.8,
-   "delta28": -1.2,
+   "delta28": -1.5,
    "serie": [
-    11.0,
+    10.9,
     11.0,
     10.8,
     10.9,
     10.8,
     10.3,
-    9.8,
-    9.6,
-    9.6
+    9.5,
+    9.3,
+    9.3
    ]
   },
   {
    "candidat": "Bruno Retailleau",
    "parti": "Les Républicains",
-   "intentions": 7.8,
-   "n": 170,
-   "intention7": 7.8,
+   "intentions": 7.7,
+   "n": 179,
+   "intention7": 7.7,
    "delta7": 0.0,
    "intention28": 8.2,
-   "delta28": -0.4,
+   "delta28": -0.5,
    "serie": [
     8.3,
     8.3,
     8.3,
     8.3,
     8.2,
-    8.1,
-    7.9,
+    8.2,
     7.8,
-    7.8
+    7.7,
+    7.7
    ]
   },
   {
    "candidat": "François Hollande",
    "parti": "Parti Socialiste",
-   "intentions": 7.4,
-   "n": 31,
-   "intention7": 7.4,
+   "intentions": 7.6,
+   "n": 32,
+   "intention7": 7.6,
    "delta7": 0.0,
    "intention28": 7.4,
-   "delta28": 0.0,
+   "delta28": 0.2,
    "serie": [
     7.8,
     7.8,
@@ -401,30 +401,30 @@
     7.5,
     7.4,
     7.5,
-    7.4,
-    7.4,
-    7.4
+    7.6,
+    7.6,
+    7.6
    ]
   },
   {
    "candidat": "David Lisnard",
    "parti": "Nouvelle Énergie",
-   "intentions": 6.0,
-   "n": 23,
-   "intention7": 6.0,
+   "intentions": 6.6,
+   "n": 27,
+   "intention7": 6.6,
    "delta7": 0.0,
    "intention28": 3.2,
-   "delta28": 2.8,
+   "delta28": 3.4,
    "serie": [
     2.8,
     3.3,
     3.1,
     3.2,
     3.2,
-    3.4,
-    5.5,
-    6.0,
-    6.0
+    5.6,
+    6.3,
+    6.6,
+    6.6
    ]
   },
   {
@@ -451,12 +451,12 @@
   {
    "candidat": "Éric Zemmour",
    "parti": "Reconquête",
-   "intentions": 4.2,
-   "n": 170,
-   "intention7": 4.2,
+   "intentions": 4.1,
+   "n": 183,
+   "intention7": 4.1,
    "delta7": 0.0,
    "intention28": 4.1,
-   "delta28": 0.1,
+   "delta28": 0.0,
    "serie": [
     3.8,
     3.8,
@@ -464,30 +464,30 @@
     4.0,
     4.1,
     4.1,
-    4.2,
-    4.2,
-    4.2
+    4.1,
+    4.1,
+    4.1
    ]
   },
   {
    "candidat": "Marine Tondelier",
    "parti": "Europe Écologie Les Verts",
-   "intentions": 3.5,
-   "n": 155,
-   "intention7": 3.5,
+   "intentions": 3.3,
+   "n": 166,
+   "intention7": 3.3,
    "delta7": 0.0,
    "intention28": 3.8,
-   "delta28": -0.3,
+   "delta28": -0.5,
    "serie": [
     3.9,
     3.8,
     3.8,
     3.9,
     3.8,
-    3.9,
-    3.5,
-    3.5,
-    3.5
+    3.7,
+    3.4,
+    3.3,
+    3.3
    ]
   }
  ]

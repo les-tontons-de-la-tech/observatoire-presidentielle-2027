@@ -1,5 +1,5 @@
 {
- "verifie_le": "2026-10-14",
+ "verifie_le": "2026-11-09",
  "scrutins": {
   "premier_tour": "2027-04-18",
   "second_tour": "2027-05-02",
@@ -466,6 +466,17 @@
    "source": "https://www.lejdd.fr/politique/sarah-knafo-eurodeputee-reconquete-je-souhaite-queric-zemmour-soit-notre-candidat-173520",
    "source_label": "Le Journal du Dimanche, 09/05/2026",
    "commentaire": "non candidate : dans un entretien au Journal du Dimanche publié le 9 mai 2026, elle a déclaré souhaiter qu'Éric Zemmour soit le candidat de Reconquête : « Je souhaite qu'Éric Zemmour soit notre candidat »."
+  },
+  {
+   "nom": "Teddy Riner",
+   "parti": "Sans étiquette",
+   "famille": "divers",
+   "statut": "declare",
+   "date_declaration": "2026-11-09",
+   "precision": "jour",
+   "source": "https://www.tf1info.fr/politique/elections/presidentielle/le-judoka-et-champion-olympique-teddy-riner-est-candidat-a-l-election-presidentielle-2027-2474763.html",
+   "source_label": "TF1 Info, 09/11/2026",
+   "commentaire": "Annonce dans une vidéo publiée sur X le 9 novembre 2026 : « je suis candidat à l'élection présidentielle de 2027 ». Judoka, 37 ans, cinq titres olympiques. Se présente hors parti, avec un mouvement baptisé « La France qu'on veut » ; programme annoncé pour « les prochaines semaines », aucune structure de financement connue. Positionnement : refuse le choix entre « les deux extrêmes ». Aucun sondage publié depuis l'annonce ne le teste dans un champ de premier tour complet ; les mesures antérieures allaient de 3 % d'intentions de vote (Vérian pour L'Hémicycle, décembre 2025) à 10 % de potentiel électoral (Toluna Harris Interactive, 2026)."
   }
  ]
 }

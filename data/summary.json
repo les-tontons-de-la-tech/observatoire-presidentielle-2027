@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-10 18:00",
+ "generated": "2026-11-11 18:00",
  "total_polls_all": 372,
  "polls_in_window": 125,
  "scenario": "H42",
@@ -539,24 +539,24 @@
  "imports_total": 3,
  "series": [
   {
-   "date": "2026-09-15",
+   "date": "2026-09-16",
    "weeks_ago": 8,
-   "polls": 12,
+   "polls": 13,
    "rows": {
-    "Marine Le Pen": 33.8,
-    "Édouard Philippe": 18.1,
-    "Jean-Luc Mélenchon": 15.7,
-    "Raphaël Glucksmann": 11.2,
-    "Bruno Retailleau": 8.2,
-    "Éric Zemmour": 4.1,
-    "Marine Tondelier": 3.4,
-    "Fabien Roussel": 2.5,
-    "Nicolas Dupont-Aignan": 2.3,
-    "Nathalie Arthaud": 0.8
+    "Marine Le Pen": 33.3,
+    "Édouard Philippe": 18.2,
+    "Jean-Luc Mélenchon": 16.3,
+    "Raphaël Glucksmann": 11.3,
+    "Bruno Retailleau": 8.1,
+    "Éric Zemmour": 4.0,
+    "Marine Tondelier": 3.3,
+    "Fabien Roussel": 2.4,
+    "Nicolas Dupont-Aignan": 2.4,
+    "Nathalie Arthaud": 0.7
    }
   },
   {
-   "date": "2026-09-22",
+   "date": "2026-09-23",
    "weeks_ago": 7,
    "polls": 13,
    "rows": {
@@ -573,7 +573,7 @@
    }
   },
   {
-   "date": "2026-09-29",
+   "date": "2026-09-30",
    "weeks_ago": 6,
    "polls": 15,
    "rows": {
@@ -590,30 +590,13 @@
    }
   },
   {
-   "date": "2026-10-06",
+   "date": "2026-10-07",
    "weeks_ago": 5,
-   "polls": 15,
+   "polls": 16,
    "rows": {
-    "Marine Le Pen": 33.4,
-    "Édouard Philippe": 18.4,
-    "Jean-Luc Mélenchon": 16.4,
-    "Raphaël Glucksmann": 11.2,
-    "Bruno Retailleau": 8.1,
-    "Éric Zemmour": 4.0,
-    "Marine Tondelier": 3.3,
-    "Fabien Roussel": 2.3,
-    "Nicolas Dupont-Aignan": 2.3,
-    "Nathalie Arthaud": 0.7
-   }
-  },
-  {
-   "date": "2026-10-13",
-   "weeks_ago": 4,
-   "polls": 17,
-   "rows": {
-    "Marine Le Pen": 34.4,
+    "Marine Le Pen": 34.3,
     "Édouard Philippe": 18.0,
-    "Jean-Luc Mélenchon": 16.9,
+    "Jean-Luc Mélenchon": 16.8,
     "Raphaël Glucksmann": 10.7,
     "Bruno Retailleau": 7.7,
     "Éric Zemmour": 4.1,
@@ -624,16 +607,33 @@
    }
   },
   {
-   "date": "2026-10-20",
+   "date": "2026-10-14",
+   "weeks_ago": 4,
+   "polls": 18,
+   "rows": {
+    "Marine Le Pen": 34.5,
+    "Édouard Philippe": 17.7,
+    "Jean-Luc Mélenchon": 16.8,
+    "Raphaël Glucksmann": 11.2,
+    "Bruno Retailleau": 7.6,
+    "Éric Zemmour": 4.1,
+    "Marine Tondelier": 3.2,
+    "Fabien Roussel": 2.2,
+    "Nicolas Dupont-Aignan": 2.1,
+    "Nathalie Arthaud": 0.7
+   }
+  },
+  {
+   "date": "2026-10-21",
    "weeks_ago": 3,
-   "polls": 20,
+   "polls": 21,
    "rows": {
     "Marine Le Pen": 34.8,
     "Édouard Philippe": 16.8,
     "Jean-Luc Mélenchon": 16.6,
-    "Raphaël Glucksmann": 11.6,
+    "Raphaël Glucksmann": 11.8,
     "Bruno Retailleau": 7.5,
-    "Éric Zemmour": 3.9,
+    "Éric Zemmour": 4.0,
     "Marine Tondelier": 3.4,
     "Fabien Roussel": 2.3,
     "Nicolas Dupont-Aignan": 2.2,
@@ -641,9 +641,9 @@
    }
   },
   {
-   "date": "2026-10-27",
+   "date": "2026-10-28",
    "weeks_ago": 2,
-   "polls": 23,
+   "polls": 22,
    "rows": {
     "Marine Le Pen": 34.7,
     "Jean-Luc Mélenchon": 16.8,
@@ -658,7 +658,7 @@
    }
   },
   {
-   "date": "2026-11-03",
+   "date": "2026-11-04",
    "weeks_ago": 1,
    "polls": 23,
    "rows": {
@@ -675,7 +675,7 @@
    }
   },
   {
-   "date": "2026-11-10",
+   "date": "2026-11-11",
    "weeks_ago": 0,
    "polls": 23,
    "rows": {

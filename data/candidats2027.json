@@ -1,5 +1,5 @@
 {
- "verifie_le": "2026-11-09",
+ "verifie_le": "2026-11-10",
  "scrutins": {
   "premier_tour": "2027-04-18",
   "second_tour": "2027-05-02",
@@ -66,10 +66,10 @@
    "famille": "droite",
    "statut": "declare",
    "date_declaration": "2026-03-31",
-   "precision": "mois",
+   "precision": "jour",
    "source": "https://lcp.fr/actualites/je-suis-candidat-david-lisnard-quitte-lr-et-relance-le-debat-sur-une-primaire-a-droite",
-   "source_label": "LCP, fin mars 2026",
-   "commentaire": "quitte LR en annonçant sa candidature et relance le débat d'une primaire à droite."
+   "source_label": "LCP, 31/03/2026",
+   "commentaire": "déclare sa candidature le 31 mars 2026 en quittant Les Républicains, dont il dénonce l'investiture de Bruno Retailleau sans primaire. Candidat de Nouvelle Énergie, il plaide pour une primaire ouverte à droite. Percée à l'automne 2026 : 7 à 8 % dans les sondages, devant parfois Bruno Retailleau, plus de 55 000 abonnés Instagram gagnés en une semaine et environ 100 000 adhérents revendiqués par son parti, chiffre non vérifiable (franceinfo, novembre 2026). Son camp le compare à la percée de François Bayrou en 2007, crédité de 18 % au premier tour. Réélection quasi assurée à la présidence de l'Association des maires de France, vote électronique du 23 au 25 novembre 2026 (Le Monde, 10 novembre 2026)."
   },
   {
    "nom": "Xavier Bertrand",

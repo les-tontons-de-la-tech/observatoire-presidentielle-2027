@@ -3,6 +3,12 @@
  "maj": "2026-09-17",
  "changelog": [
   {
+   "date": "2026-11-16",
+   "nature": "chiffres",
+   "titre": "Le scénario passe à H67, la page repasse du 5 au 13 novembre",
+   "texte": "La compilation amont s'arrêtait à l'enquête du 10 novembre et n'avait pas repris les deux notices parues depuis. Elles ont été extraites des documents de la Commission des sondages : ELABE (terrain 12-13 novembre, 1 500 interrogés, six configurations) et OpinionWay (10-12 novembre, 1 001 interrogés, deux configurations), soit huit tableaux dont chacun somme à 100,0. La page compte désormais 400 enquêtes, dont 146 sur les 90 derniers jours, et sa dernière enquête est celle du 13 novembre. La liste de référence du tableau principal change en même temps : H42 (dix noms) n'était plus testée par aucun institut depuis le 5 novembre, quand H67 (onze noms, avec Gabriel Attal et Édouard Philippe) l'était encore le 13. Le scénario retenu est maintenant la liste testée le plus récemment parmi celles qui comptent au moins trois enquêtes sur 90 jours, et non plus celle qui en compte le plus. Marine Le Pen reste à 34,3 % ; Édouard Philippe passe à 12,7 % et Gabriel Attal apparaît à 6,1 %, parce que les deux hommes figurent dans la liste — ces deux chiffres ne se comparent pas au 16,2 % de la liste à dix noms, qui mesurait un autre questionnaire."
+  },
+  {
    "date": "2026-11-04",
    "nature": "chiffres",
    "titre": "Sept notices extraites, la page repasse du 8 au 29 octobre",

@@ -78,30 +78,59 @@ def hypotheses_amont() -> list[dict]:
 
 
 def identite(r: dict) -> tuple:
+    """Identité d'un tableau : institut + dates de terrain + ensemble des candidats testés.
+
+    Jamais l'hypothèse : l'amont renumérote ses hypothèses, et une même enquête peut y changer
+    d'étiquette. Cas mesuré : OpinionWay des 21-22/10, servie une première fois sous H121 puis
+    proposée de nouveau sous un identifiant neuf, et comptée deux fois dans la couche locale.
+    """
     return (str(r.get("institut", "")).strip().lower(), r.get("debut_enquete", ""),
-            r.get("fin_enquete", ""), r.get("hypothese", ""))
+            r.get("fin_enquete", ""),
+            frozenset(cle(c.get("candidat", "")) for c in (r.get("candidats") or [])))
+
+
+def _noms_valeurs(r: dict) -> dict:
+    return {cle(c.get("candidat", "")): c.get("intentions") for c in (r.get("candidats") or [])}
+
+
+def _deja_servi(rec: dict, par_enquete: dict) -> bool:
+    """Le même tableau, y compris quand notre extraction a perdu un nom sous 1 %.
+
+    Dans ce cas nos noms forment un sous-ensemble strict des leurs, avec les mêmes valeurs :
+    c'est la même enquête, pas une seconde.
+    """
+    k = (str(rec.get("institut", "")).strip().lower(), rec.get("debut_enquete"), rec.get("fin_enquete"))
+    nous = _noms_valeurs(rec)
+    for leur in par_enquete.get(k, []):
+        if nous and set(nous) <= set(leur) and all(leur[n] == v for n, v in nous.items()):
+            return True
+    return False
 
 
 def main() -> int:
     base = json.loads(REFERENCE.read_text(encoding="utf-8"))["polls"]
-    # Identité = institut + dates + hypothèse (l'hypothèse étant attribuée sur l'ensemble des
-    # candidats testés). Le poll_id ne sert pas : l'amont le partage entre plusieurs tableaux
-    # d'une même enquête, et s'en servir ferait sauter des tableaux légitimes.
-    deja = {identite(p) for p in base}
-    cands = candidats_amont()
-    hyps = hypotheses_amont()
-    prochain = max(int(h["id"][1:]) for h in hyps if h["id"][1:].isdigit()) + 1
-
     if SORTIE.exists():
         anciens = json.loads(SORTIE.read_text(encoding="utf-8"))
         anciens = anciens.get("polls", anciens) if isinstance(anciens, dict) else anciens
     else:
         anciens = []
+    # Identité = institut + dates + ensemble des candidats testés (voir `identite`). Le poll_id
+    # ne sert pas : l'amont le partage entre plusieurs tableaux d'une même enquête.
+    deja = {identite(p) for p in base}
+    # Les enquêtes déjà servies, amont et couche locale, pour reconnaître un tableau resservi
+    # sous une autre étiquette ou amputé d'un nom sous 1 %.
+    par_enquete = {}
+    for p in list(base) + list(anciens):
+        k = (str(p.get("institut") or "").strip().lower(), p.get("debut_enquete"), p.get("fin_enquete"))
+        par_enquete.setdefault(k, []).append(_noms_valeurs(p))
     records = list(anciens)
     # Une réexécution ne doit pas dupliquer la couche locale : ses entrées comptent comme
     # déjà intégrées, exactement comme celles de la source amont.
     for r in anciens:
         deja.add(identite(r))
+    cands = candidats_amont()
+    hyps = hypotheses_amont()
+    prochain = max(int(h["id"][1:]) for h in hyps if h["id"][1:].isdigit()) + 1
 
     refuses, gardes = [], []
     for f in sorted(SOURCE.glob("*.json")):
@@ -163,10 +192,11 @@ def main() -> int:
                         "second_round": c.get("second_round", ""),
                         "intentions": valeur, "erreur_sup": sup, "erreur_inf": inf,
                     })
-                if identite(rec) in deja:
+                if identite(rec) in deja or _deja_servi(rec, par_enquete):
                     refuses.append((f.name, f"{institut} {debut}", f"table {i+1} : déjà intégrée ({poll_id})"))
                     continue
                 deja.add(identite(rec))
+                par_enquete.setdefault((institut.lower(), debut, fin), []).append(_noms_valeurs(rec))
                 records.append(rec); gardes.append(rec)
 
     SORTIE.write_text(json.dumps(records, ensure_ascii=False, indent=1), encoding="utf-8")

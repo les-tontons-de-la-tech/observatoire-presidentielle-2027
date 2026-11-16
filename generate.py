@@ -776,8 +776,12 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
     if not r1:
         return None
 
-    # 2. Scénario de référence : le plus testé récemment (fenêtre courte),
-    #    pour ne pas moyenner des configurations de candidatures différentes.
+    # 2. Scénario de référence : la liste **testée le plus récemment** parmi celles qui comptent
+    #    au moins `seuil_scen` enquêtes dans la fenêtre courte — pour ne pas moyenner des
+    #    configurations de candidatures différentes, et pour ne pas s'accrocher à une liste que
+    #    plus aucun institut ne teste. Le 16/11/2026, H42 (20 enquêtes) n'avait plus été testée
+    #    depuis le 05/11 quand H67 (19 enquêtes) l'était le 13/11 : compter d'abord le nombre
+    #    d'enquêtes figeait la page sur une liste morte.
     if scenario_sign is not None:
         scen_sign = tuple(scenario_sign)
         scen_recent = [(p, age, d) for (p, age, d) in r1
@@ -792,14 +796,18 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
             recent = defaultdict(list)
             for item in r1:
                 recent[signature(item[0])].append(item)
-        # Départage : le plus de sondages, puis la plus grande fraîcheur — et, à égalité
+        # Une liste testée une seule fois ne devient pas la référence : on exige le même seuil
+        # que pour publier un candidat. S'il n'y a pas de quoi, on retombe sur toutes les listes.
+        seuil_scen = MIN_POLLS
+        eligibles = {k: v for k, v in recent.items() if len(v) >= seuil_scen} or recent
+        # Départage : la plus grande fraîcheur, puis le plus de sondages — et, à égalité
         # stricte, la liste du relevé précédent. Sans ce troisième critère, `max()` tranche
         # sur l'ordre interne des données : le 29/09/2026 les deux listes de dix noms
         # comptaient 10 sondages chacune et la page a changé de tableau pour un tirage.
         # Ne s'applique qu'au relevé du jour : un point rétro-calculé garde la règle du maximum.
         precedent = _scenario_precedent() if as_of is None else ()
-        scen_sign, scen_recent = max(recent.items(),
-                                     key=lambda kv: (len(kv[1]), max(-x[1] for x in kv[1]),
+        scen_sign, scen_recent = max(eligibles.items(),
+                                     key=lambda kv: (max(-x[1] for x in kv[1]), len(kv[1]),
                                                      tuple(kv[0]) == precedent))
         scenario = scen_recent[0][0]["hypothese"]
 
@@ -1500,7 +1508,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
       {"".join(f"<li>{w}</li>" for w in watch) or "<li>Pas assez de candidats pour comparer les écarts.</li>"}
       <li>Total des intentions : {fr(agg["total_intentions"])} % (les intentions des candidats
       sous le seuil de {agg["min_polls"]} sondages ne sont pas affichées ; chaque ligne étant arrondie
-      au dixième, leur somme peut s'en écarter d'un dixième).</li>
+      au dixième, leur somme peut s'en écarter de quelques dixièmes).</li>
     </ul>
   </div>
 </section>
@@ -1581,8 +1589,9 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
   <code>n_eff = (Σw)² / Σw²</code> — et il est plancheré à ±{fr(agg["ic_floor"])} point, parce qu'un
   intervalle calculé sur peu de sondages donnerait une fausse précision.</p>
   <p class="small"><strong>Deux fenêtres, pour une raison.</strong> Le <em>scénario</em> est choisi
-  sur les {agg["window"]} derniers jours (le plus testé récemment) : c'est lui qui doit être à jour,
-  puisque les listes de candidats bougent. Les <em>moyennes</em> sont ensuite calculées sur tous les
+  sur les {agg["window"]} derniers jours : la liste testée le plus récemment parmi celles qui
+  comptent au moins {agg["min_polls"]} enquêtes — c'est elle qui doit être à jour, puisque les
+  listes de candidats bougent. Les <em>moyennes</em> sont ensuite calculées sur tous les
   sondages de ce même scénario dans les {agg["agg_window"]} derniers jours
   ({agg["polls_aggregated"]} sondages), pondérés par la fraîcheur. Mélanger les scénarios produirait
   des chiffres faux ; n'utiliser que {agg["window"]} jours produirait des moyennes trop instables.</p>
@@ -1843,9 +1852,10 @@ def render_landing(agg, movs=None, trends=None, fc=None):
       notices officielles de la Commission des sondages. Jamais d'un chiffre repris de seconde main
       sans origine.</p></div>
     <div class="card2"><h3>Un scénario à la fois</h3>
-      <p>Un sondage ne vaut que pour la liste de candidats qu'il teste. Nous retenons le scénario le
-      plus testé récemment et nous ignorons les autres, plutôt que de moyenner des configurations
-      différentes et de produire un chiffre qui n'existe nulle part.</p></div>
+      <p>Un sondage ne vaut que pour la liste de candidats qu'il teste. Nous retenons la liste testée
+      le plus récemment — à condition qu'au moins {agg["min_polls"]} enquêtes l'aient testée sur les
+      {agg["window"]} derniers jours — et nous ignorons les autres, plutôt que de moyenner des
+      configurations différentes et de produire un chiffre qui n'existe nulle part.</p></div>
     <div class="card2"><h3>Les limites avec les chiffres</h3>
       <p>Intervalle, amplitude observée, instituts, nombre de sondages, et la liste de ce que la
       méthode ne fait pas : tout est publié sur la même page que les résultats.</p></div>
@@ -1886,10 +1896,12 @@ def render_landing(agg, movs=None, trends=None, fc=None):
     <li><strong>Collecte.</strong> Nous lisons le flux public de la compilation MieuxVoter
     (CSV et JSON), premier tour uniquement. Quand une notice publiée par la Commission des sondages
     n'y figure pas encore, nous l'extrayons nous-mêmes et la fusionnons sans doublon — même institut,
-    mêmes dates de terrain, même hypothèse ; la compilation reste prioritaire, et l'apport disparaît
-    d'elle-même dès qu'elle rattrape l'enquête.</li>
-    <li><strong>Choix du scénario.</strong> Le scénario retenu est celui qui compte le plus de
-    sondages sur les {agg["window"]} derniers jours — les listes de candidats bougent encore.</li>
+    mêmes dates de terrain, même ensemble de candidats testés ; la compilation reste prioritaire, et
+    l'apport disparaît d'elle-même dès qu'elle rattrape l'enquête.</li>
+    <li><strong>Choix du scénario.</strong> Le scénario retenu est la liste testée le plus récemment
+    sur les {agg["window"]} derniers jours, parmi celles qui comptent au moins {agg["min_polls"]}
+    enquêtes — les listes de candidats bougent encore, et une liste que plus aucun institut ne teste
+    ne doit pas rester en tête.</li>
     <li><strong>Pondération.</strong> Chaque sondage pèse selon son âge (demi-vie de
     {agg["half_life"]} jours) et la racine de son échantillon.</li>
     <li><strong>Incertitude.</strong> L'intervalle à 95 % de la moyenne est plancheré à

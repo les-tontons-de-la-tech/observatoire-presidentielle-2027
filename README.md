@@ -56,8 +56,9 @@ Aucune dépendance : ni `pip install`, ni build. Les textes rédigés vivent dan
 
 **Règle** : les intentions de vote viennent d'**une seule** compilation licite, complétée le cas
 échéant par notre extraction des notices officielles — jamais par un second jeu de sondages
-concurrent. Les deux apports sont fusionnés sans doublon (institut + dates de terrain + hypothèse),
-et la compilation reste prioritaire : voir « Couche locale d'import » ci-dessous. Les autres sources sont des **couches
+concurrent. Les deux apports sont fusionnés sans doublon (institut + dates de terrain + ensemble des
+candidats testés), et la compilation reste prioritaire : voir « Couche locale d'import » ci-dessous.
+Les autres sources sont des **couches
 séparées et étiquetées**, jamais additionnées.
 
 | Source | Nature | Licence | Usage |
@@ -92,8 +93,10 @@ IC 95 % = max( 1,96 × σ_pondéré / √n_eff , 1 point )        n_eff = (Σw)�
 ```
 
 - **Sélection du scénario** : fenêtre de **90 jours** (mesurée sur 2022 : couverture complète des
-  échéances, erreur moyenne 3,11 pt contre 3,19 pt à 60 jours) ; **agrégation** : 180 jours du même
-  scénario ; **publication** : au moins 3 sondages.
+  échéances, erreur moyenne 3,11 pt contre 3,19 pt à 60 jours) ; la liste retenue est celle **testée
+  le plus récemment** parmi celles qui comptent au moins 3 enquêtes — une liste que plus aucun
+  institut ne teste ne reste pas en tête ; **agrégation** : 180 jours du même scénario ;
+  **publication** : au moins 3 sondages.
 - **Correction des effets de maison** (`HOUSE_CORRECTION = True`) : l'écart moyen de chaque institut au
   consensus des autres est estimé par itérations, contracté vers zéro selon le nombre d'enquêtes, puis
   retranché avant agrégation. Gain mesuré : 0,04 pt à fenêtre égale — réel mais faible, parce que les

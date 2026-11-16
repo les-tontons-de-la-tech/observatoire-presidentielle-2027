@@ -53,10 +53,25 @@ def main():
         # 3. Un écart réel (4 sondages contre 3) n'est pas écrasé par le relevé précédent.
         majorite = G.aggregate(egalite + [_sondage("Inst99", hier, a)])
         assert majorite["scenario_sign"] == sorted(a), majorite["scenario_sign"]
+
+        # 4. La fraîcheur passe avant le nombre : 4 enquêtes anciennes ne gardent pas la tête
+        #    devant 3 enquêtes récentes — cas H42 (20 enquêtes, plus testée depuis le 05/11/2026)
+        #    contre H67 (19 enquêtes, testée le 13/11/2026).
+        vieux = [_sondage(f"V{i}", (G.TODAY - datetime.timedelta(days=40)).isoformat(), a)
+                 for i in range(4)]
+        recents = [_sondage(f"R{i}", hier, b) for i in range(3)]
+        frais = G.aggregate(vieux + recents)
+        assert frais["scenario_sign"] == sorted(b), frais["scenario_sign"]
+
+        # 5. Une liste testée une seule fois ne devient pas la référence, même plus fraîche :
+        #    il faut au moins MIN_POLLS enquêtes pour être éligible.
+        isole = _sondage("Unique", (G.TODAY - datetime.timedelta(days=1)).isoformat(), _liste("c"))
+        seuil = G.aggregate(vieux + recents + [isole])
+        assert seuil["scenario_sign"] == sorted(b), seuil["scenario_sign"]
     finally:
         G.DATA = garde
         shutil.rmtree(tmp)
-    print("OK — égalité départagée par le relevé précédent, majorité respectée")
+    print("OK — fraîcheur d'abord, seuil de 3 enquêtes, égalité départagée par le relevé précédent")
 
 
 if __name__ == "__main__":

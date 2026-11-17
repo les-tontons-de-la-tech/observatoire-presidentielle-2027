@@ -230,22 +230,20 @@ def traduire(html):
     EXACT = {fr: en for fr, en in FRAGMENTS + EXACTES}
 
     def sur_texte(mo):
-        t = mo.group(0)
-        # Un nœud dont le texte, espaces normalisés, correspond exactement à une
-        # entrée du dictionnaire est remplacé en bloc : c'est le seul moyen sûr de
-        # traduire une phrase coupée sur plusieurs lignes dans le gabarit.
-        norme = " ".join(t.split())
+        # mo.group(1) est le texte seul : les chevrons appartiennent au motif et ne
+        # doivent pas être réémis, sinon on obtient « >>FR<< » dans la page.
+        norme = " ".join(mo.group(1).split())
         if norme in EXACT:
-            return ">" + EXACT[norme] + "<"
+            return EXACT[norme]
         # Les phrases du gabarit sont coupées sur plusieurs lignes : on travaille
         # donc sur le texte normalisé, sinon aucun fragment ne pourrait s'y trouver.
         for fr, en in TRI:
             if fr in norme:
                 norme = norme.replace(fr, en)
-        return ">" + norme + "<"
+        return norme
 
-    # On ne traite que ce qui est entre > et < : les attributs restent intacts.
-    return re.sub(r">[^<>]+<", sur_texte, html)
+    # On ne traite que le texte entre les balises : les attributs restent intacts.
+    return re.sub(r"(?<=>)([^<>]+)(?=<)", sur_texte, html)
 
 
 def restes(html):

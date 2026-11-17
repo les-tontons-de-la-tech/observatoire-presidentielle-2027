@@ -10,20 +10,26 @@
   {
    "niveau": "officiel",
    "quoi": "liste des candidats : décision du Conseil constitutionnel publiée au Journal officiel, décret de convocation, dates des tours",
+   "quoi_en": "candidate list: Constitutional Council decision published in the Official Journal, convening decree, dates of the rounds",
    "url": "https://www.info.gouv.fr/",
-   "note": "seule source qui fait foi pour l'officialisation ; rien n'est officialisé avant mars-avril 2027"
+   "note": "seule source qui fait foi pour l'officialisation ; rien n'est officialisé avant mars-avril 2027",
+   "note_en": "the only authoritative source for officialisation; nothing is official before March-April 2027"
   },
   {
    "niveau": "consolidation presse",
    "quoi": "dossier de suivi de la présidentielle 2027, articles publiés au fil de l'eau",
+   "quoi_en": "2027 presidential election tracking dossier, articles published as they come",
    "url": "https://lcp.fr/dossiers/presidentielle-2027-434148",
-   "note": "LCP (Assemblée nationale). La veille hebdomadaire du lundi lit la date de modification du dossier et les titres qui y sont publiés ; elle signale, l'auteur tranche. Une personne citée dans un titre n'est pas une candidature."
+   "note": "LCP (Assemblée nationale). La veille hebdomadaire du lundi lit la date de modification du dossier et les titres qui y sont publiés ; elle signale, l'auteur tranche. Une personne citée dans un titre n'est pas une candidature.",
+   "note_en": "LCP (National Assembly). The Monday weekly check reads the dossier's modification date and the headlines published there; it flags, the author decides. A person named in a headline is not a candidacy."
   },
   {
    "niveau": "primaire",
    "quoi": "date exacte de chaque déclaration",
+   "quoi_en": "exact date of each declaration",
    "url": "",
-   "note": "source de première main citée ligne par ligne (AFP, TF1, RTL, Le Point, X du candidat) — jamais une date sans source"
+   "note": "source de première main citée ligne par ligne (AFP, TF1, RTL, Le Point, X du candidat) — jamais une date sans source",
+   "note_en": "first-hand source cited line by line (AFP, TF1, RTL, Le Point, the candidate's X account) — never a date without a source"
   }
  ],
  "candidats": [
@@ -36,7 +42,8 @@
    "precision": "jour",
    "source": "https://www.lepoint.fr/politique/exclusif-edouard-philippe-je-serai-candidat-a-la-prochaine-election-presidentielle-03-09-2024-2569359_20.php",
    "source_label": "Le Point, 03/09/2024",
-   "commentaire": "premier à se déclarer, avant même la fin du mandat."
+   "commentaire": "premier à se déclarer, avant même la fin du mandat.",
+   "commentaire_en": "first to declare, even before the end of the term."
   },
   {
    "nom": "Gabriel Attal",
@@ -47,7 +54,8 @@
    "precision": "jour",
    "source": "https://lcp.fr/actualites/presidentielle-2027-gabriel-attal-officialise-sa-candidature-436721",
    "source_label": "LCP, 22/05/2026",
-   "commentaire": "officialisée autour de cinq priorités (école, salaires, frontières, IA) ; premier meeting la semaine suivante."
+   "commentaire": "officialisée autour de cinq priorités (école, salaires, frontières, IA) ; premier meeting la semaine suivante.",
+   "commentaire_en": "made official around five priorities (schools, wages, borders, AI); first rally the following week."
   },
   {
    "nom": "Bruno Retailleau",
@@ -58,7 +66,8 @@
    "precision": "mois",
    "source": "https://lcp.fr/actualites/presidentielle-bruno-retailleau-choisi-comme-candidat-officiel-des-republicains-435440",
    "source_label": "LCP, mi-avril 2026",
-   "commentaire": "désigné par les adhérents LR lors d'une consultation interne."
+   "commentaire": "désigné par les adhérents LR lors d'une consultation interne.",
+   "commentaire_en": "designated by LR members in an internal consultation."
   },
   {
    "nom": "David Lisnard",
@@ -69,7 +78,8 @@
    "precision": "jour",
    "source": "https://lcp.fr/actualites/je-suis-candidat-david-lisnard-quitte-lr-et-relance-le-debat-sur-une-primaire-a-droite",
    "source_label": "LCP, 31/03/2026",
-   "commentaire": "déclare sa candidature le 31 mars 2026 en quittant Les Républicains, dont il dénonce l'investiture de Bruno Retailleau sans primaire. Candidat de Nouvelle Énergie, il plaide pour une primaire ouverte à droite. Percée à l'automne 2026 : 7 à 8 % dans les sondages, devant parfois Bruno Retailleau, plus de 55 000 abonnés Instagram gagnés en une semaine et environ 100 000 adhérents revendiqués par son parti, chiffre non vérifiable (franceinfo, novembre 2026). Son camp le compare à la percée de François Bayrou en 2007, crédité de 18 % au premier tour. Réélection quasi assurée à la présidence de l'Association des maires de France, vote électronique du 23 au 25 novembre 2026 (Le Monde, 10 novembre 2026)."
+   "commentaire": "déclare sa candidature le 31 mars 2026 en quittant Les Républicains, dont il dénonce l'investiture de Bruno Retailleau sans primaire. Candidat de Nouvelle Énergie, il plaide pour une primaire ouverte à droite. Percée à l'automne 2026 : 7 à 8 % dans les sondages, devant parfois Bruno Retailleau, plus de 55 000 abonnés Instagram gagnés en une semaine et environ 100 000 adhérents revendiqués par son parti, chiffre non vérifiable (franceinfo, novembre 2026). Son camp le compare à la percée de François Bayrou en 2007, crédité de 18 % au premier tour. Réélection quasi assurée à la présidence de l'Association des maires de France, vote électronique du 23 au 25 novembre 2026 (Le Monde, 10 novembre 2026).",
+   "commentaire_en": "declared his candidacy on 31 March 2026 while leaving Les Républicains, whose investiture of Bruno Retailleau without a primary he denounced. Candidate of Nouvelle Énergie, he argues for an open primary on the right. Breakthrough in autumn 2026: 7 to 8 % in the polls, sometimes ahead of Bruno Retailleau, more than 55,000 Instagram followers gained in one week and about 100,000 members claimed by his party, a figure that cannot be verified (franceinfo, November 2026). His camp compares him to François Bayrou's breakthrough in 2007, credited with 18 % in the first round. Re-election as president of the Association des maires de France all but certain, electronic vote from 23 to 25 November 2026 (Le Monde, 10 November 2026)."
   },
   {
    "nom": "Xavier Bertrand",
@@ -80,7 +90,8 @@
    "precision": "jour",
    "source": "https://lcp.fr/actualites/2027-figure-de-la-droite-xavier-bertrand-confirme-qu-il-sera-candidat-a-l-election",
    "source_label": "LCP, 26/08/2026",
-   "commentaire": "confirmation après une première annonce en février."
+   "commentaire": "confirmation après une première annonce en février.",
+   "commentaire_en": "confirmation after a first announcement in February."
   },
   {
    "nom": "Gilles Platret",
@@ -91,7 +102,8 @@
    "precision": "jour",
    "source": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-le-maire-divers-droite-de-chalon-sur-saone-gilles-platret-annonce-sa-candidature_AN-202610090630.html",
    "source_label": "BFM TV, 09/10/2026",
-   "commentaire": "maire de Chalon-sur-Saône depuis 2014, réélu en mars 2026, conseiller régional de Bourgogne-Franche-Comté, ancien vice-président des Républicains jusqu'en 2023 ; a lancé sa démarche au meeting « Parlons de la France », sans prononcer ce soir-là le mot « candidat »."
+   "commentaire": "maire de Chalon-sur-Saône depuis 2014, réélu en mars 2026, conseiller régional de Bourgogne-Franche-Comté, ancien vice-président des Républicains jusqu'en 2023 ; a lancé sa démarche au meeting « Parlons de la France », sans prononcer ce soir-là le mot « candidat ».",
+   "commentaire_en": "mayor of Chalon-sur-Saône since 2014, re-elected in March 2026, regional councillor for Bourgogne-Franche-Comté, former vice-president of Les Républicains until 2023; launched his bid at the “Parlons de la France” rally, without uttering the word “candidate” that evening."
   },
   {
    "nom": "Marine Le Pen",
@@ -102,7 +114,8 @@
    "precision": "jour",
    "source": "https://lcp.fr/actualites/ce-soir-je-suis-candidate-a-l-election-presidentielle-annonce-marine-le-pen-438886",
    "source_label": "LCP, 07/07/2026",
-   "commentaire": "lancée dès septembre 2023 sur TF1, confirmée après la décision de la cour d'appel de Paris."
+   "commentaire": "lancée dès septembre 2023 sur TF1, confirmée après la décision de la cour d'appel de Paris.",
+   "commentaire_en": "launched in September 2023 on TF1, confirmed after the Paris appeal court's ruling."
   },
   {
    "nom": "Jean-Luc Mélenchon",
@@ -113,7 +126,8 @@
    "precision": "mois",
    "source": "https://lcp.fr/actualites/presidentielle-jean-luc-melenchon-officialise-sa-candidature-pour-2027-435851",
    "source_label": "LCP, fin mai 2026",
-   "commentaire": "quatrième candidature consécutive."
+   "commentaire": "quatrième candidature consécutive.",
+   "commentaire_en": "fourth consecutive candidacy."
   },
   {
    "nom": "Fabien Roussel",
@@ -124,7 +138,8 @@
    "precision": "jour",
    "source": "https://lcp.fr/actualites/fabien-roussel-officiellement-candidat-du-pcf-a-l-election-presidentielle-de-2027-441389",
    "source_label": "LCP, 06/09/2026",
-   "commentaire": "validé par le vote des militants à 72 %."
+   "commentaire": "validé par le vote des militants à 72 %.",
+   "commentaire_en": "approved by a members' vote with 72 %."
   },
   {
    "nom": "Delphine Batho",
@@ -135,7 +150,8 @@
    "precision": "jour",
    "source": "https://www.nouvelobs.com/politique/20251125.OBS110076/delphine-batho-je-suis-candidate-a-l-election-presidentielle-pour-reconstruire-une-ecologie-capable-de-gouverner.html",
    "source_label": "Le Nouvel Obs, 25/11/2025",
-   "commentaire": "« pour reconstruire une écologie capable de gouverner »."
+   "commentaire": "« pour reconstruire une écologie capable de gouverner ».",
+   "commentaire_en": "“to rebuild an ecology capable of governing”."
   },
   {
    "nom": "Karim Bouamrane",
@@ -146,7 +162,8 @@
    "precision": "mois",
    "source": "https://x.com/karim_bouamrane/status/2064254272712130638",
    "source_label": "X, juin 2026",
-   "commentaire": "maire de Saint-Ouen, « pour une France humaine et une France forte » — date à préciser."
+   "commentaire": "maire de Saint-Ouen, « pour une France humaine et une France forte » — date à préciser.",
+   "commentaire_en": "mayor of Saint-Ouen, “for a humane and strong France” — date to be confirmed."
   },
   {
    "nom": "Nathalie Arthaud",
@@ -157,7 +174,8 @@
    "precision": "jour",
    "source": "https://www.bfmtv.com/politique/election-presidentielle-2027-nathalie-arthaud-annonce-sa-candidature-pour-lutte-ouvriere_AD-202512080393.html",
    "source_label": "BFM TV, 08/12/2025",
-   "commentaire": "porte-parole de Lutte ouvrière ; elle a annoncé le 8 décembre 2025 sa candidature à la présidentielle de 2027, sa quatrième depuis 2012."
+   "commentaire": "porte-parole de Lutte ouvrière ; elle a annoncé le 8 décembre 2025 sa candidature à la présidentielle de 2027, sa quatrième depuis 2012.",
+   "commentaire_en": "spokesperson of Lutte ouvrière; she announced on 8 December 2025 her candidacy for the 2027 presidential election, her fourth since 2012."
   },
   {
    "nom": "Nicolas Dupont-Aignan",
@@ -168,7 +186,8 @@
    "precision": "jour",
    "source": "https://www.lefigaro.fr/politique/nicolas-dupont-aignan-se-declare-candidat-a-la-prochaine-election-presidentielle-20250308",
    "source_label": "Le Figaro, 08/03/2025",
-   "commentaire": "président de Debout la France ; il a annoncé sa candidature le 8 mars 2025 devant ses militants réunis à Yerres, pour la quatrième fois consécutive."
+   "commentaire": "président de Debout la France ; il a annoncé sa candidature le 8 mars 2025 devant ses militants réunis à Yerres, pour la quatrième fois consécutive.",
+   "commentaire_en": "president of Debout la France; he announced his candidacy on 8 March 2025 before his members gathered in Yerres, for the fourth time in a row."
   },
   {
    "nom": "Florian Philippot",
@@ -179,7 +198,8 @@
    "precision": "jour",
    "source": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-le-president-des-patriotes-florian-philippot-annonce-etre-candidat-a-l-elysee_AN-202605090155.html",
    "source_label": "BFM TV, 09/05/2026",
-   "commentaire": "président des Patriotes ; il a annoncé le 9 mai 2026 être candidat, en précisant qu'il se rangerait derrière une candidature souverainiste plus rassembleuse, notamment si Philippe de Villiers se présentait."
+   "commentaire": "président des Patriotes ; il a annoncé le 9 mai 2026 être candidat, en précisant qu'il se rangerait derrière une candidature souverainiste plus rassembleuse, notamment si Philippe de Villiers se présentait.",
+   "commentaire_en": "president of Les Patriotes; he announced on 9 May 2026 that he was a candidate, adding that he would step behind a more unifying sovereignist candidacy, notably if Philippe de Villiers were to run."
   },
   {
    "nom": "François Asselineau",
@@ -190,7 +210,8 @@
    "precision": "jour",
    "source": "https://www.lopinion.fr/politique/edouard-philippe-bruno-retailleau-jerome-guedj-qui-sont-les-candidats-a-lelection-presidentielle-2027",
    "source_label": "L'Opinion, 14/10/2026",
-   "commentaire": "président de l'Union populaire républicaine ; il a annoncé sa candidature le 21 mars 2026, lors du 19e anniversaire de son parti à Paris."
+   "commentaire": "président de l'Union populaire républicaine ; il a annoncé sa candidature le 21 mars 2026, lors du 19e anniversaire de son parti à Paris.",
+   "commentaire_en": "president of the Union populaire républicaine; he announced his candidacy on 21 March 2026, at his party's 19th anniversary in Paris."
   },
   {
    "nom": "Clara Egger",
@@ -201,7 +222,8 @@
    "precision": "jour",
    "source": "https://www.lopinion.fr/politique/edouard-philippe-bruno-retailleau-jerome-guedj-qui-sont-les-candidats-a-lelection-presidentielle-2027",
    "source_label": "L'Opinion, 14/10/2026",
-   "commentaire": "présidente de Solution démocratique ; sa candidature a été annoncée le 20 avril 2026, le communiqué publié sur le site du parti étant horodaté la veille au soir."
+   "commentaire": "présidente de Solution démocratique ; sa candidature a été annoncée le 20 avril 2026, le communiqué publié sur le site du parti étant horodaté la veille au soir.",
+   "commentaire_en": "president of Solution démocratique; her candidacy was announced on 20 April 2026, the press release published on the party's website being timestamped the previous evening."
   },
   {
    "nom": "Antoine Mikolajczak",
@@ -212,7 +234,8 @@
    "precision": "jour",
    "source": "https://www.larep.fr/saint-pere-sur-loire-45600/actualites/presidentielle-2027-le-parti-equinoxe-et-antoine-mikolajczak-lancent-leur-campagne-dans-un-village-du-loiret_15011694/",
    "source_label": "La République du Centre, 27/06/2026",
-   "commentaire": "candidat du parti Équinoxe, désigné par un vote des adhérents au jugement majoritaire. Candidature annoncée le 27 juin 2026 à Saint-Père-sur-Loire (Loiret), au lancement de la campagne du parti. Né en 1998, ingénieur diplômé de l'Icam de Lille, cinq ans de montage de projets locaux d'énergies renouvelables avec collectivités, agriculteurs et habitants ; engagé à Équinoxe depuis les européennes de 2024, responsable du groupe local du 5e arrondissement de Paris. Programme « Renouer avec notre avenir — L'essentiel » publié le 5 novembre 2026, en trois axes (décider collectivement, produire en France, vivre en bonne santé) ; programme complet annoncé. Collecte des parrainages en cours. Équinoxe : parti écologiste fondé en 2021 par des élèves de grandes écoles du plateau de Saclay, 6 500 adhérents selon Le Canard enchaîné du 1er novembre 2026, qui le classe parmi les « petits candidats ». Ligne revendiquée : la subsidiarité et « des règles plus simples » (portrait du Parisien, 12 août 2026)."
+   "commentaire": "candidat du parti Équinoxe, désigné par un vote des adhérents au jugement majoritaire. Candidature annoncée le 27 juin 2026 à Saint-Père-sur-Loire (Loiret), au lancement de la campagne du parti. Né en 1998, ingénieur diplômé de l'Icam de Lille, cinq ans de montage de projets locaux d'énergies renouvelables avec collectivités, agriculteurs et habitants ; engagé à Équinoxe depuis les européennes de 2024, responsable du groupe local du 5e arrondissement de Paris. Programme « Renouer avec notre avenir — L'essentiel » publié le 5 novembre 2026, en trois axes (décider collectivement, produire en France, vivre en bonne santé) ; programme complet annoncé. Collecte des parrainages en cours. Équinoxe : parti écologiste fondé en 2021 par des élèves de grandes écoles du plateau de Saclay, 6 500 adhérents selon Le Canard enchaîné du 1er novembre 2026, qui le classe parmi les « petits candidats ». Ligne revendiquée : la subsidiarité et « des règles plus simples » (portrait du Parisien, 12 août 2026).",
+   "commentaire_en": "candidate of the Équinoxe party, designated by a members' vote under majority judgement. Candidacy announced on 27 June 2026 at Saint-Père-sur-Loire (Loiret), at the launch of the party's campaign. Born in 1998, an engineering graduate of Icam Lille, five years building local renewable-energy projects with local authorities, farmers and residents; involved with Équinoxe since the 2024 European elections, head of the local group in Paris's 5th arrondissement. Programme “Renouer avec notre avenir — L'essentiel” published on 5 November 2026, in three axes (deciding collectively, producing in France, living in good health); a full programme has been announced. Signature collection under way. Équinoxe: green party founded in 2021 by graduates of the grandes écoles of the Saclay plateau, 6,500 members according to Le Canard enchaîné of 1 November 2026, which ranks it among the “small candidates”. Claimed line: subsidiarity and “simpler rules” (portrait in Le Parisien, 12 August 2026)."
   },
   {
    "nom": "Francis Lalanne",
@@ -223,7 +246,8 @@
    "precision": "jour",
    "source": "https://www.cnews.fr/france/2026-08-19/presidentielle-2027-francis-lalanne-se-porte-officiellement-candidat-1906812",
    "source_label": "CNEWS, 19/08/2026",
-   "commentaire": "soutenu par le mouvement France Libre ; il a annoncé sa candidature dans un communiqué du 19 août 2026 et a ouvert sa campagne par un meeting à Paris."
+   "commentaire": "soutenu par le mouvement France Libre ; il a annoncé sa candidature dans un communiqué du 19 août 2026 et a ouvert sa campagne par un meeting à Paris.",
+   "commentaire_en": "backed by the France Libre movement; he announced his candidacy in a press release of 19 August 2026 and opened his campaign with a rally in Paris."
   },
   {
    "nom": "Raphaël Glucksmann",
@@ -234,7 +258,8 @@
    "precision": "jour",
    "source": "https://www.bfmtv.com/politique/elections/presidentielle/raphael-glucksmann-largement-elu-des-le-premier-tour-de-la-primaire-de-la-gauche-sociale-democrate_AV-202610110303.html",
    "source_label": "BFM TV, 11/10/2026",
-   "commentaire": "élu dès le premier tour de la primaire du camp social-démocrate, le 11 octobre 2026, avec 66 % des voix (79 613 voix sur les 120 307 votants, 140 282 inscrits). Il est le candidat de la gauche sociale-démocrate."
+   "commentaire": "élu dès le premier tour de la primaire du camp social-démocrate, le 11 octobre 2026, avec 66 % des voix (79 613 voix sur les 120 307 votants, 140 282 inscrits). Il est le candidat de la gauche sociale-démocrate.",
+   "commentaire_en": "elected in the first round of the social-democratic camp's primary, on 11 October 2026, with 66 % of the vote (79,613 votes out of 120,307 voters, 140,282 registered). He is the candidate of the social-democratic left."
   },
   {
    "nom": "Natacha Polony",
@@ -245,7 +270,8 @@
    "precision": "jour",
    "source": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-je-suis-candidate-annonce-la-journaliste-natacha-polony-20261014",
    "source_label": "Le Figaro, 14/10/2026",
-   "commentaire": "essayiste, ancienne directrice de la rédaction de Marianne, directrice de la revue L'Audace ! ; elle revendique le « gaullisme social » de Philippe Séguin et la gauche républicaine de Jean-Pierre Chevènement ; mouvement lancé début septembre 2026 pour « tous les orphelins de la politique », dont elle affirme qu'il a rassemblé « 60 000 personnes » ; association de financement électorale déposée le 29 septembre 2026."
+   "commentaire": "essayiste, ancienne directrice de la rédaction de Marianne, directrice de la revue L'Audace ! ; elle revendique le « gaullisme social » de Philippe Séguin et la gauche républicaine de Jean-Pierre Chevènement ; mouvement lancé début septembre 2026 pour « tous les orphelins de la politique », dont elle affirme qu'il a rassemblé « 60 000 personnes » ; association de financement électorale déposée le 29 septembre 2026.",
+   "commentaire_en": "essayist, former editor-in-chief of Marianne, editor of the review L'Audace !; she claims the “social Gaullism” of Philippe Séguin and the republican left of Jean-Pierre Chevènement; movement launched in early September 2026 for “all the orphans of politics”, which she says brought together “60,000 people”; electoral financing association filed on 29 September 2026."
   },
   {
    "nom": "Olivier Faure",
@@ -256,7 +282,8 @@
    "precision": "jour",
    "source": "https://www.bfmtv.com/politique/elections/presidentielle/primaire-du-parti-socialiste-et-de-place-publique-la-gauche-sociale-democrate-choisit-son-candidat-pour-la-presidentielle-2027-plus-de-100-00-votants-pour-l-heure-recenses_LN-202610110078.html",
    "source_label": "BFM TV (direct), 11/10/2026",
-   "commentaire": "arrivé deuxième de la primaire (14,43 %) ; il a félicité Raphaël Glucksmann : « Nous avons désormais un candidat, à nous tous et toutes de forcer un esprit de victoire. »"
+   "commentaire": "arrivé deuxième de la primaire (14,43 %) ; il a félicité Raphaël Glucksmann : « Nous avons désormais un candidat, à nous tous et toutes de forcer un esprit de victoire. »",
+   "commentaire_en": "second in the primary (14.43 %); he congratulated Raphaël Glucksmann: “We now have a candidate, and it is up to all of us to force a spirit of victory.”"
   },
   {
    "nom": "Ségolène Royal",
@@ -267,7 +294,8 @@
    "precision": "jour",
    "source": "https://www.latribune.fr/article/la-tribune-dimanche/politique/2266887398757114/presidentielle-raphael-glucksmann-remporte-largement-la-primaire-sociale-democrate-des-le-premier-tour",
    "source_label": "La Tribune, 11/10/2026",
-   "commentaire": "arrivée troisième de la primaire (7,62 %) ; dit sa déception et se dit prête à « aider à ce rassemblement à gauche »."
+   "commentaire": "arrivée troisième de la primaire (7,62 %) ; dit sa déception et se dit prête à « aider à ce rassemblement à gauche ».",
+   "commentaire_en": "third in the primary (7.62 %); expressed her disappointment and said she was ready to “help build this gathering on the left”."
   },
   {
    "nom": "Emmanuel Maurel",
@@ -278,7 +306,8 @@
    "precision": "jour",
    "source": "https://www.latribune.fr/article/la-tribune-dimanche/politique/2266887398757114/presidentielle-raphael-glucksmann-remporte-largement-la-primaire-sociale-democrate-des-le-premier-tour",
    "source_label": "La Tribune, 11/10/2026",
-   "commentaire": "arrivé quatrième de la primaire (5,92 %) ; « félicite Raphaël Glucksmann pour sa très large victoire, qui l'oblige et qui nous oblige » et lui apporte un « soutien loyal et exigeant »."
+   "commentaire": "arrivé quatrième de la primaire (5,92 %) ; « félicite Raphaël Glucksmann pour sa très large victoire, qui l'oblige et qui nous oblige » et lui apporte un « soutien loyal et exigeant ».",
+   "commentaire_en": "fourth in the primary (5.92 %); “congratulates Raphaël Glucksmann on his very wide victory, which binds him and binds us” and offers him “loyal and demanding support”."
   },
   {
    "nom": "Fabien Verdier",
@@ -289,7 +318,8 @@
    "precision": "jour",
    "source": "https://www.intensite.net/primaire-ps-place-publique-l-ex-maire-de-chateaudun-fabien-verdier-encore-prive-de-scrutin",
    "source_label": "Intensité, 16/09/2026",
-   "commentaire": "ancien maire de Châteaudun ; écarté de la primaire socialiste faute de parrainages, le 16 septembre 2026."
+   "commentaire": "ancien maire de Châteaudun ; écarté de la primaire socialiste faute de parrainages, le 16 septembre 2026.",
+   "commentaire_en": "former mayor of Châteaudun; excluded from the socialist primary for lack of signatures, on 16 September 2026."
   },
   {
    "nom": "Philippe Brun",
@@ -300,7 +330,8 @@
    "precision": "mois",
    "source": "https://www.ladepeche.fr/2026/09/16/presidentielle-2027-accuse-de-violences-le-depute-philippe-brun-suspendu-par-le-parti-socialiste-ne-participera-pas-a-la-primaire-13553652.php",
    "source_label": "La Dépêche, 16/09/2026",
-   "commentaire": "suspendu à titre conservatoire par le Parti socialiste après les accusations d'une militante : harcèlement, violences physiques, emploi familial d'un proche. Écarté de la primaire ; il conteste les faits et a lui-même porté plainte."
+   "commentaire": "suspendu à titre conservatoire par le Parti socialiste après les accusations d'une militante : harcèlement, violences physiques, emploi familial d'un proche. Écarté de la primaire ; il conteste les faits et a lui-même porté plainte.",
+   "commentaire_en": "suspended as a precaution by the Socialist Party after accusations by a party member: harassment, physical violence, employing a relative. Excluded from the primary; he denies the facts and has himself filed a complaint."
   },
   {
    "nom": "Jérôme Guedj",
@@ -311,7 +342,8 @@
    "precision": "mois",
    "source": "https://www.latribune.fr/article/la-tribune-dimanche/politique/2266887398757114/presidentielle-raphael-glucksmann-remporte-largement-la-primaire-sociale-democrate-des-le-premier-tour",
    "source_label": "La Tribune, 11/10/2026",
-   "commentaire": "arrivé cinquième de la primaire (5,83 %) ; « La primaire, désormais, elle est derrière nous. Le vote est clair », et appelle à partir en campagne pour la gauche."
+   "commentaire": "arrivé cinquième de la primaire (5,83 %) ; « La primaire, désormais, elle est derrière nous. Le vote est clair », et appelle à partir en campagne pour la gauche.",
+   "commentaire_en": "fifth in the primary (5.83 %); “The primary is now behind us. The vote is clear”, and he calls for campaigning for the left."
   },
   {
    "nom": "Marine Tondelier",
@@ -322,7 +354,8 @@
    "precision": "jour",
    "source": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-personne-ne-gagnera-seul-assure-marine-tondelier",
    "source_label": "Public Sénat, 05/11/2026",
-   "commentaire": "déclarée le 22 octobre 2025 dans un entretien au Nouvel Obs, désignée par Les Écologistes le 8 décembre 2025 avec 86 % des voix — comme candidate à la primaire de la gauche, pas directement à la présidentielle. Après la victoire de Raphaël Glucksmann le 11 octobre 2026, elle n'a pas annoncé de ralliement et n'a pas non plus confirmé sa candidature en propre : le 26 octobre sur France 2, elle n'exclut pas de se retirer « s'il y a un chemin de victoire », en posant quatre conditions (accord de gouvernement, accord aux législatives, accord programmatique, accord sur le dispositif de campagne). Le 5 novembre, sur Public Sénat : « Personne ne gagnera seul » et « je suis candidate à l'élection présidentielle, mais s'il faut être responsable pour plusieurs, je le serai ». Les adhérents du parti tranchent entre le 10 et le 13 décembre sur le maintien ou le retrait de la candidature ; le résultat des discussions avec les partenaires leur sera présenté fin novembre. Donnée autour de 3 % (Ifop pour LCI, 3 novembre 2026), contre environ 12 % pour Raphaël Glucksmann et 18 % pour Jean-Luc Mélenchon."
+   "commentaire": "déclarée le 22 octobre 2025 dans un entretien au Nouvel Obs, désignée par Les Écologistes le 8 décembre 2025 avec 86 % des voix — comme candidate à la primaire de la gauche, pas directement à la présidentielle. Après la victoire de Raphaël Glucksmann le 11 octobre 2026, elle n'a pas annoncé de ralliement et n'a pas non plus confirmé sa candidature en propre : le 26 octobre sur France 2, elle n'exclut pas de se retirer « s'il y a un chemin de victoire », en posant quatre conditions (accord de gouvernement, accord aux législatives, accord programmatique, accord sur le dispositif de campagne). Le 5 novembre, sur Public Sénat : « Personne ne gagnera seul » et « je suis candidate à l'élection présidentielle, mais s'il faut être responsable pour plusieurs, je le serai ». Les adhérents du parti tranchent entre le 10 et le 13 décembre sur le maintien ou le retrait de la candidature ; le résultat des discussions avec les partenaires leur sera présenté fin novembre. Donnée autour de 3 % (Ifop pour LCI, 3 novembre 2026), contre environ 12 % pour Raphaël Glucksmann et 18 % pour Jean-Luc Mélenchon.",
+   "commentaire_en": "declared on 22 October 2025 in an interview with Le Nouvel Obs, designated by Les Écologistes on 8 December 2025 with 86 % of the vote — as a candidate for the left's primary, not directly for the presidential election. After Raphaël Glucksmann's victory on 11 October 2026, she announced no rallying and did not confirm a candidacy of her own either: on 26 October on France 2, she did not rule out withdrawing “if there is a path to victory”, setting four conditions (a government agreement, an agreement for the legislative elections, a programme agreement, an agreement on the campaign arrangement). On 5 November, on Public Sénat: “Nobody will win alone” and “I am a candidate in the presidential election, but if I must be responsible for several, I will be”. Party members decide between 10 and 13 December whether the candidacy stays or is withdrawn; the outcome of talks with partners will be presented to them in late November. Polling around 3 % (Ifop for LCI, 3 November 2026), against about 12 % for Raphaël Glucksmann and 18 % for Jean-Luc Mélenchon."
   },
   {
    "nom": "François Ruffin",
@@ -333,7 +366,8 @@
    "precision": "",
    "source": "https://lcp.fr/actualites/presidentielle-2027-s-il-n-y-a-pas-de-primaire-moi-j-y-vais-annonce-francois-ruffin",
    "source_label": "LCP, 2026",
-   "commentaire": "« s'il n'y a pas de primaire, moi j'y vais » : candidat si la primaire n'a pas lieu."
+   "commentaire": "« s'il n'y a pas de primaire, moi j'y vais » : candidat si la primaire n'a pas lieu.",
+   "commentaire_en": "“if there is no primary, I'm in”: a candidate if the primary does not happen."
   },
   {
    "nom": "Clémentine Autain",
@@ -344,7 +378,8 @@
    "precision": "jour",
    "source": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-la-deputee-ecologiste-clementine-autain-dit-prendre-acte-de-l-echec-de-la-primaire-unitaire-a-gauche-et-renonce-a-etre-candidate_AN-202607110279.html",
    "source_label": "BFM TV, 11/07/2026",
-   "commentaire": "elle avait annoncé le 14 juin 2025, dans La Tribune Dimanche, sa candidature dans le cadre d'une primaire de la gauche non-mélenchoniste, puis y a renoncé le 11 juillet 2026 en prenant acte de l'échec de la primaire unitaire."
+   "commentaire": "elle avait annoncé le 14 juin 2025, dans La Tribune Dimanche, sa candidature dans le cadre d'une primaire de la gauche non-mélenchoniste, puis y a renoncé le 11 juillet 2026 en prenant acte de l'échec de la primaire unitaire.",
+   "commentaire_en": "she had announced on 14 June 2025, in La Tribune Dimanche, her candidacy within a non-Mélenchon left primary, then gave it up on 11 July 2026, acknowledging the failure of the united primary."
   },
   {
    "nom": "Lydie Massard",
@@ -355,7 +390,8 @@
    "precision": "",
    "source": "https://www.letelegramme.fr/morbihan/pontivy-56300/la-pontivyenne-lydie-massard-candidate-a-la-primaire-de-la-gauche-pour-la-prochaine-presidentielle-7017809.php",
    "source_label": "Le Télégramme, 2026",
-   "commentaire": "candidate à la primaire de la gauche."
+   "commentaire": "candidate à la primaire de la gauche.",
+   "commentaire_en": "candidate in the left's primary."
   },
   {
    "nom": "Éric Zemmour",
@@ -366,7 +402,8 @@
    "precision": "",
    "source": "https://www.rtl.fr/actu/politique/s-il-n-y-a-pas-de-primaire-je-serai-candidat-eric-zemmour-affirme-sur-rtl-qu-il-se-prepare-a-la-presidentielle-2027-malgre-la-percee-magnifique-de-sarah-knafo-7900630227",
    "source_label": "RTL, 2026",
-   "commentaire": "« s'il n'y a pas de primaire, je serai candidat » ; primaire jugée de moins en moins probable."
+   "commentaire": "« s'il n'y a pas de primaire, je serai candidat » ; primaire jugée de moins en moins probable.",
+   "commentaire_en": "“if there is no primary, I will be a candidate”; a primary judged increasingly unlikely."
   },
   {
    "nom": "François Hollande",
@@ -377,7 +414,8 @@
    "precision": "",
    "source": "https://lcp.fr/actualites/presidentielle-francois-hollande-propose-la-retraite-a-63-ans-et-dira-en-decembre-s-il",
    "source_label": "LCP, 2026",
-   "commentaire": "dira « en décembre » ; refuse de passer par une primaire."
+   "commentaire": "dira « en décembre » ; refuse de passer par une primaire.",
+   "commentaire_en": "will speak “in December”; refuses to go through a primary."
   },
   {
    "nom": "Bernard Cazeneuve",
@@ -388,7 +426,8 @@
    "precision": "",
    "source": "https://www.leparisien.fr/elections/presidentielle/cest-par-un-contrat-qui-me-lie-aux-francais-que-je-presente-ma-candidature-bernard-cazeneuve-devoile-sa-lettre-pour-2027-16-07-2026-IZIQSDYXKBBT5MZBHIDBXGXFYE.php",
    "source_label": "Le Parisien, 16/07/2026",
-   "commentaire": "a présenté son projet présidentiel, sans passer par la primaire."
+   "commentaire": "a présenté son projet présidentiel, sans passer par la primaire.",
+   "commentaire_en": "presented his presidential project, without going through the primary."
   },
   {
    "nom": "Bruno Le Maire",
@@ -399,7 +438,8 @@
    "precision": "",
    "source": "https://lcp.fr/actualites/presidentielle-2027-bruno-le-maire-dira-en-octobre-s-il-est-candidat-437967",
    "source_label": "LCP, 2026",
-   "commentaire": "décision annoncée « en octobre » ; manifeste publié le 23 août."
+   "commentaire": "décision annoncée « en octobre » ; manifeste publié le 23 août.",
+   "commentaire_en": "decision announced “in October”; manifesto published on 23 August."
   },
   {
    "nom": "Élisabeth Borne",
@@ -410,7 +450,8 @@
    "precision": "",
    "source": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-de-8h20-le-grand-entretien/l-invite-de-8h20-le-grand-entretien-du-mercredi-06-mai-2026-8151349",
    "source_label": "France Inter, 06/05/2026",
-   "commentaire": "a quitté la direction de Renaissance et publié un livre de propositions."
+   "commentaire": "a quitté la direction de Renaissance et publié un livre de propositions.",
+   "commentaire_en": "left Renaissance's leadership and published a book of proposals."
   },
   {
    "nom": "Dominique de Villepin",
@@ -421,7 +462,8 @@
    "precision": "",
    "source": "https://www.radiofrance.fr/franceinfo/podcasts/8h30-franceinfo/8h30-franceinfo-du-mardi-29-septembre-2026-4945658",
    "source_label": "franceinfo, 29/09/2026",
-   "commentaire": "pas candidat déclaré : il a répété le 29 septembre 2026 sur franceinfo qu'il était encore trop tôt pour se déclarer, estimant que « le jeu va se décanter » dans les prochains mois."
+   "commentaire": "pas candidat déclaré : il a répété le 29 septembre 2026 sur franceinfo qu'il était encore trop tôt pour se déclarer, estimant que « le jeu va se décanter » dans les prochains mois.",
+   "commentaire_en": "not a declared candidate: he repeated on 29 September 2026 on franceinfo that it was still too early to declare, judging that “the field will settle” in the coming months."
   },
   {
    "nom": "Olivier Becht",
@@ -432,7 +474,8 @@
    "precision": "",
    "source": "https://www.bfmtv.com/politique/elections/presidentielle/presidentielle-2027-ancien-ministre-et-camarade-de-macron-a-l-ena-olivier-becht-envisage-une-candidature_AN-202606160283.html",
    "source_label": "BFMTV, 16/06/2026",
-   "commentaire": "envisage une candidature."
+   "commentaire": "envisage une candidature.",
+   "commentaire_en": "considering a candidacy."
   },
   {
    "nom": "Benjamin Lucas",
@@ -443,7 +486,8 @@
    "precision": "jour",
    "source": "https://www.lemonde.fr/politique/article/2026/07/07/le-depute-benjamin-lucas-landy-retire-sa-candidature-a-la-primaire-unitaire-de-la-gauche_6721467_823448.html",
    "source_label": "Le Monde, 07/07/2026",
-   "commentaire": "candidat à la primaire de la gauche annoncé le 14 mai 2026, puis retrait annoncé le 7 juillet 2026 au Parisien : « Je prends acte qu'il n'y aura pas de primaire et donc que ma candidature à la primaire n'a plus de sens »."
+   "commentaire": "candidat à la primaire de la gauche annoncé le 14 mai 2026, puis retrait annoncé le 7 juillet 2026 au Parisien : « Je prends acte qu'il n'y aura pas de primaire et donc que ma candidature à la primaire n'a plus de sens ».",
+   "commentaire_en": "candidate in the left's primary announced on 14 May 2026, then withdrawal announced on 7 July 2026 in Le Parisien: “I acknowledge that there will be no primary and therefore that my candidacy in the primary no longer makes sense”."
   },
   {
    "nom": "Gérald Darmanin",
@@ -454,7 +498,8 @@
    "precision": "jour",
    "source": "https://www.lefigaro.fr/elections/presidentielles/presidentielles-2027-gerald-darmanin-apporte-son-soutien-a-edouard-philippe-20260817",
    "source_label": "Le Figaro, 17/08/2026",
-   "commentaire": "non candidat : il a annoncé le 17 août 2026 dans un entretien à La Voix du Nord qu'il ne se présenterait pas et apportait son soutien à Édouard Philippe, ne voulant pas « rajouter de la division »."
+   "commentaire": "non candidat : il a annoncé le 17 août 2026 dans un entretien à La Voix du Nord qu'il ne se présenterait pas et apportait son soutien à Édouard Philippe, ne voulant pas « rajouter de la division ».",
+   "commentaire_en": "not a candidate: he announced on 17 August 2026 in an interview with La Voix du Nord that he would not run and was backing Édouard Philippe, not wishing to “add to the division”."
   },
   {
    "nom": "Sarah Knafo",
@@ -465,7 +510,8 @@
    "precision": "jour",
    "source": "https://www.lejdd.fr/politique/sarah-knafo-eurodeputee-reconquete-je-souhaite-queric-zemmour-soit-notre-candidat-173520",
    "source_label": "Le Journal du Dimanche, 09/05/2026",
-   "commentaire": "non candidate : dans un entretien au Journal du Dimanche publié le 9 mai 2026, elle a déclaré souhaiter qu'Éric Zemmour soit le candidat de Reconquête : « Je souhaite qu'Éric Zemmour soit notre candidat »."
+   "commentaire": "non candidate : dans un entretien au Journal du Dimanche publié le 9 mai 2026, elle a déclaré souhaiter qu'Éric Zemmour soit le candidat de Reconquête : « Je souhaite qu'Éric Zemmour soit notre candidat ».",
+   "commentaire_en": "not a candidate: in an interview with Le Journal du Dimanche published on 9 May 2026, she said she wanted Éric Zemmour to be Reconquête's candidate: “I want Éric Zemmour to be our candidate”."
   },
   {
    "nom": "Teddy Riner",
@@ -476,7 +522,8 @@
    "precision": "jour",
    "source": "https://www.tf1info.fr/politique/elections/presidentielle/le-judoka-et-champion-olympique-teddy-riner-est-candidat-a-l-election-presidentielle-2027-2474763.html",
    "source_label": "TF1 Info, 09/11/2026",
-   "commentaire": "Annonce dans une vidéo publiée sur X le 9 novembre 2026 : « je suis candidat à l'élection présidentielle de 2027 ». Judoka, 37 ans, cinq titres olympiques. Se présente hors parti, avec un mouvement baptisé « La France qu'on veut » ; programme annoncé pour « les prochaines semaines », aucune structure de financement connue. Positionnement : refuse le choix entre « les deux extrêmes ». Aucun sondage publié depuis l'annonce ne le teste dans un champ de premier tour complet ; les mesures antérieures allaient de 3 % d'intentions de vote (Vérian pour L'Hémicycle, décembre 2025) à 10 % de potentiel électoral (Toluna Harris Interactive, 2026)."
+   "commentaire": "Annonce dans une vidéo publiée sur X le 9 novembre 2026 : « je suis candidat à l'élection présidentielle de 2027 ». Judoka, 37 ans, cinq titres olympiques. Se présente hors parti, avec un mouvement baptisé « La France qu'on veut » ; programme annoncé pour « les prochaines semaines », aucune structure de financement connue. Positionnement : refuse le choix entre « les deux extrêmes ». Aucun sondage publié depuis l'annonce ne le teste dans un champ de premier tour complet ; les mesures antérieures allaient de 3 % d'intentions de vote (Vérian pour L'Hémicycle, décembre 2025) à 10 % de potentiel électoral (Toluna Harris Interactive, 2026).",
+   "commentaire_en": "Announcement in a video published on X on 9 November 2026: “I am a candidate in the 2027 presidential election”. Judoka, 37, five Olympic titles. Running outside any party, with a movement named “La France qu'on veut”; a programme announced for “the coming weeks”, no known financing structure. Positioning: refuses the choice between “the two extremes”. No poll published since the announcement tests him in a full first-round field; earlier measures ranged from 3 % of voting intentions (Vérian for L'Hémicycle, December 2025) to 10 % of electoral potential (Toluna Harris Interactive, 2026)."
   }
  ]
 }

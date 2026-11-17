@@ -147,7 +147,7 @@ def ligne(c, lang="fr"):
         f'<td class="td-date" data-label="{lbl("Déclaration", "Announcement")}">{date_affichage(c, lang)}</td>'
         f'<td data-label="{lbl("Statut", "Status")}"><span class="pill p-{c["statut"]}">{pills[c["statut"]]}</span></td>'
         f'<td data-label="{lbl("Officialisation JO", "Official listing")}">{off}</td>'
-        f'<td class="small" data-label="{lbl("Commentaire", "Comment")}">{c["commentaire"]}</td>'
+        f'<td class="small" data-label="{lbl("Commentaire", "Comment")}">{c.get("commentaire_en") if lang == "en" and c.get("commentaire_en") else c["commentaire"]}</td>'
         f'<td class="td-src small" data-label="{lbl("Source", "Source")}"><a href="{c["source"]}">'
         f'{c["source_label"]}</a></td>'
         f'</tr>')
@@ -260,29 +260,24 @@ def presence_block(lang="fr"):
                          f'<td class="num">{commun}</td>'
                          f'<td class="num">{aucun}</td>'
                          f'<td class="num">{G.fr(round(100 * (a_seul + b_seul) / n, 1))} %</td></tr>')
-        bloc_paires = f'''<h3 style="margin-top:26px">Un siège, deux noms</h3>
-  <p class="small muted" style="max-width:none">Trois conditions, mesurées et non supposées : chaque nom est testé
-  <strong>seul</strong> dans au moins trois questionnaires, ils ne se croisent
-  <strong>presque jamais</strong>, et à eux deux ils couvrent <strong>tout le champ</strong> de la
-  fenêtre. C'est la signature d'un même siège occupé par alternance dans les scénarios des instituts.
-  Une simple addition ne suffirait pas : un nom rare s'additionnerait à n'importe quel nom universel,
-  d'où la condition « chacun apparaît seul ».</p>
+        bloc_paires = f'''<h3 style="margin-top:26px">{m("Un siège, deux noms", "One seat, two names")}</h3>
+  <p class="small muted" style="max-width:none">{m("Trois conditions, mesurées et non supposées : chaque nom est testé <strong>seul</strong> dans au moins trois questionnaires, ils ne se croisent <strong>presque jamais</strong>, et à eux deux ils couvrent <strong>tout le champ</strong> de la fenêtre. C'est la signature d'un même siège occupé par alternance dans les scénarios des instituts. Une simple addition ne suffirait pas : un nom rare s'additionnerait à n'importe quel nom universel, d'où la condition « chacun apparaît seul ».",
+    "Three conditions, measured not assumed: each name is tested <strong>alone</strong> in at least three questionnaires, they <strong>almost never</strong> cross, and together they cover <strong>the whole field</strong> of the window. That is the signature of one seat held in alternation across the pollsters' scenarios. A plain sum would not do: a rare name would add up to any universal name, hence the condition “each appears alone”.")}</p>
   <div class="tblwrap"><table>
-    <thead><tr><th>Nom A</th><th>Nom B</th><th class="num">A seul</th>
-    <th class="num">B seul</th><th class="num">Les deux</th><th class="num">Ni l'un ni l'autre</th>
-    <th class="num">Champ couvert</th></tr></thead>
+    <thead><tr><th>{m("Nom A", "Name A")}</th><th>{m("Nom B", "Name B")}</th><th class="num">{m("A seul", "A alone")}</th>
+    <th class="num">{m("B seul", "B alone")}</th><th class="num">{m("Les deux", "Both")}</th><th class="num">{m("Ni l'un ni l'autre", "Neither")}</th>
+    <th class="num">{m("Champ couvert", "Field covered")}</th></tr></thead>
     <tbody>{lignes_p}</tbody>
   </table></div>
   <p class="small muted" style="margin-top:12px;max-width:none">Sur {n} questionnaires de la fenêtre,
   <strong>{'une paire remplit' if len(paires) == 1 else str(len(paires)) + ' paires remplissent'}
-  </strong> ces trois conditions.</p>'''
+  </strong> {m("ces trois conditions.", "these three conditions.")}</p>'''
     else:
-        bloc_paires = ('<h3 style="margin-top:26px">Un siège, deux noms</h3>'
-                       '<p class="small muted" style="max-width:none">Aucune paire ne remplit aujourd\'hui les trois '
-                       'conditions : deux noms testés seuls chacun de leur côté, presque jamais '
-                       'ensemble, <em>et</em> couvrant tout le '
-                       'champ. La situation peut changer au prochain sondage — la page est régénérée '
-                       'chaque jour.</p>')
+        bloc_paires = ('<h3 style="margin-top:26px">' + m("Un siège, deux noms", "One seat, two names") + '</h3>'
+                       '<p class="small muted" style="max-width:none">'
+                       + m("Aucune paire ne remplit aujourd'hui les trois conditions : deux noms testés seuls chacun de leur côté, presque jamais ensemble, et couvrant tout le champ. La situation peut changer au prochain sondage — la page est régénérée chaque jour.",
+                           "No pair currently meets the three conditions: two names tested alone on their own side, almost never together, and covering the whole field. The situation may change with the next poll — the page is regenerated every day.")
+                       + '</p>')
 
     # --- bascule : ce que les deux noms faisaient il y a un an (3 fenêtres de 90 j)
     bascule = ""
@@ -308,48 +303,34 @@ def presence_block(lang="fr"):
   </table></div>'''
 
     return f'''<section class="card" id="bulletin">
-  <h2>Qui sera sur le bulletin ?</h2>
-  <p class="lede" style="font-size:1rem">La question n'est pas qui gagne, mais qui sera sur le
-  bulletin. En France, la liste est arrêtée par le <strong>Conseil constitutionnel</strong> et publiée
-  au <em>Journal officiel</em> quelques semaines avant le premier tour : rien d'autre, juridiquement,
-  ne fait une candidature. D'ici là, un seul observable existe — les noms que les instituts testent
-  réellement dans leurs questionnaires. Nous le comptons, nous ne le modélisons pas.</p>
+  <h2>{m("Qui sera sur le bulletin ?", "Who will be on the ballot?")}</h2>
+  <p class="lede" style="font-size:1rem">{m("La question n'est pas qui gagne, mais qui sera sur le", "The question is not who wins, but who will be on the")}
+  {m("bulletin. En France, la liste est arrêtée par le Conseil constitutionnel et publiée au Journal officiel quelques semaines avant le premier tour : rien d'autre, juridiquement, ne fait une candidature. D'ici là, un seul observable existe — les noms que les instituts testent réellement dans leurs questionnaires. Nous le comptons, nous ne le modélisons pas.", "ballot. In France, the list is settled by the Constitutional Council and published in the Official Journal a few weeks before the first round: legally, nothing else makes a candidacy. Until then, only one observable exists — the names pollsters actually test in their questionnaires. We count it, we do not model it.")}</p>
   <div class="statgrid">
-    <div class="stat"><span>Questionnaires dépouillés</span><b>{n}</b>
+    <div class="stat"><span>{m("Questionnaires dépouillés", "Questionnaires parsed")}</span><b>{n}</b>
       <span>premier tour, {FENETRE} derniers jours</span></div>
-    <div class="stat"><span>Noms testés</span><b>{nb_candidats}</b><span>au moins une fois</span></div>
-    <div class="stat"><span>Hypothèses distinctes</span><b>{hypo}</b><span>listes de candidats</span></div>
-    <div class="stat"><span>Liste officielle</span><b>0</b><span>aucune avant 2027</span></div>
+    <div class="stat"><span>{m("Noms testés", "Names tested")}</span><b>{nb_candidats}</b><span>{m("au moins une fois", "at least once")}</span></div>
+    <div class="stat"><span>{m("Hypothèses distinctes", "Distinct hypotheses")}</span><b>{hypo}</b><span>{m("listes de candidats", "candidate lists")}</span></div>
+    <div class="stat"><span>{m("Liste officielle", "Official list")}</span><b>0</b><span>{m("aucune avant 2027", "none before 2027")}</span></div>
   </div>
 
-  <h3 style="margin-top:26px">Part des questionnaires où le nom est testé</h3>
+  <h3 style="margin-top:26px">{m("Part des questionnaires où le nom est testé", "Share of questionnaires in which the name is tested")}</h3>
   <div class="pbars">{lignes}</div>
-  <p class="small muted" style="margin-top:10px;max-width:none">Lecture : sur les {n} questionnaires de premier tour
-  publiés dans les {FENETRE} derniers jours, <strong>{presence_tri[0][0]}</strong> figure dans
-  {presence_tri[0][1]}. La colonne de droite compare à la fenêtre de {FENETRE} jours précédente
+  <p class="small muted" style="margin-top:10px;max-width:none">{m("Lecture : sur les", "Reading: out of the")} {n} {m("questionnaires de premier tour publiés dans les", "first-round questionnaires published in the last")} {FENETRE} {m("derniers jours,", "days,")} <strong>{presence_tri[0][0]}</strong> figure dans
+  {presence_tri[0][1]}. {m("La colonne de droite compare à la fenêtre de", "The right-hand column compares with the previous")} {FENETRE} {m("jours précédente", "day window")}
   ({nprev} questionnaires).</p>
   {bloc_paires}
   {bascule}
 
   <div class="note-legale small" style="margin-top:24px">
-    <p style="margin:0 0 8px"><strong>Ce que ce chiffre n'est pas.</strong></p>
+    <p style="margin:0 0 8px"><strong>{m("Ce que ce chiffre n'est pas.", "What this figure is not.")}</strong></p>
     <ul class="tight" style="margin:0">
-      <li><strong>Pas une probabilité de candidature.</strong> Un institut teste un nom parce qu'il le
-      juge plausible à un instant donné. Un nom testé dans 9 % des questionnaires peut être une
-      candidature très sérieuse ; un nom testé dans 100 % peut ne jamais se déclarer.</li>
-      <li><strong>Pas la liste officielle.</strong> Seuls le recueil des parrainages et la décision du
-      Conseil constitutionnel font foi. Aucun institut ne dispose d'une information que le Conseil
-      constitutionnel n'a pas encore publiée.</li>
-      <li><strong>Pas comparable à la « probabilité de figurer sur le bulletin » d'un modèle
-      bayésien.</strong> Cette page ne contient aucun modèle : elle rapporte un décompte, avec son
-      dénominateur, et rien d'autre.</li>
-      <li><strong>Une limite connue :</strong> le nombre bouge avec la spéculation autant qu'avec la
-      politique. Il mesure l'état du champ tel que la presse et les instituts le construisent — ce
-      n'est pas un jugement sur les personnes.</li>
+      <li>{m("Pas une probabilité de candidature. Un institut teste un nom parce qu'il le juge plausible à un instant donné. Un nom testé dans 9 % des questionnaires peut être une candidature très sérieuse ; un nom testé dans 100 % peut ne jamais se déclarer.", "Not a probability of candidacy. A pollster tests a name because it seems plausible at a given moment. A name tested in 9 % of questionnaires can be a very serious candidacy; a name tested in 100 % may never declare.")}</li>
+      <li>{m("Pas la liste officielle. Seuls le recueil des parrainages et la décision du Conseil constitutionnel font foi. Aucun institut ne dispose d'une information que le Conseil constitutionnel n'a pas encore publiée.", "Not the official list. Only the signature collection and the Constitutional Council's decision are authoritative. No pollster holds information the Constitutional Council has not yet published.")}</li>
+      <li>{m("Pas comparable à la « probabilité de figurer sur le bulletin » d'un modèle bayésien. Cette page ne contient aucun modèle : elle rapporte un décompte, avec son dénominateur, et rien d'autre.", "Not comparable to the “probability of appearing on the ballot” of a Bayesian model. This page contains no model: it reports a count, with its denominator, and nothing else.")}</li>
+      <li>{m("Une limite connue : le nombre bouge avec la spéculation autant qu'avec la politique. Il mesure l'état du champ tel que la presse et les instituts le construisent — ce n'est pas un jugement sur les personnes.", "A known limit: the number moves with speculation as much as with politics. It measures the state of the field as the press and pollsters build it — it is not a judgement on the people.")}</li>
     </ul>
-    <p style="margin:8px 0 0" class="muted">Source : même compilation que l'agrégation
-    (MieuxVoter, licence MIT), champ « premier tour ». Recalcul automatique à chaque régénération,
-    au moins une fois par jour.</p>
+    <p style="margin:8px 0 0" class="muted">{m("Source : même compilation que l'agrégation (MieuxVoter, licence MIT), champ « premier tour ». Recalcul automatique à chaque régénération, au moins une fois par jour.", "Source: the same compilation as the aggregate (MieuxVoter, MIT licence), “first round” field. Recomputed automatically on every regeneration, at least once a day.")}</p>
   </div>
 </section>'''
 
@@ -400,7 +381,9 @@ def render(d, lang="fr"):
     demi = ""
     for src in d["sources_reference"]:
         lien = f' — <a href="{src["url"]}">{src["url"].split("/")[2]}</a>' if src["url"] else ""
-        demi += f'<li><strong>{src["niveau"]}</strong> : {src["quoi"]}{lien}. {src["note"]}</li>'
+        quoi = src.get("quoi_en") if lang == "en" and src.get("quoi_en") else src["quoi"]
+        note = src.get("note_en") if lang == "en" and src.get("note_en") else src["note"]
+        demi += f'<li><strong>{m("officiel", "official") if src["niveau"] == "officiel" else src["niveau"]}</strong> : {quoi}{lien}. {note}</li>'
 
     return f"""<!doctype html>
 <html lang="{lang}">
@@ -506,6 +489,11 @@ def main():
     os.makedirs(os.path.join(SITE, "candidats"), exist_ok=True)
     html = render(d)
     open(os.path.join(SITE, "candidats", "index.html"), "w", encoding="utf-8").write(html)
+    # Version anglaise : mêmes lignes, mêmes sources, autre langue. Les notices sont
+    # traduites dans le fichier de données (commentaire_en), pas ici.
+    en_dir = os.path.join(SITE, "en", "observatoire", "candidats")
+    os.makedirs(en_dir, exist_ok=True)
+    open(os.path.join(en_dir, "index.html"), "w", encoding="utf-8").write(render(d, lang="en"))
     ecrire_dataset(d)
     par = {s: sum(1 for c in d["candidats"] if c["statut"] == s) for s, _, _ in STATUTS}
     print(f"page candidats : {len(d['candidats'])} personnes " + " · ".join(f"{k}={v}" for k, v in par.items()))

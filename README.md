@@ -196,7 +196,8 @@ reverse proxy qui **conserve** le préfixe `/observatoire`.
 
 ```bash
 # reproduire ce qui est publié, en local
-python3 generate.py && python3 candidats.py && python3 backtest2022.py
+python3 generate.py && python3 candidats.py && python3 backtest2022.py && \
+python3 backtest2017.py && python3 veille_lois.py && python3 workflow.py
 docker run -d --name observatoire -p 127.0.0.1:8090:80 \
   -v "$PWD/site:/usr/share/nginx/html/observatoire:ro" \
   -v "$PWD/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro" nginx:alpine
@@ -215,6 +216,49 @@ message de synthèse : dernières valeurs, mouvements sur 7 et 28 jours, état d
 d'un scrutin — l'article 11 de la loi du 19 juillet 1977 interdit alors toute publication, diffusion
 ou commentaire de sondage, et un avis remplace le contenu. La suspension se teste en simulant une date
 de scrutin, sans attendre 2027.
+
+## Version anglaise — `/en/observatoire/`
+
+Les sept pages existent en anglais sous `/en/observatoire/` : accueil, Agrégation, Candidats,
+Rétro-test 2022, Rétro-test 2017, Veille législative, Workflow. Le français reste la référence.
+
+**La traduction se fait à la source, jamais par substitution sur le HTML produit** — les balises
+coupent les phrases en morceaux, et toute substitution donne de l'anglais à trous. Trois mécanismes :
+`m(français, anglais)` en tête de chaque fonction de rendu pour le texte de passage ; `i18n.py` pour
+les libellés partagés et `workflow_i18n.py` pour la page technique (qui traduit les nœuds de texte du
+schéma SVG, jamais les attributs) ; des champs `<champ>_en` dans les JSON pour la couche de données —
+les 41 notices de candidature et les 3 sources de référence vivent dans `data/candidats2027.json`,
+pas dans le gabarit.
+
+**Ce qui reste en français est de la donnée, pas de la prose** : intitulés de textes de loi, objets de
+scrutins et noms de groupes de l'Assemblée sur la page législative ; noms de partis sur l'accueil et
+l'Agrégation. Les traduire serait falsifier la source. Restes mesurés page par page sur les fichiers
+publiés : 1 / 5 / 4 / 0 / 2 / 42 / 0 blocs français.
+
+**Deux formes de chemin, et pas une.** `lien(chemin, lang)` attend un chemin **relatif à la racine de
+l'observatoire** (`/workflow/`) et préfixe lui-même la base de la langue ; `url_page(chemin, lang)`
+attend l'**adresse complète** (`/observatoire/workflow/`) et sert aux métadonnées (`og:url`, `@id` du
+JSON-LD). Les tables `TITRES_COURTS` et `PAGES_LD` sont indexées par l'adresse complète. Confondre les
+deux publie une canonique `…/observatoire/observatoire/workflow/` sans qu'aucune erreur ne s'affiche :
+la vérifier sur l'URL servie, page par page.
+
+**Le sélecteur FR | EN** vit dans `barre_droite()` avec le bouton de thème, au bord droit de la barre :
+deux commandes de lecture, hors navigation. Sans JavaScript — deux liens, `aria-current="true"` sur la
+langue courante, `hreflang` sur l'autre. Une page dont la traduction n'existe pas encore garde un
+libellé **inerte** plutôt qu'un lien mort ; c'est l'ensemble `PAGES_EN` qui en décide.
+
+**La route publique de l'anglais n'est pas un fichier, c'est une règle de proxy.** Le conteneur sert
+`site/` sous `/observatoire/`, donc les pages anglaises y sont à `/observatoire/en/observatoire/` ;
+l'adresse canonique `/en/observatoire/` demande une règle de reverse proxy (priorité au-dessus du
+routeur du site, réécriture vers le chemin interne). Elle relève de l'infrastructure, pas de ce dépôt :
+sans elle, `/en/*` tombe sur l'application Next.js et répond 404.
+
+**Le complément de navigation est bilingue.** Le générateur n'émet que l'entrée « Rétro-test 2022 »,
+et deux pages omettent leur propre entrée : `scripts/injecter_nav_dev.py` ajoute celle de 2017 au
+moment de la publication. Il repère son ancre **par adresse** (le menu anglais n'écrit pas les mêmes
+mots) et lit la langue **sur le chemin du fichier**, jamais sur le contenu — une page anglaise
+contient aussi des adresses françaises, c'est le sélecteur, et chercher un motif français y insérait
+le lien français.
 
 ## Veille législative — les lois votées (2 novembre 2026)
 

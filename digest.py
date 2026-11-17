@@ -41,8 +41,9 @@ mvt = top(trends, "delta7") or top(trends, "delta28")
 if mvt:
     horizon = "7 j" if top(trends, "delta7") else "28 j"
     lines.append(f"Mouvement ({horizon}, toutes listes) : {mvt}")
-lines.append(f"{mv['polls_window']} sondages sur {mv.get('window', 90)} j · "
-             f"{mv['polls_agg']} agrégés · dernière enquête {mv['last']}")
+lines.append(f"{mv['polls_window']} sondages sur {mv.get('window', 90)} j, toutes listes · "
+             f"{mv.get('polls_scenario', '?')} testant le scénario {mv['scenario']} · "
+             f"{mv['polls_agg']} agrégés sur {mv.get('agg_window', 180)} j · dernière enquête {mv['last']}")
 lines.append(f"{len(hist)} jour(s) d'archive quotidienne")
 try:
     fc = json.load(open(os.path.join(D, "forecast_bayes.json"), encoding="utf-8"))

@@ -1756,13 +1756,38 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
     t_perim = m("Périmètre", "Scope")
     t_tour1 = m("Premier tour", "First round")
     t_src = m("Sondages dans la source", "Polls in the source")
-    t_window = m("derniers jours", "last days")
     t_scenario = m("Scénario retenu", "Scenario used")
     t_cand = m("candidats", "candidates")
-    t_scen_j = m("Sondages du scénario", "Scenario polls")
-    t_agg_j = m("Sondages agrégés", "Aggregated polls")
+    # Libellés du périmètre : la fenêtre et son rôle dans la même phrase. Composé à l'extérieur du
+    # gabarit, parce que « {n} derniers jours » et « last {n} days » ne se construisent pas dans le
+    # même ordre — la version anglaise sortait « 90 last days ».
+    t_all_lists_j = m(f"1<sup>er</sup> tour, toutes listes — {agg['window']} derniers jours",
+                      f"1st round, all lists — last {agg['window']} days")
+    t_scen_polls_j = m(f"Testant le scénario — {agg['window']} derniers jours",
+                       f"Testing the scenario — last {agg['window']} days")
+    t_agg_polls_j = m(f"Agrégés — scénario {agg['scenario']}, {agg['agg_window']} derniers jours",
+                      f"Aggregated — scenario {agg['scenario']}, last {agg['agg_window']} days")
     t_periode = m("Période couverte", "Period covered")
     t_instituts = m("Instituts", "Pollsters")
+    # Phrase de liaison du périmètre : deux fenêtres, deux rôles. Sans elle, « 146 sur 90 jours »
+    # à côté de « 22 agrégés sur 180 jours » se lit comme une perte de 124 enquêtes, alors que la
+    # différence est la règle du scénario — un chiffre que l'auteur a relevé comme « bizarre ».
+    d_agg = agg["polls_aggregated"] - agg["polls_in_scenario"]
+    t_perim_p = m(
+        f"Les {agg['polls_in_window']} enquêtes de {agg['window']} jours ne sont pas toutes agrégées : "
+        f"seules celles qui testent la liste retenue entrent dans la moyenne — {agg['polls_in_scenario']} "
+        f"sur {agg['window']} jours, {agg['polls_aggregated']} sur {agg['agg_window']}"
+        + (f" : la fenêtre d'agrégation en ajoute {d_agg}." if d_agg else
+           " : la fenêtre d'agrégation n'en ajoute aucune.")
+        + " Les autres portent d'autres configurations de candidats : les moyenner avec celles-ci "
+        "produirait un chiffre qui n'existe chez aucun institut.",
+        f"The {agg['polls_in_window']} polls of the {agg['window']}-day window are not all aggregated: "
+        f"only those testing the retained list enter the average — {agg['polls_in_scenario']} over "
+        f"{agg['window']} days, {agg['polls_aggregated']} over {agg['agg_window']}"
+        + (f": the aggregation window adds {d_agg}." if d_agg else
+           ": the aggregation window adds none.")
+        + " The others carry other candidate configurations: averaging them with these would produce "
+        "a figure that exists at no polling institute.")
     t_moy = m("Moyennes pondérées", "Weighted averages")
     t_moy_p = m("Les barres sont proportionnelles à la moyenne. IC 95 % : incertitude statistique de la "
                 "moyenne. Amplitude : minimum et maximum observés parmi les sondages agrégés — c'est la "
@@ -1952,13 +1977,14 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
   <div class="mets">
     <div class="met"><span>{t_tour1}</span><b>{frd("2027-04-18")} <span class="chrono" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}">—</span></b></div>
     <div class="met"><span>{t_src}</span><b>{agg["total_polls_all"]}</b></div>
-    <div class="met"><span>{m("1<sup>er</sup> tour", "1st round")}, {agg["window"]} {t_window}</span><b>{agg["polls_in_window"]}</b></div>
+    <div class="met"><span>{t_all_lists_j}</span><b>{agg["polls_in_window"]}</b></div>
     <div class="met"><span>{t_scenario}</span><b>{agg["scenario"]} · {agg["scenario_size"]} {t_cand}</b></div>
-    <div class="met"><span>{t_scen_j}, {agg["window"]} {m("j", "d")}</span><b>{agg["polls_in_scenario"]}</b></div>
-    <div class="met"><span>{t_agg_j}, {agg["agg_window"]} {m("j", "d")}</span><b>{agg["polls_aggregated"]}</b></div>
+    <div class="met"><span>{t_scen_polls_j}</span><b>{agg["polls_in_scenario"]}</b></div>
+    <div class="met"><span>{t_agg_polls_j}</span><b>{agg["polls_aggregated"]}</b></div>
     <div class="met"><span>{t_periode}</span><b>{frd(agg["first"])} → {frd(agg["last"])}</b></div>
     <div class="met wide"><span>{t_instituts}</span><b>{", ".join(agg["instituts"])}</b></div>
   </div>
+  <p class="small muted" style="max-width:none;margin-top:14px">{t_perim_p}</p>
 </section>
 
 <section id="tableau" class="card">
@@ -2410,7 +2436,8 @@ def main():
     # Nombre d'enquêtes de la couche locale réellement utilisées (celles que l'amont n'a pas).
     agg["imports_total"] = len(IDS_IMPORTES)
     json.dump(dict(generated=agg["generated"], scenario=agg["scenario"], window=agg["window"],
-                   polls_window=agg["polls_in_window"], polls_agg=agg["polls_aggregated"],
+                   polls_window=agg["polls_in_window"], polls_scenario=agg["polls_in_scenario"],
+                   polls_agg=agg["polls_aggregated"], agg_window=agg["agg_window"],
                    last=agg["last"], movs=movs, trends=trends),
               open(os.path.join(DATA, "movements.json"), "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)

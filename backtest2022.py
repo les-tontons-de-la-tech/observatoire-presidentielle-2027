@@ -242,16 +242,22 @@ def run(force=False):
 
 
 # ---------- rendu ----------
-def render(bt):
+def render(bt, lang="fr"):
+    """Page du rétro-test, dans la langue demandée (« fr » par défaut).
+
+    Même convention que generate.py et candidats.py : `m(français, anglais)` choisit le texte,
+    les métadonnées suivent `lang`, et les adresses passent par G.lien() / G.lien_page().
+    """
     from html import escape
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     res = bt["resultat"]
     ecart = lambda x: ("—" if x is None else
                        (("+" if x > 0 else "−") + G.fr1u(abs(x))))
     lignes_tbl = "\n".join(
-        f'<tr><td>{l["date"]}</td><td class="num muted">J−{l["jours_avant"]}</td>'
-        + "".join(f'<td class="num">{("—" if l["modes"][m]["mae"] is None else G.fr1u(l["modes"][m]["mae"]))}'
-                  f'<span class="muted small"> / {("—" if l["modes"][m]["biais"] is None else ecart(l["modes"][m]["biais"]))}</span></td>'
-                  for m, _ in MODES)
+        f'<tr><td>{l["date"]}</td><td class="num muted">{m("J−", "D−")}{l["jours_avant"]}</td>'
+        + "".join(f'<td class="num">{("—" if l["modes"][k]["mae"] is None else G.fr1u(l["modes"][k]["mae"]))}'
+                  f'<span class="muted small"> / {("—" if l["modes"][k]["biais"] is None else ecart(l["modes"][k]["biais"]))}</span></td>'
+                  for k, _ in MODES)
         + f'<td class="num muted small">{l["modes"]["recence"]["polls"]}</td>'
         + f'<td class="num muted small">{l["modes"]["recence"]["poids_non_candidats"]}</td></tr>'
         for l in bt["lignes"])
@@ -265,7 +271,7 @@ def render(bt):
         for nom, d in sorted(det.items(), key=lambda kv: -kv[1]["resultat"]))
 
     sens_tbl = "\n".join(
-        f'<tr><td>Demi-vie {s["half_life"]} jours</td>'
+        f'<tr><td>{m("Demi-vie ", "Half-life ")}{s["half_life"]} {m("jours", "days")}</td>'
         f'<td class="num">{G.fr1u(s["mae"])}</td><td class="num muted">{ecart(s["biais"])}</td>'
         f'<td class="num muted">{G.fr1u(s["max_err"])}</td></tr>' for s in bt["sensibilite"])
 
@@ -274,13 +280,20 @@ def render(bt):
     paires = [(n, d) for n, d in det.items() if d["erreur"] is not None]
     gw, gh = bt.get("grille_fenetre") or [], bt.get("grille_house") or []
     gw_tbl = "\n".join(
-        f'<tr><td>{g["fenetre"]} jours{"" if g["ok"] else " <span class=muted>(trou)</span>"}</td>'
+        f'<tr><td>{g["fenetre"]} {m("jours", "days")}{"" if g["ok"] else m(" <span class=muted>(trou)</span>", " <span class=muted>(gap)</span>")}</td>'
         f'<td class="num"><strong>{_fr2(g["mae_moyenne"])}</strong></td>'
         f'<td class="num">{g["couverture"]}</td>'
         f'<td class="num muted">{_fr2(g["n_moyen"])}</td>'
         f'<td class="num muted">{_fr2(g["polls_moyen"])}</td></tr>' for g in gw)
+    # Le libellé des configurations vient du calcul (« fenêtre 60 j — effets de maison
+    # corrigés »), en français : il est rebâti ici pour que la version anglaise n'affiche pas
+    # une phrase française, sans toucher au fichier de données.
+    def _libelle_house(h):
+        quoi = (m("effets de maison corrigés", "house effects corrected") if h["house"]
+                else m("sans correction", "no correction"))
+        return m("fenêtre ", "window ") + str(h["fenetre"]) + m(" j — ", " d — ") + quoi
     gh_tbl = "\n".join(
-        f'<tr><td>{h["libelle"]}</td><td class="num"><strong>{_fr2(h["mae_moyenne"])}</strong></td>'
+        f'<tr><td>{_libelle_house(h)}</td><td class="num"><strong>{_fr2(h["mae_moyenne"])}</strong></td>'
         f'<td class="num muted">{h["couverture"]}</td></tr>' for h in gh)
     best = bt.get("meilleure") or {}
     gain_fenetre = None
@@ -300,32 +313,38 @@ def render(bt):
     # affirmait donc un cas qui ne s'est pas produit. Elle dit maintenant ce que les
     # données montrent, dans un cas comme dans l'autre.
     if trous:
-        phrase_trous = (
+        phrase_trous = m(
             "à l'échéance du " + ", ".join(trous) + ", aucun scénario n'atteignait trois "
             "enquêtes — la page serait restée vide. C'est honnête, mais c'est une "
-            "fragilité à assumer."
-        )
+            "fragilité à assumer.",
+            "at the deadline of " + ", ".join(trous) + ", no scenario reached three "
+            "polls — the page would have stayed empty. That is honest, but it is a "
+            "fragility to be owned.")
     else:
-        phrase_trous = (
+        phrase_trous = m(
             "sur chacune des " + str(len(bt["lignes"])) + " échéances de ce rétro-test, au moins "
             "trois enquêtes étaient disponibles — la page ne serait jamais restée vide. La "
             "fragilité reste entière : sur une campagne plus pauvre en sondages, le seuil de "
-            "trois enquêtes ne serait pas atteint, et l'agrégation se tairait."
-        )
+            "trois enquêtes ne serait pas atteint, et l'agrégation se tairait.",
+            "at each of the " + str(len(bt["lignes"])) + " deadlines of this backtest, at least "
+            "three polls were available — the page would never have stayed empty. The "
+            "fragility remains whole: on a campaign with fewer polls, the threshold of "
+            "three polls would not be reached, and the aggregation would fall silent.")
     gain_dernier = round((r[2]["mae"] or 0) - (r[0]["mae"] or 0), 2)
     return f"""<!doctype html>
-<html lang="fr">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="{G.meta_description('/observatoire/backtest/')}">
-<title>{G.titre_court('/observatoire/backtest/')}</title>
-<link rel="canonical" href="https://dileviathan.fr/observatoire/backtest/">
-<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/backtest/">
-<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/backtest/">
-{G.meta_social('/observatoire/backtest/')}
-{G.ld_json("/observatoire/backtest/")}
+<meta name="description" content="{G.meta_description('/observatoire/backtest/', lang)}">
+<title>{G.titre_court('/observatoire/backtest/', lang)}</title>
+<link rel="canonical" href="https://dileviathan.fr{G.lien('/backtest/', lang)}">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr{G.lien('/backtest/', 'fr')}">
+<link rel="alternate" hreflang="en" href="https://dileviathan.fr{G.lien('/backtest/', 'en')}">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr{G.lien('/backtest/', 'fr')}">
+{G.meta_social('/observatoire/backtest/', lang)}
+{G.ld_json("/observatoire/backtest/", lang)}
 {G.matomo()}
 <style>{G.CSS}{G.DARK}
 /* Tables : largeur pleine dans les cartes */
@@ -333,159 +352,226 @@ section.card table{{width:100%}}</style>
 {G.THEME_HEAD}</head>
 <body>
 <div class="topbar"><div class="wrap nav">
-  <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· rétro-test 2022</span></div>
-  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/sondages/">Agrégation</a>
-  <a href="/observatoire/candidats/">Les candidats</a>{G.NAV_WORKFLOW}{G.NAV_LOIS}<a href="#resultats">Résultats</a><a href="#detail">Détail</a><a href="#lecons">Leçons</a></div>{G.THEME_BTN}
+  <div class="brand"><a href="{G.lien('/', lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· {m("rétro-test 2022", "2022 backtest")}</span></div>
+  <div class="navlinks"><a href="{G.lien('/', lang)}">{m("Accueil", "Home")}</a><a href="{G.lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>
+  <a href="{G.lien_page('/candidats/', lang)}">{m("Les candidats", "Candidates")}</a>{G.nav_workflow(lang)}{G.nav_lois(lang)}<a href="#resultats">{m("Résultats", "Results")}</a><a href="#detail">{m("Détail", "Detail")}</a><a href="#lecons">{m("Leçons", "Lessons")}</a>{G.toggle_langue('/backtest/', lang, en_pret=True)}</div>{G.THEME_BTN}
 </div></div>
 
 <header class="wrap">
-  <span class="eyebrow">Validation · observatoire des sondages 2027</span>
-  <h1>La même méthode, rejouée sur la campagne 2022</h1>
-  <p class="lede">Notre agrégation n'est pas un modèle de prévision — mais rien n'interdit de mesurer
-  son erreur passée. Voici ce qu'elle aurait donné, échéance par échéance, face au résultat réel du
-  premier tour du 10 avril 2022. C'est ce rétro-test qui a fixé deux réglages de la page 2027 :
-  <strong>fenêtre de sélection de {best.get("fenetre", 90)} jours</strong> et
-  <strong>correction des effets de maison</strong>.</p>
+  <span class="eyebrow">{m("Validation · observatoire des sondages 2027", "Validation · 2027 poll monitor")}</span>
+  <h1>{m("La même méthode, rejouée sur la campagne 2022", "The same method, replayed on the 2022 campaign")}</h1>
+  <p class="lede">{m("Notre agrégation n'est pas un modèle de prévision — mais rien n'interdit de mesurer",
+  "Our aggregation is not a forecasting model — but nothing prevents us from measuring")}
+  {m("son erreur passée. Voici ce qu'elle aurait donné, échéance par échéance, face au résultat réel du",
+  "its past error. Here is what it would have given, deadline by deadline, against the actual result of the")}
+  {m("premier tour du 10 avril 2022. C'est ce rétro-test qui a fixé deux réglages de la page 2027 :",
+  "first round of 10 April 2022. This backtest is what set two settings of the 2027 page:")}
+  <strong>{m("fenêtre de sélection de ", "scenario window of ")}{best.get("fenetre", 90)} {m("jours", "days")}</strong> {m("et", "and")}
+  <strong>{m("correction des effets de maison", "house-effect correction")}</strong>.</p>
 </header>
 
 <main class="wrap">
 <section id="resultats" class="card">
-  <h2>L'erreur à chaque échéance</h2>
-  <p class="small muted">Erreur absolue moyenne <strong>/</strong> biais moyen (en points de
-  pourcentage), sur les candidats réels publiés. Les deux colonnes de droite comptent les enquêtes
-  retenues et le poids que notre tableau donnait à des candidats… qui n'existaient pas le jour du
-  vote : c'est le prix de l'incertitude sur le champ.</p>
-  <table style="margin-top:10px"><tr><th>Échéance</th><th class="num">Distance</th>
-  <th class="num">Notre méthode</th><th class="num">Poids égaux</th><th class="num">Dernière enquête</th>
-  <th class="num">Enquêtes</th><th class="num">Poids non-candidats</th></tr>
+  <h2>{m("L'erreur à chaque échéance", "The error at each deadline")}</h2>
+  <p class="small muted">{m("Erreur absolue moyenne <strong>/</strong> biais moyen (en points de",
+  "Mean absolute error <strong>/</strong> mean bias (in percentage")}
+  {m("pourcentage), sur les candidats réels publiés. Les deux colonnes de droite comptent les enquêtes",
+  "points), across the real candidates published. The two right-hand columns count the polls")}
+  {m("retenues et le poids que notre tableau donnait à des candidats… qui n'existaient pas le jour du",
+  "retained and the weight our table gave to candidates… who did not exist on")}
+  {m("vote : c'est le prix de l'incertitude sur le champ.", "voting day: that is the price of uncertainty over the field.")}</p>
+  <table style="margin-top:10px"><tr><th>{m("Échéance", "Deadline")}</th><th class="num">{m("Distance", "Distance")}</th>
+  <th class="num">{m("Notre méthode", "Our method")}</th><th class="num">{m("Poids égaux", "Equal weights")}</th><th class="num">{m("Dernière enquête", "Latest poll only")}</th>
+  <th class="num">{m("Enquêtes", "Polls")}</th><th class="num">{m("Poids non-candidats", "Non-candidate weight")}</th></tr>
   {lignes_tbl}</table>
-  <p class="small" style="margin-top:12px"><strong>Repère :</strong> la prévision bayésienne
-  <a href="https://github.com/whyalwaysrose/presidentielle-2027">whyalwaysrose</a> affiche un rétro-test
-  2022 de 1,9 point d'erreur moyenne sur les duels, à J−31 — nous sommes ici à J−{bt["dernier"]["jours_avant"]},
-  avec une méthode bien plus simple, et nous publions notre erreur au lieu de l'affirmer.</p>
+  <p class="small" style="margin-top:12px"><strong>{m("Repère :", "Benchmark:")}</strong> {m("la prévision bayésienne", "the Bayesian forecast")}
+  <a href="https://github.com/whyalwaysrose/presidentielle-2027">whyalwaysrose</a> {m("affiche un rétro-test",
+  "reports a backtest")}
+  {m("2022 de 1,9 point d'erreur moyenne sur les duels, à J−31 — nous sommes ici à J−",
+  "of 2022 with 1,9 points mean error on runoffs, at D−31 — we are here at D−")}{bt["dernier"]["jours_avant"]},
+  {m("avec une méthode bien plus simple, et nous publions notre erreur au lieu de l'affirmer.",
+  "with a much simpler method, and we publish our error instead of asserting it.")}</p>
 </section>
 
 <section id="detail" class="card">
-  <h2>Candidat par candidat, au {bt["dernier"]["date"]} (J−{bt["dernier"]["jours_avant"]})</h2>
-  <table style="margin-top:10px"><tr><th>Candidat</th><th class="num">Estimation MieuxVoter</th>
-  <th class="num">Résultat réel</th><th class="num">Écart</th></tr>
+  <h2>{m("Candidat par candidat, au ", "Candidate by candidate, on ")}{bt["dernier"]["date"]} ({m("J−", "D−")}{bt["dernier"]["jours_avant"]})</h2>
+  <table style="margin-top:10px"><tr><th>{m("Candidat", "Candidate")}</th><th class="num">{m("Estimation MieuxVoter", "MieuxVoter estimate")}</th>
+  <th class="num">{m("Résultat réel", "Actual result")}</th><th class="num">{m("Écart", "Gap")}</th></tr>
   {det_tbl}</table>
-  <p class="small muted" style="margin-top:10px">« Estimation MieuxVoter » désigne la moyenne
-  pondérée calculée ici à partir de la compilation de sondages MieuxVoter (licence MIT) : la source
-  fournit les enquêtes, la pondération est la nôtre — la colonne indique donc ce que cette méthode
-  produisait à cette date, pas un chiffre publié par MieuxVoter.</p>
+  <p class="small muted" style="margin-top:10px">{m("« Estimation MieuxVoter » désigne la moyenne",
+  "“MieuxVoter estimate” is the weighted average")}
+  {m("pondérée calculée ici à partir de la compilation de sondages MieuxVoter (licence MIT) : la source",
+  "computed here from the MieuxVoter poll compilation (MIT licence): the source")}
+  {m("fournit les enquêtes, la pondération est la nôtre — la colonne indique donc ce que cette méthode",
+  "provides the surveys, the weighting is ours — so the column shows what this method")}
+  {m("produisait à cette date, pas un chiffre publié par MieuxVoter.", "produced on that date, not a figure published by MieuxVoter.")}</p>
 </section>
 
 <section class="card">
-  <h2>Sensibilité au réglage le plus arbitraire</h2>
-  <p class="small muted" style="max-width:none">La demi-vie est notre choix le plus discutable (elle fixe la vitesse à
-  laquelle une vieille enquête perd son poids). Voici son effet, à la dernière échéance : si l'erreur
-  variait fortement, le réglage serait un aveu de fragilité.</p>
-  <table style="margin-top:10px"><tr><th>Réglage</th><th class="num">Erreur moyenne</th>
-  <th class="num">Biais</th><th class="num">Pire écart</th></tr>
+  <h2>{m("Sensibilité au réglage le plus arbitraire", "Sensitivity to the most arbitrary setting")}</h2>
+  <p class="small muted" style="max-width:none">{m("La demi-vie est notre choix le plus discutable (elle fixe la vitesse à",
+  "The half-life is our most debatable choice (it sets how fast")}
+  {m("laquelle une vieille enquête perd son poids). Voici son effet, à la dernière échéance : si l'erreur",
+  "an old poll loses its weight). Here is its effect, at the last deadline: if the error")}
+  {m("variait fortement, le réglage serait un aveu de fragilité.", "varied sharply, the setting would be an admission of fragility.")}</p>
+  <table style="margin-top:10px"><tr><th>{m("Réglage", "Setting")}</th><th class="num">{m("Erreur moyenne", "Mean error")}</th>
+  <th class="num">{m("Biais", "Bias")}</th><th class="num">{m("Pire écart", "Worst gap")}</th></tr>
   {sens_tbl}</table>
 </section>
 
 <section id="reglages" class="card">
-  <h2>Deux réglages mesurés, pas choisis au feeling</h2>
+  <h2>{m("Deux réglages mesurés, pas choisis au feeling", "Two settings measured, not chosen on a hunch")}</h2>
 
-  <h3 style="margin-top:18px">Fenêtre de sélection du scénario</h3>
-  <p class="small muted" style="max-width:none">La fenêtre fixe la durée pendant laquelle on cherche le scénario de
-  candidatures le plus testé. Trop courte, on rate les scénarios les plus documentés ; trop longue, on
-  agrège des sondages d'un autre âge. Erreur moyenne sur les échéances, et couverture (échéances où
-  quelque chose était publiable) — correction des effets de maison activée sur toutes les
-  lignes :</p>
-  <table style="margin-top:10px"><tr><th>Fenêtre</th><th class="num">Erreur moyenne</th>
-  <th class="num">Couverture</th><th class="num">Candidats publiés</th>
-  <th class="num">Enquêtes retenues</th></tr>
+  <h3 style="margin-top:18px">{m("Fenêtre de sélection du scénario", "Scenario selection window")}</h3>
+  <p class="small muted" style="max-width:none">{m("La fenêtre fixe la durée pendant laquelle on cherche le scénario de",
+  "The window sets how far back we look for the")}
+  {m("candidatures le plus testé. Trop courte, on rate les scénarios les plus documentés ; trop longue, on",
+  "most-tested candidate scenario. Too short and we miss the best-documented scenarios; too long and we")}
+  {m("agrège des sondages d'un autre âge. Erreur moyenne sur les échéances, et couverture (échéances où",
+  "aggregate polls from another age. Mean error across the deadlines, and coverage (deadlines where")}
+  {m("quelque chose était publiable) — correction des effets de maison activée sur toutes les",
+  "something was publishable) — house-effect correction enabled on every")}
+  {m("lignes :", "row:")}</p>
+  <table style="margin-top:10px"><tr><th>{m("Fenêtre", "Window")}</th><th class="num">{m("Erreur moyenne", "Mean error")}</th>
+  <th class="num">{m("Couverture", "Coverage")}</th><th class="num">{m("Candidats publiés", "Candidates published")}</th>
+  <th class="num">{m("Enquêtes retenues", "Polls retained")}</th></tr>
   {gw_tbl}</table>
-  <p class="small" style="margin-top:12px"><strong>Décision : 90 jours.</strong> C'est la fenêtre la
-  plus courte qui couvre les six échéances (à 60 jours, celle de septembre 2021 restait vide) et qui
-  minimise l'erreur{"" if gain_fenetre is None else f" ({_fr2(gain_fenetre)} point de moins qu'à 60 jours)"}.
-  Au-delà (120 jours), le gain est nul et l'on agrège des enquêtes plus anciennes pour rien.</p>
+  <p class="small" style="margin-top:12px"><strong>{m("Décision : 90 jours.", "Decision: 90 days.")}</strong> {m("C'est la fenêtre la",
+  "It is the shortest window")}
+  {m("plus courte qui couvre les six échéances (à 60 jours, celle de septembre 2021 restait vide) et qui",
+  "that covers all six deadlines (at 60 days, the September 2021 one stayed empty) and that")}
+  {m("minimise l'erreur", "minimises the error")}{"" if gain_fenetre is None else m(f" ({_fr2(gain_fenetre)} point de moins qu'à 60 jours)", f" ({_fr2(gain_fenetre)} point less than at 60 days)")}.
+  {m("Au-delà (120 jours), le gain est nul et l'on agrège des enquêtes plus anciennes pour rien.",
+  "Beyond that (120 days), the gain is nil and we aggregate older polls for nothing.")}</p>
 
-  <h3 style="margin-top:24px">Correction des effets de maison</h3>
-  <p class="small muted" style="max-width:none">Chaque institut a sa manière de poser ses questions et de redresser ses
-  résultats. Nous estimons son écart moyen au consensus des autres — par itérations, avec contraction
-  vers zéro quand l'institut est peu vu — puis nous corrigeons avant d'agréger.</p>
-  <table style="margin-top:10px"><tr><th>Configuration</th><th class="num">Erreur moyenne</th>
-  <th class="num">Couverture</th></tr>
+  <h3 style="margin-top:24px">{m("Correction des effets de maison", "House-effect correction")}</h3>
+  <p class="small muted" style="max-width:none">{m("Chaque institut a sa manière de poser ses questions et de redresser ses",
+  "Each polling firm has its own way of asking questions and weighting its")}
+  {m("résultats. Nous estimons son écart moyen au consensus des autres — par itérations, avec contraction",
+  "results. We estimate its average gap to the others' consensus — iteratively, shrinking")}
+  {m("vers zéro quand l'institut est peu vu — puis nous corrigeons avant d'agréger.",
+  "towards zero when the firm is rarely seen — then we correct before aggregating.")}</p>
+  <table style="margin-top:10px"><tr><th>{m("Configuration", "Configuration")}</th><th class="num">{m("Erreur moyenne", "Mean error")}</th>
+  <th class="num">{m("Couverture", "Coverage")}</th></tr>
   {gh_tbl}</table>
-  <p class="small" style="margin-top:12px"><strong>Décision : correction activée.</strong>
-  Le gain est réel mais faible{"" if gain_house is None else f" ({_fr2(gain_house)} point à fenêtre égale)"} —
-  et c'est logique : en 2022, la plus grosse erreur (Mélenchon sous-estimé de 14 points) était
-  <em>partagée par tous les instituts</em>. Une correction d'effet de maison ne peut rien contre un
-  biais collectif : elle corrige les écarts <em>entre</em> instituts, pas leur aveuglement commun.</p>
+  <p class="small" style="margin-top:12px"><strong>{m("Décision : correction activée.", "Decision: correction on.")}</strong>
+  {m("Le gain est réel mais faible", "The gain is real but small")}{"" if gain_house is None else m(f" ({_fr2(gain_house)} point à fenêtre égale)", f" ({_fr2(gain_house)} point at equal window)")} —
+  {m("et c'est logique : en 2022, la plus grosse erreur (Mélenchon sous-estimé de 14 points) était",
+  "and that is logical: in 2022 the largest error (Mélenchon underestimated by 14 points) was")}
+  <em>{m("partagée par tous les instituts", "shared by every pollster")}</em>{m(". Une correction d'effet de maison ne peut rien contre un",
+  ". A house-effect correction can do nothing against a")}
+  {m("biais collectif : elle corrige les écarts <em>entre</em> instituts, pas leur aveuglement commun.",
+  "collective bias: it corrects the gaps <em>between</em> pollsters, not their shared blind spot.")}</p>
 </section>
 
 <section id="lecons" class="card">
-  <h2>Ce que ça nous apprend</h2>
+  <h2>{m("Ce que ça nous apprend", "What it teaches us")}</h2>
   <ul class="tight">
-    <li><strong>Les deux finalistes étaient identifiés</strong> dès octobre 2021 :
-    {", ".join(r[0]["top2"])}, dans le bon ordre — les deux qualifiés réels étant Emmanuel Macron et
-    Marine Le Pen. En juillet et août 2021, l'ordre était inversé (Le Pen devant).</li>
-    <li><strong>Erreur moyenne de {G.fr1u(r[0]["mae"])} point(s)</strong> sur les parts du premier tour
-    à J−{bt["dernier"]["jours_avant"]}, pour un biais de {ecart(r[0]["biais"])} : notre tableau n'aurait
-    pas désigné un vainqueur, mais il donnait déjà le rapport de forces. Sur les douze candidats réels,
-    {r[0]["n"]} étaient publiés.</li>
-    <li><strong>Les deux réglages mesurés sont désormais ceux de la page 2027</strong> : fenêtre de
-    sélection portée à {best.get("fenetre", 90)} jours (couverture complète des échéances, erreur
-    moyenne {_fr2(gw[2]["mae_moyenne"]) if len(gw) > 2 else "—"} contre {_fr2(gw[1]["mae_moyenne"]) if len(gw) > 1 else "—"}
-    à 60 jours) et correction des effets de maison activée (gain marginal mais systématique).</li>
-    <li><strong>Notre pondération n'apporte rien</strong> : {fr2(r[0]["mae"])} point d'erreur avec
-    notre calcul, {fr2(r[1]["mae"])} à poids égaux, {fr2(r[2]["mae"])} avec la dernière enquête seule —
-    soit {fr2(abs(gain_dernier))} point de moins pour le sondage brut. La demi-vie ne change presque rien
-    non plus ({", ".join(fr2(s["mae"]) for s in bt["sensibilite"])} selon le réglage, de 15 à 180 jours).
-    La valeur ajoutée de cette page n'est donc pas l'agrégation : elle est dans la lisibilité, le
-    scénario explicite et l'intervalle publié.</li>
-    <li><strong>L'erreur n'est pas répartie au hasard</strong> : au dernier point, la plus forte
-    sous-estimation est {escape(sous[0]) if sous else "—"} ({ecart(sous[1]["erreur"]) if sous else "—"})
-    et la plus forte surestimation {escape(sur[0]) if sur else "—"} ({ecart(sur[1]["erreur"]) if sur else "—"}).
-    Les instituts avaient surestimé Zemmour, Pécresse et Hidalgo, et sous-estimé la gauche : un
-    agrégateur de sondages ne corrige pas ces biais structurels, il les reproduit.</li>
-    <li><strong>Le champ de candidats est le premier facteur d'erreur</strong> : les non-candidats
-    (Montebourg, Bertrand, Philippot…) pesaient jusqu'à {G.fr1u(nc_max)} points de notre tableau en
-    2021, contre {G.fr1u(r[0]["poids_non_candidats"])} au dernier point. Verrouiller un scénario revient
-    à parier sur ce chiffre ; un modèle qui intègre le champ le paie autrement, en largeur d'intervalle.</li>
-    <li><strong>Notre méthode peut ne rien publier</strong> : {phrase_trous}</li>
-    <li><strong>Ce chiffre ne se compare pas</strong> à celui de la prévision bayésienne (1,9 point sur
-    les duels à J−31) : autre horizon, autre grandeur. Ce qui est comparable, c'est la discipline —
-    désormais, nous publions notre erreur au lieu de l'affirmer.</li>
+    <li><strong>{m("Les deux finalistes étaient identifiés", "Both finalists were identified")}</strong> {m("dès octobre 2021 :",
+    "as early as October 2021:")}
+    {", ".join(r[0]["top2"])}, {m("dans le bon ordre — les deux qualifiés réels étant Emmanuel Macron et",
+    "in the right order — the two actual qualifiers being Emmanuel Macron and")}
+    Marine Le Pen. {m("En juillet et août 2021, l'ordre était inversé (Le Pen devant).",
+    "In July and August 2021 the order was reversed (Le Pen ahead).")}</li>
+    <li><strong>{m("Erreur moyenne de ", "Mean error of ")}{G.fr1u(r[0]["mae"])} {m("point(s)", "point(s)")}</strong> {m("sur les parts du premier tour",
+    "on first-round shares")}
+    {m("à J−", "at D−")}{bt["dernier"]["jours_avant"]}, {m("pour un biais de ", "for a bias of ")}{ecart(r[0]["biais"])} : {m("notre tableau n'aurait",
+    "our table would not")}
+    {m("pas désigné un vainqueur, mais il donnait déjà le rapport de forces. Sur les douze candidats réels,",
+    "have named a winner, but it already gave the balance of power. Of the twelve real candidates,")}
+    {r[0]["n"]} {m("étaient publiés.", "were published.")}</li>
+    <li><strong>{m("Les deux réglages mesurés sont désormais ceux de la page 2027", "The two measured settings are now those of the 2027 page")}</strong> : {m("fenêtre de",
+    "selection window")}
+    {m("sélection portée à ", "raised to ")}{best.get("fenetre", 90)} {m("jours (couverture complète des échéances, erreur",
+    "days (full coverage of the deadlines, mean")}
+    {m("moyenne ", "error ")}{_fr2(gw[2]["mae_moyenne"]) if len(gw) > 2 else "—"} {m("contre", "against")} {_fr2(gw[1]["mae_moyenne"]) if len(gw) > 1 else "—"}
+    {m("à 60 jours) et correction des effets de maison activée (gain marginal mais systématique).",
+    "at 60 days) and house-effect correction enabled (a marginal but systematic gain).")}</li>
+    <li><strong>{m("Notre pondération n'apporte rien", "Our weighting adds nothing")}</strong> : {fr2(r[0]["mae"])} {m("point d'erreur avec",
+    "point of error with")}
+    {m("notre calcul, ", "our calculation, ")}{fr2(r[1]["mae"])} {m("à poids égaux, ", "with equal weights, ")}{fr2(r[2]["mae"])} {m("avec la dernière enquête seule —",
+    "with the latest poll alone —")}
+    {m("soit ", "that is ")}{fr2(abs(gain_dernier))} {m("point de moins pour le sondage brut. La demi-vie ne change presque rien",
+    "point less for the raw poll. The half-life barely changes anything")}
+    {m("non plus (", "either (")}{", ".join(fr2(s["mae"]) for s in bt["sensibilite"])} {m("selon le réglage, de 15 à 180 jours).",
+    "depending on the setting, from 15 to 180 days).")}
+    {m("La valeur ajoutée de cette page n'est donc pas l'agrégation : elle est dans la lisibilité, le",
+    "The added value of this page is therefore not the aggregation: it lies in readability, the")}
+    {m("scénario explicite et l'intervalle publié.", "explicit scenario and the published interval.")}</li>
+    <li><strong>{m("L'erreur n'est pas répartie au hasard", "The error is not spread at random")}</strong> : {m("au dernier point, la plus forte",
+    "at the last data point, the largest")}
+    {m("sous-estimation est ", "underestimation is ")}{escape(sous[0]) if sous else "—"} ({ecart(sous[1]["erreur"]) if sous else "—"})
+    {m("et la plus forte surestimation ", "and the largest overestimation ")}{escape(sur[0]) if sur else "—"} ({ecart(sur[1]["erreur"]) if sur else "—"}).
+    {m("Les instituts avaient surestimé Zemmour, Pécresse et Hidalgo, et sous-estimé la gauche : un",
+    "The pollsters had overestimated Zemmour, Pécresse and Hidalgo, and underestimated the left: a")}
+    {m("agrégateur de sondages ne corrige pas ces biais structurels, il les reproduit.",
+    "poll aggregator does not correct these structural biases, it reproduces them.")}</li>
+    <li><strong>{m("Le champ de candidats est le premier facteur d'erreur", "The candidate field is the first source of error")}</strong> : {m("les non-candidats",
+    "the non-candidates")}
+    {m("(Montebourg, Bertrand, Philippot…) pesaient jusqu'à ", "(Montebourg, Bertrand, Philippot…) weighed up to ")}{G.fr1u(nc_max)} {m("points de notre tableau en",
+    "points of our table in")}
+    2021, {m("contre ", "against ")}{G.fr1u(r[0]["poids_non_candidats"])} {m("au dernier point. Verrouiller un scénario revient",
+    "at the last data point. Locking a scenario amounts")}
+    {m("à parier sur ce chiffre ; un modèle qui intègre le champ le paie autrement, en largeur d'intervalle.",
+    "to betting on that figure; a model that integrates the field pays for it elsewhere, in interval width.")}</li>
+    <li><strong>{m("Notre méthode peut ne rien publier", "Our method may publish nothing")}</strong> : {phrase_trous}</li>
+    <li><strong>{m("Ce chiffre ne se compare pas", "This figure is not comparable")}</strong> {m("à celui de la prévision bayésienne (1,9 point sur",
+    "to the Bayesian forecast (1,9 points on")}
+    {m("les duels à J−31) : autre horizon, autre grandeur. Ce qui est comparable, c'est la discipline —",
+    "runoffs at D−31): another horizon, another quantity. What is comparable is the discipline —")}
+    {m("désormais, nous publions notre erreur au lieu de l'affirmer.", "from now on, we publish our error instead of asserting it.")}</li>
   </ul>
 </section>
 
 <section class="card">
-  <h2>Sources et limites du rétro-test</h2>
+  <h2>{m("Sources et limites du rétro-test", "Sources and limits of the backtest")}</h2>
   <ul class="tight small">
-    <li>Sondages : <a href="https://github.com/Bkolenc/sondages_presidentielle2022_ebra">
-    Bkolenc/sondages_presidentielle2022_ebra</a> (licence MIT) — {bt["nb_hypotheses"]} hypothèses de
-    premier tour, {bt["nb_enquetes"]} dates d'enquête, chaque notice étant liée à la Commission des
-    sondages.</li>
-    <li>Résultats : scores officiels du premier tour 2022 publiés par le
-    <a href="https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2022/FE.php">ministère
-    de l'Intérieur</a> (« France entière », archives des résultats électoraux) — 35 132 947 suffrages
-    exprimés. Les douze scores ont été vérifiés un à un le 14/09/2026 : identiques à la page
-    officielle, et recoupés avec l'article « Élection présidentielle française de 2022 »
-    (Wikipédia FR, CC BY-SA).</li>
-    <li>Ce rétro-test rejoue notre <em>méthode de calcul</em> sur les données de l'époque : les
-    chiffres publiés ici n'ont jamais été affichés en 2022.</li>
-    <li>Les intentions de vote des instituts portent sur les suffrages exprimés — comme les résultats
-    retenus ici — mais les champs de candidats différaient d'un sondage à l'autre.</li>
-    <li><strong>Horizon</strong> : la compilation 2022 s'arrête au 29/11/2021, soit J−132. Étendre ce
-    rétro-test à la dernière ligne droite (J−30, J−10) demanderait une compilation couvrant
-    janvier-avril 2022 sous licence libre : elle n'existe pas — les références les plus complètes,
-    comme <a href="https://github.com/nsppolls/nsppolls">nsppolls</a>, ne portent aucune licence, et
-    nous ne les réutilisons pas. Nous mesurons donc notre erreur à l'horizon où nous publions
-    (≈ J−215 pour 2027), pas là où l'élection se joue.</li>
+    <li>{m("Sondages :", "Polls:")} <a href="https://github.com/Bkolenc/sondages_presidentielle2022_ebra">
+    Bkolenc/sondages_presidentielle2022_ebra</a> ({m("licence MIT", "MIT licence")}) — {bt["nb_hypotheses"]} {m("hypothèses de",
+    "hypotheses of the")}
+    {m("premier tour, ", "first round, ")}{bt["nb_enquetes"]} {m("dates d'enquête, chaque notice étant liée à la Commission des",
+    "survey dates, each notice linked to the")}
+    {m("sondages.", "polling commission.")}</li>
+    <li>{m("Résultats : scores officiels du premier tour 2022 publiés par le", "Results: official first-round scores of 2022 published by the")}
+    <a href="https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2022/FE.php">{m("ministère",
+    "Ministry")}
+    {m("de l'Intérieur", "of the Interior")}</a> ({m("« France entière », archives des résultats électoraux) — 35 132 947 suffrages",
+    "“France entière”, electoral results archive) — 35 132 947 votes")}
+    {m("exprimés. Les douze scores ont été vérifiés un à un le 14/09/2026 : identiques à la page",
+    "cast. The twelve scores were checked one by one on 14/09/2026: identical to the")}
+    {m("officielle, et recoupés avec l'article « Élection présidentielle française de 2022 »",
+    "official page, and cross-checked with the article “Élection présidentielle française de 2022”")}
+    ({m("Wikipédia FR, CC BY-SA", "Wikipédia FR, CC BY-SA")}).</li>
+    <li>{m("Ce rétro-test rejoue notre", "This backtest replays our")} <em>{m("méthode de calcul", "calculation method")}</em> {m("sur les données de l'époque : les",
+    "on the data of the time: the")}
+    {m("chiffres publiés ici n'ont jamais été affichés en 2022.", "figures published here were never displayed in 2022.")}</li>
+    <li>{m("Les intentions de vote des instituts portent sur les suffrages exprimés — comme les résultats",
+    "The pollsters' voting intentions refer to votes cast — as do the results")}
+    {m("retenus ici — mais les champs de candidats différaient d'un sondage à l'autre.",
+    "retained here — but the candidate fields differed from one poll to the next.")}</li>
+    <li><strong>{m("Horizon", "Horizon")}</strong> : {m("la compilation 2022 s'arrête au 29/11/2021, soit J−132. Étendre ce",
+    "the 2022 compilation stops on 29/11/2021, that is D−132. Extending this")}
+    {m("rétro-test à la dernière ligne droite (J−30, J−10) demanderait une compilation couvrant",
+    "backtest to the home straight (D−30, D−10) would require a compilation covering")}
+    {m("janvier-avril 2022 sous licence libre : elle n'existe pas — les références les plus complètes,",
+    "January-April 2022 under a free licence: it does not exist — the most complete references,")}
+    {m("comme", "such as")} <a href="https://github.com/nsppolls/nsppolls">nsppolls</a>, {m("ne portent aucune licence, et",
+    "carry no licence at all, and")}
+    {m("nous ne les réutilisons pas. Nous mesurons donc notre erreur à l'horizon où nous publions",
+    "we do not reuse them. We therefore measure our error at the horizon where we publish")}
+    ({m("≈ J−215 pour 2027", "≈ D−215 for 2027")}), {m("pas là où l'élection se joue.", "not where the election is decided.")}</li>
   </ul>
-  <p class="small">Rétro-test indépendant de toute publication : son intérêt est d'être faux un jour,
-  publiquement. Cette page n'est pas un sondage : elle n'interroge personne et n'anticipe aucun vote.</p>
-  <p class="small muted">Page générée le {bt["genere"]} par <code>backtest2022.py</code> — rejouable
-  à volonté.</p>
+  <p class="small">{m("Rétro-test indépendant de toute publication : son intérêt est d'être faux un jour,",
+  "A backtest independent of any publication: its interest is in being wrong one day,")}
+  {m("publiquement. Cette page n'est pas un sondage : elle n'interroge personne et n'anticipe aucun vote.",
+  "publicly. This page is not a poll: it questions nobody and anticipates no vote.")}</p>
+  <p class="small muted">{m("Page générée le ", "Page generated on ")}{bt["genere"]} {m("par", "by")} <code>backtest2022.py</code> — {m("rejouable",
+  "replayable")}
+  {m("à volonté.", "at will.")}</p>
 </section>
 </main>
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">{m("Mentions légales", "Legal notice")}</a></p>
 </footer>
 {G.THEME_JS}</body>
 </html>
@@ -496,6 +582,10 @@ def main():
     bt = run(force="--force" in sys.argv)
     os.makedirs(os.path.join(SITE, "backtest"), exist_ok=True)
     open(os.path.join(SITE, "backtest", "index.html"), "w", encoding="utf-8").write(render(bt))
+    # Version anglaise : mêmes chiffres, autres mots.
+    en_dir = os.path.join(SITE, "en", "observatoire", "backtest")
+    os.makedirs(en_dir, exist_ok=True)
+    open(os.path.join(en_dir, "index.html"), "w", encoding="utf-8").write(render(bt, lang="en"))
     r = bt["dernier"]["modes"]
     print(f"rétro-test 2022 : {bt['nb_enquetes']} dates d'enquête, {bt['nb_hypotheses']} hypothèses")
     for m in r:

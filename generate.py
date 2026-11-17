@@ -125,7 +125,10 @@ def table_ld(lang):
 def url_page(chemin, lang="fr"):
     """Adresse publique d'une page, arborescence anglaise comprise."""
     if lang == "en":
-        return SITE_URL + chemin.replace("/observatoire/", "/observatoire/en/", 1)
+        # /en/observatoire/ et non /observatoire/en/ : c'est l'adresse servie par Traefik.
+        # Le chemin est déjà passé par lien() dans les gabarits ; cette fonction ne sert
+        # qu'aux métadonnées (og:url, @id du JSON-LD) qui ne peuvent pas l'appeler.
+        return SITE_URL + chemin.replace("/observatoire/", "/en/observatoire/", 1)
     return SITE_URL + chemin
 
 
@@ -1385,7 +1388,7 @@ BASE_LANGUE = {"fr": "/observatoire", "en": "/en/observatoire"}
 # Pages qui existent réellement en anglais. Tant qu'une page n'y figure pas, le menu
 # anglais renvoie vers sa version française : un lien mort serait pire qu'un lien
 # vers une page lisible dans une autre langue.
-PAGES_EN = {"/", "/sondages/", "/candidats/"}
+PAGES_EN = {"/", "/sondages/", "/candidats/", "/backtest/", "/backtest2017/"}
 
 
 def lien(chemin, lang="fr"):

@@ -1360,12 +1360,20 @@ def hors_scenario(movs, trends, maxi=6, lang="fr"):
     reste = len(absents) - maxi
     if reste > 0:
         montres += f" et {reste} autre{'s' if reste > 1 else ''}"
-    suite = ("Ces noms ne sont pas testés dans la liste retenue par les questionnaires les plus récents : "
-             "leur suivi est celui du tableau « toutes listes » ci-dessous." if len(absents) > 1 else
-             "Il n'est pas testé dans la liste retenue par les questionnaires les plus récents : "
-             "son suivi est celui du tableau « toutes listes » ci-dessous.")
-    return ('<p class="small" style="max-width:none;margin-top:12px"><strong>Hors scénario aujourd\'hui, '
-            f'parmi les candidats déclarés :</strong> {montres}. {suite}</p>')
+    if lang == "en":
+        suite = ("These names are not tested in the list used by the most recent questionnaires: "
+                 "their tracking is the one in the \u201call lists\u201d table below." if len(absents) > 1 else
+                 "It is not tested in the list used by the most recent questionnaires: "
+                 "its tracking is the one in the \u201call lists\u201d table below.")
+        titre = "Outside the scenario today, among declared candidates:"
+    else:
+        suite = ("Ces noms ne sont pas testés dans la liste retenue par les questionnaires les plus récents : "
+                 "leur suivi est celui du tableau « toutes listes » ci-dessous." if len(absents) > 1 else
+                 "Il n'est pas testé dans la liste retenue par les questionnaires les plus récents : "
+                 "son suivi est celui du tableau « toutes listes » ci-dessous.")
+        titre = "Hors scénario aujourd'hui, parmi les candidats déclarés :"
+    return ('<p class="small" style="max-width:none;margin-top:12px">'
+            f'<strong>{titre}</strong> {montres}. {suite}</p>')
 
 
 def mov_line(movs, lang="fr"):
@@ -1379,19 +1387,21 @@ def mov_line(movs, lang="fr"):
 
     big7 = pick("delta7")
     if big7:
-        return " · ".join(fmt(m, "delta7") for m in big7[:4]) + " (sur 7 jours)"
+        return " · ".join(fmt(m, "delta7") for m in big7[:4]) + (" (over 7 days)" if lang == "en" else " (sur 7 jours)")
     big28 = pick("delta28")
     if big28:
-        return ("rien au-delà de 1 point sur 7 jours ; sur 28 jours : "
+        return (("nothing beyond 1 point over 7 days; over 28 days: " if lang == "en"
+                 else "rien au-delà de 1 point sur 7 jours ; sur 28 jours : ")
                 + " · ".join(fmt(m, "delta28") for m in big28[:3]))
-    return "aucun écart supérieur à 1 point sur 7 ou 28 jours (tous dans la marge)"
+    return ("no gap above 1 point over 7 or 28 days (all within the margin)" if lang == "en"
+            else "aucun écart supérieur à 1 point sur 7 ou 28 jours (tous dans la marge)")
 
 
 def fr(x, lang="fr"):
-    """Formatage français : virgule décimale, pas de ',0' inutile."""
+    """Formatage du nombre : virgule décimale en français, point en anglais, sans ',0' inutile."""
     s = f"{x:.1f}" if isinstance(x, float) else str(x)
     s = s.rstrip("0").rstrip(".") if "." in s else s
-    return s.replace(".", ",")
+    return s if lang == "en" else s.replace(".", ",")
 
 
 def trend_point(polls, as_of, min_polls=3):
@@ -1942,13 +1952,13 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
     <li><strong>{m("Pondération.", "Weighting.")}</strong> {m("Chaque sondage pèse selon son âge (demi-vie de", "Each poll is weighted by its age (half-life of")}
     {agg["half_life"]} {m("jours) et la racine de son échantillon.", "days) and the square root of its sample.")}</li>
     <li><strong>{m("Incertitude.", "Uncertainty.")}</strong> {m("L'intervalle à 95 % de la moyenne est plancheré à", "The 95% interval on the average has a floor of")}
-    ±{fr(agg["ic_floor"])} {m("point, pour ne pas fabriquer de fausse précision sur peu de sondages.", "point, so as not to manufacture false precision from few polls.")}</li>
+    ±{fr(agg["ic_floor"], lang)} {m("point, pour ne pas fabriquer de fausse précision sur peu de sondages.", "point, so as not to manufacture false precision from few polls.")}</li>
     <li><strong>{m("Publication.", "Publication.")}</strong> {m("Un candidat n'apparaît qu'à partir de", "A candidate appears only from")} {agg["min_polls"]} {m("sondages.", "polls.")}</li>
   </ol>
   <div class="excl small" style="margin-top:14px">
     <code>poids w = exp(−ln2 × âge_jours / {agg["half_life"]}) × √(échantillon / 1000)</code><br>
     <code>moyenne = Σ(w·x) / Σw</code> &nbsp;·&nbsp;
-    <code>IC 95 % = max( 1,96 × σ_pondéré / √n_eff , {fr(agg["ic_floor"])} )</code> {m("avec", "with")}
+    <code>IC 95 % = max( 1,96 × σ_pondéré / √n_eff , {fr(agg["ic_floor"], lang)} )</code> {m("avec", "with")}
     <code>n_eff = (Σw)² / Σw²</code>
   </div>
   <p class="small muted" style="margin-top:12px">{m("Le détail des calculs, les valeurs par candidat et les limites complètes sont sur la page", "The details of the calculations, the per-candidate values and the full limits are on the")}

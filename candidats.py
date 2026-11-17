@@ -34,6 +34,24 @@ FAMILLES = {
 PILLS = {"declare": "Déclaré", "conditionnel": "Sous condition", "suspens": "En suspens",
          "retire": "Retiré", "soutien": "Non candidat"}
 
+# Versions anglaises des trois tables ci-dessus. Elles restent séparées plutôt que
+# fusionnées dans des tuples bilingues : le français est la référence, et une table
+# anglaise incomplète doit se voir à la lecture, pas se traduire en silence par du vide.
+STATUTS_EN = {
+    "declare": ("Declared", "The candidacy has been announced publicly, by the candidate or by their party."),
+    "conditionnel": ("Declared with conditions", "The candidacy is stated but depends on an internal step: "
+                     "a primary, an investiture, a party's decision."),
+    "suspens": ("Neither candidates nor absent", "They keep the doubt alive and have not given up."),
+    "retire": ("Announced then withdrawn", "A withdrawal is information too: the line stays, struck through."),
+    "soutien": ("Mentioned but not candidates", "They have said they are not candidates — or that they back someone else."),
+}
+FAMILLES_EN = {"extreme-gauche": "Far left", "gauche": "Left", "centre": "Centre",
+               "droite": "Right", "extreme-droite": "Far right", "divers": "Various"}
+PILLS_EN = {"declare": "Declared", "conditionnel": "Conditional", "suspens": "Pending",
+            "retire": "Withdrawn", "soutien": "Not a candidate"}
+MOIS_EN = ["January", "February", "March", "April", "May", "June", "July", "August",
+           "September", "October", "November", "December"]
+
 CSS_PAGE = """
 .tblwrap{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
 table.cand{border-collapse:separate;border-spacing:0;width:100%;font-size:.9rem;min-width:860px}
@@ -98,33 +116,39 @@ tr.retiree .nom{text-decoration:line-through;text-decoration-thickness:1px}
 """
 
 
-def date_affichage(c):
+MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
+           "septembre", "octobre", "novembre", "décembre"]
+
+
+def date_affichage(c, lang="fr"):
     """Date de déclaration en clair, sans fausse précision : le mois quand le jour n'est pas établi."""
     if not c["date_declaration"]:
         return '<span class="muted">—</span>'
     y, m, j = c["date_declaration"].split("-")
-    mois = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
-            "septembre", "octobre", "novembre", "décembre"][int(m) - 1]
+    mois = (MOIS_EN if lang == "en" else MOIS_FR)[int(m) - 1]
     if c["precision"] == "jour":
         return f"{j}/{m}/{y}"
     return f"<span class='muted'>≈</span> {mois} {y}"
 
 
-def ligne(c):
-    fam, col = FAMILLES.get(c["famille"], FAMILLES["divers"])
+def ligne(c, lang="fr"):
+    fam_fr, col = FAMILLES.get(c["famille"], FAMILLES["divers"])
+    fam = FAMILLES_EN.get(c["famille"], FAMILLES_EN["divers"]) if lang == "en" else fam_fr
+    pills = PILLS_EN if lang == "en" else PILLS
+    lbl = (lambda a, b: b if lang == "en" else a)
     cls = ' class="retiree"' if c["statut"] == "retire" else ""
-    off = ('<span class="muted">non</span>' if c["statut"] != "soutien"
+    off = ('<span class="muted">' + lbl("non", "no") + '</span>' if c["statut"] != "soutien"
            else '<span class="muted">—</span>')
     return (
         f'<tr{cls}>'
-        f'<td data-label="Candidat"><span class="nom">{c["nom"]}</span></td>'
-        f'<td data-label="Parti">{c["parti"]}<br><span class="chip">'
+        f'<td data-label="{lbl("Candidat", "Candidate")}"><span class="nom">{c["nom"]}</span></td>'
+        f'<td data-label="{lbl("Parti", "Party")}">{c["parti"]}<br><span class="chip">'
         f'<span class="dot" style="background:{col}"></span>{fam}</span></td>'
-        f'<td class="td-date" data-label="Déclaration">{date_affichage(c)}</td>'
-        f'<td data-label="Statut"><span class="pill p-{c["statut"]}">{PILLS[c["statut"]]}</span></td>'
-        f'<td data-label="Officialisation JO">{off}</td>'
-        f'<td class="small" data-label="Commentaire">{c["commentaire"]}</td>'
-        f'<td class="td-src small" data-label="Source"><a href="{c["source"]}">'
+        f'<td class="td-date" data-label="{lbl("Déclaration", "Announcement")}">{date_affichage(c, lang)}</td>'
+        f'<td data-label="{lbl("Statut", "Status")}"><span class="pill p-{c["statut"]}">{pills[c["statut"]]}</span></td>'
+        f'<td data-label="{lbl("Officialisation JO", "Official listing")}">{off}</td>'
+        f'<td class="small" data-label="{lbl("Commentaire", "Comment")}">{c["commentaire"]}</td>'
+        f'<td class="td-src small" data-label="{lbl("Source", "Source")}"><a href="{c["source"]}">'
         f'{c["source_label"]}</a></td>'
         f'</tr>')
 
@@ -139,7 +163,8 @@ def _iso(s):
 FENETRE = 90          # jours : fenêtre de référence (celle de l'agrégation)
 
 
-def presence_block():
+def presence_block(lang="fr"):
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     """« Qui sera sur le bulletin ? » — mesuré, jamais modélisé.
 
     Ce que la source permet de compter : dans chaque sondage publié, la liste des noms réellement
@@ -329,37 +354,46 @@ def presence_block():
 </section>'''
 
 
-def render(d):
+def statut_titre(code, lang="fr"):
+    return STATUTS_EN[code][0] if lang == "en" else next(t for k, t, _ in STATUTS if k == code)
+
+
+def statut_intro(code, lang="fr"):
+    return STATUTS_EN[code][1] if lang == "en" else next(i for k, _, i in STATUTS if k == code)
+
+
+def render(d, lang="fr"):
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     # Date de régénération, comme sur l'accueil et l'agrégation. Elle vient du résumé de
     # l'agrégation, écrit par generate.py dans le même passage : les deux pages ne peuvent pas
     # afficher deux dates différentes.
     try:
         _s = json.load(open(os.path.join(DATA, "summary.json"), encoding="utf-8"))
-        gen = G.frdate(_s["generated"]) if _s.get("generated") else "date inconnue"
+        gen = G.frdate(_s["generated"], lang) if _s.get("generated") else m("date inconnue", "unknown date")
     except Exception:
-        gen = "date inconnue"
+        gen = m("date inconnue", "unknown date")
     par_statut = {s: [c for c in d["candidats"] if c["statut"] == s] for s, _, _ in STATUTS}
     sc = d["scrutins"]
     t1, t2 = G.frd(sc["premier_tour"]), G.frd(sc["second_tour"])
 
     sommaire = "".join(
-        f'<a class="btn2" href="#{s}" style="margin:0 8px 8px 0">{titre} '
+        f'<a class="btn2" href="#{s}" style="margin:0 8px 8px 0">{statut_titre(s, lang)} '
         f'<strong>{len(par_statut[s])}</strong></a>' for s, titre, _ in STATUTS)
 
     sections = ""
     for s, titre, intro in STATUTS:
-        rows = "".join(ligne(c) for c in sorted(par_statut[s], key=lambda c: c["nom"].split()[-1]))
+        rows = "".join(ligne(c, lang) for c in sorted(par_statut[s], key=lambda c: c["nom"].split()[-1]))
         sections += f'''<section id="{s}" class="card">
-  <h2>{titre} <span class="muted" style="font-size:.8em">({len(par_statut[s])})</span></h2>
-  <p class="small muted" style="max-width:none">{intro}</p>
+  <h2>{statut_titre(s, lang)} <span class="muted" style="font-size:.8em">({len(par_statut[s])})</span></h2>
+  <p class="small muted" style="max-width:none">{statut_intro(s, lang)}</p>
   <div class="tblwrap"><table class="cand">
-    <thead><tr><th>Candidat</th><th>Parti</th><th>Déclaration</th><th>Statut</th>
-    <th>Officialisation<br>Journal officiel</th><th>Commentaire</th><th>Source</th></tr></thead>
+    <thead><tr><th>{m("Candidat", "Candidate")}</th><th>{m("Parti", "Party")}</th><th>{m("Déclaration", "Announcement")}</th><th>{m("Statut", "Status")}</th>
+    <th>{m("Officialisation", "Official listing")}<br>{m("Journal officiel", "Official journal")}</th><th>{m("Commentaire", "Comment")}</th><th>{m("Source", "Source")}</th></tr></thead>
     <tbody>{rows}</tbody>
   </table></div>
 </section>'''
 
-    bulletin = presence_block()
+    bulletin = presence_block(lang)
 
     sans_date = sum(1 for c in d["candidats"] if not c["date_declaration"])
 
@@ -369,61 +403,51 @@ def render(d):
         demi += f'<li><strong>{src["niveau"]}</strong> : {src["quoi"]}{lien}. {src["note"]}</li>'
 
     return f"""<!doctype html>
-<html lang="fr">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="{G.meta_description('/observatoire/candidats/')}">
-<title>{G.titre_court('/observatoire/candidats/')}</title>
-<link rel="canonical" href="https://dileviathan.fr/observatoire/candidats/">
-<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/candidats/">
-<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/candidats/">
-{G.meta_social('/observatoire/candidats/')}
-{G.ld_json("/observatoire/candidats/")}
+<meta name="description" content="{G.meta_description('/observatoire/candidats/', lang)}">
+<title>{G.titre_court('/observatoire/candidats/', lang)}</title>
+<link rel="canonical" href="https://dileviathan.fr{G.lien('/candidats/', lang)}">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr{G.lien('/candidats/', 'fr')}">
+<link rel="alternate" hreflang="en" href="https://dileviathan.fr{G.lien('/candidats/', 'en')}">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr{G.lien('/candidats/', 'fr')}">
+{G.meta_social('/observatoire/candidats/', lang)}
+{G.ld_json("/observatoire/candidats/", lang)}
 {G.matomo()}
 <style>{G.CSS}{CSS_PAGE}{G.DARK}</style>
 {G.THEME_HEAD}</head>
 <body>
 <div class="topbar"><div class="wrap nav">
-  <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· les candidats</span></div>
-  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/sondages/">Agrégation</a>
-  <a href="/observatoire/backtest/">Rétro-test 2022</a>{G.NAV_WORKFLOW}{G.NAV_LOIS}<a href="#bulletin">Qui sera sur le bulletin ?</a></div>{G.THEME_BTN}
+  <div class="brand"><a href="{G.lien('/', lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· {m("les candidats", "the candidates")}</span></div>
+  <div class="navlinks"><a href="{G.lien('/', lang)}">{m("Accueil", "Home")}</a><a href="{G.lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>
+  <a href="{G.lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{G.nav_workflow(lang)}{G.nav_lois(lang)}<a href="#bulletin">{m("Qui sera sur le bulletin ?", "Who will be on the ballot?")}</a>{G.toggle_langue('/candidats/', lang, en_pret=True)}</div>{G.THEME_BTN}
 </div></div>
 
 <header class="wrap">
-  <span class="eyebrow">Observatoire des sondages · présidentielle 2027</span>
-  <h1>Qui est candidat, qui ne l'est pas, et ce qu'il reste à franchir</h1>
-  <p class="lede">Une déclaration de candidature n'est pas une candidature. Le scrutin aura lieu les
-  <strong>{t1}</strong> et <strong>{t2}</strong> 2027 ; la liste officielle des candidats sera arrêtée
-  par le Conseil constitutionnel et publiée au Journal officiel quelques semaines avant le premier
-  tour. D'ici là, tout est déclaratif — et nous le disons ligne par ligne. Page régénérée le {gen} (heure de Paris).</p>
+  <span class="eyebrow">{m("Observatoire des sondages · présidentielle 2027", "Poll monitor · 2027 presidential election")}</span>
+  <h1>{m("Qui est candidat, qui ne l'est pas, et ce qu'il reste à franchir", "Who is a candidate, who is not, and what remains to be cleared")}</h1>
+  <p class="lede">{m("Une déclaration de candidature n'est pas une candidature. Le scrutin aura lieu les", "Announcing a candidacy is not a candidacy. The ballot will be held on")}
+  <strong>{t1}</strong> {m("et", "and")} <strong>{t2}</strong> 2027 ; {m("la liste officielle des candidats sera arrêtée par le Conseil constitutionnel et publiée au Journal officiel quelques semaines avant le premier tour. D'ici là, tout est déclaratif — et nous le disons ligne par ligne. Page régénérée le", "the official list of candidates will be settled by the Constitutional Council and published in the Official Journal a few weeks before the first round. Until then, everything is declaratory — and we say so line by line. Page regenerated on")} {gen} {m("(heure de Paris).", "(Paris time).")}</p>
   <div class="statgrid">
-    <div class="stat"><span>Déclarés</span><b>{len(par_statut["declare"])}</b><span>candidature annoncée</span></div>
-    <div class="stat"><span>Sous condition</span><b>{len(par_statut["conditionnel"])}</b>
-      <span>primaire ou investiture</span></div>
-    <div class="stat"><span>Déclarés en 2022</span><b>12</b><span>pour comparaison</span></div>
-    <div class="stat"><span>Officialisations</span><b>0</b><span>aucune avant 2027</span></div>
+    <div class="stat"><span>{m("Déclarés", "Declared")}</span><b>{len(par_statut["declare"])}</b><span>{m("candidature annoncée", "candidacy announced")}</span></div>
+    <div class="stat"><span>{m("Sous condition", "Conditional")}</span><b>{len(par_statut["conditionnel"])}</b>
+      <span>{m("primaire ou investiture", "primary or investiture")}</span></div>
+    <div class="stat"><span>{m("Déclarés en 2022", "Declared in 2022")}</span><b>12</b><span>{m("pour comparaison", "for comparison")}</span></div>
+    <div class="stat"><span>{m("Officialisations", "Official listings")}</span><b>0</b><span>{m("aucune avant 2027", "none before 2027")}</span></div>
   </div>
-  <p class="small muted" style="margin-top:14px;max-width:none">Vérifié le {G.frd(d["verifie_le"])} sur les sources
-  listées en bas de page ({len(d["candidats"])} personnes recensées). Deux règles : jamais de date sans
-  source, et un retrait reste affiché.</p>
+  <p class="small muted" style="margin-top:14px;max-width:none">{m("Vérifié le", "Checked on")} {G.frd(d["verifie_le"])} {m("sur les sources listées en bas de page", "against the sources listed at the foot of the page")} ({len(d["candidats"])} {m("personnes recensées", "people listed")}). {m("Deux règles : jamais de date sans source, et un retrait reste affiché.", "Two rules: never a date without a source, and a withdrawal stays visible.")}</p>
 </header>
 
 <main class="wrap">
 <section class="card">
-  <h2>Par où commencer</h2>
-  <p class="small muted" style="max-width:none">Les groupes ci-dessous ne sont pas des jugements : ils décrivent ce qui manque
-  à chaque candidature pour devenir une candidature au sens du Conseil constitutionnel.</p>
+  <h2>{m("Par où commencer", "Where to start")}</h2>
+  <p class="small muted" style="max-width:none">{m("Les groupes ci-dessous ne sont pas des jugements : ils décrivent ce qui manque à chaque candidature pour devenir une candidature au sens du Conseil constitutionnel.", "The groups below are not judgements: they describe what each candidacy still lacks to become a candidacy in the sense of the Constitutional Council.")}</p>
   <p style="margin-top:12px">{sommaire}</p>
   <div class="note-legale small" style="margin-top:18px">
-    <p style="margin:0"><strong>Ce qu'exige la loi.</strong> Pour figurer sur le bulletin, il faut
-    <strong>500 parrainages</strong> d'élus venant d'au moins <strong>30 départements ou
-    collectivités</strong>, sans que plus d'un dixième vienne du même département. Les parrainages sont
-    adressés au Conseil constitutionnel, qui arrête la liste des candidats et la publie au
-    <em>Journal officiel</em> — en 2022, cette publication a eu lieu le 7 mars, un mois avant le
-    premier tour. La colonne « officialisation » restera donc vide pour tout le monde jusqu'à cette
-    publication, et nous ne l'anticiperons pas.</p>
+    <p style="margin:0"><strong>{m("Ce qu'exige la loi.", "What the law requires.")}</strong> {m("Pour figurer sur le bulletin, il faut", "To appear on the ballot, a candidate needs")} <strong>{m("500 parrainages", "500 signatures")}</strong> {m("d'élus venant d'au moins", "from elected officials in at least")} <strong>{m("30 départements ou collectivités", "30 departments or communities")}</strong>, {m("sans que plus d'un dixième vienne du même département. Les parrainages sont adressés au Conseil constitutionnel, qui arrête la liste des candidats et la publie au", "with no more than a tenth from the same department. The signatures are sent to the Constitutional Council, which settles the list of candidates and publishes it in the")} <em>Journal officiel</em> — {m("en 2022, cette publication a eu lieu le 7 mars, un mois avant le premier tour. La colonne « officialisation » restera donc vide pour tout le monde jusqu'à cette publication, et nous ne l'anticiperons pas.", "in 2022 that publication took place on 7 March, one month before the first round. The “official listing” column will therefore stay empty for everyone until that publication, and we will not anticipate it.")}</p>
   </div>
 </section>
 
@@ -432,31 +456,20 @@ def render(d):
 {bulletin}
 
 <section class="card">
-  <h2>Sources, méthode de mise à jour et limites</h2>
+  <h2>{m("Sources, méthode de mise à jour et limites", "Sources, update method and limits")}</h2>
   <ul class="tight small">{demi}</ul>
-  <h3 style="margin-top:20px">Comment cette page est mise à jour</h3>
+  <h3 style="margin-top:20px">{m("Comment cette page est mise à jour", "How this page is updated")}</h3>
   <ul class="tight small">
-    <li><strong>Un fichier, pas une saisie manuelle de page</strong> : toutes les lignes vivent dans
-    <code>data/candidats2027.json</code>, chacune avec sa source et sa date de déclaration. La page est
-    régénérée par script ; elle ne peut pas dériver du fichier.</li>
-    <li><strong>Rythme</strong> : vérification hebdomadaire de la liste de référence, et mise à jour
-    immédiate à chaque événement — déclaration, retrait, résultat de primaire, investiture. Le premier
-    jalon connu est la primaire socialiste des 9 et 10 octobre 2026.</li>
-    <li><strong>Jalons suivants</strong> : décret de convocation des électeurs, ouverture du recueil des
-    parrainages, publication de la liste par le Conseil constitutionnel — c'est à ce moment que la
-    colonne « officialisation » se remplira, pour de bon, sur tout le tableau.</li>
-    <li><strong>Ce que cette page ne fait pas</strong> : elle ne juge pas les chances, ne classe pas les
-    candidats par popularité et n'anticipe aucune investiture. Les sondages sont sur la page
-    <a href="/observatoire/sondages/">Agrégation</a>, où ils sont agrégés séparément.</li>
-    <li><strong>Limites assumées</strong> : pour plusieurs candidatures, la presse n'a pas établi de date
-    précise — la colonne affiche alors le mois (« ≈ avril 2026 ») plutôt qu'un jour inventé ; et
-    {sans_date} personnes de la liste n'ont aucune date, leur situation n'étant pas une candidature
-    déclarée (candidature sous condition ou en suspens).</li>
+    <li><strong>{m("Un fichier, pas une saisie manuelle de page", "One file, not hand-edited page")}</strong> : {m("toutes les lignes vivent dans", "every row lives in")} <code>data/candidats2027.json</code>, {m("chacune avec sa source et sa date de déclaration. La page est régénérée par script ; elle ne peut pas dériver du fichier.", "each with its source and announcement date. The page is regenerated by script; it cannot drift from the file.")}</li>
+    <li><strong>{m("Rythme", "Cadence")}</strong> : {m("vérification hebdomadaire de la liste de référence, et mise à jour immédiate à chaque événement — déclaration, retrait, résultat de primaire, investiture. Le premier jalon connu est la primaire socialiste des 9 et 10 octobre 2026.", "weekly check of the reference list, and an immediate update on every event — announcement, withdrawal, primary result, investiture. The first known milestone is the socialist primary of 9 and 10 October 2026.")}</li>
+    <li><strong>{m("Jalons suivants", "Next milestones")}</strong> : {m("décret de convocation des électeurs, ouverture du recueil des parrainages, publication de la liste par le Conseil constitutionnel — c'est à ce moment que la colonne « officialisation » se remplira, pour de bon, sur tout le tableau.", "decree convening the electorate, opening of the signature collection, publication of the list by the Constitutional Council — that is when the “official listing” column will fill in, for good, across the whole table.")}</li>
+    <li><strong>{m("Ce que cette page ne fait pas", "What this page does not do")}</strong> : {m("elle ne juge pas les chances, ne classe pas les candidats par popularité et n'anticipe aucune investiture. Les sondages sont sur la page", "it does not judge chances, does not rank candidates by popularity and does not anticipate any investiture. Polls are on the")} <a href="{G.lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a> {m("où ils sont agrégés séparément.", "page, where they are aggregated separately.")}</li>
+    <li><strong>{m("Limites assumées", "Assumed limits")}</strong> : {m("pour plusieurs candidatures, la presse n'a pas établi de date précise — la colonne affiche alors le mois (« ≈ avril 2026 ») plutôt qu'un jour inventé ; et", "for several candidacies the press has not established a precise date — the column then shows the month (“≈ April 2026”) rather than an invented day; and")} {sans_date} {m("personnes de la liste n'ont aucune date, leur situation n'étant pas une candidature déclarée (candidature sous condition ou en suspens).", "people on the list have no date at all, their situation not being a declared candidacy (conditional or pending).")}</li>
   </ul>
 </section>
 </main>
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">{m("Mentions légales", "Legal notice")}</a></p>
 </footer>
 {G.THEME_JS}</body>
 </html>

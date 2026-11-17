@@ -1,5 +1,5 @@
 {
- "genere": "2026-10-27 17:53",
+ "genere": "2026-11-17 16:47",
  "source_sondages": "Bkolenc/sondages_presidentielle2022_ebra (MIT)",
  "source_resultat": "Résultats officiels du 1er tour 2022 — ministère de l'Intérieur, archives des résultats électoraux (France entière) ; recoupés avec Wikipédia FR, CC BY-SA",
  "source_resultat_url": "https://www.archives-resultats-elections.interieur.gouv.fr/resultats/presidentielle-2022/FE.php",
@@ -799,61 +799,61 @@
    "modes": {
     "recence": {
      "mode": "Notre méthode (fraîcheur + échantillon)",
-     "n": 10,
-     "publies": 14,
-     "mae": 2.84,
-     "biais": -0.68,
-     "max_err": 10.8,
+     "n": 12,
+     "publies": 17,
+     "mae": 3.57,
+     "biais": -0.31,
+     "max_err": 11.3,
      "detail": {
       "Emmanuel Macron": {
-       "estimation": 23.7,
+       "estimation": 24.1,
        "resultat": 27.85,
-       "erreur": -4.2
+       "erreur": -3.8
       },
       "Marine Le Pen": {
-       "estimation": 22.6,
+       "estimation": 17.6,
        "resultat": 23.15,
-       "erreur": -0.5
+       "erreur": -5.5
       },
       "Jean-Luc Mélenchon": {
-       "estimation": 11.2,
+       "estimation": 10.6,
        "resultat": 21.95,
-       "erreur": -10.8
+       "erreur": -11.3
       },
       "Éric Zemmour": {
-       "estimation": null,
+       "estimation": 10.6,
        "resultat": 7.07,
-       "erreur": null
+       "erreur": 3.5
       },
       "Valérie Pécresse": {
-       "estimation": null,
+       "estimation": 13.1,
        "resultat": 4.78,
-       "erreur": null
+       "erreur": 8.3
       },
       "Yannick Jadot": {
-       "estimation": 6.6,
+       "estimation": 6.4,
        "resultat": 4.63,
-       "erreur": 2.0
+       "erreur": 1.8
       },
       "Jean Lassalle": {
-       "estimation": 1.0,
+       "estimation": 0.4,
        "resultat": 3.13,
-       "erreur": -2.1
+       "erreur": -2.7
       },
       "Fabien Roussel": {
-       "estimation": 2.5,
+       "estimation": 2.3,
        "resultat": 2.28,
-       "erreur": 0.2
+       "erreur": 0.0
       },
       "Nicolas Dupont-Aignan": {
-       "estimation": 4.6,
+       "estimation": 2.7,
        "resultat": 2.06,
-       "erreur": 2.5
+       "erreur": 0.6
       },
       "Anne Hidalgo": {
-       "estimation": 7.3,
+       "estimation": 7.0,
        "resultat": 1.75,
-       "erreur": 5.5
+       "erreur": 5.2
       },
       "Philippe Poutou": {
        "estimation": 1.0,
@@ -861,14 +861,14 @@
        "erreur": 0.2
       },
       "Nathalie Arthaud": {
-       "estimation": 1.0,
+       "estimation": 0.6,
        "resultat": 0.56,
-       "erreur": 0.4
+       "erreur": 0.0
       }
      },
-     "poids_non_candidats": 18.5,
-     "scenario": "Hypothèse Bertrand",
-     "polls": 4,
+     "poids_non_candidats": 3.7,
+     "scenario": "Hypothèse Jadot / Pécresse",
+     "polls": 3,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
@@ -876,66 +876,66 @@
      "top3": [
       "Emmanuel Macron",
       "Marine Le Pen",
-      "Xavier Bertrand"
+      "Valérie Pécresse"
      ]
     },
     "egal": {
      "mode": "Poids égaux",
-     "n": 10,
-     "publies": 14,
-     "mae": 2.79,
-     "biais": -0.67,
-     "max_err": 10.8,
+     "n": 12,
+     "publies": 17,
+     "mae": 3.58,
+     "biais": -0.32,
+     "max_err": 11.5,
      "detail": {
       "Emmanuel Macron": {
-       "estimation": 23.8,
+       "estimation": 24.1,
        "resultat": 27.85,
-       "erreur": -4.1
+       "erreur": -3.8
       },
       "Marine Le Pen": {
-       "estimation": 22.8,
+       "estimation": 17.7,
        "resultat": 23.15,
-       "erreur": -0.3
+       "erreur": -5.4
       },
       "Jean-Luc Mélenchon": {
-       "estimation": 11.2,
+       "estimation": 10.4,
        "resultat": 21.95,
-       "erreur": -10.8
+       "erreur": -11.5
       },
       "Éric Zemmour": {
-       "estimation": null,
+       "estimation": 10.4,
        "resultat": 7.07,
-       "erreur": null
+       "erreur": 3.3
       },
       "Valérie Pécresse": {
-       "estimation": null,
+       "estimation": 13.2,
        "resultat": 4.78,
-       "erreur": null
+       "erreur": 8.4
       },
       "Yannick Jadot": {
-       "estimation": 6.5,
+       "estimation": 6.4,
        "resultat": 4.63,
-       "erreur": 1.9
+       "erreur": 1.8
       },
       "Jean Lassalle": {
-       "estimation": 1.0,
+       "estimation": 0.4,
        "resultat": 3.13,
-       "erreur": -2.1
+       "erreur": -2.7
       },
       "Fabien Roussel": {
-       "estimation": 2.5,
+       "estimation": 2.3,
        "resultat": 2.28,
-       "erreur": 0.2
+       "erreur": 0.0
       },
       "Nicolas Dupont-Aignan": {
-       "estimation": 4.5,
+       "estimation": 2.8,
        "resultat": 2.06,
-       "erreur": 2.4
+       "erreur": 0.7
       },
       "Anne Hidalgo": {
-       "estimation": 7.2,
+       "estimation": 7.0,
        "resultat": 1.75,
-       "erreur": 5.5
+       "erreur": 5.2
       },
       "Philippe Poutou": {
        "estimation": 1.0,
@@ -943,14 +943,14 @@
        "erreur": 0.2
       },
       "Nathalie Arthaud": {
-       "estimation": 1.0,
+       "estimation": 0.6,
        "resultat": 0.56,
-       "erreur": 0.4
+       "erreur": 0.0
       }
      },
-     "poids_non_candidats": 18.6,
-     "scenario": "Hypothèse Bertrand",
-     "polls": 4,
+     "poids_non_candidats": 3.7,
+     "scenario": "Hypothèse Jadot / Pécresse",
+     "polls": 3,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
@@ -958,16 +958,16 @@
      "top3": [
       "Emmanuel Macron",
       "Marine Le Pen",
-      "Xavier Bertrand"
+      "Valérie Pécresse"
      ]
     },
     "dernier": {
      "mode": "Dernière enquête seule",
-     "n": 10,
-     "publies": 14,
-     "mae": 2.98,
-     "biais": -0.62,
-     "max_err": 10.9,
+     "n": 12,
+     "publies": 17,
+     "mae": 3.64,
+     "biais": -0.26,
+     "max_err": 8.9,
      "detail": {
       "Emmanuel Macron": {
        "estimation": 24.0,
@@ -975,44 +975,44 @@
        "erreur": -3.9
       },
       "Marine Le Pen": {
-       "estimation": 22.0,
+       "estimation": 16.0,
        "resultat": 23.15,
-       "erreur": -1.1
+       "erreur": -7.1
       },
       "Jean-Luc Mélenchon": {
-       "estimation": 11.0,
+       "estimation": 13.0,
        "resultat": 21.95,
-       "erreur": -10.9
+       "erreur": -8.9
       },
       "Éric Zemmour": {
-       "estimation": null,
+       "estimation": 13.0,
        "resultat": 7.07,
-       "erreur": null
+       "erreur": 5.9
       },
       "Valérie Pécresse": {
-       "estimation": null,
+       "estimation": 12.0,
        "resultat": 4.78,
-       "erreur": null
+       "erreur": 7.2
       },
       "Yannick Jadot": {
-       "estimation": 7.0,
+       "estimation": 6.0,
        "resultat": 4.63,
-       "erreur": 2.4
+       "erreur": 1.4
       },
       "Jean Lassalle": {
-       "estimation": 1.0,
+       "estimation": 0.0,
        "resultat": 3.13,
-       "erreur": -2.1
+       "erreur": -3.1
       },
       "Fabien Roussel": {
-       "estimation": 3.0,
+       "estimation": 2.0,
        "resultat": 2.28,
-       "erreur": 0.7
+       "erreur": -0.3
       },
       "Nicolas Dupont-Aignan": {
-       "estimation": 5.0,
+       "estimation": 2.0,
        "resultat": 2.06,
-       "erreur": 2.9
+       "erreur": -0.1
       },
       "Anne Hidalgo": {
        "estimation": 7.0,
@@ -1030,8 +1030,8 @@
        "erreur": 0.4
       }
      },
-     "poids_non_candidats": 18.0,
-     "scenario": "Hypothèse Bertrand",
+     "poids_non_candidats": 3.0,
+     "scenario": "Hypothèse Jadot / Pécresse",
      "polls": 1,
      "top2": [
       "Emmanuel Macron",
@@ -1040,7 +1040,7 @@
      "top3": [
       "Emmanuel Macron",
       "Marine Le Pen",
-      "Xavier Bertrand"
+      "Éric Zemmour"
      ]
     }
    }
@@ -1052,194 +1052,30 @@
     "recence": {
      "mode": "Notre méthode (fraîcheur + échantillon)",
      "n": 12,
-     "publies": 17,
-     "mae": 3.8,
-     "biais": -0.27,
-     "max_err": 12.6,
+     "publies": 16,
+     "mae": 4.07,
+     "biais": -0.22,
+     "max_err": 11.9,
      "detail": {
       "Emmanuel Macron": {
-       "estimation": 24.7,
+       "estimation": 24.6,
        "resultat": 27.85,
        "erreur": -3.2
       },
       "Marine Le Pen": {
-       "estimation": 17.1,
-       "resultat": 23.15,
-       "erreur": -6.0
-      },
-      "Jean-Luc Mélenchon": {
-       "estimation": 9.3,
-       "resultat": 21.95,
-       "erreur": -12.6
-      },
-      "Éric Zemmour": {
-       "estimation": 14.4,
-       "resultat": 7.07,
-       "erreur": 7.3
-      },
-      "Valérie Pécresse": {
-       "estimation": 10.9,
-       "resultat": 4.78,
-       "erreur": 6.1
-      },
-      "Yannick Jadot": {
-       "estimation": 7.5,
-       "resultat": 4.63,
-       "erreur": 2.9
-      },
-      "Jean Lassalle": {
-       "estimation": 0.7,
-       "resultat": 3.13,
-       "erreur": -2.4
-      },
-      "Fabien Roussel": {
-       "estimation": 2.1,
-       "resultat": 2.28,
-       "erreur": -0.2
-      },
-      "Nicolas Dupont-Aignan": {
-       "estimation": 2.3,
-       "resultat": 2.06,
-       "erreur": 0.2
-      },
-      "Anne Hidalgo": {
-       "estimation": 5.7,
-       "resultat": 1.75,
-       "erreur": 4.0
-      },
-      "Philippe Poutou": {
-       "estimation": 1.2,
-       "resultat": 0.77,
-       "erreur": 0.4
-      },
-      "Nathalie Arthaud": {
-       "estimation": 0.9,
-       "resultat": 0.56,
-       "erreur": 0.3
-      }
-     },
-     "poids_non_candidats": 3.1,
-     "scenario": "Hypothèse Pécresse",
-     "polls": 7,
-     "top2": [
-      "Emmanuel Macron",
-      "Marine Le Pen"
-     ],
-     "top3": [
-      "Emmanuel Macron",
-      "Marine Le Pen",
-      "Éric Zemmour"
-     ]
-    },
-    "egal": {
-     "mode": "Poids égaux",
-     "n": 12,
-     "publies": 17,
-     "mae": 3.76,
-     "biais": -0.27,
-     "max_err": 12.4,
-     "detail": {
-      "Emmanuel Macron": {
-       "estimation": 24.8,
-       "resultat": 27.85,
-       "erreur": -3.1
-      },
-      "Marine Le Pen": {
-       "estimation": 17.1,
-       "resultat": 23.15,
-       "erreur": -6.0
-      },
-      "Jean-Luc Mélenchon": {
-       "estimation": 9.5,
-       "resultat": 21.95,
-       "erreur": -12.4
-      },
-      "Éric Zemmour": {
-       "estimation": 13.6,
-       "resultat": 7.07,
-       "erreur": 6.5
-      },
-      "Valérie Pécresse": {
-       "estimation": 11.3,
-       "resultat": 4.78,
-       "erreur": 6.5
-      },
-      "Yannick Jadot": {
-       "estimation": 7.3,
-       "resultat": 4.63,
-       "erreur": 2.7
-      },
-      "Jean Lassalle": {
-       "estimation": 0.6,
-       "resultat": 3.13,
-       "erreur": -2.5
-      },
-      "Fabien Roussel": {
-       "estimation": 2.1,
-       "resultat": 2.28,
-       "erreur": -0.2
-      },
-      "Nicolas Dupont-Aignan": {
-       "estimation": 2.5,
-       "resultat": 2.06,
-       "erreur": 0.4
-      },
-      "Anne Hidalgo": {
-       "estimation": 6.0,
-       "resultat": 1.75,
-       "erreur": 4.2
-      },
-      "Philippe Poutou": {
-       "estimation": 1.2,
-       "resultat": 0.77,
-       "erreur": 0.4
-      },
-      "Nathalie Arthaud": {
-       "estimation": 0.8,
-       "resultat": 0.56,
-       "erreur": 0.2
-      }
-     },
-     "poids_non_candidats": 3.3,
-     "scenario": "Hypothèse Pécresse",
-     "polls": 7,
-     "top2": [
-      "Emmanuel Macron",
-      "Marine Le Pen"
-     ],
-     "top3": [
-      "Emmanuel Macron",
-      "Marine Le Pen",
-      "Éric Zemmour"
-     ]
-    },
-    "dernier": {
-     "mode": "Dernière enquête seule",
-     "n": 12,
-     "publies": 17,
-     "mae": 3.98,
-     "biais": -0.26,
-     "max_err": 15.9,
-     "detail": {
-      "Emmanuel Macron": {
-       "estimation": 24.0,
-       "resultat": 27.85,
-       "erreur": -3.9
-      },
-      "Marine Le Pen": {
-       "estimation": 19.0,
-       "resultat": 23.15,
-       "erreur": -4.1
-      },
-      "Jean-Luc Mélenchon": {
-       "estimation": 6.0,
-       "resultat": 21.95,
-       "erreur": -15.9
-      },
-      "Éric Zemmour": {
        "estimation": 16.0,
+       "resultat": 23.15,
+       "erreur": -7.1
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.0,
+       "resultat": 21.95,
+       "erreur": -11.9
+      },
+      "Éric Zemmour": {
+       "estimation": 17.0,
        "resultat": 7.07,
-       "erreur": 8.9
+       "erreur": 9.9
       },
       "Valérie Pécresse": {
        "estimation": 10.0,
@@ -1247,14 +1083,178 @@
        "erreur": 5.2
       },
       "Yannick Jadot": {
-       "estimation": 8.0,
+       "estimation": 9.0,
        "resultat": 4.63,
-       "erreur": 3.4
+       "erreur": 4.4
       },
       "Jean Lassalle": {
-       "estimation": 2.0,
+       "estimation": 0.0,
        "resultat": 3.13,
-       "erreur": -1.1
+       "erreur": -3.1
+      },
+      "Fabien Roussel": {
+       "estimation": 2.0,
+       "resultat": 2.28,
+       "erreur": -0.3
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 2.06,
+       "erreur": -0.1
+      },
+      "Anne Hidalgo": {
+       "estimation": 4.7,
+       "resultat": 1.75,
+       "erreur": 3.0
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 0.77,
+       "erreur": 0.2
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.56,
+       "erreur": 0.4
+      }
+     },
+     "poids_non_candidats": 2.7,
+     "scenario": "Hypothèse Pécresse",
+     "polls": 3,
+     "top2": [
+      "Emmanuel Macron",
+      "Éric Zemmour"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Éric Zemmour",
+      "Marine Le Pen"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 12,
+     "publies": 16,
+     "mae": 4.07,
+     "biais": -0.22,
+     "max_err": 11.9,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 24.7,
+       "resultat": 27.85,
+       "erreur": -3.2
+      },
+      "Marine Le Pen": {
+       "estimation": 16.0,
+       "resultat": 23.15,
+       "erreur": -7.1
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.0,
+       "resultat": 21.95,
+       "erreur": -11.9
+      },
+      "Éric Zemmour": {
+       "estimation": 17.0,
+       "resultat": 7.07,
+       "erreur": 9.9
+      },
+      "Valérie Pécresse": {
+       "estimation": 10.0,
+       "resultat": 4.78,
+       "erreur": 5.2
+      },
+      "Yannick Jadot": {
+       "estimation": 9.0,
+       "resultat": 4.63,
+       "erreur": 4.4
+      },
+      "Jean Lassalle": {
+       "estimation": 0.0,
+       "resultat": 3.13,
+       "erreur": -3.1
+      },
+      "Fabien Roussel": {
+       "estimation": 2.0,
+       "resultat": 2.28,
+       "erreur": -0.3
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 2.06,
+       "erreur": -0.1
+      },
+      "Anne Hidalgo": {
+       "estimation": 4.7,
+       "resultat": 1.75,
+       "erreur": 3.0
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 0.77,
+       "erreur": 0.2
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.56,
+       "erreur": 0.4
+      }
+     },
+     "poids_non_candidats": 2.6,
+     "scenario": "Hypothèse Pécresse",
+     "polls": 3,
+     "top2": [
+      "Emmanuel Macron",
+      "Éric Zemmour"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Éric Zemmour",
+      "Marine Le Pen"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 12,
+     "publies": 16,
+     "mae": 4.14,
+     "biais": -0.26,
+     "max_err": 11.9,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 24.0,
+       "resultat": 27.85,
+       "erreur": -3.9
+      },
+      "Marine Le Pen": {
+       "estimation": 16.0,
+       "resultat": 23.15,
+       "erreur": -7.1
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.0,
+       "resultat": 21.95,
+       "erreur": -11.9
+      },
+      "Éric Zemmour": {
+       "estimation": 17.0,
+       "resultat": 7.07,
+       "erreur": 9.9
+      },
+      "Valérie Pécresse": {
+       "estimation": 10.0,
+       "resultat": 4.78,
+       "erreur": 5.2
+      },
+      "Yannick Jadot": {
+       "estimation": 9.0,
+       "resultat": 4.63,
+       "erreur": 4.4
+      },
+      "Jean Lassalle": {
+       "estimation": 0.0,
+       "resultat": 3.13,
+       "erreur": -3.1
       },
       "Fabien Roussel": {
        "estimation": 2.0,
@@ -1272,9 +1272,261 @@
        "erreur": 3.2
       },
       "Philippe Poutou": {
-       "estimation": 2.0,
+       "estimation": 1.0,
        "resultat": 0.77,
-       "erreur": 1.2
+       "erreur": 0.2
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.56,
+       "erreur": 0.4
+      }
+     },
+     "poids_non_candidats": 3.0,
+     "scenario": "Hypothèse Pécresse",
+     "polls": 1,
+     "top2": [
+      "Emmanuel Macron",
+      "Éric Zemmour"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Éric Zemmour",
+      "Marine Le Pen"
+     ]
+    }
+   }
+  },
+  {
+   "date": "2021-11-29",
+   "jours_avant": 132,
+   "modes": {
+    "recence": {
+     "mode": "Notre méthode (fraîcheur + échantillon)",
+     "n": 12,
+     "publies": 15,
+     "mae": 3.86,
+     "biais": -0.27,
+     "max_err": 11.9,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 24.0,
+       "resultat": 27.85,
+       "erreur": -3.9
+      },
+      "Marine Le Pen": {
+       "estimation": 17.6,
+       "resultat": 23.15,
+       "erreur": -5.5
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.0,
+       "resultat": 21.95,
+       "erreur": -11.9
+      },
+      "Éric Zemmour": {
+       "estimation": 15.1,
+       "resultat": 7.07,
+       "erreur": 8.0
+      },
+      "Valérie Pécresse": {
+       "estimation": 10.7,
+       "resultat": 4.78,
+       "erreur": 5.9
+      },
+      "Yannick Jadot": {
+       "estimation": 8.6,
+       "resultat": 4.63,
+       "erreur": 4.0
+      },
+      "Jean Lassalle": {
+       "estimation": 0.0,
+       "resultat": 3.13,
+       "erreur": -3.1
+      },
+      "Fabien Roussel": {
+       "estimation": 2.0,
+       "resultat": 2.28,
+       "erreur": -0.3
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 2.06,
+       "erreur": -0.1
+      },
+      "Anne Hidalgo": {
+       "estimation": 4.7,
+       "resultat": 1.75,
+       "erreur": 3.0
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 0.77,
+       "erreur": 0.2
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.56,
+       "erreur": 0.4
+      }
+     },
+     "poids_non_candidats": 3.3,
+     "scenario": "Hypothèse Pécresse",
+     "polls": 3,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Marine Le Pen",
+      "Éric Zemmour"
+     ]
+    },
+    "egal": {
+     "mode": "Poids égaux",
+     "n": 12,
+     "publies": 15,
+     "mae": 3.91,
+     "biais": -0.28,
+     "max_err": 11.9,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 24.0,
+       "resultat": 27.85,
+       "erreur": -3.9
+      },
+      "Marine Le Pen": {
+       "estimation": 17.3,
+       "resultat": 23.15,
+       "erreur": -5.8
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.0,
+       "resultat": 21.95,
+       "erreur": -11.9
+      },
+      "Éric Zemmour": {
+       "estimation": 15.3,
+       "resultat": 7.07,
+       "erreur": 8.2
+      },
+      "Valérie Pécresse": {
+       "estimation": 10.7,
+       "resultat": 4.78,
+       "erreur": 5.9
+      },
+      "Yannick Jadot": {
+       "estimation": 8.7,
+       "resultat": 4.63,
+       "erreur": 4.1
+      },
+      "Jean Lassalle": {
+       "estimation": 0.0,
+       "resultat": 3.13,
+       "erreur": -3.1
+      },
+      "Fabien Roussel": {
+       "estimation": 2.0,
+       "resultat": 2.28,
+       "erreur": -0.3
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 2.06,
+       "erreur": -0.1
+      },
+      "Anne Hidalgo": {
+       "estimation": 4.7,
+       "resultat": 1.75,
+       "erreur": 3.0
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 0.77,
+       "erreur": 0.2
+      },
+      "Nathalie Arthaud": {
+       "estimation": 1.0,
+       "resultat": 0.56,
+       "erreur": 0.4
+      }
+     },
+     "poids_non_candidats": 3.4,
+     "scenario": "Hypothèse Pécresse",
+     "polls": 3,
+     "top2": [
+      "Emmanuel Macron",
+      "Marine Le Pen"
+     ],
+     "top3": [
+      "Emmanuel Macron",
+      "Marine Le Pen",
+      "Éric Zemmour"
+     ]
+    },
+    "dernier": {
+     "mode": "Dernière enquête seule",
+     "n": 12,
+     "publies": 15,
+     "mae": 3.48,
+     "biais": -0.26,
+     "max_err": 11.9,
+     "detail": {
+      "Emmanuel Macron": {
+       "estimation": 24.0,
+       "resultat": 27.85,
+       "erreur": -3.9
+      },
+      "Marine Le Pen": {
+       "estimation": 20.0,
+       "resultat": 23.15,
+       "erreur": -3.1
+      },
+      "Jean-Luc Mélenchon": {
+       "estimation": 10.0,
+       "resultat": 21.95,
+       "erreur": -11.9
+      },
+      "Éric Zemmour": {
+       "estimation": 13.0,
+       "resultat": 7.07,
+       "erreur": 5.9
+      },
+      "Valérie Pécresse": {
+       "estimation": 11.0,
+       "resultat": 4.78,
+       "erreur": 6.2
+      },
+      "Yannick Jadot": {
+       "estimation": 8.0,
+       "resultat": 4.63,
+       "erreur": 3.4
+      },
+      "Jean Lassalle": {
+       "estimation": 0.0,
+       "resultat": 3.13,
+       "erreur": -3.1
+      },
+      "Fabien Roussel": {
+       "estimation": 2.0,
+       "resultat": 2.28,
+       "erreur": -0.3
+      },
+      "Nicolas Dupont-Aignan": {
+       "estimation": 2.0,
+       "resultat": 2.06,
+       "erreur": -0.1
+      },
+      "Anne Hidalgo": {
+       "estimation": 5.0,
+       "resultat": 1.75,
+       "erreur": 3.2
+      },
+      "Philippe Poutou": {
+       "estimation": 1.0,
+       "resultat": 0.77,
+       "erreur": 0.2
       },
       "Nathalie Arthaud": {
        "estimation": 1.0,
@@ -1296,293 +1548,41 @@
      ]
     }
    }
-  },
-  {
-   "date": "2021-11-29",
-   "jours_avant": 132,
-   "modes": {
-    "recence": {
-     "mode": "Notre méthode (fraîcheur + échantillon)",
-     "n": 12,
-     "publies": 13,
-     "mae": 3.83,
-     "biais": -0.18,
-     "max_err": 13.8,
-     "detail": {
-      "Emmanuel Macron": {
-       "estimation": 25.4,
-       "resultat": 27.85,
-       "erreur": -2.5
-      },
-      "Marine Le Pen": {
-       "estimation": 17.7,
-       "resultat": 23.15,
-       "erreur": -5.4
-      },
-      "Jean-Luc Mélenchon": {
-       "estimation": 8.2,
-       "resultat": 21.95,
-       "erreur": -13.8
-      },
-      "Éric Zemmour": {
-       "estimation": 15.4,
-       "resultat": 7.07,
-       "erreur": 8.3
-      },
-      "Valérie Pécresse": {
-       "estimation": 9.8,
-       "resultat": 4.78,
-       "erreur": 5.0
-      },
-      "Yannick Jadot": {
-       "estimation": 7.6,
-       "resultat": 4.63,
-       "erreur": 3.0
-      },
-      "Jean Lassalle": {
-       "estimation": 1.0,
-       "resultat": 3.13,
-       "erreur": -2.1
-      },
-      "Fabien Roussel": {
-       "estimation": 2.0,
-       "resultat": 2.28,
-       "erreur": -0.3
-      },
-      "Nicolas Dupont-Aignan": {
-       "estimation": 3.3,
-       "resultat": 2.06,
-       "erreur": 1.2
-      },
-      "Anne Hidalgo": {
-       "estimation": 5.4,
-       "resultat": 1.75,
-       "erreur": 3.7
-      },
-      "Philippe Poutou": {
-       "estimation": 1.3,
-       "resultat": 0.77,
-       "erreur": 0.5
-      },
-      "Nathalie Arthaud": {
-       "estimation": 0.8,
-       "resultat": 0.56,
-       "erreur": 0.2
-      }
-     },
-     "poids_non_candidats": 2.1,
-     "scenario": "Hypothèse Pécresse / Zemmour",
-     "polls": 8,
-     "top2": [
-      "Emmanuel Macron",
-      "Marine Le Pen"
-     ],
-     "top3": [
-      "Emmanuel Macron",
-      "Marine Le Pen",
-      "Éric Zemmour"
-     ]
-    },
-    "egal": {
-     "mode": "Poids égaux",
-     "n": 12,
-     "publies": 13,
-     "mae": 3.83,
-     "biais": -0.18,
-     "max_err": 13.8,
-     "detail": {
-      "Emmanuel Macron": {
-       "estimation": 25.5,
-       "resultat": 27.85,
-       "erreur": -2.4
-      },
-      "Marine Le Pen": {
-       "estimation": 17.7,
-       "resultat": 23.15,
-       "erreur": -5.4
-      },
-      "Jean-Luc Mélenchon": {
-       "estimation": 8.2,
-       "resultat": 21.95,
-       "erreur": -13.8
-      },
-      "Éric Zemmour": {
-       "estimation": 15.1,
-       "resultat": 7.07,
-       "erreur": 8.0
-      },
-      "Valérie Pécresse": {
-       "estimation": 10.2,
-       "resultat": 4.78,
-       "erreur": 5.4
-      },
-      "Yannick Jadot": {
-       "estimation": 7.8,
-       "resultat": 4.63,
-       "erreur": 3.2
-      },
-      "Jean Lassalle": {
-       "estimation": 1.0,
-       "resultat": 3.13,
-       "erreur": -2.1
-      },
-      "Fabien Roussel": {
-       "estimation": 1.9,
-       "resultat": 2.28,
-       "erreur": -0.4
-      },
-      "Nicolas Dupont-Aignan": {
-       "estimation": 3.0,
-       "resultat": 2.06,
-       "erreur": 0.9
-      },
-      "Anne Hidalgo": {
-       "estimation": 5.5,
-       "resultat": 1.75,
-       "erreur": 3.8
-      },
-      "Philippe Poutou": {
-       "estimation": 1.2,
-       "resultat": 0.77,
-       "erreur": 0.4
-      },
-      "Nathalie Arthaud": {
-       "estimation": 0.8,
-       "resultat": 0.56,
-       "erreur": 0.2
-      }
-     },
-     "poids_non_candidats": 2.2,
-     "scenario": "Hypothèse Pécresse / Zemmour",
-     "polls": 8,
-     "top2": [
-      "Emmanuel Macron",
-      "Marine Le Pen"
-     ],
-     "top3": [
-      "Emmanuel Macron",
-      "Marine Le Pen",
-      "Éric Zemmour"
-     ]
-    },
-    "dernier": {
-     "mode": "Dernière enquête seule",
-     "n": 12,
-     "publies": 13,
-     "mae": 3.73,
-     "biais": -0.18,
-     "max_err": 13.4,
-     "detail": {
-      "Emmanuel Macron": {
-       "estimation": 25.0,
-       "resultat": 27.85,
-       "erreur": -2.9
-      },
-      "Marine Le Pen": {
-       "estimation": 19.5,
-       "resultat": 23.15,
-       "erreur": -3.6
-      },
-      "Jean-Luc Mélenchon": {
-       "estimation": 8.5,
-       "resultat": 21.95,
-       "erreur": -13.4
-      },
-      "Éric Zemmour": {
-       "estimation": 15.0,
-       "resultat": 7.07,
-       "erreur": 7.9
-      },
-      "Valérie Pécresse": {
-       "estimation": 10.0,
-       "resultat": 4.78,
-       "erreur": 5.2
-      },
-      "Yannick Jadot": {
-       "estimation": 6.5,
-       "resultat": 4.63,
-       "erreur": 1.9
-      },
-      "Jean Lassalle": {
-       "estimation": 0.0,
-       "resultat": 3.13,
-       "erreur": -3.1
-      },
-      "Fabien Roussel": {
-       "estimation": 2.0,
-       "resultat": 2.28,
-       "erreur": -0.3
-      },
-      "Nicolas Dupont-Aignan": {
-       "estimation": 4.0,
-       "resultat": 2.06,
-       "erreur": 1.9
-      },
-      "Anne Hidalgo": {
-       "estimation": 6.0,
-       "resultat": 1.75,
-       "erreur": 4.2
-      },
-      "Philippe Poutou": {
-       "estimation": 1.0,
-       "resultat": 0.77,
-       "erreur": 0.2
-      },
-      "Nathalie Arthaud": {
-       "estimation": 0.5,
-       "resultat": 0.56,
-       "erreur": -0.1
-      }
-     },
-     "poids_non_candidats": 2.0,
-     "scenario": "Hypothèse Pécresse / Zemmour",
-     "polls": 1,
-     "top2": [
-      "Emmanuel Macron",
-      "Marine Le Pen"
-     ],
-     "top3": [
-      "Emmanuel Macron",
-      "Marine Le Pen",
-      "Éric Zemmour"
-     ]
-    }
-   }
   }
  ],
  "sensibilite": [
   {
    "half_life": 15,
-   "mae": 3.81,
-   "biais": -0.18,
-   "max_err": 13.6
+   "mae": 3.83,
+   "biais": -0.27,
+   "max_err": 11.9
   },
   {
    "half_life": 30,
-   "mae": 3.83,
-   "biais": -0.18,
-   "max_err": 13.8
+   "mae": 3.86,
+   "biais": -0.27,
+   "max_err": 11.9
   },
   {
    "half_life": 60,
-   "mae": 3.85,
-   "biais": -0.18,
-   "max_err": 13.8
+   "mae": 3.89,
+   "biais": -0.29,
+   "max_err": 11.9
   },
   {
    "half_life": 180,
-   "mae": 3.85,
-   "biais": -0.18,
-   "max_err": 13.8
+   "mae": 3.91,
+   "biais": -0.28,
+   "max_err": 11.9
   }
  ],
  "grille_fenetre": [
   {
    "fenetre": 30,
-   "mae_moyenne": 3.49,
+   "mae_moyenne": 3.56,
    "couverture": "4/6",
    "n_moyen": 11.5,
-   "polls_moyen": 5.5,
+   "polls_moyen": 4.5,
    "detail": [
     {
      "date": "2021-07-01",
@@ -1628,13 +1628,13 @@
     },
     {
      "date": "2021-11-01",
-     "mae": 3.8,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7,
-     "non_cand": 3.1,
+     "polls": 3,
+     "non_cand": 2.7,
      "top2": [
       "Emmanuel Macron",
-      "Marine Le Pen"
+      "Éric Zemmour"
      ],
      "scenario": "Hypothèse Pécresse"
     },
@@ -1655,10 +1655,10 @@
   },
   {
    "fenetre": 60,
-   "mae_moyenne": 3.19,
+   "mae_moyenne": 3.39,
    "couverture": "5/6",
-   "n_moyen": 10.8,
-   "polls_moyen": 7.6,
+   "n_moyen": 11.2,
+   "polls_moyen": 5.6,
    "detail": [
     {
      "date": "2021-07-01",
@@ -1695,49 +1695,49 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.84,
-     "n": 10,
-     "polls": 4,
-     "non_cand": 18.5,
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3,
+     "non_cand": 3.7,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
      ],
-     "scenario": "Hypothèse Bertrand"
+     "scenario": "Hypothèse Jadot / Pécresse"
     },
     {
      "date": "2021-11-01",
-     "mae": 3.8,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7,
-     "non_cand": 3.1,
+     "polls": 3,
+     "non_cand": 2.7,
      "top2": [
       "Emmanuel Macron",
-      "Marine Le Pen"
+      "Éric Zemmour"
      ],
      "scenario": "Hypothèse Pécresse"
     },
     {
      "date": "2021-11-29",
-     "mae": 3.83,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8,
-     "non_cand": 2.1,
+     "polls": 3,
+     "non_cand": 3.3,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
      ],
-     "scenario": "Hypothèse Pécresse / Zemmour"
+     "scenario": "Hypothèse Pécresse"
     }
    ],
    "ok": false
   },
   {
    "fenetre": 90,
-   "mae_moyenne": 3.11,
+   "mae_moyenne": 3.28,
    "couverture": "6/6",
-   "n_moyen": 10.7,
-   "polls_moyen": 8.0,
+   "n_moyen": 11.0,
+   "polls_moyen": 6.3,
    "detail": [
     {
      "date": "2021-07-01",
@@ -1777,49 +1777,49 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.84,
-     "n": 10,
-     "polls": 4,
-     "non_cand": 18.5,
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3,
+     "non_cand": 3.7,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
      ],
-     "scenario": "Hypothèse Bertrand"
+     "scenario": "Hypothèse Jadot / Pécresse"
     },
     {
      "date": "2021-11-01",
-     "mae": 3.8,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7,
-     "non_cand": 3.1,
+     "polls": 3,
+     "non_cand": 2.7,
      "top2": [
       "Emmanuel Macron",
-      "Marine Le Pen"
+      "Éric Zemmour"
      ],
      "scenario": "Hypothèse Pécresse"
     },
     {
      "date": "2021-11-29",
-     "mae": 3.83,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8,
-     "non_cand": 2.1,
+     "polls": 3,
+     "non_cand": 3.3,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
      ],
-     "scenario": "Hypothèse Pécresse / Zemmour"
+     "scenario": "Hypothèse Pécresse"
     }
    ],
    "ok": true
   },
   {
    "fenetre": 120,
-   "mae_moyenne": 3.1,
+   "mae_moyenne": 3.28,
    "couverture": "6/6",
-   "n_moyen": 10.7,
-   "polls_moyen": 9.0,
+   "n_moyen": 11.0,
+   "polls_moyen": 6.3,
    "detail": [
     {
      "date": "2021-07-01",
@@ -1859,39 +1859,39 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.74,
-     "n": 10,
-     "polls": 10,
-     "non_cand": 16.7,
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3,
+     "non_cand": 3.7,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
      ],
-     "scenario": "Hypothèse X. Bertrand"
+     "scenario": "Hypothèse Jadot / Pécresse"
     },
     {
      "date": "2021-11-01",
-     "mae": 3.8,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7,
-     "non_cand": 3.1,
+     "polls": 3,
+     "non_cand": 2.7,
      "top2": [
       "Emmanuel Macron",
-      "Marine Le Pen"
+      "Éric Zemmour"
      ],
      "scenario": "Hypothèse Pécresse"
     },
     {
      "date": "2021-11-29",
-     "mae": 3.83,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8,
-     "non_cand": 2.1,
+     "polls": 3,
+     "non_cand": 3.3,
      "top2": [
       "Emmanuel Macron",
       "Marine Le Pen"
      ],
-     "scenario": "Hypothèse Pécresse / Zemmour"
+     "scenario": "Hypothèse Pécresse"
     }
    ],
    "ok": true
@@ -1902,7 +1902,7 @@
    "fenetre": 60,
    "house": false,
    "libelle": "fenêtre 60 j — sans correction",
-   "mae_moyenne": 3.22,
+   "mae_moyenne": 3.43,
    "couverture": "5/6",
    "detail": [
     {
@@ -1925,21 +1925,21 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.84,
-     "n": 10,
-     "polls": 4
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3
     },
     {
      "date": "2021-11-01",
-     "mae": 3.81,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7
+     "polls": 3
     },
     {
      "date": "2021-11-29",
-     "mae": 3.82,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8
+     "polls": 3
     }
    ]
   },
@@ -1947,7 +1947,7 @@
    "fenetre": 60,
    "house": true,
    "libelle": "fenêtre 60 j — effets de maison corrigés",
-   "mae_moyenne": 3.19,
+   "mae_moyenne": 3.39,
    "couverture": "5/6",
    "detail": [
     {
@@ -1970,21 +1970,21 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.84,
-     "n": 10,
-     "polls": 4
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3
     },
     {
      "date": "2021-11-01",
-     "mae": 3.8,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7
+     "polls": 3
     },
     {
      "date": "2021-11-29",
-     "mae": 3.83,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8
+     "polls": 3
     }
    ]
   },
@@ -1992,7 +1992,7 @@
    "fenetre": 90,
    "house": false,
    "libelle": "fenêtre 90 j — sans correction",
-   "mae_moyenne": 3.15,
+   "mae_moyenne": 3.32,
    "couverture": "6/6",
    "detail": [
     {
@@ -2015,21 +2015,21 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.84,
-     "n": 10,
-     "polls": 4
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3
     },
     {
      "date": "2021-11-01",
-     "mae": 3.81,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7
+     "polls": 3
     },
     {
      "date": "2021-11-29",
-     "mae": 3.82,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8
+     "polls": 3
     }
    ]
   },
@@ -2037,7 +2037,7 @@
    "fenetre": 90,
    "house": true,
    "libelle": "fenêtre 90 j — effets de maison corrigés",
-   "mae_moyenne": 3.11,
+   "mae_moyenne": 3.28,
    "couverture": "6/6",
    "detail": [
     {
@@ -2060,21 +2060,21 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.84,
-     "n": 10,
-     "polls": 4
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3
     },
     {
      "date": "2021-11-01",
-     "mae": 3.8,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7
+     "polls": 3
     },
     {
      "date": "2021-11-29",
-     "mae": 3.83,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8
+     "polls": 3
     }
    ]
   },
@@ -2082,7 +2082,7 @@
    "fenetre": 120,
    "house": true,
    "libelle": "fenêtre 120 j — effets de maison corrigés",
-   "mae_moyenne": 3.1,
+   "mae_moyenne": 3.28,
    "couverture": "6/6",
    "detail": [
     {
@@ -2105,21 +2105,21 @@
     },
     {
      "date": "2021-10-01",
-     "mae": 2.74,
-     "n": 10,
-     "polls": 10
+     "mae": 3.57,
+     "n": 12,
+     "polls": 3
     },
     {
      "date": "2021-11-01",
-     "mae": 3.8,
+     "mae": 4.07,
      "n": 12,
-     "polls": 7
+     "polls": 3
     },
     {
      "date": "2021-11-29",
-     "mae": 3.83,
+     "mae": 3.86,
      "n": 12,
-     "polls": 8
+     "polls": 3
     }
    ]
   }
@@ -2127,7 +2127,7 @@
  "meilleure": {
   "fenetre": 90,
   "house": true,
-  "mae": 3.11,
+  "mae": 3.28,
   "couv": "6/6",
   "ok": true
  },
@@ -2138,45 +2138,45 @@
    {
     "mode": "Notre méthode (fraîcheur + échantillon)",
     "n": 12,
-    "publies": 13,
-    "mae": 3.83,
-    "biais": -0.18,
-    "max_err": 13.8,
+    "publies": 15,
+    "mae": 3.86,
+    "biais": -0.27,
+    "max_err": 11.9,
     "detail": {
      "Emmanuel Macron": {
-      "estimation": 25.4,
+      "estimation": 24.0,
       "resultat": 27.85,
-      "erreur": -2.5
+      "erreur": -3.9
      },
      "Marine Le Pen": {
-      "estimation": 17.7,
+      "estimation": 17.6,
       "resultat": 23.15,
-      "erreur": -5.4
+      "erreur": -5.5
      },
      "Jean-Luc Mélenchon": {
-      "estimation": 8.2,
+      "estimation": 10.0,
       "resultat": 21.95,
-      "erreur": -13.8
+      "erreur": -11.9
      },
      "Éric Zemmour": {
-      "estimation": 15.4,
+      "estimation": 15.1,
       "resultat": 7.07,
-      "erreur": 8.3
+      "erreur": 8.0
      },
      "Valérie Pécresse": {
-      "estimation": 9.8,
+      "estimation": 10.7,
       "resultat": 4.78,
-      "erreur": 5.0
+      "erreur": 5.9
      },
      "Yannick Jadot": {
-      "estimation": 7.6,
+      "estimation": 8.6,
       "resultat": 4.63,
-      "erreur": 3.0
+      "erreur": 4.0
      },
      "Jean Lassalle": {
-      "estimation": 1.0,
+      "estimation": 0.0,
       "resultat": 3.13,
-      "erreur": -2.1
+      "erreur": -3.1
      },
      "Fabien Roussel": {
       "estimation": 2.0,
@@ -2184,29 +2184,29 @@
       "erreur": -0.3
      },
      "Nicolas Dupont-Aignan": {
-      "estimation": 3.3,
+      "estimation": 2.0,
       "resultat": 2.06,
-      "erreur": 1.2
+      "erreur": -0.1
      },
      "Anne Hidalgo": {
-      "estimation": 5.4,
+      "estimation": 4.7,
       "resultat": 1.75,
-      "erreur": 3.7
+      "erreur": 3.0
      },
      "Philippe Poutou": {
-      "estimation": 1.3,
+      "estimation": 1.0,
       "resultat": 0.77,
-      "erreur": 0.5
+      "erreur": 0.2
      },
      "Nathalie Arthaud": {
-      "estimation": 0.8,
+      "estimation": 1.0,
       "resultat": 0.56,
-      "erreur": 0.2
+      "erreur": 0.4
      }
     },
-    "poids_non_candidats": 2.1,
-    "scenario": "Hypothèse Pécresse / Zemmour",
-    "polls": 8,
+    "poids_non_candidats": 3.3,
+    "scenario": "Hypothèse Pécresse",
+    "polls": 3,
     "top2": [
      "Emmanuel Macron",
      "Marine Le Pen"
@@ -2220,75 +2220,75 @@
    {
     "mode": "Poids égaux",
     "n": 12,
-    "publies": 13,
-    "mae": 3.83,
-    "biais": -0.18,
-    "max_err": 13.8,
+    "publies": 15,
+    "mae": 3.91,
+    "biais": -0.28,
+    "max_err": 11.9,
     "detail": {
      "Emmanuel Macron": {
-      "estimation": 25.5,
+      "estimation": 24.0,
       "resultat": 27.85,
-      "erreur": -2.4
+      "erreur": -3.9
      },
      "Marine Le Pen": {
-      "estimation": 17.7,
+      "estimation": 17.3,
       "resultat": 23.15,
-      "erreur": -5.4
+      "erreur": -5.8
      },
      "Jean-Luc Mélenchon": {
-      "estimation": 8.2,
+      "estimation": 10.0,
       "resultat": 21.95,
-      "erreur": -13.8
+      "erreur": -11.9
      },
      "Éric Zemmour": {
-      "estimation": 15.1,
+      "estimation": 15.3,
       "resultat": 7.07,
-      "erreur": 8.0
+      "erreur": 8.2
      },
      "Valérie Pécresse": {
-      "estimation": 10.2,
+      "estimation": 10.7,
       "resultat": 4.78,
-      "erreur": 5.4
+      "erreur": 5.9
      },
      "Yannick Jadot": {
-      "estimation": 7.8,
+      "estimation": 8.7,
       "resultat": 4.63,
-      "erreur": 3.2
+      "erreur": 4.1
      },
      "Jean Lassalle": {
-      "estimation": 1.0,
+      "estimation": 0.0,
       "resultat": 3.13,
-      "erreur": -2.1
+      "erreur": -3.1
      },
      "Fabien Roussel": {
-      "estimation": 1.9,
+      "estimation": 2.0,
       "resultat": 2.28,
-      "erreur": -0.4
+      "erreur": -0.3
      },
      "Nicolas Dupont-Aignan": {
-      "estimation": 3.0,
+      "estimation": 2.0,
       "resultat": 2.06,
-      "erreur": 0.9
+      "erreur": -0.1
      },
      "Anne Hidalgo": {
-      "estimation": 5.5,
+      "estimation": 4.7,
       "resultat": 1.75,
-      "erreur": 3.8
+      "erreur": 3.0
      },
      "Philippe Poutou": {
-      "estimation": 1.2,
+      "estimation": 1.0,
       "resultat": 0.77,
-      "erreur": 0.4
+      "erreur": 0.2
      },
      "Nathalie Arthaud": {
-      "estimation": 0.8,
+      "estimation": 1.0,
       "resultat": 0.56,
-      "erreur": 0.2
+      "erreur": 0.4
      }
     },
-    "poids_non_candidats": 2.2,
-    "scenario": "Hypothèse Pécresse / Zemmour",
-    "polls": 8,
+    "poids_non_candidats": 3.4,
+    "scenario": "Hypothèse Pécresse",
+    "polls": 3,
     "top2": [
      "Emmanuel Macron",
      "Marine Le Pen"
@@ -2302,40 +2302,40 @@
    {
     "mode": "Dernière enquête seule",
     "n": 12,
-    "publies": 13,
-    "mae": 3.73,
-    "biais": -0.18,
-    "max_err": 13.4,
+    "publies": 15,
+    "mae": 3.48,
+    "biais": -0.26,
+    "max_err": 11.9,
     "detail": {
      "Emmanuel Macron": {
-      "estimation": 25.0,
+      "estimation": 24.0,
       "resultat": 27.85,
-      "erreur": -2.9
+      "erreur": -3.9
      },
      "Marine Le Pen": {
-      "estimation": 19.5,
+      "estimation": 20.0,
       "resultat": 23.15,
-      "erreur": -3.6
+      "erreur": -3.1
      },
      "Jean-Luc Mélenchon": {
-      "estimation": 8.5,
+      "estimation": 10.0,
       "resultat": 21.95,
-      "erreur": -13.4
+      "erreur": -11.9
      },
      "Éric Zemmour": {
-      "estimation": 15.0,
+      "estimation": 13.0,
       "resultat": 7.07,
-      "erreur": 7.9
+      "erreur": 5.9
      },
      "Valérie Pécresse": {
-      "estimation": 10.0,
+      "estimation": 11.0,
       "resultat": 4.78,
-      "erreur": 5.2
+      "erreur": 6.2
      },
      "Yannick Jadot": {
-      "estimation": 6.5,
+      "estimation": 8.0,
       "resultat": 4.63,
-      "erreur": 1.9
+      "erreur": 3.4
      },
      "Jean Lassalle": {
       "estimation": 0.0,
@@ -2348,14 +2348,14 @@
       "erreur": -0.3
      },
      "Nicolas Dupont-Aignan": {
-      "estimation": 4.0,
+      "estimation": 2.0,
       "resultat": 2.06,
-      "erreur": 1.9
+      "erreur": -0.1
      },
      "Anne Hidalgo": {
-      "estimation": 6.0,
+      "estimation": 5.0,
       "resultat": 1.75,
-      "erreur": 4.2
+      "erreur": 3.2
      },
      "Philippe Poutou": {
       "estimation": 1.0,
@@ -2363,13 +2363,13 @@
       "erreur": 0.2
      },
      "Nathalie Arthaud": {
-      "estimation": 0.5,
+      "estimation": 1.0,
       "resultat": 0.56,
-      "erreur": -0.1
+      "erreur": 0.4
      }
     },
-    "poids_non_candidats": 2.0,
-    "scenario": "Hypothèse Pécresse / Zemmour",
+    "poids_non_candidats": 3.0,
+    "scenario": "Hypothèse Pécresse",
     "polls": 1,
     "top2": [
      "Emmanuel Macron",
@@ -2386,45 +2386,45 @@
  "reference": {
   "mode": "Notre méthode",
   "n": 12,
-  "publies": 13,
-  "mae": 3.83,
-  "biais": -0.18,
-  "max_err": 13.8,
+  "publies": 15,
+  "mae": 3.86,
+  "biais": -0.27,
+  "max_err": 11.9,
   "detail": {
    "Emmanuel Macron": {
-    "estimation": 25.4,
+    "estimation": 24.0,
     "resultat": 27.85,
-    "erreur": -2.5
+    "erreur": -3.9
    },
    "Marine Le Pen": {
-    "estimation": 17.7,
+    "estimation": 17.6,
     "resultat": 23.15,
-    "erreur": -5.4
+    "erreur": -5.5
    },
    "Jean-Luc Mélenchon": {
-    "estimation": 8.2,
+    "estimation": 10.0,
     "resultat": 21.95,
-    "erreur": -13.8
+    "erreur": -11.9
    },
    "Éric Zemmour": {
-    "estimation": 15.4,
+    "estimation": 15.1,
     "resultat": 7.07,
-    "erreur": 8.3
+    "erreur": 8.0
    },
    "Valérie Pécresse": {
-    "estimation": 9.8,
+    "estimation": 10.7,
     "resultat": 4.78,
-    "erreur": 5.0
+    "erreur": 5.9
    },
    "Yannick Jadot": {
-    "estimation": 7.6,
+    "estimation": 8.6,
     "resultat": 4.63,
-    "erreur": 3.0
+    "erreur": 4.0
    },
    "Jean Lassalle": {
-    "estimation": 1.0,
+    "estimation": 0.0,
     "resultat": 3.13,
-    "erreur": -2.1
+    "erreur": -3.1
    },
    "Fabien Roussel": {
     "estimation": 2.0,
@@ -2432,29 +2432,29 @@
     "erreur": -0.3
    },
    "Nicolas Dupont-Aignan": {
-    "estimation": 3.3,
+    "estimation": 2.0,
     "resultat": 2.06,
-    "erreur": 1.2
+    "erreur": -0.1
    },
    "Anne Hidalgo": {
-    "estimation": 5.4,
+    "estimation": 4.7,
     "resultat": 1.75,
-    "erreur": 3.7
+    "erreur": 3.0
    },
    "Philippe Poutou": {
-    "estimation": 1.3,
+    "estimation": 1.0,
     "resultat": 0.77,
-    "erreur": 0.5
+    "erreur": 0.2
    },
    "Nathalie Arthaud": {
-    "estimation": 0.8,
+    "estimation": 1.0,
     "resultat": 0.56,
-    "erreur": 0.2
+    "erreur": 0.4
    }
   },
-  "poids_non_candidats": 2.1,
-  "scenario": "Hypothèse Pécresse / Zemmour",
-  "polls": 8,
+  "poids_non_candidats": 3.3,
+  "scenario": "Hypothèse Pécresse",
+  "polls": 3,
   "top2": [
    "Emmanuel Macron",
    "Marine Le Pen"

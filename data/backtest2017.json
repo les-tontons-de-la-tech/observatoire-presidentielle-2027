@@ -1,5 +1,5 @@
 {
- "genere": "2026-11-16 18:40",
+ "genere": "2026-11-17 16:57",
  "election": "2017-04-23",
  "scrutin": "2017-04-23",
  "source_sondages": "Wikipédia FR, « Liste de sondages sur l'élection présidentielle française de 2017 » (CC BY-SA), lue en wikitext",
@@ -3081,13 +3081,13 @@
  },
  "reference_2022": {
   "date": "2021-11-29",
-  "mae": 3.83,
+  "mae": 3.86,
   "n": 12,
-  "biais": -0.18,
-  "fenetre_90": 3.11,
-  "fenetre_60": 3.19,
-  "house_90_sans": 3.15,
-  "house_90_avec": 3.11
+  "biais": -0.27,
+  "fenetre_90": 3.28,
+  "fenetre_60": 3.39,
+  "house_90_sans": 3.32,
+  "house_90_avec": 3.28
  },
  "densites": [
   {

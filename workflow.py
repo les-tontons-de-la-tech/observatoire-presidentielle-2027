@@ -328,9 +328,14 @@ def page(lang="fr"):
     Le français reste la référence : chaque fragment anglais est la traduction de
     la phrase française écrite ici. Le schéma suit la langue de la page.
     """
-    chemin = "/observatoire/workflow/"
+    # Deux formes, et pas une : lien() attend un chemin relatif à la racine de
+    # l'observatoire (« /workflow/ ») et préfixe lui-même la base de la langue, alors que
+    # les tables de métadonnées sont indexées par l'adresse complète. Les confondre a
+    # publié une canonique « /en/observatoire/observatoire/workflow/ ».
+    chemin = "/workflow/"
+    page = "/observatoire/workflow/"
     alternates = "".join(
-        f'<link rel="alternate" hreflang="{code}" href="{G.lien(chemin, code)}">\n'
+        f'<link rel="alternate" hreflang="{code}" href="{G.url_page(page, code)}">\n'
         for code in ("fr", "en", "x-default"))
     nav = "".join([
         f'<a href="{G.lien_page("/", lang)}">{"Home" if lang == "en" else "Accueil"}</a>',
@@ -346,11 +351,11 @@ def page(lang="fr"):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="{G.meta_description(chemin, lang)}">
-<title>{G.titre_court(chemin, lang)}</title>
-<link rel="canonical" href="{G.lien(chemin, lang)}">
-{alternates}{G.meta_social(chemin, lang)}
-{G.ld_json(chemin, lang)}
+<meta name="description" content="{G.meta_description(page, lang)}">
+<title>{G.titre_court(page, lang)}</title>
+<link rel="canonical" href="{G.url_page(page, lang)}">
+{alternates}{G.meta_social(page, lang)}
+{G.ld_json(page, lang)}
 {G.matomo()}
 {G.THEME_HEAD}
 <style>{G.CSS}{G.DARK}{CSS_PAGE}</style>

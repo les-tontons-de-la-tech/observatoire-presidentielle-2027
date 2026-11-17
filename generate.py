@@ -1603,10 +1603,19 @@ def fr(x, lang="fr"):
     return s if lang == "en" else s.replace(".", ",")
 
 
+# Noms que les instituts continuent de tester alors qu'ils ne seront pas candidats. Jordan Bardella
+# figure dans les questionnaires comme variante de la candidature du Rassemblement national, ouverte
+# tant que l'inéligibilité de Marine Le Pen n'était pas tranchée ; la cour d'appel de Paris a statué,
+# Marine Le Pen est déclarée depuis le 7 juillet 2026 (data/candidats2027.json). Le garder dans
+# l'indicateur « toutes listes » compte deux fois la même offre politique et place en tête du tableau
+# un nom qui ne sera pas sur le bulletin — 28 enquêtes à 34,8 %, sans mouvement mesurable.
+SANS_CANDIDATURE = {"Jordan Bardella"}
+
+
 def trend_point(polls, as_of, min_polls=3):
     """Moyenne pondérée par candidat, TOUTES hypothèses confondues : indicateur de tendance.
     Le niveau n'est pas comparable au tableau principal (chaque sondage teste une liste différente) ;
-    seule la direction est informative."""
+    seule la direction est informative. Les noms de SANS_CANDIDATURE n'entrent pas dans la moyenne."""
     acc = defaultdict(list)
     for p in polls:
         if (p.get("tour") or "") != "1er Tour":
@@ -1619,6 +1628,8 @@ def trend_point(polls, as_of, min_polls=3):
             continue
         w = math.exp(-math.log(2) * age / HALF_LIFE) * math.sqrt((p.get("echantillon") or 1000) / 1000.0)
         for c in p.get("candidats", []):
+            if c.get("candidat") in SANS_CANDIDATURE:
+                continue
             if isinstance(c.get("intentions"), (int, float)):
                 acc[c["candidat"]].append((w, float(c["intentions"]), c.get("parti")))
     out = {}
@@ -1872,11 +1883,17 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
                      "un indicateur de direction. Les niveaux ne sont pas comparables à ceux du tableau "
                      "ci-dessus (une liste de dix candidats ne suit pas la même arithmétique qu'une liste "
                      "de quinze) — seule l'évolution compte, et elle est plus robuste car elle repose sur "
-                     "beaucoup plus d'enquêtes.",
+                     "beaucoup plus d'enquêtes. Un nom que les instituts testent sans qu'il soit candidat "
+                     "en est écarté : Jordan Bardella, variante du Rassemblement national dans les "
+                     "questionnaires, ne sera pas sur le bulletin — la candidature du parti est celle de "
+                     "Marine Le Pen, déclarée le 7 juillet 2026.",
                      "Here every first-round poll counts, whatever the list tested: this is a direction "
                      "indicator. Levels are not comparable with those of the table above (a ten-candidate "
                      "list does not follow the same arithmetic as a fifteen-candidate one) — only the "
-                     "movement matters, and it is more robust because it rests on far more surveys.")
+                     "movement matters, and it is more robust because it rests on far more surveys. A name "
+                     "the pollsters test without being a candidate is left out: Jordan Bardella, a National "
+                     "Rally variant in the questionnaires, will not be on the ballot — the party's "
+                     "candidacy is Marine Le Pen's, declared on 7 July 2026.")
 
     return f"""<!doctype html>
 <html lang="{lang}">
@@ -2204,7 +2221,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
   <p class="small" style="margin-top:14px"><strong>{m("Mouvements sur 7 jours (scénario retenu) :", "7-day movements (selected scenario):")}</strong>
   {mov_line(movs, lang)}.</p>
   <h3 style="margin-top:24px">{m("Tendance, toutes listes confondues", "Trend, all lists combined")}</h3>
-  <p class="small muted" style="max-width:none">{m("Indicateur de direction : chaque sondage du premier tour compte, quelle que soit la liste testée. Les niveaux ne sont pas comparables à ceux du tableau ci-dessus ; seule l'évolution compte, et elle est plus robuste (beaucoup plus d'enquêtes).", "Direction indicator: every first-round poll counts, whichever list it tested. The levels are not comparable with those in the table above; only the movement matters, and it is more robust (far more surveys).")}
+  <p class="small muted" style="max-width:none">{m("Indicateur de direction : chaque sondage du premier tour compte, quelle que soit la liste testée. Les niveaux ne sont pas comparables à ceux du tableau ci-dessus ; seule l'évolution compte, et elle est plus robuste (beaucoup plus d'enquêtes). Un nom testé sans être candidat en est écarté : Jordan Bardella, variante du Rassemblement national, ne sera pas sur le bulletin — la candidature du parti est celle de Marine Le Pen, déclarée le 7 juillet 2026.", "Direction indicator: every first-round poll counts, whichever list it tested. The levels are not comparable with those in the table above; only the movement matters, and it is more robust (far more surveys). A name polled without being a candidate is left out: Jordan Bardella, a National Rally variant, will not be on the ballot — the party's candidacy is Marine Le Pen's, declared on 7 July 2026.")}
   <a href="{lien_page('/sondages/', lang)}#evolution">{m("Méthode et détail", "Method and detail")}</a>.</p>
   {trend_table(trends, lang)}
   <p class="small" style="margin-top:14px"><strong>{m("Mouvement de fond :", "Underlying movement:")}</strong> {mov_line(trends, lang)}.</p>

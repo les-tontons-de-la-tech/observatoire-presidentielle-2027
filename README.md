@@ -106,7 +106,11 @@ IC 95 % = max( 1,96 × σ_pondéré / √n_eff , 1 point )        n_eff = (Σw)�
 - **Évolution hebdomadaire** : série **rétro-calculée** (J−56 → J−0), scénario verrouillé, coupe
   stricte à chaque point.
 - **Tendance toutes listes** : moyenne par candidat sur tous les sondages de premier tour —
-  indicateur de **direction** uniquement, niveaux non comparables au tableau principal.
+  indicateur de **direction** uniquement, niveaux non comparables au tableau principal. Un nom que
+  les instituts testent sans qu'il soit candidat en est écarté, par la liste nommée
+  `SANS_CANDIDATURE` de `generate.py` : c'est le cas de Jordan Bardella, variante du Rassemblement
+  national dans les questionnaires alors que la candidature du parti est celle de Marine Le Pen,
+  déclarée le 7 juillet 2026 — le laisser placerait en tête du tableau un nom absent du bulletin.
 - **Archive quotidienne** : `data/history.jsonl`, une ligne par jour.
 - **Comparaison bayésienne** : sortie de `whyalwaysrose/presidentielle-2027` (MIT) affichée en regard
   (médiane 1<sup>er</sup> tour, 90 %, P(2<sup>e</sup> tour), P(victoire), duels).

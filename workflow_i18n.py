@@ -232,7 +232,12 @@ def traduire(html):
     def sur_texte(mo):
         # mo.group(1) est le texte seul : les chevrons appartiennent au motif et ne
         # doivent pas être réémis, sinon on obtient « >>FR<< » dans la page.
-        norme = " ".join(mo.group(1).split())
+        brut = mo.group(1)
+        # Un nœud fait uniquement d'espaces sépare deux éléments en ligne : le vider
+        # collerait le lien et son libellé (« election· workflow »). On le garde tel quel.
+        if not brut.strip():
+            return brut
+        norme = " ".join(brut.split())
         if norme in EXACT:
             return EXACT[norme]
         # Les phrases du gabarit sont coupées sur plusieurs lignes : on travaille

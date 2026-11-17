@@ -2139,7 +2139,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
   <h1>{m("Agrégation des sondages de la présidentielle 2027", "Poll aggregation for the 2027 presidential election")}</h1>
   <p class="lede">{m("Nous compilons les sondages publiés par les instituts, <strong>un scénario de candidatures à la fois</strong>, avec la méthode écrite noir sur blanc et les limites affichées à côté des chiffres. Pas de probabilité de victoire : une lecture sourcée, datée, discutable.", "We compile the polls published by the polling institutes, <strong>one candidate scenario at a time</strong>, with the method written out in full and the limits displayed next to the figures. No probability of victory: a sourced, dated, arguable reading.")}</p>
   <div class="cta">
-    <a class="btn" href="/observatoire/sondages/">{m("Voir l'agrégation du jour", "See today's aggregate")}</a>
+    <a class="btn" href="{lien_page('/sondages/', lang)}">{m("Voir l'agrégation du jour", "See today's aggregate")}</a>
     <a class="btn2" href="#methode">{m("La méthode", "The method")}</a>
   </div>
 
@@ -2181,7 +2181,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
   {mov_line(movs, lang)}.</p>
   <h3 style="margin-top:24px">{m("Tendance, toutes listes confondues", "Trend, all lists combined")}</h3>
   <p class="small muted" style="max-width:none">{m("Indicateur de direction : chaque sondage du premier tour compte, quelle que soit la liste testée. Les niveaux ne sont pas comparables à ceux du tableau ci-dessus ; seule l'évolution compte, et elle est plus robuste (beaucoup plus d'enquêtes).", "Direction indicator: every first-round poll counts, whichever list it tested. The levels are not comparable with those in the table above; only the movement matters, and it is more robust (far more surveys).")}
-  <a href="/observatoire/sondages/#evolution">{m("Méthode et détail", "Method and detail")}</a>.</p>
+  <a href="{lien_page('/sondages/', lang)}#evolution">{m("Méthode et détail", "Method and detail")}</a>.</p>
   {trend_table(trends, lang)}
   <p class="small" style="margin-top:14px"><strong>{m("Mouvement de fond :", "Underlying movement:")}</strong> {mov_line(trends, lang)}.</p>
 </section>
@@ -2262,7 +2262,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
 <section id="comparaison" class="card">
   <h2>{m("Comparaison avec une prévision bayésienne", "Comparison with a Bayesian forecast")}</h2>
   <p class="small muted" style="max-width:none">{m("Un projet MIT indépendant prévoit la même élection à partir des <strong>mêmes sondages</strong>, mais en intégrant l'incertitude sur la liste des candidats au lieu de verrouiller un scénario. En résumé : les deux lectures se rejoignent désormais sur tout le haut du tableau (aucun écart supérieur à 0,3 point sous le quatrième), et leurs intervalles restent dix fois plus larges que les nôtres — donc plus honnêtes. Analyse complète sur la page", "An independent MIT project forecasts the same election from the <strong>same polls</strong>, but folds in the uncertainty over the candidate list instead of locking a scenario. In short: the two readings now agree across the top of the table (no gap above 0.3 point below fourth place), and their intervals remain ten times wider than ours — hence more honest. Full analysis on the")}
-  <a href="/observatoire/sondages/#comparaison">{m("Agrégation", "Aggregate")}</a>.</p>
+  <a href="{lien_page('/sondages/', lang)}#comparaison">{m("Agrégation", "Aggregate")}</a>.</p>
   {forecast_block(agg, trends, fc, lang)}
   {backtest_block(lang)}
 </section>
@@ -2272,7 +2272,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
   <div class="excl small" style="max-width:none">
     <p style="margin:0 0 8px"><strong>{m("Cette page n'est pas un modèle de prévision.", "This page is not a forecasting model.")}</strong> {m("Elle décrit ce que disent les sondages publiés, agrémenté d'une incertitude explicite — rien de plus.", "It describes what the published polls say, with an explicit uncertainty attached — nothing more.")}</p>
     <p style="margin:0">{m("Une moyenne de sondages n'est pas un résultat, et une intention de vote n'est pas un vote. La méthode est versionnée : chaque changement est daté dans le journal ci-dessous, et le détail de ce qui peut être cité — sous quelle forme et à quelles conditions — se trouve dans la section", "An average of polls is not a result, and a voting intention is not a vote. The method is versioned: every change is dated in the log below, and the detail of what may be cited — in what form and under what conditions — is in the section")}
-    <a href="/observatoire/sondages/#a-lire">{m("Citer un chiffre", "Citing a figure")}</a>.</p>
+    <a href="{lien_page('/sondages/', lang)}#a-lire">{m("Citer un chiffre", "Citing a figure")}</a>.</p>
   </div>
   <ul class="tight small" style="max-width:none">
     <li><strong>{m("Citez la moyenne, jamais un sondage", "Cite the average, never a single poll")}</strong> : {m("« moyenne des sondages publiés au", "\"average of the polls published as of")}

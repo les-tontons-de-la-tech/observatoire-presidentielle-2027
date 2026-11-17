@@ -108,7 +108,7 @@ def changelog_bloc(limite=None, titre=None, note=None, valeurs=None, lang="fr"):
         return ""
     suite = ""
     if reste:
-        base = "/observatoire/en/sondages/" if lang == "en" else "/observatoire/sondages/"
+        base = "/en/observatoire/sondages/" if lang == "en" else "/observatoire/sondages/"
         suite = (f'<p class="small muted" style="margin:12px 0 0">'
                  f'{m(f"Les {reste} mises à jour plus anciennes figurent dans le journal complet, sur la page", f"The {reste} older updates are in the full log, on the")} '
                  f'<a href="{base}#a-lire">{m("Agrégation", "Aggregate")}</a>.</p>')

@@ -1388,7 +1388,7 @@ BASE_LANGUE = {"fr": "/observatoire", "en": "/en/observatoire"}
 # Pages qui existent réellement en anglais. Tant qu'une page n'y figure pas, le menu
 # anglais renvoie vers sa version française : un lien mort serait pire qu'un lien
 # vers une page lisible dans une autre langue.
-PAGES_EN = {"/", "/sondages/", "/candidats/", "/backtest/", "/backtest2017/"}
+PAGES_EN = {"/", "/sondages/", "/candidats/", "/backtest/", "/backtest2017/", "/lois/"}
 
 
 def lien(chemin, lang="fr"):

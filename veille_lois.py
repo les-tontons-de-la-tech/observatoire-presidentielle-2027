@@ -26,6 +26,9 @@ import generate as G
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(BASE, "data")
 SITE = os.path.join(BASE, "site", "lois")
+# Version anglaise : même arborescence que les autres pages (/en/observatoire/…).
+# Séparée de SITE pour qu'un rendu anglais n'écrase jamais la page française.
+SITE_EN = os.path.join(BASE, "site", "en", "observatoire", "lois")
 CACHE = os.path.join(DATA, "lois")
 os.makedirs(CACHE, exist_ok=True)
 os.makedirs(SITE, exist_ok=True)
@@ -74,6 +77,20 @@ THEMES = [
      r"médias|audiovisuel|presse|droits voisins|radiodiffusion|publicité"),
 ]
 
+# Libellés anglais des thèmes éditoriaux, indexés par le libellé français affiché.
+# Le français reste la clé : c'est lui qui identifie le thème dans THEMES et dans les
+# données déjà écrites (data/veille_lois.json), il n'est donc jamais traduit sur place.
+THEMES_EN = {
+    "Numérique & plateformes": "Digital & platforms",
+    "Réseaux sociaux & protection des mineurs": "Social media & protection of minors",
+    "IA & algorithmes": "AI & algorithms",
+    "Données & vie privée": "Data & privacy",
+    "Surveillance & biométrie": "Surveillance & biometrics",
+    "Cyber & sécurité numérique": "Cyber & digital security",
+    "Médias & souveraineté informationnelle": "Media & informational sovereignty",
+    "Fiscalité des données": "Taxation of data",
+}
+
 # ---------- scrutins suivis à la main ----------
 # Le filtre automatique lit le NOM DU TEXTE. Or un amendement au projet de loi de
 # finances n'y entre jamais : le nom du texte ne parle ni de numérique, ni de données,
@@ -89,6 +106,13 @@ SUIVIS = {
                      "gouvernement et du rapporteur général, dans le cadre du projet de loi de finances "
                      "pour 2027. Le texte n'est pas voté : le vote solennel sur la première partie est "
                      "inscrit au 3 novembre 2026."),
+        # Même fait, même sélection : seule la langue change. Le texte français ci-dessus reste
+        # la source et n'est pas touché ; l'anglais est rendu quand lang == "en".
+        "pourquoi_en": ("Amendment No. 1358 by Mr Lhardit (Socialists and allies) creating a tax of "
+                         "5.5 cents per gigabyte transmitted to households, passed against the advice "
+                         "of the government and of the general rapporteur, as part of the finance bill "
+                         "for 2027. The bill has not been voted yet: the solemn vote on the first part "
+                         "is scheduled for 3 November 2026."),
     },
 }
 
@@ -303,6 +327,13 @@ def theme_of(name):
     return None
 
 
+def theme_aff(libelle, lang="fr"):
+    '''Libellé de thème à afficher : version anglaise si elle existe, français sinon.'''
+    if lang != "en" or not libelle:
+        return libelle
+    return THEMES_EN.get(libelle, libelle)
+
+
 def build(scrutins):
     """Regroupe les scrutins par texte de loi, sur le périmètre éditorial."""
     par_texte = defaultdict(list)
@@ -353,6 +384,7 @@ def build(scrutins):
             "theme": theme_of(name) or (suivi_v["theme_suivi"] if suivi_v else None),
             "suivi": bool(suivi_v),
             "pourquoi": (SUIVIS.get(str(suivi_v["numero"]), {}) or {}).get("pourquoi") if suivi_v else None,
+            "pourquoi_en": (SUIVIS.get(str(suivi_v["numero"]), {}) or {}).get("pourquoi_en") if suivi_v else None,
             "nature": "projet" if name.startswith("projet") else "proposition",
             "nb": len(votes),
             "date_min": min(dates) if dates else "",
@@ -402,12 +434,24 @@ def reference_texts(scrutins):
 THEME_BTN = """<button type="button" class="themebtn" id="themebtn" aria-label="Changer le thème"
   title="Passer en mode clair ou sombre">&#9681;</button>"""
 
+# Même bouton en anglais : l'infobulle est du texte d'interface. La version française
+# ci-dessus n'est pas touchée, elle reste celle que rend le site en français.
+THEME_BTN_EN = """<button type="button" class="themebtn" id="themebtn" aria-label="Change theme"
+  title="Switch between light and dark mode">&#9681;</button>"""
+
 THEME_JS = """<script>(function(){var b=document.getElementById("themebtn");if(!b)return;
 b.addEventListener("click",function(){var r=document.documentElement;
 var sombre=r.getAttribute("data-theme")==="dark";
 if(sombre){r.removeAttribute("data-theme");}else{r.setAttribute("data-theme","dark");}
 try{localStorage.setItem("theme",sombre?"light":"dark");}catch(e){}
 b.setAttribute("title",sombre?"Passer en mode sombre":"Passer en mode clair");});})();</script>"""
+
+THEME_JS_EN = """<script>(function(){var b=document.getElementById("themebtn");if(!b)return;
+b.addEventListener("click",function(){var r=document.documentElement;
+var sombre=r.getAttribute("data-theme")==="dark";
+if(sombre){r.removeAttribute("data-theme");}else{r.setAttribute("data-theme","dark");}
+try{localStorage.setItem("theme",sombre?"light":"dark");}catch(e){}
+b.setAttribute("title",sombre?"Switch to dark mode":"Switch to light mode");});})();</script>"""
 
 CSS = """
 :root{--bg:#f3efe5;--paper:#fffdf8;--ink:#171713;--muted:#676459;--line:#d9d2c3;
@@ -516,6 +560,8 @@ def fr_date(iso):
 
 MOIS_FR = ("janvier", "février", "mars", "avril", "mai", "juin", "juillet",
            "août", "septembre", "octobre", "novembre", "décembre")
+MOIS_EN = ("January", "February", "March", "April", "May", "June", "July", "August",
+           "September", "October", "November", "December")
 
 
 def fr_date_longue(iso):
@@ -529,21 +575,35 @@ def fr_date_longue(iso):
         return fr_date(iso)
 
 
-def pill(sort):
+def date_longue(iso, lang="fr"):
+    '''« 2026-10-01 » → « 1er octobre 2026 » en français, « 1 October 2026 » en anglais.'''
+    if lang != "en":
+        return fr_date_longue(iso)
+    if not iso or len(iso) < 10:
+        return iso or ""
+    try:
+        jour, mois = int(iso[8:10]), int(iso[5:7])
+        return f"{jour} {MOIS_EN[mois - 1]} {iso[:4]}"
+    except (ValueError, IndexError):
+        return fr_date(iso)
+
+
+def pill(sort, lang="fr"):
     if "adopt" in sort:
-        return '<span class="pill adopte">Adopté</span>'
+        return '<span class="pill adopte">' + ("Adopted" if lang == "en" else "Adopté") + '</span>'
     if "rejet" in sort:
-        return '<span class="pill rejete">Rejeté</span>'
+        return '<span class="pill rejete">' + ("Rejected" if lang == "en" else "Rejeté") + '</span>'
     return f'<span class="pill">{sort or "—"}</span>'
 
 
-def bandeau_etat(dernier, auj=None, date_controle=""):
-    """État de la veille : dernier scrutin publié et situation du Parlement.
+def bandeau_etat(dernier, auj=None, date_controle="", lang="fr"):
+    '''État de la veille : dernier scrutin publié et situation du Parlement.
 
     Sans ce bandeau, une période couverte qui s'arrête net se lit comme une veille en
     panne. Entre deux sessions, la page doit dire que l'Assemblée ne siège pas, et
     jusqu'à quand.
-    """
+    '''
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     if not dernier:
         return ""
     try:
@@ -556,26 +616,32 @@ def bandeau_etat(dernier, auj=None, date_controle=""):
     if today < ouv:
         classe = "etat"
         situation = f"""
-  <p>Le Parlement ne siège pas. La session ordinaire 2025-2026 s'est achevée le
-  {fr_date_longue(DERNIERE_SEANCE)}, le gouvernement a renoncé à convoquer une session
-  extraordinaire en septembre, et la session ordinaire 2026-2027 ouvre le
-  {fr_date_longue(OUVERTURE_SESSION)}. Entre ces deux dates, aucun scrutin public n'est prononcé :
-  il n'y a donc rien à ajouter ici. Les commissions peuvent se réunir hors session, mais
-  leurs travaux ne donnent pas lieu à des scrutins publics.</p>
-  <p class="small muted">Situation : {SOURCE_INTERSESSION}.</p>"""
+  <p>{m("Le Parlement ne siège pas. La session ordinaire 2025-2026 s'est achevée le", "Parliament is not sitting. The 2025-2026 ordinary session ended on")}
+  {date_longue(DERNIERE_SEANCE, lang)}, {m("le gouvernement a renoncé à convoquer une session", "the government gave up convening an")}
+  {m("extraordinaire en septembre, et la session ordinaire 2026-2027 ouvre le", "extraordinary session in September, and the 2026-2027 ordinary session opens on")}
+  {date_longue(OUVERTURE_SESSION, lang)}. {m("Entre ces deux dates, aucun scrutin public n'est prononcé :", "Between those two dates no public vote is held:")}
+  {m("il n'y a donc rien à ajouter ici. Les commissions peuvent se réunir hors session, mais", "so there is nothing to add here. Committees may sit outside session, but")}
+  {m("leurs travaux ne donnent pas lieu à des scrutins publics.", "their work does not lead to public votes.")}</p>
+  <p class="small muted">{m("Situation :", "Situation:")} {SOURCE_INTERSESSION}.</p>"""
     else:
         classe, situation = "etat ok", ""
 
     return f"""
 <section class="{classe}">
-  <p><b>Dernier scrutin publié : {fr_date(dernier)}</b>.</p>{situation}
-  <p class="small muted">Données ouvertes de l'Assemblée nationale{f", relevées le {fr_date(date_controle)}" if date_controle else ""}.
-  Le premier scrutin de la rentrée apparaîtra ici automatiquement, sans intervention. Actualisation chaque lundi.</p>
+  <p><b>{m("Dernier scrutin publié :", "Last vote published:")} {fr_date(dernier)}</b>.</p>{situation}
+  <p class="small muted">{m("Données ouvertes de l'Assemblée nationale", "Open data from the National Assembly")}{m(f", relevées le {fr_date(date_controle)}", f", checked on {fr_date(date_controle)}") if date_controle else ""}.
+  {m("Le premier scrutin de la rentrée apparaîtra ici automatiquement, sans intervention. Actualisation chaque lundi.", "The first vote after the recess will appear here automatically, with no intervention. Updated every Monday.")}</p>
 </section>"""
 
 
 def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
-           date_controle=""):
+           date_controle="", lang="fr"):
+    '''Page /observatoire/lois/ : gabarit unique, texte d'interface dans la langue demandée.
+
+    Les libellés qui viennent de l'Assemblée (intitulés des textes, noms des groupes,
+    sort des scrutins) ne passent pas par m() : ce sont des données, pas de l'interface.
+    '''
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     nb_scrutins = sum(t["nb"] for t in textes)
     periodes = [t["date_max"] for t in textes if t["date_max"]]
     p_max = max(periodes) if periodes else ""
@@ -583,19 +649,19 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
     p_min = min(periodes_min) if periodes_min else ""
 
     POS = {
-        "pour": ("pos-pour", "Pour"),
-        "contre": ("pos-contre", "Contre"),
-        "abstention": ("pos-abst", "Abstention"),
-        "partage": ("pos-nv", "Partagé"),
+        "pour": ("pos-pour", m("Pour", "For")),
+        "contre": ("pos-contre", m("Contre", "Against")),
+        "abstention": ("pos-abst", m("Abstention", "Abstention")),
+        "partage": ("pos-nv", m("Partagé", "Split")),
     }
 
     def groupe_block(t):
-        """Ventilation du vote retenu par groupe politique."""
+        '''Ventilation du vote retenu par groupe politique.'''
         gv = t.get("groupe_vote")
         if not gv or not gv.get("groupes"):
             return ""
-        quoi = ("vote sur l'ensemble du texte" if gv["kind"] == "ensemble"
-                else "dernier scrutin enregistré")
+        quoi = (m("vote sur l'ensemble du texte", "vote on the whole bill") if gv["kind"] == "ensemble"
+                else m("dernier scrutin enregistré", "latest recorded vote"))
         lignes = ""
         for g in gv["groupes"]:
             info = gmap.get(g["ref"]) or ALIAS_GROUPES.get(g["ref"]) or {}
@@ -603,16 +669,19 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
             nom = info.get("nom") or ""
             coul = info.get("couleur") or "#8D949A"
             cls, lab = POS.get(g["dominante"], ("pos-nv", "—"))
-            m = g["membres"] or 1
+            # Effectif du groupe. Nommé `eff` et non `m` : `m` est le sélecteur de langue.
+            eff = g["membres"] or 1
 
-            def pc(x, m=m):
-                return round(100 * x / m, 1)
+            def pc(x, eff=eff):
+                return round(100 * x / eff, 1)
 
             def val(x):
                 return x if x else "—"
 
-            titre = (f'{g["pour"]} pour, {g["contre"]} contre, {g["abst"]} abstentions, '
-                     f'{g["nv"]} non-votants, {g["absents"]} absents')
+            titre = m(f'{g["pour"]} pour, {g["contre"]} contre, {g["abst"]} abstentions, '
+                      f'{g["nv"]} non-votants, {g["absents"]} absents',
+                      f'{g["pour"]} for, {g["contre"]} against, {g["abst"]} abstentions, '
+                      f'{g["nv"]} non-voting, {g["absents"]} absent')
             barre = (f'<span class="bar" title="{titre}">'
                      f'<i class="p" style="width:{pc(g["pour"])}%"></i>'
                      f'<i class="c" style="width:{pc(g["contre"])}%"></i>'
@@ -632,70 +701,75 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
 
         return f"""
   <details open class="gv">
-    <summary>Vote par groupe politique</summary>
+    <summary>{m("Vote par groupe politique", "Vote by political group")}</summary>
     <p class="small muted" style="max-width:none;margin:8px 0 6px">
-      {quoi}, du {fr_date(gv["date"])}. Chaque député du groupe est compté une fois :
-      pour + contre + abstentions + non-votants + absents = effectif.</p>
+      {quoi}, {m("du", "on")} {fr_date(gv["date"])}. {m("Chaque député du groupe est compté une fois :", "Each MP in the group is counted once:")}
+      {m("pour + contre + abstentions + non-votants + absents = effectif.", "for + against + abstentions + non-voting + absent = membership.")}</p>
     <table>
-      <tr><th>Groupe</th><th>Position dominante</th><th class="num">Pour</th>
-      <th class="num">Contre</th><th class="num">Abst.</th><th class="num">Non-vot.</th>
-      <th class="num">Absents</th><th class="num">Effectif</th><th>Répartition</th></tr>
+      <tr><th>{m("Groupe", "Group")}</th><th>{m("Position dominante", "Dominant position")}</th><th class="num">{m("Pour", "For")}</th>
+      <th class="num">{m("Contre", "Against")}</th><th class="num">{m("Abst.", "Abst.")}</th><th class="num">{m("Non-vot.", "Non-voting")}</th>
+      <th class="num">{m("Absents", "Absent")}</th><th class="num">{m("Effectif", "Members")}</th><th>{m("Répartition", "Breakdown")}</th></tr>
       {lignes}
     </table>
     <p class="legend small muted">
-      <span class="sw p"></span>pour
-      <span class="sw c"></span>contre
-      <span class="sw a"></span>abstention
-      <span class="sw n"></span>non-votant (présent, sans vote)
-      <span class="sw abs"></span>absent (dans aucun décompte du scrutin)
+      <span class="sw p"></span>{m("pour", "for")}
+      <span class="sw c"></span>{m("contre", "against")}
+      <span class="sw a"></span>{m("abstention", "abstention")}
+      <span class="sw n"></span>{m("non-votant (présent, sans vote)", "non-voting (present, no vote)")}
+      <span class="sw abs"></span>{m("absent (dans aucun décompte du scrutin)", "absent (in no tally of the vote)")}
     </p>
     <p class="small muted" style="max-width:none;margin-top:8px">
-      « Position dominante » est calculée sur les voix exprimées du groupe (partagée en cas
-      d'égalité) — et non reprise du champ « position majoritaire » publié par l'Assemblée,
-      qui contredit ses propres décomptes. Un groupe qui se divise reste donc lisible ligne
-      par ligne. Un député absent, ou présent sans voter, ne soutient ni ne rejette le texte :
-      ne pas lire les colonnes « absents » et « non-votants » comme un vote.</p>
+      {m("« Position dominante » est calculée sur les voix exprimées du groupe (partagée en cas d'égalité) — et non reprise du champ « position majoritaire » publié par l'Assemblée, qui contredit ses propres décomptes. Un groupe qui se divise reste donc lisible ligne par ligne. Un député absent, ou présent sans voter, ne soutient ni ne rejette le texte : ne pas lire les colonnes « absents » et « non-votants » comme un vote.", "“Dominant position” is computed from the group's votes cast (split in case of a tie) — not taken from the “majority position” field published by the Assembly, which contradicts its own tallies. A group that splits therefore remains readable line by line. An MP who is absent, or present without voting, neither supports nor rejects the bill: do not read the “absent” and “non-voting” columns as a vote.")}</p>
   </details>"""
 
-    bandeau = bandeau_etat(dernier_scrutin, date_controle=date_controle)
+    bandeau = bandeau_etat(dernier_scrutin, date_controle=date_controle, lang=lang)
 
     cards = ""
     for t in textes:
         final = t["final"]
         if final:
-            entete = f'{pill(final["sort"])} <span class="small muted">vote final du ' \
-                     f'{fr_date(final["date"])} — {final["pour"]} pour, {final["contre"]} contre</span>'
+            entete = (f'{pill(final["sort"], lang)} <span class="small muted">{m("vote final du", "final vote on")} '
+                      f'{fr_date(final["date"])} — '
+                      + m(f'{final["pour"]} pour, {final["contre"]} contre',
+                          f'{final["pour"]} for, {final["contre"]} against') + '</span>')
         else:
-            entete = '<span class="small muted">aucun vote sur l\'ensemble enregistré</span>'
+            entete = ('<span class="small muted">'
+                      + m("aucun vote sur l'ensemble enregistré", "no vote on the whole bill recorded")
+                      + '</span>')
 
         lignes = ""
         for v in t["votes"]:
             lien = f'<a href="{v["lien"]}">{v["objet"]}</a>' if v["lien"] else v["objet"]
-            kind = {"ensemble": "ensemble", "motion": "motion", "article": "article",
-                    "amendement": "amendement", "autre": "vote"}[v["kind"]]
+            kind = {"ensemble": m("ensemble", "final vote"), "motion": m("motion", "motion"),
+                    "article": m("article", "article"),
+                    "amendement": m("amendement", "amendment"), "autre": m("vote", "vote")}[v["kind"]]
             lignes += (f'<tr><td class="date">{fr_date(v["date"])}</td>'
                        f'<td><span class="tag">{kind}</span>{lien}</td>'
-                       f'<td>{pill(v["sort"])}</td>'
+                       f'<td>{pill(v["sort"], lang)}</td>'
                        f'<td class="num">{v["pour"]}</td>'
                        f'<td class="num">{v["contre"]}</td>'
                        f'<td class="num">{v["abst"]}</td></tr>\n')
 
-        badge = ' <span class="chip">suivi éditorial</span>' if t.get("suivi") else ""
-        note = (f'<p class="small muted" style="max-width:none">{t["pourquoi"]}</p>'
-                if t.get("pourquoi") else "")
+        badge = (' <span class="chip">' + m("suivi éditorial", "editorial watch") + '</span>'
+                 if t.get("suivi") else "")
+        pourquoi = t.get("pourquoi_en") if lang == "en" and t.get("pourquoi_en") else t.get("pourquoi")
+        note = (f'<p class="small muted" style="max-width:none">{pourquoi}</p>'
+                if pourquoi else "")
+        voir = m(f'Voir les {t["nb"]} scrutins',
+                 f'See the {t["nb"]} vote' + ("s" if t["nb"] > 1 else ""))
         cards += f"""
 <section class="card">
   <h2>{t["nom"]}</h2>
-  <div class="chips"><span class="chip">{t["theme"]}</span>
-    <span class="chip">{t["nb"]} scrutin{"s" if t["nb"] > 1 else ""}</span>{badge}</div>
+  <div class="chips"><span class="chip">{theme_aff(t["theme"], lang)}</span>
+    <span class="chip">{t["nb"]} {m("scrutin", "vote")}{"s" if t["nb"] > 1 else ""}</span>{badge}</div>
   <p style="margin:0">{entete}</p>
   {note}
   {groupe_block(t)}
   <details>
-    <summary>Voir les {t["nb"]} scrutins ({fr_date(t["date_min"])} → {fr_date(t["date_max"])})</summary>
+    <summary>{voir} ({fr_date(t["date_min"])} → {fr_date(t["date_max"])})</summary>
     <table>
-      <tr><th>Date</th><th>Objet du vote</th><th>Sort</th>
-      <th class="num">Pour</th><th class="num">Contre</th><th class="num">Abst.</th></tr>
+      <tr><th>{m("Date", "Date")}</th><th>{m("Objet du vote", "Item voted")}</th><th>{m("Sort", "Outcome")}</th>
+      <th class="num">{m("Pour", "For")}</th><th class="num">{m("Contre", "Against")}</th><th class="num">{m("Abst.", "Abst.")}</th></tr>
       {lignes}
     </table>
   </details>
@@ -705,113 +779,108 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
     for r in refs:
         f = r["final"]
         if f:
-            outcome = (f'{pill(f["sort"])} <span class="small muted">vote final du '
-                       f'{fr_date(f["date"])} — {f["pour"]} pour, {f["contre"]} contre</span>')
+            outcome = (f'{pill(f["sort"], lang)} <span class="small muted">{m("vote final du", "final vote on")} '
+                       f'{fr_date(f["date"])} — '
+                       + m(f'{f["pour"]} pour, {f["contre"]} contre',
+                           f'{f["pour"]} for, {f["contre"]} against') + '</span>')
         else:
             outcome = '<span class="small muted">—</span>'
-        refs_html += (f'<tr><td>{r["nom"]}<br><span class="small muted">{r["theme"]}</span></td>'
+        refs_html += (f'<tr><td>{r["nom"]}<br><span class="small muted">{theme_aff(r["theme"], lang)}</span></td>'
                       f'<td class="num">{r["nb"]}</td><td>{outcome}</td></tr>\n')
 
-    themes_chips = "".join(f'<span class="chip">{lib}</span>' for lib, _ in THEMES)
+    themes_chips = "".join(f'<span class="chip">{theme_aff(lib, lang)}</span>' for lib, _ in THEMES)
+
+    # Chrome du bouton de thème : libellé et infobulles dans la langue de la page.
+    theme_btn = THEME_BTN_EN if lang == "en" else THEME_BTN
+    theme_js = THEME_JS_EN if lang == "en" else THEME_JS
 
     html = f"""<!doctype html>
-<html lang="fr">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="{G.meta_description('/observatoire/lois/')}">
-<title>{G.titre_court('/observatoire/lois/')}</title>
-<link rel="canonical" href="https://dileviathan.fr/observatoire/lois/">
-<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/lois/">
-<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/lois/">
-{G.meta_social('/observatoire/lois/')}
-{G.ld_json("/observatoire/lois/")}
+<meta name="description" content="{G.meta_description('/observatoire/lois/', lang)}">
+<title>{G.titre_court('/observatoire/lois/', lang)}</title>
+<link rel="canonical" href="https://dileviathan.fr{G.lien('/lois/', lang)}">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr{G.lien('/lois/', 'fr')}">
+<link rel="alternate" hreflang="en" href="https://dileviathan.fr{G.lien('/lois/', 'en')}">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr{G.lien('/lois/', 'fr')}">
+{G.meta_social('/observatoire/lois/', lang)}
+{G.ld_json("/observatoire/lois/", lang)}
 {G.matomo()}
 <style>{CSS}</style>
 {G.THEME_HEAD}</head>
 <body>
 <div class="topbar"><div class="wrap nav">
-  <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· veille législative</span></div>
+  <div class="brand"><a href="{G.lien('/', lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· {m("veille législative", "legislative watch")}</span></div>
   <div class="navlinks">
-    <a href="/observatoire/">Accueil</a>
-    <a href="/observatoire/sondages/">Agrégation</a>
-    <a href="/observatoire/candidats/">Les candidats</a>
-    <a href="/observatoire/workflow/">Workflow</a>
-    <a href="/observatoire/backtest/">Rétro-test 2022</a>
-    <a href="/observatoire/lois/" style="font-weight:700;color:var(--ink)">Veille législative</a>
-  </div>{THEME_BTN}
+    <a href="{G.lien_page('/', lang)}">{m("Accueil", "Home")}</a>
+    <a href="{G.lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>
+    <a href="{G.lien_page('/candidats/', lang)}">{m("Les candidats", "The candidates")}</a>
+    {G.nav_workflow(lang)}
+    <a href="{G.lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>
+    <a href="{G.lien('/lois/', lang)}" style="font-weight:700;color:var(--ink)">{m("Veille législative", "Legislative watch")}</a>
+    {G.toggle_langue('/lois/', lang, en_pret=True)}
+  </div>{theme_btn}
 </div></div>
 
 <header class="wrap hero">
-  <h1>Ce que le Parlement vote</h1>
-  <p class="lede">Les textes de loi qui touchent au numérique, à l'intelligence artificielle,
-  aux données, à la surveillance et à la souveraineté informationnelle — suivis dans les
-  données ouvertes de l'Assemblée nationale, scrutins publics compris.</p>
+  <h1>{m("Ce que le Parlement vote", "What Parliament votes on")}</h1>
+  <p class="lede">{m("Les textes de loi qui touchent au numérique, à l'intelligence artificielle, aux données, à la surveillance et à la souveraineté informationnelle — suivis dans les données ouvertes de l'Assemblée nationale, scrutins publics compris.", "Bills touching digital affairs, artificial intelligence, data, surveillance and informational sovereignty — tracked in the open data of the National Assembly, public votes included.")}</p>
 </header>
 
 <main class="wrap">
 {bandeau}
 <section class="card">
-  <h2>Législature en cours (depuis juillet 2024)</h2>
-  <p class="small muted" style="max-width:none">Scrutins publics de la 17<sup>e</sup> législature
-  rattachés au périmètre ci-dessous, regroupés par texte de loi.</p>
+  <h2>{m("Législature en cours (depuis juillet 2024)", "Current legislature (since July 2024)")}</h2>
+  <p class="small muted" style="max-width:none">{m("Scrutins publics de la 17<sup>e</sup> législature rattachés au périmètre ci-dessous, regroupés par texte de loi.", "Public votes of the 17th legislature falling within the scope below, grouped by bill.")}</p>
   <div class="stat">
-    <div><b>{len(textes)}</b>textes suivis</div>
-    <div><b>{nb_scrutins}</b>scrutins publics</div>
-    <div><b>{n_total_cur}</b>scrutins au total dans la législature</div>
-    <div><b>{fr_date(p_min)} → {fr_date(date_controle or p_max)}</b>période couverte</div>
+    <div><b>{len(textes)}</b>{m("textes suivis", "bills tracked")}</div>
+    <div><b>{nb_scrutins}</b>{m("scrutins publics", "public votes")}</div>
+    <div><b>{n_total_cur}</b>{m("scrutins au total dans la législature", "votes in total in the legislature")}</div>
+    <div><b>{fr_date(p_min)} → {fr_date(date_controle or p_max)}</b>{m("période couverte", "period covered")}</div>
   </div>
   <p class="small muted" style="max-width:none;margin-top:12px">
-  La période couverte s'arrête à la date du dernier contrôle de la source, et non à celle du dernier
-  vote : elle dit jusqu'où les données ont été vérifiées. La date du dernier scrutin publié, elle,
-  figure dans le bandeau ci-dessus — quand le Parlement ne siège pas, les deux ne coïncident pas.</p>
+  {m("La période couverte s'arrête à la date du dernier contrôle de la source, et non à celle du dernier vote : elle dit jusqu'où les données ont été vérifiées. La date du dernier scrutin publié, elle, figure dans le bandeau ci-dessus — quand le Parlement ne siège pas, les deux ne coïncident pas.", "The period covered stops at the date of the last check of the source, not at the date of the last vote: it says how far the data has been verified. The date of the last published vote appears in the banner above — when Parliament is not sitting, the two do not coincide.")}</p>
   <div class="chips" style="margin-top:14px">{themes_chips}</div>
 </section>
 {cards}
 
 <section class="card">
-  <h2>Textes de référence de la législature précédente</h2>
-  <p class="small muted" style="max-width:none">Les scrutins de la 16<sup>e</sup> législature
-  (2022-2024) ne sont plus au centre de la veille, mais deux textes continuent de structurer le
-  droit du numérique : ils restent listés ici pour mémoire.</p>
+  <h2>{m("Textes de référence de la législature précédente", "Reference bills from the previous legislature")}</h2>
+  <p class="small muted" style="max-width:none">{m("Les scrutins de la 16<sup>e</sup> législature (2022-2024) ne sont plus au centre de la veille, mais deux textes continuent de structurer le droit du numérique : ils restent listés ici pour mémoire.", "The votes of the 16th legislature (2022-2024) are no longer at the centre of this watch, but two bills continue to shape digital law: they remain listed here for the record.")}</p>
   <table>
-    <tr><th>Texte</th><th class="num">Scrutins</th><th>Vote final</th></tr>
+    <tr><th>{m("Texte", "Bill")}</th><th class="num">{m("Scrutins", "Votes")}</th><th>{m("Vote final", "Final vote")}</th></tr>
     {refs_html}
   </table>
 </section>
 
 <section class="card" id="methode">
-  <h2>Méthode</h2>
+  <h2>{m("Méthode", "Method")}</h2>
   <p class="small muted" style="max-width:none">
-  Source unique : les scrutins publics publiés en données ouvertes par l'Assemblée nationale
-  (<a href="https://data.assemblee-nationale.fr">data.assemblee-nationale.fr</a>, licence Etalab).
-  Chaque scrutin est rattaché au texte de loi qu'il modifie ; les textes hors périmètre
-  technopolitique sont écartés. Aucun chiffre n'est repris d'une source secondaire.<br>
-  Sélection thématique, appliquée à l'intitulé des textes : numérique et plateformes, réseaux
-  sociaux et protection des mineurs, intelligence artificielle et algorithmes, données et vie
-  privée, surveillance et biométrie, cybersécurité, médias et souveraineté informationnelle.<br>
-  <strong>Limite assumée :</strong> un texte dont l'intitulé ne dit rien du numérique peut contenir
-  des dispositions qui le concernent — il échappe alors à cette veille. Le filtre porte sur le titre,
-  pas sur le contenu article par article.<br>
-  <strong>Votes par groupe :</strong> ils viennent des décomptes nominatifs du scrutin, croisés avec
-  le référentiel des organes de l'Assemblée (noms et couleurs officielles des groupes). La position
-  affichée pour chaque groupe est recalculée à partir de ses voix exprimées : le champ « position
-  majoritaire » publié par l'Assemblée a été écarté après vérification, il contredit ses propres
-  décomptes nominatifs.<br>
-  Page régénérée automatiquement chaque semaine.</p>
+  {m("Source unique : les scrutins publics publiés en données ouvertes par l'Assemblée nationale", "Single source: the public votes published as open data by the National Assembly")}
+  (<a href="https://data.assemblee-nationale.fr">data.assemblee-nationale.fr</a>, {m("licence Etalab", "Etalab licence")}).
+  {m("Chaque scrutin est rattaché au texte de loi qu'il modifie ; les textes hors périmètre technopolitique sont écartés. Aucun chiffre n'est repris d'une source secondaire.", "Each vote is attached to the bill it amends; bills outside the tech-policy scope are excluded. No figure is taken from a secondary source.")}<br>
+  {m("Sélection thématique, appliquée à l'intitulé des textes : numérique et plateformes, réseaux sociaux et protection des mineurs, intelligence artificielle et algorithmes, données et vie privée, surveillance et biométrie, cybersécurité, médias et souveraineté informationnelle.", "Thematic selection, applied to the title of each bill: digital affairs and platforms, social media and protection of minors, artificial intelligence and algorithms, data and privacy, surveillance and biometrics, cybersecurity, media and informational sovereignty.")}<br>
+  <strong>{m("Limite assumée :", "Assumed limit:")}</strong> {m("un texte dont l'intitulé ne dit rien du numérique peut contenir des dispositions qui le concernent — il échappe alors à cette veille. Le filtre porte sur le titre, pas sur le contenu article par article.", "a bill whose title says nothing about digital affairs may contain provisions that concern it — it then escapes this watch. The filter applies to the title, not to the content article by article.")}<br>
+  <strong>{m("Votes par groupe :", "Votes by group:")}</strong> {m("ils viennent des décomptes nominatifs du scrutin, croisés avec le référentiel des organes de l'Assemblée (noms et couleurs officielles des groupes). La position affichée pour chaque groupe est recalculée à partir de ses voix exprimées : le champ « position majoritaire » publié par l'Assemblée a été écarté après vérification, il contredit ses propres décomptes nominatifs.", "they come from the roll-call tallies of the vote, cross-checked with the Assembly's register of bodies (official names and colours of the groups). The position shown for each group is recomputed from its votes cast: the “majority position” field published by the Assembly was set aside after checking, as it contradicts its own roll-call tallies.")}<br>
+  {m("Page régénérée automatiquement chaque semaine.", "Page regenerated automatically every week.")}</p>
 </section>
 </main>
 
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">{m("Mentions légales", "Legal notice")}</a></p>
 </footer>
-{THEME_JS}</body>
+{theme_js}</body>
 </html>"""
 
-    with open(os.path.join(SITE, "index.html"), "w", encoding="utf-8") as f:
+    dossier = SITE_EN if lang == "en" else SITE
+    os.makedirs(dossier, exist_ok=True)
+    with open(os.path.join(dossier, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"  → {os.path.join(SITE, 'index.html')} ({len(html)} caractères)")
+    print(f"  → {os.path.join(dossier, 'index.html')} ({len(html)} caractères)")
+    return html
 
 
 # ========================================================================
@@ -864,6 +933,9 @@ if __name__ == "__main__":
                      if os.path.exists(cache_l17) else "")
 
     render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin, date_controle)
+    # Version anglaise : mêmes scrutins, mêmes décomptes, autre langue. Les intitulés de
+    # textes et les noms de groupes restent ceux de l'Assemblée — ce sont des données.
+    render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin, date_controle, lang="en")
     print(f"  → dernier scrutin publié par la source : {dernier_scrutin or 'inconnu'}")
     print(f"  → période couverte jusqu'au contrôle du : {date_controle or 'inconnu'}")
 

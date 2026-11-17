@@ -14,7 +14,8 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import generate as G  # CSS, DARK, THEME_HEAD, THEME_BTN, THEME_JS : le rendu vient de là
+import generate as G
+import workflow_i18n as WI  # CSS, DARK, THEME_HEAD, THEME_BTN, THEME_JS : le rendu vient de là
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.join(BASE, "site")
@@ -316,28 +317,48 @@ SCHEMA = """
 </svg>
 """
 
-PAGE = f"""<!doctype html>
-<html lang="fr">
+LANGUE = "fr"
+
+
+def page(lang="fr"):
+    global LANGUE
+    LANGUE = lang
+    """Gabarit de la page, dans la langue demandée.
+
+    Le français reste la référence : chaque fragment anglais est la traduction de
+    la phrase française écrite ici. Le schéma suit la langue de la page.
+    """
+    chemin = "/observatoire/workflow/"
+    alternates = "".join(
+        f'<link rel="alternate" hreflang="{code}" href="{G.lien(chemin, code)}">\n'
+        for code in ("fr", "en", "x-default"))
+    nav = "".join([
+        f'<a href="{G.lien_page("/", lang)}">{"Home" if lang == "en" else "Accueil"}</a>',
+        f'<a href="{G.lien_page("/sondages/", lang)}">{"Aggregation" if lang == "en" else "Agrégation"}</a>',
+        f'<a href="{G.lien_page("/candidats/", lang)}">{"Candidates" if lang == "en" else "Les candidats"}</a>',
+        f'<a href="{G.lien_page("/backtest/", lang)}">{"2022 backtest" if lang == "en" else "Rétro-test 2022"}</a>',
+        G.nav_lois(lang),
+        '<a href="#schema" style="font-weight:700;color:var(--ink)">Workflow</a>',
+    ])
+    html = f"""<!doctype html>
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="{G.meta_description('/observatoire/workflow/')}">
-<title>{G.titre_court('/observatoire/workflow/')}</title>
-<link rel="canonical" href="https://dileviathan.fr/observatoire/workflow/">
-<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/workflow/">
-<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/workflow/">
-{G.meta_social('/observatoire/workflow/')}
-{G.ld_json("/observatoire/workflow/")}
+<meta name="description" content="{G.meta_description(chemin, lang)}">
+<title>{G.titre_court(chemin, lang)}</title>
+<link rel="canonical" href="{G.lien(chemin, lang)}">
+{alternates}{G.meta_social(chemin, lang)}
+{G.ld_json(chemin, lang)}
 {G.matomo()}
 {G.THEME_HEAD}
 <style>{G.CSS}{G.DARK}{CSS_PAGE}</style>
 </head>
 <body>
 <div class="topbar"><div class="wrap nav">
-  <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· workflow</span></div>
-  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/sondages/">Agrégation</a>
-  <a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a><a href="/observatoire/lois/">Veille législative</a><a href="#schema" style="font-weight:700;color:var(--ink)">Workflow</a></div>{G.THEME_BTN}
+  <div class="brand"><a href="{G.lien_page("/", lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· workflow</span></div>
+<div class="navlinks">{nav}{G.toggle_langue("/workflow/", lang, en_pret=True)}</div>{G.THEME_BTN}
 </div></div>
 
 <main class="wrap">
@@ -355,7 +376,7 @@ PAGE = f"""<!doctype html>
   <p class="small muted" style="max-width:none">Six étapes, une seule source de chiffres (MieuxVoter, licence MIT) et des
   couches complémentaires toujours étiquetées séparément. Une intention de vote ne se moyenne jamais
   avec une probabilité de marché ou de modèle.</p>
-  <div class="dgwrap" id="dg-wrap">{SCHEMA}</div>
+  <div class="dgwrap" id="dg-wrap">{WI.traduire(SCHEMA) if lang == "en" else SCHEMA}</div>
   <p class="dghint">↔ le schéma défile horizontalement · cliquez pour zoomer</p>
 </section>
 
@@ -472,15 +493,35 @@ if(e.key==="Escape")closeZoom();
 }})();</script></body>
 </html>
 """
+    if lang == "en":
+        html = WI.traduire(html)
+    return html
+
+
+m = lambda fr, en: en if LANGUE == "en" else fr
 
 
 def main():
     out_dir = os.path.join(SITE, "workflow")
     os.makedirs(out_dir, exist_ok=True)
     out = os.path.join(out_dir, "index.html")
+    fr = page()
     with open(out, "w", encoding="utf-8") as f:
-        f.write(PAGE)
-    print(f"  -> {out} ({len(PAGE)} caractères)")
+        f.write(fr)
+    print(f"  -> {out} ({len(fr)} caractères)")
+    # Version anglaise : même schéma, mêmes chiffres, autre langue.
+    en_dir = os.path.join(SITE, "en", "observatoire", "workflow")
+    os.makedirs(en_dir, exist_ok=True)
+    en = page("en")
+    with open(os.path.join(en_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(en)
+    print(f"  -> {os.path.join(en_dir, 'index.html')} ({len(en)} caractères)")
+    restes = WI.restes(en)
+    if restes:
+        print(f"  ⚠ {len(restes)} nœuds de texte encore en français :")
+        for x in restes[:12]:
+            print(f"      · {x[:80]}")
+
 
 
 if __name__ == "__main__":

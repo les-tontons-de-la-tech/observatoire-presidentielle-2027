@@ -551,24 +551,39 @@ def backtest_summary():
 
 def backtest_block(lang="fr"):
     """Bloc de validation, affiché avec la comparaison bayésienne."""
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     b = backtest_summary()
     if not b:
-        return ('<h3 style="margin-top:24px">Validation</h3><p class="small muted">Rétro-test 2022 '
-                'non calculé (lancer <code>python3 backtest2022.py</code>).</p>')
-    top2 = " et ".join(b["top2"])
+        return ('<h3 style="margin-top:24px">' + m("Validation", "Validation") + '</h3><p class="small muted">'
+                + m("Rétro-test 2022 non calculé (lancer ", "2022 backtest not computed (run ")
+                + '<code>python3 backtest2022.py</code>).</p>')
+    top2 = m(" et ", " and ").join(b["top2"])
     return (
-        '<h3 style="margin-top:24px">Validation : la méthode rejouée sur 2022</h3>'
-        '<p class="small" style="max-width:none">Rejouée sur la campagne 2022 (sondages compilés sous licence MIT, résultat '
-        'officiel vérifié), notre agrégation affiche <strong>' + fr1u(b["mae"])
-        + " point d'erreur moyenne</strong> à J−" + str(b["jours"]) + ", " + str(b["n"])
-        + " candidats réels publiés, et les deux finalistes identifiés (" + top2 + "). "
-        'Deux enseignements désagréables : la pondération par fraîcheur n\'apporte <em>rien</em> '
-        'face à la dernière enquête seule (' + fr1u(b["dernier"]) + " point), et le poids donné aux "
-        'non-candidats atteignait ' + fr1u(b["non_cand"]) + ' points au dernier point. '
-        '<a href="/observatoire/backtest/">Voir le rétro-test complet, échéance par échéance</a>.</p>')
+        '<h3 style="margin-top:24px">'
+        + m("Validation : la méthode rejouée sur 2022", "Validation: the method replayed on 2022") + '</h3>'
+        '<p class="small" style="max-width:none">'
+        + m("Rejouée sur la campagne 2022 (sondages compilés sous licence MIT, résultat officiel vérifié), "
+            "notre agrégation affiche ",
+            "Replayed on the 2022 campaign (compiled polls under MIT licence, official result verified), "
+            "our aggregation shows ")
+        + '<strong>' + fr1u(b["mae"])
+        + m(" point d'erreur moyenne", " point mean error") + '</strong> '
+        + m("à J−", "at D−") + str(b["jours"]) + ", " + str(b["n"])
+        + m(" candidats réels publiés, et les deux finalistes identifiés (",
+            " real candidates published, and both finalists identified (") + top2 + "). "
+        + m("Deux enseignements désagréables : la pondération par fraîcheur n'apporte <em>rien</em> "
+            "face à la dernière enquête seule (",
+            "Two unpleasant lessons: recency weighting adds <em>nothing</em> over the latest poll alone (")
+        + fr1u(b["dernier"]) + m(" point), et le poids donné aux non-candidats atteignait ",
+                                 " point), and the weight given to non-candidates reached ")
+        + fr1u(b["non_cand"]) + m(" points au dernier point. ", " points at the last data point. ")
+        + '<a href="/observatoire/backtest/">'
+        + m("Voir le rétro-test complet, échéance par échéance",
+            "See the full backtest, deadline by deadline") + '</a>.</p>')
 
 
-def compare_table(agg, trends, fc):
+def compare_table(agg, trends, fc, lang="fr"):
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     rows = forecast_rows(agg, trends, fc)
     body = "\n".join(
         f'<tr><td>{r["candidat"]}</td>'
@@ -579,76 +594,119 @@ def compare_table(agg, trends, fc):
         f'<td class="num muted">{fr1u(r["p_qualify"])}</td>'
         f'<td class="num">{fr1u(r["p_win"])}</td></tr>'
         for r in rows)
-    head = ('<tr><th rowspan="2">Candidat</th>'
-            '<th class="num" colspan="2">MieuxVoter<br><span class="muted small">agrégation des '
-            'sondages compilés</span></th>'
-            '<th class="num" colspan="4">Prévision bayésienne<br><span class="muted small">'
+    head = ('<tr><th rowspan="2">' + m("Candidat", "Candidate") + '</th>'
+            '<th class="num" colspan="2">MieuxVoter<br><span class="muted small">'
+            + m("agrégation des sondages compilés", "aggregation of the compiled polls") + '</span></th>'
+            '<th class="num" colspan="4">'
+            + m("Prévision bayésienne", "Bayesian forecast") + '<br><span class="muted small">'
             'whyalwaysrose, 80 000 simulations</span></th></tr>'
-            '<tr><th class="num small">scénario ' + str(agg["scenario"]) + '</th>'
-            '<th class="num small">toutes listes</th>'
-            '<th class="num small">médiane 1<sup>er</sup> tour</th>'
+            '<tr><th class="num small">' + m("scénario ", "scenario ") + str(agg["scenario"]) + '</th>'
+            '<th class="num small">' + m("toutes listes", "all lists") + '</th>'
+            '<th class="num small">' + m("médiane 1<sup>er</sup> tour", "median 1st round") + '</th>'
             '<th class="num small">90 % (5–95)</th>'
-            '<th class="num small">P(2<sup>e</sup> tour)</th>'
-            '<th class="num small">P(victoire)</th></tr>')
+            '<th class="num small">' + m("P(2<sup>e</sup> tour)", "P(runoff)") + '</th>'
+            '<th class="num small">' + m("P(victoire)", "P(victory)") + '</th></tr>')
     return ('<table style="margin-top:10px">' + head + body + '</table>')
 
 
-def compare_duels(fc):
+def compare_duels(fc, lang="fr"):
     duels = sorted((fc or {}).get("duels") or [], key=lambda z: -(z.get("p_matchup") or 0))[:5]
     if not duels:
         return ""
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
+    pour = m("pour", "for")
     body = "\n".join(
         f'<tr><td>{x.get("nom_a")} <span class="muted small">vs</span> {x.get("nom_b")}</td>'
         f'<td class="num muted">{fr1u((x.get("p_matchup") or 0) * 100)} %</td>'
         f'<td class="num"><strong>{fr1u((x.get("p_a_wins") or 0) * 100)} %</strong> '
-        f'<span class="muted small">pour {x.get("nom_a")}</span></td></tr>'
+        f'<span class="muted small">{pour} {x.get("nom_a")}</span></td></tr>'
         for x in duels)
-    return ('<h3 style="margin-top:24px">Leurs duels les plus probables</h3>'
-            '<table style="margin-top:8px"><tr><th>Affiche</th>'
-            '<th class="num">Probabilité du duel</th><th class="num">Issue</th></tr>'
+    return ('<h3 style="margin-top:24px">'
+            + m("Leurs duels les plus probables", "Their most likely runoffs") + '</h3>'
+            '<table style="margin-top:8px"><tr><th>'
+            + m("Affiche", "Matchup") + '</th>'
+            '<th class="num">' + m("Probabilité du duel", "Probability of the matchup") + '</th>'
+            '<th class="num">' + m("Issue", "Outcome") + '</th></tr>'
             + body + '</table>')
 
 
 def forecast_block(agg, trends, fc, lang="fr"):
     """Comparaison honnête : moyenne maison (scénario verrouillé) vs prévision bayésienne."""
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     if not fc or not fc.get("candidats"):
-        return ('<p class="small muted">Prévision bayésienne indisponible à cette génération '
-                '(source externe) — la page reste complète par ailleurs.</p>')
+        return ('<p class="small muted">'
+                + m("Prévision bayésienne indisponible à cette génération (source externe) — la page reste complète par ailleurs.",
+                    "Bayesian forecast unavailable for this build (external source) — the rest of the page is complete.")
+                + '</p>')
     stale = ''
     if fc.get("cached_at"):
         from datetime import datetime as dt
-        stale = ('<p class="small muted" style="color:var(--amber);max-width:none">⚠ Données mises à jour le '
-                 + dt.fromtimestamp(fc["cached_at"]).strftime("%d/%m/%Y à %H:%M")
-                 + ' — la source externe est temporairement injoignable.</p>')
+        stale = ('<p class="small muted" style="color:var(--amber);max-width:none">'
+                 + m("⚠ Données mises à jour le ", "⚠ Data last updated on ")
+                 + dt.fromtimestamp(fc["cached_at"]).strftime("%d/%m/%Y à %H:%M" if lang == "fr" else "%d/%m/%Y at %H:%M")
+                 + m(" — la source externe est temporairement injoignable.",
+                     " — the external source is temporarily unreachable.")
+                 + '</p>')
     d = fc.get("diagnostics") or {}
     s = fc.get("sondages") or {}
     rf = d.get("runoff_fit") or {}
-    intro = ('<p class="small muted" style="max-width:none">Deux colonnes de gauche : nos <strong>intentions de vote</strong> '
-             'mesurées (moyenne pondérée). Quatre colonnes de droite : leurs <strong>probabilités</strong> '
-             'issues de 80 000 simulations d\'un modèle bayésien. Les niveaux se comparent avec prudence '
-             '(deux objets différents) ; l\'incertitude, elle, se compare directement — et elle est '
-             'édifiante.</p>'
-             '<p class="small muted" style="max-width:none">Ce que recouvre la colonne « MieuxVoter » : la compilation ouverte '
-             'des sondages (licence MIT) et la moyenne pondérée calculée à partir d\'elle, selon la '
-             'méthode publiée plus bas — jamais un chiffre repris tel quel.</p>')
-    chiffres = (f'<h3 style="margin-top:24px">La prévision bayésienne, en chiffres</h3><ul class="tight small" style="max-width:none">'
-                f'<li><strong>{s.get("surveys", "?")} enquêtes</strong> et '
-                f'<strong>{s.get("hypotheses", "?")} hypothèses</strong> de candidatures dépouillées '
-                f'({s.get("hypotheses_tour1", "?")} de premier tour, '
-                f'{s.get("hypotheses_tour2", "?")} de second), {len(s.get("instituts") or [])} instituts, '
-                f'du {s.get("date_min")} au {s.get("date_max")} — quand l\'agrégation, scénario '
-                f'verrouillé, n\'en retient que {agg["polls_aggregated"]}.</li>'
-                f'<li><strong>Échantillon effectif</strong> : {frnum(s.get("effective_sample_tour1", 0))} '
-                f'sur {frnum(s.get("raw_sample_tour1", 0))} bruts, après pondération.</li>'
-                f'<li><strong>{frnum(fc.get("n_simulations", 0))} simulations</strong> ; convergence '
-                f'publiée : R̂ max {d.get("max_rhat", "?")}, ESS min {frnum(d.get("min_ess_bulk", 0))}.</li>'
-                f'<li><strong>Validation</strong> : rétro-test 2022 sur les duels, erreur absolue moyenne '
-                f'{fr1u(rf.get("mae_points"))} point(s), biais {fr1u(rf.get("bias_points"))} ; '
-                f'{d.get("n_transferts_2022", "?")} reports de voix de 2022 modélisés.</li>'
-                f'<li><strong>Mise à jour quotidienne</strong> par GitHub Action ; sortie arrêtée au '
-                f'{fc.get("as_of")} (calcul du {str(fc.get("generated_at"))[:16]}), site bilingue '
-                f'<a href="https://whyalwaysrose.github.io/presidentielle-2027/">'
-                f'whyalwaysrose.github.io</a>.</li></ul>')
+    intro = ('<p class="small muted" style="max-width:none">'
+             + m("Deux colonnes de gauche : nos <strong>intentions de vote</strong> mesurées "
+                 "(moyenne pondérée). Quatre colonnes de droite : leurs <strong>probabilités</strong> "
+                 "issues de 80 000 simulations d'un modèle bayésien. Les niveaux se comparent avec prudence "
+                 "(deux objets différents) ; l'incertitude, elle, se compare directement — et elle est "
+                 "édifiante.",
+                 "Left two columns: our measured <strong>voting intentions</strong> (weighted average). "
+                 "Right four columns: their <strong>probabilities</strong> from 80,000 simulations of a "
+                 "Bayesian model. Levels are compared cautiously (two different objects); uncertainty, "
+                 "on the other hand, compares directly — and it is telling.")
+             + '</p>'
+             '<p class="small muted" style="max-width:none">'
+             + m("Ce que recouvre la colonne « MieuxVoter » : la compilation ouverte des sondages "
+                 "(licence MIT) et la moyenne pondérée calculée à partir d'elle, selon la méthode "
+                 "publiée plus bas — jamais un chiffre repris tel quel.",
+                 "What the \u201cMieuxVoter\u201d column covers: the open compilation of polls (MIT licence) "
+                 "and the weighted average computed from it, following the method published below — "
+                 "never a figure taken as is.")
+             + '</p>')
+    chiffres = ('<h3 style="margin-top:24px">'
+                + m("La prévision bayésienne, en chiffres", "The Bayesian forecast, in figures")
+                + '</h3><ul class="tight small" style="max-width:none">'
+                f'<li><strong>{s.get("surveys", "?")} ' + m("enquêtes", "surveys") + '</strong> '
+                + m("et ", "and ") + f'<strong>{s.get("hypotheses", "?")} '
+                + m("hypothèses", "hypotheses") + '</strong> '
+                + m("de candidatures dépouillées ", "of candidacies parsed ")
+                + f'({s.get("hypotheses_tour1", "?")} '
+                + m("de premier tour, ", "first round, ")
+                + f'{s.get("hypotheses_tour2", "?")} '
+                + m("de second), ", "second), ")
+                + f'{len(s.get("instituts") or [])} ' + m("instituts", "pollsters") + ', '
+                + m("du ", "from ") + f'{s.get("date_min")} ' + m("au ", "to ") + f'{s.get("date_max")}'
+                + m(" — quand l'agrégation, scénario verrouillé, n'en retient que ",
+                    " — where the aggregation, with a locked scenario, keeps only ")
+                + f'{agg["polls_aggregated"]}.</li>'
+                f'<li><strong>' + m("Échantillon effectif", "Effective sample") + f'</strong> : {frnum(s.get("effective_sample_tour1", 0))} '
+                + m("sur ", "out of ") + f'{frnum(s.get("raw_sample_tour1", 0))} '
+                + m("bruts, après pondération.", "raw, after weighting.") + '</li>'
+                f'<li><strong>{frnum(fc.get("n_simulations", 0))} '
+                + m("simulations", "simulations") + '</strong> ; '
+                + m("convergence publiée : ", "published convergence: ")
+                + f'R̂ max {d.get("max_rhat", "?")}, ESS min {frnum(d.get("min_ess_bulk", 0))}.</li>'
+                f'<li><strong>' + m("Validation", "Validation") + '</strong> : '
+                + m("rétro-test 2022 sur les duels, erreur absolue moyenne ",
+                    "2022 backtest on runoffs, mean absolute error ")
+                + f'{fr1u(rf.get("mae_points"))} ' + m("point(s), biais ", "point(s), bias ")
+                + f'{fr1u(rf.get("bias_points"))} ; '
+                + f'{d.get("n_transferts_2022", "?")} '
+                + m("reports de voix de 2022 modélisés.", "vote transfers from 2022 modelled.") + '</li>'
+                f'<li><strong>' + m("Mise à jour quotidienne", "Daily update") + '</strong> '
+                + m("par GitHub Action ; sortie arrêtée au ", "by GitHub Action; output as of ")
+                + f'{fc.get("as_of")} '
+                + m("(calcul du ", "(computed ")
+                + f'{str(fc.get("generated_at"))[:16]}'
+                + m("), site bilingue ", "), bilingual site ")
+                + '<a href="https://whyalwaysrose.github.io/presidentielle-2027/">'
+                + 'whyalwaysrose.github.io</a>.</li></ul>')
     rows_cmp = forecast_rows(agg, trends, fc)
     ecarts = [r for r in rows_cmp if r["q50"] is not None]
     tete3 = ecarts[:3]
@@ -659,44 +717,94 @@ def forecast_block(agg, trends, fc, lang="fr"):
     largeur_bayes = (tete_max["q95"] - tete_max["q05"]) if tete_max else None
     facteur = (round(largeur_bayes / largeur_agr, 1) if (largeur_bayes and largeur_agr) else None)
     ecart_txt = " · ".join(
-        f'{r["candidat"]} {fr1u(r["nous_num"])} % contre {fr1u(r["q50"])} %' for r in tete3)
+        f'{r["candidat"]} {fr1u(r["nous_num"])} % '
+        + m("contre", "against") + f' {fr1u(r["q50"])} %' for r in tete3)
     lecture = (
-        '<h3 style="margin-top:24px">Ce qu\'on lit dans l\'écart</h3><ul class="tight small" style="max-width:none">'
-        '<li><strong>Les deux lectures se rejoignent sur le haut du tableau.</strong> '
-        + ecart_txt + '. Deux méthodes opposées, la même source de sondages : '
-        + ('le plus large écart des trois est de ' + fr1u(abs(tete_max["nous_num"] - tete_max["q50"]))
-           + ' point (' + tete_max["candidat"] + '), les autres se comptent en dixièmes.'
+        '<h3 style="margin-top:24px">'
+        + m("Ce qu'on lit dans l'écart", "What the gap says") + '</h3>'
+        '<ul class="tight small" style="max-width:none">'
+        '<li><strong>'
+        + m("Les deux lectures se rejoignent sur le haut du tableau.",
+            "Both reads converge at the top of the table.")
+        + '</strong> '
+        + ecart_txt + m(". Deux méthodes opposées, la même source de sondages : ",
+                         ". Two opposite methods, the same poll source: ")
+        + ((m("le plus large écart des trois est de ", "the widest gap of the three is ")
+            + fr1u(abs(tete_max["nous_num"] - tete_max["q50"]))
+            + m(" point (", " point (") + tete_max["candidat"]
+            + m("), les autres se comptent en dixièmes.",
+                "), the others are counted in tenths."))
            if tete_max else '—') + '</li>'
-        '<li><strong>Le reste du tableau suit la même logique</strong> : '
-        + (('aucun écart ne dépasse ' + fr1u(abs(reste_max["nous_num"] - reste_max["q50"]))
-            + ' point (' + reste_max["candidat"] + ')') if reste_max else '—')
-        + '. Là où des écarts subsistent, l\'agrégation donne le niveau d\'un scénario précis de '
-        'candidatures, la prévision bayésienne une moyenne pondérée sur toutes les hypothèses : '
-        'l\'écart mesure surtout la différence de question posée.</li>'
-        '<li><strong>L\'intervalle de l\'agrégation n\'est pas un intervalle de prévision.</strong> '
-        + fr1u(largeur_agr) + ' point du côté MieuxVoter contre '
-        + (fr1u(largeur_bayes) + ' points dans la prévision bayésienne sur le premier' if largeur_bayes else '—')
-        + (f' — un facteur {fr1u(facteur)}' if facteur else '')
-        + '. La largeur bayésienne contient l\'incertitude sur le champ de candidats, les erreurs '
-        'd\'enquête et la campagne à venir ; l\'intervalle d\'agrégation ne dit que la dispersion des '
-        'sondages retenus.</li>'
-        '<li><strong>Ils répondent à « qui gagne »</strong> — P(second tour), P(victoire), duels — ce '
-        'que cette page ne sait pas faire et ne prétend pas faire.</li>'
-        '<li><strong>Validation : match nul.</strong> Ils publient rétro-test 2022, convergence MCMC et '
-        'qualité des instituts ajustée. Nous publions désormais notre propre rétro-test 2022 — même '
-        'exercice, un seul millésime, une erreur de 3,8 points à J−132 et deux réglages corrigés '
-        '(voir la section Validation ci-dessous). Ni l\'un ni l\'autre ne peut prétendre avoir raison : '
-        'même source de données, deux modèles, deux façons de se tromper.</li>'
-        '<li><strong>Le décalage a une cause connue.</strong> Nos chiffres de milieu de tableau étaient '
-        'systématiquement plus bas que les leurs : c\'est ce qui nous a fait passer la fenêtre de '
-        'sélection du scénario de 60 à 90 jours, après mesure sur 2022. Depuis, les deux lectures se '
-        'rejoignent — un modèle bayésien et une moyenne expliquée ne convergent pas par hasard.</li>'
+        '<li><strong>'
+        + m("Le reste du tableau suit la même logique", "The rest of the table follows the same logic")
+        + '</strong> : '
+        + ((m("aucun écart ne dépasse ", "no gap exceeds ")
+            + fr1u(abs(reste_max["nous_num"] - reste_max["q50"]))
+            + m(" point (", " point (") + reste_max["candidat"] + ')') if reste_max else '—')
+        + m(". Là où des écarts subsistent, l'agrégation donne le niveau d'un scénario précis de "
+            "candidatures, la prévision bayésienne une moyenne pondérée sur toutes les hypothèses : "
+            "l'écart mesure surtout la différence de question posée.",
+            ". Where gaps remain, the aggregation gives the level of one precise candidacy scenario, the "
+            "Bayesian forecast a weighted average over all hypotheses: the gap mostly measures the "
+            "difference in the question asked.")
+        + '</li>'
+        '<li><strong>'
+        + m("L'intervalle de l'agrégation n'est pas un intervalle de prévision.",
+            "The aggregation interval is not a forecast interval.")
+        + '</strong> '
+        + fr1u(largeur_agr) + m(" point du côté MieuxVoter contre ", " point on the MieuxVoter side against ")
+        + (fr1u(largeur_bayes) + m(" points dans la prévision bayésienne sur le premier",
+                                   " points in the Bayesian forecast on the front-runner")
+           if largeur_bayes else '—')
+        + (m(f' — un facteur {fr1u(facteur)}', f' — a factor of {fr1u(facteur)}') if facteur else '')
+        + m(". La largeur bayésienne contient l'incertitude sur le champ de candidats, les erreurs "
+            "d'enquête et la campagne à venir ; l'intervalle d'agrégation ne dit que la dispersion des "
+            "sondages retenus.",
+            ". The Bayesian width contains the uncertainty over the field of candidates, the polling "
+            "errors and the campaign to come; the aggregation interval only reports the dispersion of "
+            "the polls kept.")
+        + '</li>'
+        '<li><strong>'
+        + m("Ils répondent à « qui gagne »", "They answer \u201cwho wins\u201d")
+        + '</strong>'
+        + m(" — P(second tour), P(victoire), duels — ce que cette page ne sait pas faire et ne prétend pas faire.",
+            " — P(runoff), P(victory), runoffs — what this page cannot do and does not claim to do.")
+        + '</li>'
+        '<li><strong>'
+        + m("Validation : match nul.", "Validation: a draw.")
+        + '</strong> '
+        + m("Ils publient rétro-test 2022, convergence MCMC et qualité des instituts ajustée. Nous "
+            "publions désormais notre propre rétro-test 2022 — même exercice, un seul millésime, une "
+            "erreur de 3,8 points à J−132 et deux réglages corrigés (voir la section Validation "
+            "ci-dessous). Ni l'un ni l'autre ne peut prétendre avoir raison : même source de données, "
+            "deux modèles, deux façons de se tromper.",
+            "They publish a 2022 backtest, MCMC convergence and an adjusted pollster quality. We now "
+            "publish our own 2022 backtest — the same exercise, a single vintage, an error of 3.8 points "
+            "at D−132 and two settings corrected (see the Validation section below). Neither can claim to "
+            "be right: the same data source, two models, two ways of being wrong.")
+        + '</li>'
+        '<li><strong>'
+        + m("Le décalage a une cause connue.", "The offset has a known cause.")
+        + '</strong> '
+        + m("Nos chiffres de milieu de tableau étaient systématiquement plus bas que les leurs : c'est ce "
+            "qui nous a fait passer la fenêtre de sélection du scénario de 60 à 90 jours, après mesure "
+            "sur 2022. Depuis, les deux lectures se rejoignent — un modèle bayésien et une moyenne "
+            "expliquée ne convergent pas par hasard.",
+            "Our mid-table figures were systematically lower than theirs: that is what led us to move the "
+            "scenario selection window from 60 to 90 days, after measuring it on 2022. Since then, both "
+            "reads converge — a Bayesian model and an explained average do not converge by chance.")
+        + '</li>'
         '</ul>')
 
-    garde = ('<p class="small muted" style="max-width:none">Ce que cette page garde : lisibilité totale (aucune dépendance, '
-             'aucun modèle latent à croire sur parole), chiffre explicite d\'un scénario donné, aucune '
-             'donnée non licite. Ce qu\'il doit emprunter : la validation par rétro-test.</p>')
-    return intro + stale + compare_table(agg, trends, fc) + chiffres + compare_duels(fc) + lecture + garde
+    garde = ('<p class="small muted" style="max-width:none">'
+             + m("Ce que cette page garde : lisibilité totale (aucune dépendance, aucun modèle latent à "
+                 "croire sur parole), chiffre explicite d'un scénario donné, aucune donnée non licite. "
+                 "Ce qu'il doit emprunter : la validation par rétro-test.",
+                 "What this page keeps: full readability (no dependency, no latent model to be taken on "
+                 "trust), an explicit figure for a given scenario, no non-licensed data. What it must "
+                 "borrow: validation by backtest.")
+             + '</p>')
+    return intro + stale + compare_table(agg, trends, fc, lang) + chiffres + compare_duels(fc, lang) + lecture + garde
 
 
 def parse_date(s):

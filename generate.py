@@ -1189,7 +1189,10 @@ main p, main li, .card > p, .card > ul > li, header p, footer p{max-width:36em}
   border-radius:8px;padding:2px;font-size:.72rem;letter-spacing:.04em}
 .langsw a{padding:3px 7px;border-radius:6px;color:var(--muted);text-decoration:none}
 .langsw a:hover{color:var(--ink)}
-.langsw a[aria-current="true"]{background:var(--accent);color:#fff}
+.langsw a[aria-current="true"]{background:var(--ink);color:var(--paper);font-weight:600}
+/* Pas de --accent dans la palette de l'observatoire : un jeton inexistant laissait
+   le libellé actif en blanc sur blanc. Les deux jetons employés ici existent dans
+   les deux thèmes, et s'inversent proprement. */
 .langsw .absente{padding:3px 7px;color:var(--muted);opacity:.5;cursor:not-allowed}
 header{padding:56px 0 24px}
 .eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;

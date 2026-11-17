@@ -1366,16 +1366,21 @@ THEME_BTN = """<button type="button" class="themebtn" id="themebtn" aria-label="
 # Lien vers la page « Workflow » (annexe technique : comment le site se fabrique).
 # Défini une seule fois ici, utilisé par les quatre pages — un seul endroit à corriger.
 def nav_workflow(lang="fr"):
-    return f'<a href="{lien("/workflow/", lang)}">Workflow</a>'
+    return f'<a href="{lien_page("/workflow/", lang)}">Workflow</a>'
 
 
 def nav_lois(lang="fr"):
-    return f'<a href="{lien("/lois/", lang)}">{"Legislative watch" if lang == "en" else "Veille législative"}</a>'
+    return f'<a href="{lien_page("/lois/", lang)}">{"Legislative watch" if lang == "en" else "Veille législative"}</a>'
 
 # Adresses par langue. L'anglais vit sous /en/observatoire/, cohérent avec /en/veille
 # et /en/blog du site : un seul endroit pour l'anglais, et un lien direct entre les
 # deux versions de chaque page.
 BASE_LANGUE = {"fr": "/observatoire", "en": "/en/observatoire"}
+
+# Pages qui existent réellement en anglais. Tant qu'une page n'y figure pas, le menu
+# anglais renvoie vers sa version française : un lien mort serait pire qu'un lien
+# vers une page lisible dans une autre langue.
+PAGES_EN = {"/", "/sondages/"}
 
 
 def lien(chemin, lang="fr"):
@@ -1385,6 +1390,13 @@ def lien(chemin, lang="fr"):
     """
     base = BASE_LANGUE.get(lang, BASE_LANGUE["fr"])
     return base + chemin
+
+
+def lien_page(chemin, lang="fr"):
+    """Adresse d'une page : en anglais seulement si la traduction existe, sinon français."""
+    if lang == "en" and chemin not in PAGES_EN:
+        return lien(chemin, "fr")
+    return lien(chemin, lang)
 
 
 def nav_lien(chemin, texte_fr, texte_en, lang="fr"):
@@ -1471,8 +1483,10 @@ def dcell(d):
 
 def mov_table(movs, lang="fr"):
     """Tableau par candidat : aujourd'hui, il y a 7 jours, il y a 28 jours, tendance."""
+    tr = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     if not movs:
-        return '<p class="small muted">Série indisponible (pas assez de sondages publiés).</p>'
+        return '<p class="small muted">' + tr("Série indisponible (pas assez de sondages publiés).",
+                                             "Series unavailable (not enough published polls).") + '</p>'
     body = "\n".join(
         f'<tr><td>{m["candidat"]} <span class="muted small">{m["parti"] or ""}</span></td>'
         f'<td class="num"><strong>{fr1u(m["intentions"])}</strong></td>'
@@ -1484,10 +1498,12 @@ def mov_table(movs, lang="fr"):
         f'{"—" if m["mini8"] is None else fr1u(m["mini8"]) + " – " + fr1u(m["maxi8"])}</td>'
         f'<td>{sparkline(m["serie"])}</td></tr>'
         for m in movs)
-    return ('<table style="margin-top:10px"><tr><th>Candidat</th>'
-            '<th class="num">Aujourd\'hui</th><th class="num">Il y a 7 j</th><th class="num">Δ 7 j</th>'
-            '<th class="num">Il y a 28 j</th><th class="num">Δ 28 j</th>'
-            '<th class="num">8 sem. (min–max)</th><th>8 semaines</th></tr>'
+    return ('<table style="margin-top:10px"><tr><th>' + tr("Candidat", "Candidate") + '</th>'
+            '<th class="num">' + tr("Aujourd'hui", "Today") + '</th><th class="num">'
+            + tr("Il y a 7 j", "7 days ago") + '</th><th class="num">Δ 7 j</th>'
+            '<th class="num">' + tr("Il y a 28 j", "28 days ago") + '</th><th class="num">Δ 28 j</th>'
+            '<th class="num">' + tr("8 sem. (min–max)", "8 wks (min–max)") + '</th><th>'
+            + tr("8 semaines", "8 weeks") + '</th></tr>'
             + body + '</table>')
 
 
@@ -1608,8 +1624,9 @@ def trend_movements(polls, weeks=8, keep=12):
 
 
 def trend_table(rows, lang="fr"):
+    tr = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     if not rows:
-        return '<p class="small muted">Indicateur indisponible.</p>'
+        return '<p class="small muted">' + tr("Indicateur indisponible.", "Indicator unavailable.") + '</p>'
     body = "\n".join(
         f'<tr><td>{m["candidat"]} <span class="muted small">{m["parti"] or ""}</span></td>'
         f'<td class="num"><strong>{fr1u(m["intentions"])}</strong></td>'
@@ -1620,10 +1637,12 @@ def trend_table(rows, lang="fr"):
         f'<td class="num muted small">{m["n"]}</td>'
         f'<td>{sparkline(m["serie"])}</td></tr>'
         for m in rows)
-    return ('<table style="margin-top:10px"><tr><th>Candidat</th>'
-            '<th class="num">Toutes listes</th><th class="num">Il y a 7 j</th><th class="num">Δ 7 j</th>'
-            '<th class="num">Il y a 28 j</th><th class="num">Δ 28 j</th>'
-            '<th class="num">Sondages</th><th>8 semaines</th></tr>' + body + '</table>')
+    return ('<table style="margin-top:10px"><tr><th>' + tr("Candidat", "Candidate") + '</th>'
+            '<th class="num">' + tr("Toutes listes", "All lists") + '</th><th class="num">'
+            + tr("Il y a 7 j", "7 days ago") + '</th><th class="num">Δ 7 j</th>'
+            '<th class="num">' + tr("Il y a 28 j", "28 days ago") + '</th><th class="num">Δ 28 j</th>'
+            '<th class="num">' + tr("Sondages", "Polls") + '</th><th>'
+            + tr("8 semaines", "8 weeks") + '</th></tr>' + body + '</table>')
 
 
 def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
@@ -1632,27 +1651,29 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
     r0 = agg["rows"][0] if agg["rows"] else None
     rows = agg["rows"]
     VALEURS = valeurs_textes(agg, rows)
+    m = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
 
     watch = []
     if len(rows) >= 3:
         gap = round(rows[1]["intentions"] - rows[2]["intentions"], 1)
-        watch.append(f"Écart entre le 2ᵉ et le 3ᵉ : {fr(gap)} point{'s' if gap >= 1.5 else ''}.")
+        watch.append(m(f"Écart entre le 2ᵉ et le 3ᵉ : {fr(gap, lang)} point{'s' if gap >= 1.5 else ''}.",
+                       f"Gap between 2nd and 3rd: {fr(gap, lang)} point{'s' if gap >= 1.5 else ''}."))
         if rows[2]["haut"] >= rows[1]["bas"]:
-            watch.append("Les intervalles du 2ᵉ et du 3ᵉ se recouvrent : l'écart n'est pas significatif au vu des marges.")
+            watch.append(m("Les intervalles du 2ᵉ et du 3ᵉ se recouvrent : l'écart n'est pas significatif au vu des marges.",
+                           "The 2nd and 3rd intervals overlap: the gap is not significant given the margins."))
     duo = ""
     if len(rows) >= 2:
         duo = f'''<div class="duo">
-      <div class="slot"><span class="tag">1<sup>er</sup> tour · 1<sup>re</sup> place</span>
+      <div class="slot"><span class="tag">{m("1<sup>er</sup> tour · 1<sup>re</sup> place", "1st round · 1st place")}</span>
         <b>{rows[0]["candidat"]}</b>
-        <span class="muted small">{rows[0]["parti"] or "sans étiquette"} — <span class="sc"><i>{fr(rows[0]["intentions"])} %</i> <span class="small">[{fr(rows[0]["bas"])}–{fr(rows[0]["haut"])}]</span></span></span></div>
-      <div class="slot"><span class="tag">1<sup>er</sup> tour · 2<sup>e</sup> place</span>
+        <span class="muted small">{rows[0]["parti"] or m("sans étiquette", "no label")} — <span class="sc"><i>{fr(rows[0]["intentions"])} %</i> <span class="small">[{fr(rows[0]["bas"])}–{fr(rows[0]["haut"])}]</span></span></span></div>
+      <div class="slot"><span class="tag">{m("1<sup>er</sup> tour · 2<sup>e</sup> place", "1st round · 2nd place")}</span>
         <b>{rows[1]["candidat"]}</b>
-        <span class="muted small">{rows[1]["parti"] or "sans étiquette"} — <span class="sc"><i>{fr(rows[1]["intentions"])} %</i> <span class="small">[{fr(rows[1]["bas"])}–{fr(rows[1]["haut"])}]</span></span></span></div>
+        <span class="muted small">{rows[1]["parti"] or m("sans étiquette", "no label")} — <span class="sc"><i>{fr(rows[1]["intentions"])} %</i> <span class="small">[{fr(rows[1]["bas"])}–{fr(rows[1]["haut"])}]</span></span></span></div>
     </div>
-    <p class="small muted" style="margin-top:10px"><strong>Second tour théorique : {rows[0]["candidat"]} et
-    {rows[1]["candidat"]}.</strong> Ce sont les deux premiers de cette moyenne — une lecture mécanique du
-    tableau, pas une prévision. Le second tour dépend des reports de voix, de la participation et des
-    alliances, que nous ne modélisons pas : aucun chiffre de cette page ne dit qui le remporterait.</p>'''
+    <p class="small muted" style="margin-top:10px"><strong>{m("Second tour théorique", "Theoretical runoff")} : {rows[0]["candidat"]} {m("et", "and")}
+    {rows[1]["candidat"]}.</strong> {m("Ce sont les deux premiers de cette moyenne — une lecture mécanique du tableau, pas une prévision. Le second tour dépend des reports de voix, de la participation et des alliances, que nous ne modélisons pas : aucun chiffre de cette page ne dit qui le remporterait.",
+    "These are the top two in this average — a mechanical reading of the table, not a forecast. A runoff depends on vote transfers, turnout and alliances, which we do not model: no figure on this page says who would win it.")}</p>'''
 
     maxv = max((r["intentions"] for r in rows), default=1)
     bars = "\n".join(
@@ -1664,217 +1685,326 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
         f'<span>{fr(r["intentions"])} %</span></div></div>'
         for r in rows)
     trs = "\n".join(
-        f'<tr><td data-label="Candidat">{r["candidat"]}</td>'
-        f'<td class="muted small" data-label="Parti">{r["parti"] or ""}</td>'
-        f'<td class="num" data-label="Moyenne"><strong>{fr(r["intentions"])}</strong></td>'
-        f'<td class="num muted" data-label="IC 95 %">{fr(r["bas"])} – {fr(r["haut"])}</td>'
-        f'<td class="num muted" data-label="Amplitude">{fr(r["mini"])} – {fr(r["maxi"])}</td>'
-        f'<td class="num" data-label="Sondages">{r["n"]}</td>'
-        f'<td class="num" data-label="n effectif">{fr(r["neff"])}</td>'
-        f'<td class="num muted small" data-label="Dernier">{r["dernier"]}</td></tr>'
+        f'<tr><td data-label="{m('Candidat', 'Candidate')}">{r["candidat"]}</td>'
+        f'<td class="muted small" data-label="{m('Parti', 'Party')}">{r["parti"] or ""}</td>'
+        f'<td class="num" data-label="{m('Moyenne', 'Average')}"><strong>{fr(r["intentions"])}</strong></td>'
+        f'<td class="num muted" data-label="{m('IC 95 %', '95% CI')}">{fr(r["bas"])} – {fr(r["haut"])}</td>'
+        f'<td class="num muted" data-label="{m('Amplitude', 'Range')}">{fr(r["mini"])} – {fr(r["maxi"])}</td>'
+        f'<td class="num" data-label="{m('Sondages', 'Polls')}">{r["n"]}</td>'
+        f'<td class="num" data-label="{m('n effectif', 'effective n')}">{fr(r["neff"])}</td>'
+        f'<td class="num muted small" data-label="{m('Dernier', 'Latest')}">{r["dernier"]}</td></tr>'
         for r in rows)
 
+    t_h1 = m("Ce que disent les sondages de la présidentielle 2027, agrégés et sourcés",
+             "What the 2027 presidential polls say, aggregated and sourced")
+    t_lede = m("Un seul scénario de candidatures, une moyenne pondérée par la fraîcheur et la taille "
+               "d'échantillon, un intervalle publié, et la liste de toutes les limites. Page régénérée le "
+               f"{frdate(agg['generated'])} (heure de Paris).",
+               "A single candidacy scenario, an average weighted by recency and sample size, a published "
+               "interval, and the full list of limits. Page regenerated on "
+               f"{frdate(agg['generated'], 'en')} (Paris time).")
+    t_tete = m("Tête de course", "Front of the race")
+    t_ic95 = m("Intervalle à 95 %", "95% interval")
+    t_sondages = m("sondages", "polls")
+    t_neff = m("n effectif", "effective n")
+    t_lecture = m("Lecture rapide", "Quick read")
+    t_pas_assez = m("Pas assez de candidats pour comparer les écarts.",
+                    "Not enough candidates to compare gaps.")
+    t_total = m("Total des intentions : "
+                f"{fr(agg['total_intentions'], lang)} % (les intentions des candidats sous le seuil de "
+                f"{agg['min_polls']} sondages ne sont pas affichées ; chaque ligne étant arrondie au "
+                "dixième, leur somme peut s'en écarter de quelques dixièmes).",
+                "Total of voting intentions: "
+                f"{fr(agg['total_intentions'], lang)} % (intentions for candidates below the threshold of "
+                f"{agg['min_polls']} polls are not shown; each line being rounded to the tenth, their sum "
+                "may differ by a few tenths).")
+    t_perim = m("Périmètre", "Scope")
+    t_tour1 = m("Premier tour", "First round")
+    t_src = m("Sondages dans la source", "Polls in the source")
+    t_window = m("derniers jours", "last days")
+    t_scenario = m("Scénario retenu", "Scenario used")
+    t_cand = m("candidats", "candidates")
+    t_scen_j = m("Sondages du scénario", "Scenario polls")
+    t_agg_j = m("Sondages agrégés", "Aggregated polls")
+    t_periode = m("Période couverte", "Period covered")
+    t_instituts = m("Instituts", "Pollsters")
+    t_moy = m("Moyennes pondérées", "Weighted averages")
+    t_moy_p = m("Les barres sont proportionnelles à la moyenne. IC 95 % : incertitude statistique de la "
+                "moyenne. Amplitude : minimum et maximum observés parmi les sondages agrégés — c'est la "
+                "dispersion réelle entre instituts, souvent plus parlante que l'intervalle.",
+                "Bars are proportional to the average. 95% CI: statistical uncertainty of the average. "
+                "Range: minimum and maximum observed among the aggregated polls — the real dispersion "
+                "between pollsters, often more telling than the interval.")
+    t_evol = m(f"Évolution, semaine par semaine — scénario {agg['scenario']} ({agg['scenario_size']} noms)",
+               f"Week-by-week trend — scenario {agg['scenario']} ({agg['scenario_size']} names)")
+    t_evol_p = m("Série rétro-calculée : la méthode actuelle appliquée aux sondages publiés à chaque "
+                 "échéance hebdomadaire — c'est ce que cette page aurait affiché, pas ce qu'elle "
+                 f"affichait. Le scénario est verrouillé sur {agg['scenario']} pour que les lignes restent "
+                 "comparables. Un nom absent de cette liste ne disparaît pas de la page : la ligne "
+                 "« hors scénario » et le tableau « toutes listes » ci-dessous le suivent. Un écart "
+                 "inférieur à 1 point reste dans la marge : nous ne le commentons pas.",
+                 "Back-computed series: the current method applied to the polls published at each weekly "
+                 "deadline — what this page would have shown, not what it did show. The scenario is "
+                 f"locked on {agg['scenario']} so that lines stay comparable. A name missing from this "
+                 "list does not vanish from the page: the “outside the scenario” line and the "
+                 "“all lists” table below follow it. A gap below 1 point stays within the margin: "
+                 "we do not comment on it.")
+    t_mov7 = m("Mouvements sur 7 jours :", "Movements over 7 days:")
+    t_tendance = m("Tendance, toutes listes confondues", "Trend, all lists combined")
+    t_meth_1 = m("Chaque sondage reçoit un poids : <code>w = exp(−ln2 × âge / demi-vie) × √(échantillon / 1000)</code>, "
+                 f"avec une demi-vie de {agg['half_life']} jours. La moyenne publiée est la moyenne pondérée ; "
+                 "l'intervalle à 95 % vaut <code>1,96 × σ<sub>pondéré</sub> / √n<sub>eff</sub></code>, avec "
+                 "<code>n_eff = (Σw)² / Σw²</code> — et il est plancheré à "
+                 f"±{fr(agg['ic_floor'], lang)} point, parce qu'un intervalle calculé sur peu de sondages "
+                 "donnerait une fausse précision.",
+                 "Each poll is given a weight: <code>w = exp(−ln2 × age / half-life) × √(sample / 1000)</code>, "
+                 f"with a half-life of {agg['half_life']} days. The published average is the weighted mean; "
+                 "the 95% interval is <code>1.96 × σ<sub>weighted</sub> / √n<sub>eff</sub></code>, with "
+                 "<code>n_eff = (Σw)² / Σw²</code> — and it is floored at "
+                 f"±{fr(agg['ic_floor'], lang)} point, because an interval computed from few polls would "
+                 "give false precision.")
+    t_meth_2 = m("<strong>Deux fenêtres, pour une raison.</strong> Le <em>scénario</em> est choisi sur les "
+                 f"{agg['window']} derniers jours : la liste testée le plus récemment parmi celles qui "
+                 f"comptent au moins {agg['min_polls']} enquêtes — c'est elle qui doit être à jour, puisque "
+                 "les listes de candidats bougent. Les <em>moyennes</em> sont ensuite calculées sur tous les "
+                 f"sondages de ce même scénario dans les {agg['agg_window']} derniers jours "
+                 f"({agg['polls_aggregated']} sondages), pondérés par la fraîcheur. Mélanger les scénarios "
+                 f"produirait des chiffres faux ; n'utiliser que {agg['window']} jours produirait des "
+                 "moyennes trop instables.",
+                 "<strong>Two windows, for one reason.</strong> The <em>scenario</em> is chosen over the last "
+                 f"{agg['window']} days: the most recently tested list among those with at least "
+                 f"{agg['min_polls']} surveys — it must be current, because candidate lists move. The "
+                 "<em>averages</em> are then computed over all polls of that same scenario within the last "
+                 f"{agg['agg_window']} days ({agg['polls_aggregated']} polls), weighted by recency. Mixing "
+                 f"scenarios would produce wrong figures; using only {agg['window']} days would produce "
+                 "averages far too unstable.")
+    t_meth_3 = m("<strong>Ces deux réglages ont été mesurés, pas choisis.</strong> Un "
+                 "<a href=\"/observatoire/backtest/\">rétro-test complet sur la campagne 2022</a> — la même "
+                 "méthode rejouée face au résultat réel — a fixé la fenêtre de sélection à "
+                 f"{agg['window']} jours (la plus courte qui couvre toutes les échéances testées) et activé "
+                 "la correction des effets de maison. Il montre aussi les limites de l'exercice : notre "
+                 "pondération par fraîcheur n'apporte rien face à la dernière enquête seule, et les biais "
+                 "collectifs des instituts subsistent.",
+                 "<strong>Both settings were measured, not chosen.</strong> A "
+                 "<a href=\"/en/observatoire/backtest/\">full backtest on the 2022 campaign</a> — the same "
+                 "method replayed against the real result — fixed the selection window at "
+                 f"{agg['window']} days (the shortest covering every deadline tested) and enabled house-effect "
+                 "correction. It also shows the limits of the exercise: our recency weighting adds nothing "
+                 "over the latest poll alone, and the pollsters' collective biases remain.")
+    t_meth_4 = m("Données : <a href=\"https://github.com/MieuxVoter/presidentielle2027\">MieuxVoter/presidentielle2027</a> "
+                 "(licence MIT), flux JSON brut, 1<sup>er</sup> tour uniquement"
+                 + (" ; les enquêtes que cette compilation n'a pas encore intégrées sont extraites par nos "
+                    "soins des notices de la Commission des sondages et signalées par † dans le tableau des "
+                    "sondages" if agg.get("imports") else "")
+                 + ". Le document est régénéré par un script, sans retouche manuelle des chiffres ; la "
+                 "méthode ci-dessus est la spécification exacte du code qui produit la page.",
+                 "Data: <a href=\"https://github.com/MieuxVoter/presidentielle2027\">MieuxVoter/presidentielle2027</a> "
+                 "(MIT licence), raw JSON feed, first round only"
+                 + (" ; the surveys this compilation has not yet integrated are extracted by us from the "
+                    "notices of the Commission des sondages and flagged with † in the polls table"
+                    if agg.get("imports") else "")
+                 + ". The document is regenerated by a script, with no manual editing of figures; the method "
+                 "above is the exact specification of the code producing the page.")
+    t_lim_intro = m("<strong>Cette page n'est pas un modèle de prévision.</strong> Elle n'anticipe ni la "
+                    "participation, ni les reports de voix, ni les dynamiques de campagne, et ne calcule "
+                    "aucune probabilité de victoire.",
+                    "<strong>This page is not a forecasting model.</strong> It anticipates neither turnout, "
+                    "nor vote transfers, nor campaign dynamics, and computes no probability of victory.")
+    t_lim = [
+        m("<strong>Effets de maison corrigés, mais biais partagés non</strong> : l'écart moyen de chaque "
+          "institut au consensus des autres est estimé puis retranché (rétro-test 2022 : gain réel mais "
+          "faible). En revanche, quand <em>tous</em> les instituts se trompent ensemble — en 2022, une "
+          "sous-estimation de Mélenchon de près de 14 points — aucune correction d'effet de maison ne peut "
+          "rien : nous reproduisons ce biais collectif.",
+          "<strong>House effects corrected, shared biases not</strong>: each pollster's average deviation "
+          "from the others' consensus is estimated then removed (2022 backtest: a real but small gain). By "
+          "contrast, when <em>every</em> pollster is wrong together — in 2022, an underestimation of "
+          "Mélenchon by nearly 14 points — no house-effect correction can help: we reproduce that "
+          "collective bias."),
+        m("<strong>Marges des instituts ignorées</strong> : l'IC affiché est celui de la moyenne "
+          f"(plancheré à ±{fr(agg['ic_floor'], lang)} point), plus étroit que la marge d'un sondage isolé. "
+          "La colonne « amplitude » montre, elle, l'écart réel entre instituts.",
+          "<strong>Pollsters' margins ignored</strong>: the displayed CI is that of the average "
+          f"(floored at ±{fr(agg['ic_floor'], lang)} point), narrower than the margin of a single poll. The "
+          "\u201crange\u201d column shows the real dispersion between pollsters."),
+        m(f"<strong>Peu de sondages par scénario</strong> : {agg['polls_aggregated']} sondages seulement "
+          "entrent dans le calcul — les listes de candidats sont encore instables à ce stade.",
+          f"<strong>Few polls per scenario</strong>: only {agg['polls_aggregated']} polls enter the "
+          "computation — candidate lists are still unstable at this stage."),
+        m("<strong>Scénarios écartés</strong> : les sondages testant d'autres listes de candidats ne sont "
+          "pas comptés.",
+          "<strong>Discarded scenarios</strong>: polls testing other candidate lists are not counted."),
+        m("<strong>Candidatures mouvantes</strong> : annonces, retraits et ralliements rendent toute liste "
+          f"instable à {agg['window']} jours de l'élection.",
+          "<strong>Shifting candidacies</strong>: announcements, withdrawals and endorsements make any list "
+          f"unstable {agg['window']} days out from the election."),
+        m("<strong>Ne pas confondre</strong> : une moyenne de sondages n'est pas un résultat, et une "
+          "intention de vote n'est pas un vote.",
+          "<strong>Do not confuse</strong>: an average of polls is not a result, and a voting intention is "
+          "not a vote."),
+    ]
+    t_lim_bullets = "".join(f"<li>{x}</li>" for x in t_lim)
+    t_tendance_p = m("Ici, chaque sondage du premier tour compte, quelle que soit la liste testée : c'est "
+                     "un indicateur de direction. Les niveaux ne sont pas comparables à ceux du tableau "
+                     "ci-dessus (une liste de dix candidats ne suit pas la même arithmétique qu'une liste "
+                     "de quinze) — seule l'évolution compte, et elle est plus robuste car elle repose sur "
+                     "beaucoup plus d'enquêtes.",
+                     "Here every first-round poll counts, whatever the list tested: this is a direction "
+                     "indicator. Levels are not comparable with those of the table above (a ten-candidate "
+                     "list does not follow the same arithmetic as a fifteen-candidate one) — only the "
+                     "movement matters, and it is more robust because it rests on far more surveys.")
+
     return f"""<!doctype html>
-<html lang="fr">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<meta name="description" content="{meta_description('/observatoire/sondages/')}">
-<title>{titre_court('/observatoire/sondages/')}</title>
-<link rel="canonical" href="https://dileviathan.fr/observatoire/sondages/">
-<link rel="alternate" hreflang="fr" href="https://dileviathan.fr/observatoire/sondages/">
-<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr/observatoire/sondages/">
-{meta_social('/observatoire/sondages/')}
-{ld_json("/observatoire/sondages/")}
+<meta name="description" content="{meta_description('/observatoire/sondages/', lang)}">
+<title>{titre_court('/observatoire/sondages/', lang)}</title>
+<link rel="canonical" href="https://dileviathan.fr{lien('/sondages/', lang)}">
+<link rel="alternate" hreflang="fr" href="https://dileviathan.fr{lien('/sondages/', 'fr')}">
+<link rel="alternate" hreflang="en" href="https://dileviathan.fr{lien('/sondages/', 'en')}">
+<link rel="alternate" hreflang="x-default" href="https://dileviathan.fr{lien('/sondages/', 'fr')}">
+{meta_social('/observatoire/sondages/', lang)}
+{ld_json("/observatoire/sondages/", lang)}
 {matomo()}
 <style>{CSS}{DARK}</style>
 {THEME_HEAD}</head>
 <body>
 <div class="topbar"><div class="wrap nav">
-  <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· agrégation</span></div>
-  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#tete">Tête de course</a>
+  <div class="brand"><a href="{lien('/', lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· {m("agrégation", "aggregate")}</span></div>
+  <div class="navlinks"><a href="{lien('/', lang)}">{m("Accueil", "Home")}</a><a href="{lien_page('/candidats/', lang)}">{m("Les candidats", "Candidates")}</a><a href="{lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#tete">{m("Tête de course", "Front of the race")}</a>
   <a href="#tableau">Tableau</a><a href="#evolution">Évolution</a>
   <a href="#comparaison">Comparaison</a><a href="#methode">Méthode</a>
-  <a href="#a-lire">Citer un chiffre</a><a href="#limites">Limites</a>{toggle_langue('/sondages/', lang)}</div>{THEME_BTN}
+  <a href="#a-lire">Citer un chiffre</a><a href="#limites">Limites</a>{toggle_langue('/sondages/', lang, en_pret=True)}</div>{THEME_BTN}
 </div></div>
 
 <header class="wrap">
-  <span class="eyebrow">Observatoire des sondages · présidentielle 2027</span>
-  <h1>Ce que disent les sondages de la présidentielle 2027, agrégés et sourcés</h1>
-  <p class="lede">Un seul scénario de candidatures, une moyenne pondérée par la fraîcheur et la
-  taille d'échantillon, un intervalle publié, et la liste de toutes les limites. Page régénérée le
-  {frdate(agg['generated'])} (heure de Paris).</p>
+  <span class="eyebrow">{m("Observatoire des sondages · présidentielle 2027", "Poll monitor · 2027 presidential election")}</span>
+  <h1>{t_h1}</h1>
+  <p class="lede">{t_lede}</p>
 </header>
 
 <main class="wrap">
 <section id="tete" class="card">
   <div>
-    <span class="pill b">Tête de course</span>
+    <span class="pill b">{t_tete}</span>
     {"" if not r0 else f'''
     <div class="kpi" style="margin-top:14px">
       <span class="big">{fr(r0["intentions"])}</span><span class="unit">%</span>
-      <span class="muted">— {r0["candidat"]} ({r0["parti"] or "sans étiquette"})</span>
+      <span class="muted">— {r0["candidat"]} ({r0["parti"] or m("sans étiquette", "no label")})</span>
     </div>
-    <p class="small muted" style="margin-top:8px">Intervalle à 95 % : <strong>{fr(r0["bas"])} – {fr(r0["haut"])} %</strong>
-    · {r0["n"]} sondages · n effectif {fr(r0["neff"])}</p>'''}
+    <p class="small muted" style="margin-top:8px">{t_ic95} : <strong>{fr(r0["bas"], lang)} – {fr(r0["haut"], lang)} %</strong>
+    · {r0["n"]} {t_sondages} · {t_neff} {fr(r0["neff"], lang)}</p>'''}
     {duo}
-    <h3>Lecture rapide</h3>
+    <h3>{t_lecture}</h3>
     <ul class="small muted liste2">
-      {"".join(f"<li>{w}</li>" for w in watch) or "<li>Pas assez de candidats pour comparer les écarts.</li>"}
-      <li>Total des intentions : {fr(agg["total_intentions"])} % (les intentions des candidats
-      sous le seuil de {agg["min_polls"]} sondages ne sont pas affichées ; chaque ligne étant arrondie
-      au dixième, leur somme peut s'en écarter de quelques dixièmes).</li>
+      {"".join(f"<li>{w}</li>" for w in watch) or "<li>" + t_pas_assez + "</li>"}
+      <li>{t_total}</li>
     </ul>
   </div>
 </section>
 
 <section id="perimetre" class="card">
-  <span class="pill a">Périmètre</span>
+  <span class="pill a">{t_perim}</span>
   <div class="mets">
-    <div class="met"><span>Premier tour</span><b>{frd("2027-04-18")} <span class="chrono" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}">—</span></b></div>
-    <div class="met"><span>Sondages dans la source</span><b>{agg["total_polls_all"]}</b></div>
-    <div class="met"><span>1<sup>er</sup> tour, {agg["window"]} derniers jours</span><b>{agg["polls_in_window"]}</b></div>
-    <div class="met"><span>Scénario retenu</span><b>{agg["scenario"]} · {agg["scenario_size"]} candidats</b></div>
-    <div class="met"><span>Sondages du scénario, {agg["window"]} j</span><b>{agg["polls_in_scenario"]}</b></div>
-    <div class="met"><span>Sondages agrégés, {agg["agg_window"]} j</span><b>{agg["polls_aggregated"]}</b></div>
-    <div class="met"><span>Période couverte</span><b>{frd(agg["first"])} → {frd(agg["last"])}</b></div>
-    <div class="met wide"><span>Instituts</span><b>{", ".join(agg["instituts"])}</b></div>
+    <div class="met"><span>{t_tour1}</span><b>{frd("2027-04-18")} <span class="chrono" data-target="{f"{SCRUTIN_1}T20:00:00" if SCRUTIN_1 else ''}">—</span></b></div>
+    <div class="met"><span>{t_src}</span><b>{agg["total_polls_all"]}</b></div>
+    <div class="met"><span>{m("1<sup>er</sup> tour", "1st round")}, {agg["window"]} {t_window}</span><b>{agg["polls_in_window"]}</b></div>
+    <div class="met"><span>{t_scenario}</span><b>{agg["scenario"]} · {agg["scenario_size"]} {t_cand}</b></div>
+    <div class="met"><span>{t_scen_j}, {agg["window"]} {m("j", "d")}</span><b>{agg["polls_in_scenario"]}</b></div>
+    <div class="met"><span>{t_agg_j}, {agg["agg_window"]} {m("j", "d")}</span><b>{agg["polls_aggregated"]}</b></div>
+    <div class="met"><span>{t_periode}</span><b>{frd(agg["first"])} → {frd(agg["last"])}</b></div>
+    <div class="met wide"><span>{t_instituts}</span><b>{", ".join(agg["instituts"])}</b></div>
   </div>
 </section>
 
 <section id="tableau" class="card">
-  <h2>Moyennes pondérées</h2>
-  <p class="small muted" style="max-width:none">Les barres sont proportionnelles à la moyenne. <strong>IC 95 %</strong> :
-  incertitude statistique de la moyenne. <strong>Amplitude</strong> : minimum et maximum observés
-  parmi les sondages agrégés — c'est la dispersion réelle entre instituts, souvent plus parlante
-  que l'intervalle.</p>
+  <h2>{t_moy}</h2>
+  <p class="small muted" style="max-width:none">{t_moy_p}</p>
   {bars}
   <table class="data" style="margin-top:18px">
-    <tr><th>Candidat</th><th>Parti</th><th class="num">Moyenne</th><th class="num">IC 95 %</th>
-    <th class="num">Amplitude</th><th class="num">Sondages</th><th class="num">n effectif</th>
-    <th class="num">Dernier</th></tr>
+    <tr><th>{m("Candidat", "Candidate")}</th><th>{m("Parti", "Party")}</th><th class="num">{m("Moyenne", "Average")}</th>
+    <th class="num">{m("IC 95 %", "95% CI")}</th><th class="num">{m("Amplitude", "Range")}</th>
+    <th class="num">{m("Sondages", "Polls")}</th><th class="num">{m("n effectif", "effective n")}</th>
+    <th class="num">{m("Dernier", "Latest")}</th></tr>
     {trs}
   </table>
 </section>
 
 <section id="evolution" class="card">
-  <h2>Évolution, semaine par semaine — scénario {agg["scenario"]} ({agg["scenario_size"]} noms)</h2>
-  <p class="small muted" style="max-width:none">Série <strong>rétro-calculée</strong> : la méthode actuelle appliquée aux
-  sondages publiés à chaque échéance hebdomadaire — c'est ce que cette page aurait affiché, pas ce
-  qu'elle affichait. Le scénario est verrouillé sur {agg["scenario"]} pour que les lignes restent
-  comparables. Un nom absent de cette liste ne disparaît pas de la page : la ligne « hors scénario »
-  et le tableau « toutes listes » ci-dessous le suivent. Un écart inférieur à 1 point reste dans la
-  marge : nous ne le commentons pas.</p>
-  {mov_table(movs)}
-  {hors_scenario(movs, trends)}
-  <p class="small" style="margin-top:14px"><strong>Mouvements sur 7 jours :</strong> {mov_line(movs)}.</p>
-  <h3 style="margin-top:26px">Tendance, toutes listes confondues</h3>
-  <p class="small muted" style="max-width:none">Ici, chaque sondage du premier tour compte, quelle que soit la liste testée :
-  c'est un <strong>indicateur de direction</strong>. Les niveaux ne sont pas comparables à ceux du
-  tableau ci-dessus (une liste de dix candidats ne suit pas la même arithmétique qu'une liste de
-  quinze) — seule l'évolution compte, et elle est plus robuste car elle repose sur beaucoup plus
-  d'enquêtes.</p>
-  {trend_table(trends)}
-  <p class="small" style="margin-top:14px"><strong>Mouvement de fond (toutes listes) :</strong>
-  {mov_line(trends)}.</p>
-  <p class="small muted">Sondages agrégés par point, de J−56 à J−0 :
-  {" · ".join(str(p["polls"]) for p in agg.get("series", []))}. Un tiret signale un candidat absent
-  du scénario à cette date ; la courbe relie les points disponibles. Les premières semaines reposent
-  sur très peu de sondages : un plateau à trois enquêtes ne démontre rien.</p>
+  <h2>{t_evol}</h2>
+  <p class="small muted" style="max-width:none">{t_evol_p}</p>
+  {mov_table(movs, lang)}
+  {hors_scenario(movs, trends, lang=lang)}
+  <p class="small" style="margin-top:14px"><strong>{t_mov7}</strong> {mov_line(movs, lang)}.</p>
+  <h3 style="margin-top:26px">{t_tendance}</h3>
+  <p class="small muted" style="max-width:none">{t_tendance_p}</p>
+  {trend_table(trends, lang)}
+  <p class="small" style="margin-top:14px"><strong>{m("Mouvement de fond (toutes listes) :", "Underlying movement (all lists):")}</strong>
+  {mov_line(trends, lang)}.</p>
+  <p class="small muted">{m("Sondages agrégés par point, de J−56 à J−0 :", "Polls aggregated per point, from D−56 to D−0:")}
+  {" · ".join(str(p["polls"]) for p in agg.get("series", []))}. {m("Un tiret signale un candidat absent du scénario à cette date ; la courbe relie les points disponibles. Les premières semaines reposent sur très peu de sondages : un plateau à trois enquêtes ne démontre rien.",
+    "A dash marks a candidate absent from the scenario at that date; the curve links the available points. The first weeks rest on very few polls: a plateau of three surveys proves nothing.")}</p>
 </section>
 
 <section id="comparaison" class="card">
-  <h2>Comparaison : l'agrégation des sondages face à une prévision bayésienne</h2>
-  <p class="small" style="max-width:none">Un projet indépendant, <a
+  <h2>{m("Comparaison : l'agrégation des sondages face à une prévision bayésienne",
+        "Comparison: poll aggregation against a Bayesian forecast")}</h2>
+  <p class="small" style="max-width:none">{m("Un projet indépendant", "An independent project")}, <a
   href="https://github.com/whyalwaysrose/presidentielle-2027">whyalwaysrose/presidentielle-2027</a>
-  (licence MIT), publie une prévision bayésienne hiérarchique de la même élection, nourrie de la
-  <strong>même source de sondages</strong>, avec le choix inverse du nôtre : il <em>intègre</em>
-  l'incertitude sur la liste des candidats au lieu de verrouiller un scénario. Voici les deux côte à
-  côte, et ce que l'écart nous apprend.</p>
-  {forecast_block(agg, trends, fc)}
-  {backtest_block()}
+  {m("(licence MIT), publie une prévision bayésienne hiérarchique de la même élection, nourrie de la même source de sondages, avec le choix inverse du nôtre : il intègre l'incertitude sur la liste des candidats au lieu de verrouiller un scénario. Voici les deux côte à côte, et ce que l'écart nous apprend.",
+     "(MIT licence), publishes a hierarchical Bayesian forecast of the same election, fed by the same poll source, with the opposite choice to ours: it folds the uncertainty over the candidate list into the model instead of locking a scenario. Here they are side by side, and what the gap tells us.")}</p>
+  {forecast_block(agg, trends, fc, lang)}
+  {backtest_block(lang)}
 </section>
 
 <section id="methode" class="card">
-  <h2>Méthode</h2>
-  <p class="small">Chaque sondage reçoit un poids :
-  <code>w = exp(−ln2 × âge / demi-vie) × √(échantillon / 1000)</code>, avec une demi-vie de
-  {agg["half_life"]} jours. La moyenne publiée est la moyenne pondérée ; l'intervalle à 95 %
-  vaut <code>1,96 × σ<sub>pondéré</sub> / √n<sub>eff</sub></code>, avec
-  <code>n_eff = (Σw)² / Σw²</code> — et il est plancheré à ±{fr(agg["ic_floor"])} point, parce qu'un
-  intervalle calculé sur peu de sondages donnerait une fausse précision.</p>
-  <p class="small"><strong>Deux fenêtres, pour une raison.</strong> Le <em>scénario</em> est choisi
-  sur les {agg["window"]} derniers jours : la liste testée le plus récemment parmi celles qui
-  comptent au moins {agg["min_polls"]} enquêtes — c'est elle qui doit être à jour, puisque les
-  listes de candidats bougent. Les <em>moyennes</em> sont ensuite calculées sur tous les
-  sondages de ce même scénario dans les {agg["agg_window"]} derniers jours
-  ({agg["polls_aggregated"]} sondages), pondérés par la fraîcheur. Mélanger les scénarios produirait
-  des chiffres faux ; n'utiliser que {agg["window"]} jours produirait des moyennes trop instables.</p>
-  <p class="small"><strong>Ces deux réglages ont été mesurés, pas choisis.</strong> Un
-  <a href="/observatoire/backtest/">rétro-test complet sur la campagne 2022</a> — la même méthode rejouée
-  face au résultat réel — a fixé la fenêtre de sélection à {agg["window"]} jours (la plus courte qui
-  couvre toutes les échéances testées) et activé la correction des effets de maison. Il montre aussi
-  les limites de l'exercice : notre pondération par fraîcheur n'apporte rien face à la dernière
-  enquête seule, et les biais collectifs des instituts subsistent.</p>
-  <p class="small">Données : <a href="https://github.com/MieuxVoter/presidentielle2027">MieuxVoter/presidentielle2027</a>
-  (licence MIT), flux JSON brut, 1<sup>er</sup> tour uniquement{" ; les enquêtes que cette compilation n'a pas encore intégrées sont extraites par nos soins des notices de la Commission des sondages et signalées par † dans le tableau des sondages" if agg.get("imports") else ""}. Le document est régénéré par un
-  script, sans retouche manuelle des chiffres ; la méthode ci-dessus est la spécification exacte du
-  code qui produit la page.</p>
+  <h2>{m("Méthode", "Method")}</h2>
+  <p class="small">{t_meth_1}</p>
+  <p class="small">{t_meth_2}</p>
+  <p class="small">{t_meth_3}</p>
+  <p class="small">{t_meth_4}</p>
 </section>
 
-{a_lire_bloc(VALEURS)}
+{a_lire_bloc(VALEURS, lang)}
 
 <section id="limites" class="card">
-  <h2>Limites de la méthode</h2>
+  <h2>{m("Limites de la méthode", "Limits of the method")}</h2>
   <div class="excl small" style="max-width:none">
-    <p style="margin:0 0 8px"><strong>Cette page n'est pas un modèle de prévision.</strong> Elle n'anticipe
-    ni la participation, ni les reports de voix, ni les dynamiques de campagne, et ne calcule aucune
-    probabilité de victoire.</p>
+    <p style="margin:0 0 8px">{t_lim_intro}</p>
     <ul style="margin:0">
-      <li><strong>Effets de maison corrigés, mais biais partagés non</strong> : l'écart moyen de
-      chaque institut au consensus des autres est estimé puis retranché (rétro-test 2022 : gain réel
-      mais faible). En revanche, quand <em>tous</em> les instituts se trompent ensemble — en 2022, une
-      sous-estimation de Mélenchon de près de 14 points — aucune correction d'effet de maison ne peut
-      rien : nous reproduisons ce biais collectif.</li>
-      <li><strong>Marges des instituts ignorées</strong> : l'IC affiché est celui de la moyenne
-      (plancheré à ±{fr(agg["ic_floor"])} point), plus étroit que la marge d'un sondage isolé. La colonne
-      « amplitude » montre, elle, l'écart réel entre instituts.</li>
-      <li><strong>Peu de sondages par scénario</strong> : {agg["polls_aggregated"]} sondages
-      seulement entrent dans le calcul — les listes de candidats sont encore instables à ce stade.</li>
-      <li><strong>Scénarios écartés</strong> : les sondages testant d'autres listes de candidats ne
-      sont pas comptés.</li>
-      <li><strong>Candidatures mouvantes</strong> : annonces, retraits et ralliements rendent toute
-      liste instable à {agg["window"]} jours de l'élection.</li>
-      <li><strong>Ne pas confondre</strong> : une moyenne de sondages n'est pas un résultat, et une
-      intention de vote n'est pas un vote.</li>
+      {t_lim_bullets}
     </ul>
   </div>
 </section>
 
 <section id="mentions" class="card">
-  <h2>Sources, traçabilité et mentions légales</h2>
-  <p class="small muted" style="max-width:none">Chaque sondage agrégé est nommé, daté et attribué. Les indications ci-dessous
-  sont celles que la loi exige pour la publication des résultats d'un sondage :</p>
-  {mentions_table(agg)}
-  {legal_block(agg)}
+  <h2>{m("Sources, traçabilité et mentions légales", "Sources, traceability and legal notices")}</h2>
+  <p class="small muted" style="max-width:none">{m("Chaque sondage agrégé est nommé, daté et attribué. Les indications ci-dessous sont celles que la loi exige pour la publication des résultats d'un sondage :",
+    "Every aggregated poll is named, dated and attributed. The details below are those the law requires for publishing poll results:")}</p>
+  {mentions_table(agg, lang)}
+  {legal_block(agg, lang)}
 </section>
 </main>
 
 <footer class="wrap">
-  <p><a href="/fr/mentions-legales">Mentions légales</a></p>
+  <p><a href="/fr/mentions-legales">{m("Mentions légales", "Legal notice")}</a></p>
 </footer>
 {THEME_JS}{CHRONO_JS}</body>
 </html>
 """
 
 
-def mentions_table(agg):
+def mentions_table(agg, lang="fr"):
+    tr = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     """Sondages agrégés avec les indications requises par l'article 2 de la loi du 19 juillet 1977
     (organisme, commanditaire, effectif, dates, marges d'erreur) — telles que fournies par la source."""
     det = agg.get("polls_detail") or []
     if not det:
-        return '<p class="small muted">Aucun sondage dans la fenêtre d\'agrégation.</p>'
+        return '<p class="small muted">' + tr("Aucun sondage dans la fenêtre d'agrégation.",
+                                               "No poll in the aggregation window.") + '</p>'
     trs = "".join(
         f'<tr><td class="small">{d["institut"]}{" †" if d.get("importe") else ""}</td>'
         f'<td class="small">{d["commanditaire"]}</td>'
@@ -1885,42 +2015,37 @@ def mentions_table(agg):
         for d in det)
     return (
         '<table style="margin-top:14px">\n'
-        '<tr><th>Institut</th><th>Commanditaire</th><th class="num">Dates</th>'
-        '<th class="num">Interrogés</th><th class="num">Marge</th><th>Référence de la notice</th></tr>\n'
+        '<tr><th>' + tr("Institut", "Pollster") + '</th><th>' + tr("Commanditaire", "Commissioner") + '</th>'
+        '<th class="num">' + tr("Dates", "Dates") + '</th>'
+        '<th class="num">' + tr("Interrogés", "Respondents") + '</th>'
+        '<th class="num">' + tr("Marge", "Margin") + '</th>'
+        '<th>' + tr("Référence de la notice", "Notice reference") + '</th></tr>\n'
         + trs + '</table>\n'
-        f'<p class="small muted" style="margin-top:10px">{len(det)} sondages agrégés, du '
-        f'{frd(agg["first"])} au {frd(agg["last"])}. La colonne « marge » reprend l\'écart indiqué par '
-        'l\'institut pour le candidat le mieux placé de son enquête.</p>'
-        + ('<p class="small muted">† enquête extraite par nos soins de la notice publiée par la '
-           'Commission des sondages, que la compilation amont n\'avait pas encore intégrée.</p>'
+        f'<p class="small muted" style="margin-top:10px">' + tr(
+            f"{len(det)} sondages agrégés, du {frd(agg['first'])} au {frd(agg['last'])}. La colonne « marge » "
+            "reprend l'écart indiqué par l'institut pour le candidat le mieux placé de son enquête.",
+            f"{len(det)} polls aggregated, from {frd(agg['first'])} to {frd(agg['last'])}. The \u201cmargin\u201d "
+            "column repeats the interval stated by the pollster for its best-placed candidate.") + '</p>'
+        + (('<p class="small muted">' + tr("† enquête extraite par nos soins de la notice publiée par la Commission des sondages, que la compilation amont n'avait pas encore intégrée.",
+                                            "† survey extracted by us from the notice published by the Commission des sondages, which the upstream compilation had not yet integrated.") + '</p>')
            if any(d.get("importe") for d in det) else ''))
 
 
-def legal_block(agg):
+def legal_block(agg, lang="fr"):
+    tr = (lambda a, b: b) if lang == "en" else (lambda a, b: a)
     """Ce que la loi impose, et ce que cette page en fait — sans jamais se dire elle-même « sondage »."""
     n = len(agg.get("polls_detail") or [])
-    return f'''  <h3 style="margin-top:24px">Notre situation au regard de la loi du 19 juillet 1977</h3>
-  <p class="small">Cette page ne réalise aucun sondage et n'interroge personne : elle agrège des
-  sondages publiés par des instituts, en citant pour chacun les indications prévues par l'article 2 de
-  la loi n° 77-808 du 19 juillet 1977 — organisme ayant réalisé l'enquête, commanditaire, nombre de
-  personnes interrogées, dates des interrogations et mention des marges d'erreur. La loi organique
-  n° 2021-335 du 29 mars 2021 impose par ailleurs, pour l'élection du Président de la République, que
-  toute publication de sondage soit accompagnée des marges d'erreur des résultats publiés : elles
-  figurent dans le tableau ci-dessus.</p>
-  <p class="small">Les notices déposées par les instituts auprès de la
-  <a href="https://www.commission-des-sondages.fr/notices/">Commission des sondages</a> — questions
-  posées, méthode d'échantillonnage, taux de non-réponse (article 3 de la même loi) — y sont
-  consultables publiquement. Nous ne les reproduisons pas ici, et nous signalons la limite que cela
-  crée : le libellé exact de chaque question n'est pas vérifiable dans nos tableaux.</p>
-  <p class="small">En période électorale, l'article 11 interdit toute publication, diffusion ou
-  commentaire de sondage électoral la veille et le jour du scrutin ; pour l'élection présidentielle,
-  cette interdiction court du samedi précédant le scrutin à zéro heure jusqu'à la fermeture du dernier
-  bureau de vote. Cette page s'y conformera, y compris en cessant de se régénérer le moment venu.</p>
-    <p class="small">La génération quotidienne s'interrompt d'elle-même la veille et le jour de
-  chaque tour de scrutin, dès lors que les dates officielles sont renseignées dans le générateur.</p>
-  <p class="small">Nous n'employons pas le mot « sondage » pour notre propre calcul : une
-  <em>moyenne de sondages</em> n'est pas une enquête, et la présenter comme telle serait une faute
-  méthodologique — la loi sanctionne d'ailleurs cet usage impropre.</p>'''
+    return f'''  <h3 style="margin-top:24px">{tr("Notre situation au regard de la loi du 19 juillet 1977", "Our position under the law of 19 July 1977")}</h3>
+  <p class="small">{tr("Cette page ne réalise aucun sondage et n'interroge personne : elle agrège des sondages publiés par des instituts, en citant pour chacun les indications prévues par l'article 2 de la loi n° 77-808 du 19 juillet 1977 — organisme ayant réalisé l'enquête, commanditaire, nombre de personnes interrogées, dates des interrogations et mention des marges d'erreur. La loi organique n° 2021-335 du 29 mars 2021 impose par ailleurs, pour l'élection du Président de la République, que toute publication de sondage soit accompagnée des marges d'erreur des résultats publiés : elles figurent dans le tableau ci-dessus.",
+     "This page conducts no poll and interviews nobody: it aggregates polls published by polling institutes, citing for each the information required by article 2 of law no. 77-808 of 19 July 1977 — the organisation that carried out the survey, the commissioner, the number of people interviewed, the dates of the interviews and the statement of margins of error. Organic law no. 2021-335 of 29 March 2021 further requires, for the election of the President of the Republic, that any publication of a poll be accompanied by the margins of error of the published results: they appear in the table above.")}</p>
+  <p class="small">{tr("Les notices déposées par les instituts auprès de la <a href=\"https://www.commission-des-sondages.fr/notices/\">Commission des sondages</a> — questions posées, méthode d'échantillonnage, taux de non-réponse (article 3 de la même loi) — y sont consultables publiquement. Nous ne les reproduisons pas ici, et nous signalons la limite que cela crée : le libellé exact de chaque question n'est pas vérifiable dans nos tableaux.",
+     "The notices filed by the institutes with the <a href=\"https://www.commission-des-sondages.fr/notices/\">Commission des sondages</a> — questions asked, sampling method, non-response rate (article 3 of the same law) — are publicly available there. We do not reproduce them here, and we flag the limit this creates: the exact wording of each question cannot be verified in our tables.")}</p>
+  <p class="small">{tr("En période électorale, l'article 11 interdit toute publication, diffusion ou commentaire de sondage électoral la veille et le jour du scrutin ; pour l'élection présidentielle, cette interdiction court du samedi précédant le scrutin à zéro heure jusqu'à la fermeture du dernier bureau de vote. Cette page s'y conformera, y compris en cessant de se régénérer le moment venu.",
+     "During an election period, article 11 forbids any publication, broadcast or commentary of an electoral poll on the eve and the day of the ballot; for the presidential election, this ban runs from midnight on the Saturday before the ballot until the closing of the last polling station. This page will comply, including by ceasing to regenerate when the time comes.")}</p>
+    <p class="small">{tr("La génération quotidienne s'interrompt d'elle-même la veille et le jour de chaque tour de scrutin, dès lors que les dates officielles sont renseignées dans le générateur.",
+     "The daily generation stops by itself on the eve and the day of each round of voting, once the official dates are entered in the generator.")}</p>
+  <p class="small">{tr("Nous n'employons pas le mot « sondage » pour notre propre calcul : une <em>moyenne de sondages</em> n'est pas une enquête, et la présenter comme telle serait une faute méthodologique — la loi sanctionne d'ailleurs cet usage impropre.",
+     "We do not use the word “poll” for our own computation: an <em>average of polls</em> is not a survey, and presenting it as one would be a methodological fault — the law also punishes that improper use.")}</p>'''
 
 
 def frd(s):
@@ -1945,7 +2070,7 @@ def frdate(s, lang="fr"):
     try:
         d, h = s.split(" ")
         y, m, j = d.split("-")
-        return f"{j}/{m}/{y} à {h}"
+        return f"{j}/{m}/{y} " + ("at" if lang == "en" else "à") + f" {h}"
     except Exception:
         return s
 
@@ -1981,8 +2106,8 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
     # à cette page restent ici, pour qu'on ne cherche jamais où est la traduction.
     def m(fr_txt, en_txt):
         return en_txt if lang == "en" else fr_txt
-    url_fr = "https://dileviathan.fr/observatoire/"
-    url_en = "https://dileviathan.fr/observatoire/en/"
+    url_fr = "https://dileviathan.fr" + lien("/", "fr")
+    url_en = "https://dileviathan.fr" + lien("/", "en")
     url = url_en if lang == "en" else url_fr
     autre = url_fr if lang == "en" else url_en
     return f"""<!doctype html>
@@ -2005,8 +2130,8 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
 <body>
 <div class="topbar"><div class="wrap nav">
   <div class="brand">{m("Présidentielle 2027 <span>· observatoire</span>", "2027 presidential election <span>· monitor</span>")}</div>
-  <div class="navlinks"><a href="{lien('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a><a href="{lien('/candidats/', lang)}">{m("Les candidats", "Candidates")}</a><a href="{lien('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#evolution">{m("Évolution", "Trend")}</a>
-  <a href="#comparaison">{m("Comparaison", "Comparison")}</a><a href="#methode">{m("Méthode", "Method")}</a><a href="#donnees">{m("Données", "Data")}</a><a href="#limites">{m("Limites", "Limits")}</a>{toggle_langue('/', lang)}</div>{THEME_BTN}
+  <div class="navlinks"><a href="{lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a><a href="{lien_page('/candidats/', lang)}">{m("Les candidats", "Candidates")}</a><a href="{lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#evolution">{m("Évolution", "Trend")}</a>
+  <a href="#comparaison">{m("Comparaison", "Comparison")}</a><a href="#methode">{m("Méthode", "Method")}</a><a href="#donnees">{m("Données", "Data")}</a><a href="#limites">{m("Limites", "Limits")}</a>{toggle_langue('/', lang, en_pret=True)}</div>{THEME_BTN}
 </div></div>
 
 <header class="wrap hero">
@@ -2121,7 +2246,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
     <code>n_eff = (Σw)² / Σw²</code>
   </div>
   <p class="small muted" style="margin-top:12px">{m("Le détail des calculs, les valeurs par candidat et les limites complètes sont sur la page", "The details of the calculations, the per-candidate values and the full limits are on the")}
-  <a href="{lien('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>.</p>
+  <a href="{lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>.</p>
 </section>
 
 <section id="donnees" class="card">
@@ -2255,6 +2380,14 @@ def main():
     os.makedirs(SITE, exist_ok=True)
     os.makedirs(os.path.join(SITE, "sondages"), exist_ok=True)
     open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(render_landing(agg, movs, trends, fc))
+    # Version anglaise : mêmes données, mêmes chiffres, autre langue. Une page n'est
+    # écrite que si sa traduction est complète — le sélecteur ne pointe que sur elle.
+    en_dir = os.path.join(SITE, "en", "observatoire")
+    os.makedirs(os.path.join(en_dir, "sondages"), exist_ok=True)
+    open(os.path.join(en_dir, "index.html"), "w", encoding="utf-8").write(
+        render_landing(agg, movs, trends, fc, lang="en"))
+    open(os.path.join(en_dir, "sondages", "index.html"), "w", encoding="utf-8").write(
+        render_sondages(agg, movs, trends, fc, lang="en"))
     open(os.path.join(SITE, "sondages", "index.html"), "w", encoding="utf-8").write(
         render_sondages(agg, movs, trends, fc))
     json.dump(agg, open(os.path.join(DATA, "summary.json"), "w", encoding="utf-8"),

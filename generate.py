@@ -1185,15 +1185,17 @@ main p, main li, .card > p, .card > ul > li, header p, footer p{max-width:36em}
 .themebtn:hover{color:var(--ink);border-color:var(--muted)}
 /* Sélecteur de langue : deux liens, la langue courante marquée. Pas de JavaScript —
    chaque version a sa propre adresse, un lien suffit à changer de langue. */
-.langsw{display:inline-flex;align-items:center;gap:2px;margin-left:8px;border:1px solid var(--line);
-  border-radius:8px;padding:2px;font-size:.72rem;letter-spacing:.04em}
-.langsw a{padding:3px 7px;border-radius:6px;color:var(--muted);text-decoration:none}
+/* Sélecteur FR/EN : même dessin que celui du site (Header.tsx) — pastille arrondie,
+   filet fin, libellé actif en rouge, séparateur vertical. Adapté aux jetons de
+   l'observatoire, qui a ses propres variables et deux thèmes. */
+.langsw{display:inline-flex;align-items:center;gap:.375rem;margin-left:10px;
+  font-size:.75rem;font-weight:600;border:1px solid var(--line);border-radius:999px;
+  padding:.25rem .625rem}
+.langsw a{color:var(--muted);text-decoration:none}
 .langsw a:hover{color:var(--ink)}
-.langsw a[aria-current="true"]{background:var(--ink);color:var(--paper);font-weight:600}
-/* Pas de --accent dans la palette de l'observatoire : un jeton inexistant laissait
-   le libellé actif en blanc sur blanc. Les deux jetons employés ici existent dans
-   les deux thèmes, et s'inversent proprement. */
-.langsw .absente{padding:3px 7px;color:var(--muted);opacity:.5;cursor:not-allowed}
+.langsw a[aria-current="true"]{color:var(--red-text)}
+.langsw .sep{color:var(--muted);opacity:.35}
+.langsw .absente{color:var(--muted);opacity:.45;cursor:not-allowed}
 header{padding:56px 0 24px}
 .eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
 color:var(--red-text);border:1px solid var(--red);border-radius:999px;padding:4px 12px}
@@ -1414,7 +1416,9 @@ def toggle_langue(chemin, lang="fr", en_pret=False):
     qu'il ne peut pas encore faire.
     """
     morceaux = []
-    for code, libelle in (("fr", "FR"), ("en", "EN")):
+    for i, (code, libelle) in enumerate((("fr", "FR"), ("en", "EN"))):
+        if i:
+            morceaux.append('<span class="sep" aria-hidden="true">|</span>')
         if code == lang:
             morceaux.append(f'<a href="{lien(chemin, code)}" hreflang="{code}" aria-current="true">{libelle}</a>')
         elif code == "en" and not en_pret:

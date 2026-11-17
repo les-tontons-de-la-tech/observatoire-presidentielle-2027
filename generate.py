@@ -1186,6 +1186,10 @@ main p, main li, .card > p, .card > ul > li, header p, footer p{max-width:36em}
   border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);
   font-size:.86rem;line-height:1;cursor:pointer;flex:0 0 auto}
 .themebtn:hover{color:var(--ink);border-color:var(--muted)}
+/* Langue et thème forment un seul bloc collé au bord droit : deux commandes de
+   lecture, pas de navigation. Le sélecteur ne doit pas se perdre au milieu des liens. */
+.barredroite{display:inline-flex;align-items:center;gap:8px;flex-shrink:0}
+.barredroite .langsw{margin-left:0}
 /* Sélecteur de langue : deux liens, la langue courante marquée. Pas de JavaScript —
    chaque version a sa propre adresse, un lien suffit à changer de langue. */
 /* Sélecteur FR/EN : même dessin que celui du site (Header.tsx) — pastille arrondie,
@@ -1370,6 +1374,16 @@ if(c==="dark"||(!c&&window.matchMedia&&window.matchMedia("(prefers-color-scheme:
 
 THEME_BTN = """<button type="button" class="themebtn" id="themebtn" aria-label="Changer le thème"
   title="Passer en mode clair ou sombre">&#9681;</button>"""
+
+def barre_droite(chemin, lang="fr", en_pret=True):
+    """Sélecteur de langue + bouton de thème, côte à côte, au bord droit de la barre.
+
+    Deux commandes de lecture, hors navigation : elles restent groupées pour que
+    l'œil les trouve au même endroit sur toutes les pages.
+    """
+    return (f'<div class="barredroite">{toggle_langue(chemin, lang, en_pret=en_pret)}'
+            f'{THEME_BTN}</div>')
+
 
 # Lien vers la page « Workflow » (annexe technique : comment le site se fabrique).
 # Défini une seule fois ici, utilisé par les quatre pages — un seul endroit à corriger.
@@ -1887,7 +1901,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
   <div class="navlinks"><a href="{lien('/', lang)}">{m("Accueil", "Home")}</a><a href="{lien_page('/candidats/', lang)}">{m("Les candidats", "Candidates")}</a><a href="{lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#tete">{m("Tête de course", "Front of the race")}</a>
   <a href="#tableau">Tableau</a><a href="#evolution">Évolution</a>
   <a href="#comparaison">Comparaison</a><a href="#methode">Méthode</a>
-  <a href="#a-lire">Citer un chiffre</a><a href="#limites">Limites</a>{toggle_langue('/sondages/', lang, en_pret=True)}</div>{THEME_BTN}
+  <a href="#a-lire">Citer un chiffre</a><a href="#limites">Limites</a></div>{barre_droite('/sondages/', lang)}
 </div></div>
 
 <header class="wrap">
@@ -2141,7 +2155,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
 <div class="topbar"><div class="wrap nav">
   <div class="brand">{m("Présidentielle 2027 <span>· observatoire</span>", "2027 presidential election <span>· monitor</span>")}</div>
   <div class="navlinks"><a href="{lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a><a href="{lien_page('/candidats/', lang)}">{m("Les candidats", "Candidates")}</a><a href="{lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#evolution">{m("Évolution", "Trend")}</a>
-  <a href="#comparaison">{m("Comparaison", "Comparison")}</a><a href="#methode">{m("Méthode", "Method")}</a><a href="#donnees">{m("Données", "Data")}</a><a href="#limites">{m("Limites", "Limits")}</a>{toggle_langue('/', lang, en_pret=True)}</div>{THEME_BTN}
+  <a href="#comparaison">{m("Comparaison", "Comparison")}</a><a href="#methode">{m("Méthode", "Method")}</a><a href="#donnees">{m("Données", "Data")}</a><a href="#limites">{m("Limites", "Limits")}</a></div>{barre_droite('/', lang)}
 </div></div>
 
 <header class="wrap hero">

@@ -933,7 +933,7 @@ section.card table{{width:100%}}</style>
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="{G.lien('/', lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· {m("rétro-test 2017", "2017 backtest")}</span></div>
   <div class="navlinks"><a href="{G.lien('/', lang)}">{m("Accueil", "Home")}</a><a href="{G.lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>
-  <a href="{G.lien_page('/candidats/', lang)}">{m("Les candidats", "The candidates")}</a>{G.nav_workflow(lang)}{G.nav_lois(lang)}<a href="#resultats">{m("Résultats", "Results")}</a><a href="#detail">{m("Détail", "Breakdown")}</a><a href="#lecons">{m("Leçons", "Lessons")}</a>{G.toggle_langue('/backtest2017/', lang, en_pret=True)}</div>{G.THEME_BTN}
+  <a href="{G.lien_page('/candidats/', lang)}">{m("Les candidats", "The candidates")}</a>{G.nav_workflow(lang)}{G.nav_lois(lang)}<a href="#resultats">{m("Résultats", "Results")}</a><a href="#detail">{m("Détail", "Breakdown")}</a><a href="#lecons">{m("Leçons", "Lessons")}</a></div>{G.barre_droite('/backtest2017/', lang)}
 </div></div>
 
 <header class="wrap">

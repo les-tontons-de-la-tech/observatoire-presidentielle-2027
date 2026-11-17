@@ -358,7 +358,7 @@ def page(lang="fr"):
 <body>
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="{G.lien_page("/", lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· workflow</span></div>
-<div class="navlinks">{nav}{G.toggle_langue("/workflow/", lang, en_pret=True)}</div>{G.THEME_BTN}
+<div class="navlinks">{nav}</div>{G.barre_droite('/workflow/', lang)}
 </div></div>
 
 <main class="wrap">

@@ -406,7 +406,7 @@ def render(d, lang="fr"):
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="{G.lien('/', lang)}" style="text-decoration:none">{m("Présidentielle 2027", "2027 presidential election")}</a> <span>· {m("les candidats", "the candidates")}</span></div>
   <div class="navlinks"><a href="{G.lien('/', lang)}">{m("Accueil", "Home")}</a><a href="{G.lien_page('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>
-  <a href="{G.lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{G.nav_workflow(lang)}{G.nav_lois(lang)}<a href="#bulletin">{m("Qui sera sur le bulletin ?", "Who will be on the ballot?")}</a>{G.toggle_langue('/candidats/', lang, en_pret=True)}</div>{G.THEME_BTN}
+  <a href="{G.lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{G.nav_workflow(lang)}{G.nav_lois(lang)}<a href="#bulletin">{m("Qui sera sur le bulletin ?", "Who will be on the ballot?")}</a></div>{G.barre_droite('/candidats/', lang)}
 </div></div>
 
 <header class="wrap">

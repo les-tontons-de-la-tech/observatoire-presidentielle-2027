@@ -821,8 +821,7 @@ def render(textes, refs, n_total_cur, n_total_ref, gmap, dernier_scrutin=None,
     {G.nav_workflow(lang)}
     <a href="{G.lien_page('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>
     <a href="{G.lien('/lois/', lang)}" style="font-weight:700;color:var(--ink)">{m("Veille législative", "Legislative watch")}</a>
-    {G.toggle_langue('/lois/', lang, en_pret=True)}
-  </div>{theme_btn}
+  </div>{G.barre_droite('/lois/', lang)}
 </div></div>
 
 <header class="wrap hero">

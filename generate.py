@@ -1183,6 +1183,14 @@ main p, main li, .card > p, .card > ul > li, header p, footer p{max-width:36em}
   border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);
   font-size:.86rem;line-height:1;cursor:pointer;flex:0 0 auto}
 .themebtn:hover{color:var(--ink);border-color:var(--muted)}
+/* Sélecteur de langue : deux liens, la langue courante marquée. Pas de JavaScript —
+   chaque version a sa propre adresse, un lien suffit à changer de langue. */
+.langsw{display:inline-flex;align-items:center;gap:2px;margin-left:8px;border:1px solid var(--line);
+  border-radius:8px;padding:2px;font-size:.72rem;letter-spacing:.04em}
+.langsw a{padding:3px 7px;border-radius:6px;color:var(--muted);text-decoration:none}
+.langsw a:hover{color:var(--ink)}
+.langsw a[aria-current="true"]{background:var(--accent);color:#fff}
+.langsw .absente{padding:3px 7px;color:var(--muted);opacity:.5;cursor:not-allowed}
 header{padding:56px 0 24px}
 .eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
 color:var(--red-text);border:1px solid var(--red);border-radius:999px;padding:4px 12px}
@@ -1357,8 +1365,51 @@ THEME_BTN = """<button type="button" class="themebtn" id="themebtn" aria-label="
 
 # Lien vers la page « Workflow » (annexe technique : comment le site se fabrique).
 # Défini une seule fois ici, utilisé par les quatre pages — un seul endroit à corriger.
-NAV_WORKFLOW = '<a href="/observatoire/workflow/">Workflow</a>'
-NAV_LOIS = '<a href="/observatoire/lois/">Veille législative</a>'
+def nav_workflow(lang="fr"):
+    return f'<a href="{lien("/workflow/", lang)}">Workflow</a>'
+
+
+def nav_lois(lang="fr"):
+    return f'<a href="{lien("/lois/", lang)}">{"Legislative watch" if lang == "en" else "Veille législative"}</a>'
+
+# Adresses par langue. L'anglais vit sous /en/observatoire/, cohérent avec /en/veille
+# et /en/blog du site : un seul endroit pour l'anglais, et un lien direct entre les
+# deux versions de chaque page.
+BASE_LANGUE = {"fr": "/observatoire", "en": "/en/observatoire"}
+
+
+def lien(chemin, lang="fr"):
+    """Adresse d'une page de l'observatoire dans la langue demandée.
+
+    `chemin` est relatif à la racine de l'observatoire (« / », « /sondages/ »).
+    """
+    base = BASE_LANGUE.get(lang, BASE_LANGUE["fr"])
+    return base + chemin
+
+
+def nav_lien(chemin, texte_fr, texte_en, lang="fr"):
+    return f'<a href="{lien(chemin, lang)}">{texte_en if lang == "en" else texte_fr}</a>'
+
+
+def toggle_langue(chemin, lang="fr", en_pret=False):
+    """Sélecteur FR/EN : la langue courante est marquée, l'autre est le lien.
+
+    Tant qu'une page n'existe pas en anglais, le libellé EN n'est pas un lien :
+    un sélecteur qui mène à une 404 est pire que pas de sélecteur. Il annonce ce
+    qu'il ne peut pas encore faire.
+    """
+    morceaux = []
+    for code, libelle in (("fr", "FR"), ("en", "EN")):
+        if code == lang:
+            morceaux.append(f'<a href="{lien(chemin, code)}" hreflang="{code}" aria-current="true">{libelle}</a>')
+        elif code == "en" and not en_pret:
+            morceaux.append('<span class="absente" aria-disabled="true" title="'
+                            + ("Version anglaise en préparation" if lang == "fr" else "English version in preparation")
+                            + '">EN</span>')
+        else:
+            morceaux.append(f'<a href="{lien(chemin, code)}" hreflang="{code}">{libelle}</a>')
+    return ('<span class="langsw" role="group" aria-label="'
+            + ("Langue" if lang == "fr" else "Language") + '">' + "".join(morceaux) + "</span>")
 
 THEME_JS = """<script>(function(){var b=document.getElementById("themebtn");if(!b)return;
 b.addEventListener("click",function(){var r=document.documentElement;
@@ -1575,7 +1626,7 @@ def trend_table(rows, lang="fr"):
             '<th class="num">Sondages</th><th>8 semaines</th></tr>' + body + '</table>')
 
 
-def render_sondages(agg, movs=None, trends=None, fc=None):
+def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
     movs = movs or []
     trends = trends or []
     r0 = agg["rows"][0] if agg["rows"] else None
@@ -1642,10 +1693,10 @@ def render_sondages(agg, movs=None, trends=None, fc=None):
 <body>
 <div class="topbar"><div class="wrap nav">
   <div class="brand"><a href="/observatoire/" style="text-decoration:none">Présidentielle 2027</a> <span>· agrégation</span></div>
-  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a>{NAV_WORKFLOW}{NAV_LOIS}<a href="#tete">Tête de course</a>
+  <div class="navlinks"><a href="/observatoire/">Accueil</a><a href="/observatoire/candidats/">Les candidats</a><a href="/observatoire/backtest/">Rétro-test 2022</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#tete">Tête de course</a>
   <a href="#tableau">Tableau</a><a href="#evolution">Évolution</a>
   <a href="#comparaison">Comparaison</a><a href="#methode">Méthode</a>
-  <a href="#a-lire">Citer un chiffre</a><a href="#limites">Limites</a></div>{THEME_BTN}
+  <a href="#a-lire">Citer un chiffre</a><a href="#limites">Limites</a>{toggle_langue('/sondages/', lang)}</div>{THEME_BTN}
 </div></div>
 
 <header class="wrap">
@@ -1954,8 +2005,8 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
 <body>
 <div class="topbar"><div class="wrap nav">
   <div class="brand">{m("Présidentielle 2027 <span>· observatoire</span>", "2027 presidential election <span>· monitor</span>")}</div>
-  <div class="navlinks"><a href="/observatoire/sondages/">{m("Agrégation", "Aggregate")}</a><a href="/observatoire/candidats/">{m("Les candidats", "Candidates")}</a><a href="/observatoire/backtest/">{m("Rétro-test 2022", "2022 backtest")}</a>{NAV_WORKFLOW}{NAV_LOIS}<a href="#evolution">{m("Évolution", "Trend")}</a>
-  <a href="#comparaison">{m("Comparaison", "Comparison")}</a><a href="#methode">{m("Méthode", "Method")}</a><a href="#donnees">{m("Données", "Data")}</a><a href="#limites">{m("Limites", "Limits")}</a><a class="lang" href="{autre}" hreflang="{'fr' if lang == 'en' else 'en'}">{m("EN", "FR")}</a></div>{THEME_BTN}
+  <div class="navlinks"><a href="{lien('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a><a href="{lien('/candidats/', lang)}">{m("Les candidats", "Candidates")}</a><a href="{lien('/backtest/', lang)}">{m("Rétro-test 2022", "2022 backtest")}</a>{nav_workflow(lang)}{nav_lois(lang)}<a href="#evolution">{m("Évolution", "Trend")}</a>
+  <a href="#comparaison">{m("Comparaison", "Comparison")}</a><a href="#methode">{m("Méthode", "Method")}</a><a href="#donnees">{m("Données", "Data")}</a><a href="#limites">{m("Limites", "Limits")}</a>{toggle_langue('/', lang)}</div>{THEME_BTN}
 </div></div>
 
 <header class="wrap hero">
@@ -2070,7 +2121,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
     <code>n_eff = (Σw)² / Σw²</code>
   </div>
   <p class="small muted" style="margin-top:12px">{m("Le détail des calculs, les valeurs par candidat et les limites complètes sont sur la page", "The details of the calculations, the per-candidate values and the full limits are on the")}
-  <a href="/observatoire/sondages/">{m("Agrégation", "Aggregate")}</a>.</p>
+  <a href="{lien('/sondages/', lang)}">{m("Agrégation", "Aggregate")}</a>.</p>
 </section>
 
 <section id="donnees" class="card">

@@ -516,7 +516,7 @@ def main():
     with open(os.path.join(en_dir, "index.html"), "w", encoding="utf-8") as f:
         f.write(en)
     print(f"  -> {os.path.join(en_dir, 'index.html')} ({len(en)} caractères)")
-    restes = WI.restes(en)
+    restes = WI.restes_par_comparaison(fr, en)
     if restes:
         print(f"  ⚠ {len(restes)} nœuds de texte encore en français :")
         for x in restes[:12]:

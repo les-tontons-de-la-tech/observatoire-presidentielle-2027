@@ -116,6 +116,8 @@ FRAGMENTS = [
     ("avis de suspension, aucun chiffre", "blackout notice, no figures"),
     ("1er tour 18/04/2027 · 2d tour 02/05/2027", "round 1 18/04/2027 · round 2 02/05/2027"),
 
+    ("PAGES STATIQUES", "STATIC PAGES"),
+
     # ── page : tête ──────────────────────────────────────────────────────────
     ("· workflow", "· workflow"),
     ("Annexe technique", "Technical annex"),
@@ -258,4 +260,40 @@ def restes(html):
         if len(n) > 3 and marque.search(n) and n not in vus:
             vus.add(n)
             sortie.append(n)
+    return sortie
+
+
+# Textes qui ont la même forme dans les deux langues sans être des oublis : noms de
+# fichiers, chemins, domaines, en-têtes HTTP, sigles. Tout autre texte identique
+# dans les deux pages signale une traduction manquante.
+AUTORISES = {
+    "· workflow", "Workflow", "DATA · CACHE", "PUBLICATION", "ORCHESTRATION",
+    "Orchestration", "Publication", "2022 · stable", "Cache-Control: no-cache",
+    "absolute_redirect off", "handle /observatoire*", "Caddy — reverse proxy",
+    "nginx:alpine — simulation-poc", "MieuxVoter/presidentielle2027",
+    "whyalwaysrose", "observatoire-presidentielle-2027", "dileviathan.fr",
+    "J−132", "&#9681;", "Cron · 0 18 * * *",
+    "→ data/polls.json", "→ data/forecast_bayes.json", "→ data/polls2022.json",
+}
+
+
+def restes_par_comparaison(html_fr, html_en):
+    """Textes présents à l'identique dans les deux langues, hors éléments autorisés."""
+    import re
+
+    def noeuds(h):
+        h = re.sub(r"<(script|style)\b.*?</\1>", " ", h, flags=re.S)
+        h = re.sub(r"<!--.*?-->", " ", h, flags=re.S)
+        return [" ".join(x.split()) for x in re.findall(r">([^<>]+)<", h)]
+
+    ens_en = set(noeuds(html_en))
+    sortie = []
+    for x in noeuds(html_fr):
+        if len(x) < 3 or x in AUTORISES or x in sortie:
+            continue
+        if x in ens_en and re.search(r"[A-Za-zÀ-ÿ]", x):
+            # les chemins et les noms de fichiers sont légitimes
+            if re.fullmatch(r"[\w./\-]+", x):
+                continue
+            sortie.append(x)
     return sortie

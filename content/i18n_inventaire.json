@@ -1,0 +1,734 @@
+[
+ {
+  "fr": " ; les enquêtes que cette compilation n'a pas encore intégrées sont extraites par nos soins des notices de la Commission des sondages et signalées par † dans le tableau des sondages",
+  "en": ""
+ },
+ {
+  "fr": " candidats réels publiés, et les deux finalistes identifiés (",
+  "en": ""
+ },
+ {
+  "fr": " peut être publié, diffusé ou commenté la veille et le jour du scrutin.</p>",
+  "en": ""
+ },
+ {
+  "fr": " point d'erreur moyenne</strong> à J−",
+  "en": ""
+ },
+ {
+  "fr": " point du côté MieuxVoter contre ",
+  "en": ""
+ },
+ {
+  "fr": " point), et le poids donné aux ",
+  "en": ""
+ },
+ {
+  "fr": " points dans la prévision bayésienne sur le premier",
+  "en": ""
+ },
+ {
+  "fr": "'2026-09-09' -> '09/09/2026' (date d'enquête, lecture française).",
+  "en": ""
+ },
+ {
+  "fr": "'2026-09-14 15:29' -> '14/09/2026 à 15:29' (date de génération, lecture française).",
+  "en": ""
+ },
+ {
+  "fr": "(deux objets différents) ; l\\",
+  "en": ""
+ },
+ {
+  "fr": "(source externe) — la page reste complète par ailleurs.</p>",
+  "en": ""
+ },
+ {
+  "fr": ". Deux méthodes opposées, la même source de sondages : ",
+  "en": ""
+ },
+ {
+  "fr": ". La largeur bayésienne contient l\\",
+  "en": ""
+ },
+ {
+  "fr": ". Là où des écarts subsistent, l\\",
+  "en": ""
+ },
+ {
+  "fr": "14/09/2026 à 15:29",
+  "en": ""
+ },
+ {
+  "fr": "2027, candidat par candidat : intention de vote, intervalle de confiance à ",
+  "en": ""
+ },
+ {
+  "fr": "95 %, amplitude, effectif corrigé des poids et instituts contributeurs.",
+  "en": ""
+ },
+ {
+  "fr": "<a href=\"/observatoire/backtest/\">Voir le rétro-test complet, échéance par échéance</a>.</p>",
+  "en": ""
+ },
+ {
+  "fr": "<a href=\"/observatoire/lois/\">Veille législative</a>",
+  "en": ""
+ },
+ {
+  "fr": "<h3 style=\"margin-top:24px\">La prévision bayésienne, en chiffres</h3><ul class=\"tight small\" style=\"max-width:none\">",
+  "en": ""
+ },
+ {
+  "fr": "<h3 style=\"margin-top:24px\">Validation : la méthode rejouée sur 2022</h3>",
+  "en": ""
+ },
+ {
+  "fr": "<h3 style=\"margin-top:24px\">Validation</h3><p class=\"small muted\">Rétro-test 2022 ",
+  "en": ""
+ },
+ {
+  "fr": "<li><strong>Ils répondent à « qui gagne »</strong> — P(second tour), P(victoire), duels — ce ",
+  "en": ""
+ },
+ {
+  "fr": "<li><strong>Le décalage a une cause connue.</strong> Nos chiffres de milieu de tableau étaient ",
+  "en": ""
+ },
+ {
+  "fr": "<li><strong>Le reste du tableau suit la même logique</strong> : ",
+  "en": ""
+ },
+ {
+  "fr": "<li><strong>Mise à jour quotidienne</strong> par GitHub Action ; sortie arrêtée au ",
+  "en": ""
+ },
+ {
+  "fr": "<li><strong>Validation : match nul.</strong> Ils publient rétro-test 2022, convergence MCMC et ",
+  "en": ""
+ },
+ {
+  "fr": "<li><strong>Validation</strong> : rétro-test 2022 sur les duels, erreur absolue moyenne ",
+  "en": ""
+ },
+ {
+  "fr": "<li><strong>{s.get(\"surveys\", \"?\")} enquêtes</strong> et ",
+  "en": ""
+ },
+ {
+  "fr": "<li>Pas assez de candidats pour comparer les écarts.</li>",
+  "en": ""
+ },
+ {
+  "fr": "<meta property=\"og:site_name\" content=\"Diléviathan\">",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small muted\" style=\"color:var(--amber);max-width:none\">⚠ Données mises à jour le ",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small muted\" style=\"margin-top:10px\">{len(det)} sondages agrégés, du ",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small muted\" style=\"max-width:none\">Ce que cette page garde : lisibilité totale (aucune dépendance, ",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small muted\">Aucun sondage dans la fenêtre d\\",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small muted\">Prévision bayésienne indisponible à cette génération ",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small muted\">Série indisponible (pas assez de sondages publiés).</p>",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small muted\">† enquête extraite par nos soins de la notice publiée par la ",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small\" style=\"max-width:none\">Rejouée sur la campagne 2022 (sondages compilés sous licence MIT, résultat ",
+  "en": ""
+ },
+ {
+  "fr": "<p class=\"small\" style=\"max-width:none;margin-top:12px\"><strong>Hors scénario aujourd\\",
+  "en": ""
+ },
+ {
+  "fr": "<p>Conformément à l'article 11 de la loi du 19 juillet 1977, aucun sondage électoral ne",
+  "en": ""
+ },
+ {
+  "fr": "<p>Le scrutin a lieu le {frd(str(sus))}. Cette page reprendra sa mise à jour après la",
+  "en": ""
+ },
+ {
+  "fr": "<strong>{s.get(\"hypotheses\", \"?\")} hypothèses</strong> de candidatures dépouillées ",
+  "en": ""
+ },
+ {
+  "fr": "<th class=\"num small\">médiane 1<sup>er</sup> tour</th>",
+  "en": ""
+ },
+ {
+  "fr": "<th class=\"num\" colspan=\"2\">MieuxVoter<br><span class=\"muted small\">agrégation des ",
+  "en": ""
+ },
+ {
+  "fr": "<th class=\"num\" colspan=\"4\">Prévision bayésienne<br><span class=\"muted small\">",
+  "en": ""
+ },
+ {
+  "fr": "<th class=\"num\">Interrogés</th><th class=\"num\">Marge</th><th>Référence de la notice</th></tr>\\n",
+  "en": ""
+ },
+ {
+  "fr": "<th class=\"num\">Probabilité du duel</th><th class=\"num\">Issue</th></tr>",
+  "en": ""
+ },
+ {
+  "fr": "<tr><th class=\"num small\">scénario ",
+  "en": ""
+ },
+ {
+  "fr": "><h3>Fraîcheur</h3><p>{agg[",
+  "en": ""
+ },
+ {
+  "fr": "><span>Dernière enquête</span><b>{agg[",
+  "en": ""
+ },
+ {
+  "fr": "><span>Période couverte</span><b>{frd(agg[",
+  "en": ""
+ },
+ {
+  "fr": "><span>Scénario retenu</span><b>{agg[",
+  "en": ""
+ },
+ {
+  "fr": "><span>Sondages agrégés, {agg[",
+  "en": ""
+ },
+ {
+  "fr": "><span>Sondages agrégés</span><b>{agg[",
+  "en": ""
+ },
+ {
+  "fr": "><span>Sondages du scénario, {agg[",
+  "en": ""
+ },
+ {
+  "fr": ">Données : <a href=",
+  "en": ""
+ },
+ {
+  "fr": ">Données</a><a href=",
+  "en": ""
+ },
+ {
+  "fr": ">Interrogés</th><th class=",
+  "en": ""
+ },
+ {
+  "fr": ">Méthode</a><a href=",
+  "en": ""
+ },
+ {
+  "fr": ">Probabilité du duel</th><th class=",
+  "en": ""
+ },
+ {
+  "fr": ">Prévision bayésienne<br><span class=",
+  "en": ""
+ },
+ {
+  "fr": ">Scénario retenu : {agg[",
+  "en": ""
+ },
+ {
+  "fr": ">scénario ' + str(agg[",
+  "en": ""
+ },
+ {
+  "fr": "Agrégation des sondages de la présidentielle 2027",
+  "en": ""
+ },
+ {
+  "fr": "Archive quotidienne (une ligne par jour) : la mémoire réelle du projet, réécrite sans doublon.",
+  "en": ""
+ },
+ {
+  "fr": "Aucun sondage exploitable dans la fenêtre.",
+  "en": ""
+ },
+ {
+  "fr": "Bloc de validation, affiché avec la comparaison bayésienne.",
+  "en": ""
+ },
+ {
+  "fr": "Ce que la loi impose, et ce que cette page en fait — sans jamais se dire elle-même « sondage ».",
+  "en": ""
+ },
+ {
+  "fr": "Ce que le Parlement vote sur le numérique, les données et la surveillance : les scrutins publics de l'Assemblée nationale, par texte et par groupe.",
+  "en": ""
+ },
+ {
+  "fr": "Cellule de variation : ▲/▼ au-delà de 1 point, gris en deçà (marge).",
+  "en": ""
+ },
+ {
+  "fr": "Ces noms ne sont pas testés dans la liste retenue par les questionnaires les plus récents : ",
+  "en": ""
+ },
+ {
+  "fr": "Charge amont sans liste de sondages : clés {sorted(payload)}",
+  "en": ""
+ },
+ {
+  "fr": "Comment l'observatoire se fabrique : sources, cache, calculs, pages statiques, publication et orchestration quotidienne, en un schéma.",
+  "en": ""
+ },
+ {
+  "fr": "Comparaison honnête : moyenne maison (scénario verrouillé) vs prévision bayésienne.",
+  "en": ""
+ },
+ {
+  "fr": "Dernières mises à jour",
+  "en": ""
+ },
+ {
+  "fr": "Deux enseignements désagréables : la pondération par fraîcheur n\\",
+  "en": ""
+ },
+ {
+  "fr": "Formatage français : virgule décimale, pas de ',0' inutile.",
+  "en": ""
+ },
+ {
+  "fr": "Il n'est pas testé dans la liste retenue par les questionnaires les plus récents : ",
+  "en": ""
+ },
+ {
+  "fr": "La méthode d'agrégation rejouée sur la campagne de 2022 : erreur moyenne, grilles de sensibilité, et la décision qui en découle.",
+  "en": ""
+ },
+ {
+  "fr": "Les candidats à la présidentielle 2027",
+  "en": ""
+ },
+ {
+  "fr": "Les candidats à la présidentielle 2027 — qui est déclaré, qui ne l'est pas",
+  "en": ""
+ },
+ {
+  "fr": "Les intervalles du 2ᵉ et du 3ᵉ se recouvrent : l'écart n'est pas significatif au vu des marges.",
+  "en": ""
+ },
+ {
+  "fr": "Mini-courbe SVG, sans JavaScript, sur les points disponibles de la série.",
+  "en": ""
+ },
+ {
+  "fr": "Moyenne de sondages de la présidentielle 2027 : pondération, intervalle, marges de chaque enquête, mentions légales et limites.",
+  "en": ""
+ },
+ {
+  "fr": "Moyenne pondérée des enquêtes publiées pour l'élection présidentielle de ",
+  "en": ""
+ },
+ {
+  "fr": "Niveau (sans signe), une décimale, virgule française.",
+  "en": ""
+ },
+ {
+  "fr": "Nom de candidat ramené à une forme comparable (accents, casse, tirets, espaces).",
+  "en": ""
+ },
+ {
+  "fr": "Nombre avec séparateurs de milliers (espace fine insécable).",
+  "en": ""
+ },
+ {
+  "fr": "Nombre à une décimale, virgule française, sans signe : 3.5 -> 3,5.",
+  "en": ""
+ },
+ {
+  "fr": "Observatoire des sondages de la présidentielle 2027 : agrégation sourcée des enquêtes publiées, méthode publiée, limites affichées.",
+  "en": ""
+ },
+ {
+  "fr": "Prépare les observations (institut, poids, {candidat: valeur}) pour l'estimation des effets.",
+  "en": ""
+ },
+ {
+  "fr": "Présidentielle 2027 — agrégation des sondages",
+  "en": ""
+ },
+ {
+  "fr": "Présidentielle 2027 — agrégation des sondages, méthode et limites",
+  "en": ""
+ },
+ {
+  "fr": "Présidentielle 2027 — observatoire des sondages",
+  "en": ""
+ },
+ {
+  "fr": "Présidentielle 2027 — observatoire des sondages, agrégation sourcée",
+  "en": ""
+ },
+ {
+  "fr": "Qui est candidat à la présidentielle de 2027 : déclarés, candidatures sous condition, suspens, retraits, et ce qu'il reste à trancher.",
+  "en": ""
+ },
+ {
+  "fr": "Rapproche un candidat de notre tableau de son équivalent dans la prévision.",
+  "en": ""
+ },
+ {
+  "fr": "Résumé des trois dernières. Le journal complet, avec les sources et le cadre légal, est dans la section Citer un chiffre de la page Agrégation.",
+  "en": ""
+ },
+ {
+  "fr": "Résumé du rétro-test 2022 s'il a été calculé (backtest2022.py). None sinon.",
+  "en": ""
+ },
+ {
+  "fr": "Rétro-test 2022 — la méthode mise à l'épreuve",
+  "en": ""
+ },
+ {
+  "fr": "Rétro-test 2022 — la méthode à l'épreuve",
+  "en": ""
+ },
+ {
+  "fr": "Une décimale, virgule française, signe typographique : pour les colonnes de tableau.",
+  "en": ""
+ },
+ {
+  "fr": "Valeurs d'un sondage après correction d'effet de maison (bornées à zéro).",
+  "en": ""
+ },
+ {
+  "fr": "Valeurs du jour injectées dans les textes rédigés (jetons {{...}} de content/observatoire.json).",
+  "en": ""
+ },
+ {
+  "fr": "Veille législative — les textes numériques votés",
+  "en": ""
+ },
+ {
+  "fr": "Veille législative — les textes « technologie et pouvoir »",
+  "en": ""
+ },
+ {
+  "fr": "Vrai si la publication de chiffres est interdite à cette date (veille ou jour de scrutin).",
+  "en": ""
+ },
+ {
+  "fr": "]}, scénario {VALEURS[",
+  "en": ""
+ },
+ {
+  "fr": "agrégation n\\",
+  "en": ""
+ },
+ {
+  "fr": "agrégation ne dit que la dispersion des ",
+  "en": ""
+ },
+ {
+  "fr": "agrégation telle qu",
+  "en": ""
+ },
+ {
+  "fr": "amont gagne toujours : dès qu",
+  "en": ""
+ },
+ {
+  "fr": "apport disparaît d",
+  "en": ""
+ },
+ {
+  "fr": "apport disparaît de lui-même et la chaîne redevient exactement la sienne. C",
+  "en": ""
+ },
+ {
+  "fr": "arrêtée au {fc.get('as_of')}, ",
+  "en": ""
+ },
+ {
+  "fr": "au moins {agg[\"min_polls\"]} enquêtes l",
+  "en": ""
+ },
+ {
+  "fr": "aucun modèle latent à croire sur parole), chiffre explicite d\\",
+  "en": ""
+ },
+ {
+  "fr": "aucun écart ne dépasse ",
+  "en": ""
+ },
+ {
+  "fr": "aucun écart supérieur à 1 point sur 7 ou 28 jours (tous dans la marge)",
+  "en": ""
+ },
+ {
+  "fr": "autre ne peut prétendre avoir raison : ",
+  "en": ""
+ },
+ {
+  "fr": "candidatures, la prévision bayésienne une moyenne pondérée sur toutes les hypothèses : ",
+  "en": ""
+ },
+ {
+  "fr": "corrigé des poids ; sondages = nombre d'enquêtes agrégées pour ce candidat",
+  "en": ""
+ },
+ {
+  "fr": "des sondages (licence MIT) et la moyenne pondérée calculée à partir d\\",
+  "en": ""
+ },
+ {
+  "fr": "donnée non licite. Ce qu\\",
+  "en": ""
+ },
+ {
+  "fr": "effectif corrigé des poids (milliers)",
+  "en": ""
+ },
+ {
+  "fr": "enquête et la campagne à venir ; l\\",
+  "en": ""
+ },
+ {
+  "fr": "enquête et la taille de l",
+  "en": ""
+ },
+ {
+  "fr": "enquêtes de l",
+  "en": ""
+ },
+ {
+  "fr": "enquêtes de la couche locale réellement utilisées (celles que l",
+  "en": ""
+ },
+ {
+  "fr": "est pas un modèle de prévision.</strong> Elle n",
+  "en": ""
+ },
+ {
+  "fr": "est pas un résultat, et une intention de vote n",
+  "en": ""
+ },
+ {
+  "fr": "exercice : notre pondération par fraîcheur n",
+  "en": ""
+ },
+ {
+  "fr": "exercice, un seul millésime, une erreur de 3,8 points à J−132 et deux réglages corrigés ",
+  "en": ""
+ },
+ {
+  "fr": "face à la dernière enquête seule (",
+  "en": ""
+ },
+ {
+  "fr": "hypothèse ne peuvent servir : l",
+  "en": ""
+ },
+ {
+  "fr": "imports locaux : {len(gardes)} enquête(s) ajoutée(s) à la source amont",
+  "en": ""
+ },
+ {
+  "fr": "incohérence qu",
+  "en": ""
+ },
+ {
+  "fr": "institut pour le candidat le mieux placé de son enquête.</p>",
+  "en": ""
+ },
+ {
+  "fr": "intentions de vote qui dépasse 100 % n",
+  "en": ""
+ },
+ {
+  "fr": "intervalle de confiance à 95 % (points de pourcentage)",
+  "en": ""
+ },
+ {
+  "fr": "le plus large écart des trois est de ",
+  "en": ""
+ },
+ {
+  "fr": "mesurées (moyenne pondérée). Quatre colonnes de droite : leurs <strong>probabilités</strong> ",
+  "en": ""
+ },
+ {
+  "fr": "méthode publiée plus bas — jamais un chiffre repris tel quel.</p>",
+  "en": ""
+ },
+ {
+  "fr": "même source de données, deux modèles, deux façons de se tromper.</li>",
+  "en": ""
+ },
+ {
+  "fr": "nombre d'enquêtes agrégées",
+  "en": ""
+ },
+ {
+  "fr": "non calculé (lancer <code>python3 backtest2022.py</code>).</p>",
+  "en": ""
+ },
+ {
+  "fr": "officiel vérifié), notre agrégation affiche <strong>",
+  "en": ""
+ },
+ {
+  "fr": "parmi les candidats déclarés :</strong> {montres}. {suite}</p>",
+  "en": ""
+ },
+ {
+  "fr": "prévision bayésienne : ",
+  "en": ""
+ },
+ {
+  "fr": "publication suspendue (scrutin du {sus}) : aucune donnée écrite.",
+  "en": ""
+ },
+ {
+  "fr": "publiée : R̂ max {d.get(\"max_rhat\", \"?\")}, ESS min {frnum(d.get(\"min_ess_bulk\", 0))}.</li>",
+  "en": ""
+ },
+ {
+  "fr": "qualité des instituts ajustée. Nous publions désormais notre propre rétro-test 2022 — même ",
+  "en": ""
+ },
+ {
+  "fr": "que cette page ne sait pas faire et ne prétend pas faire.</li>",
+  "en": ""
+ },
+ {
+  "fr": "rejoignent — un modèle bayésien et une moyenne expliquée ne convergent pas par hasard.</li>",
+  "en": ""
+ },
+ {
+  "fr": "rien au-delà de 1 point sur 7 jours ; sur 28 jours : ",
+  "en": ""
+ },
+ {
+  "fr": "rien à publier, la page reste en l'état.",
+  "en": ""
+ },
+ {
+  "fr": "sans étiquette",
+  "en": ""
+ },
+ {
+  "fr": "scénario {agg['scenario']} : {agg['polls_in_scenario']} sondages",
+  "en": ""
+ },
+ {
+  "fr": "sondages compilés</span></th>",
+  "en": ""
+ },
+ {
+  "fr": "sondages source : {agg['total_polls_all']} | fenêtre : {agg['polls_in_window']} | ",
+  "en": ""
+ },
+ {
+  "fr": "sur {frnum(s.get(\"raw_sample_tour1\", 0))} bruts, après pondération.</li>",
+  "en": ""
+ },
+ {
+  "fr": "systématiquement plus bas que les leurs : c\\",
+  "en": ""
+ },
+ {
+  "fr": "sélection du scénario de 60 à 90 jours, après mesure sur 2022. Depuis, les deux lectures se ",
+  "en": ""
+ },
+ {
+  "fr": "série : {len(series)} points hebdo | archive quotidienne : {n_hist} jour(s) ",
+  "en": ""
+ },
+ {
+  "fr": "un scénario précis de ",
+  "en": ""
+ },
+ {
+  "fr": "un sondage après correction d",
+  "en": ""
+ },
+ {
+  "fr": "une page à l",
+  "en": ""
+ },
+ {
+  "fr": "unité de chaque colonne et le lien vers la méthode : c",
+  "en": ""
+ },
+ {
+  "fr": "verrouillé, n\\",
+  "en": ""
+ },
+ {
+  "fr": "y apparaît pas, même suivi depuis des mois. La ligne existe pour qu",
+  "en": ""
+ },
+ {
+  "fr": "{d.get(\"n_transferts_2022\", \"?\")} reports de voix de 2022 modélisés.</li>",
+  "en": ""
+ },
+ {
+  "fr": "{j}/{m}/{y} à {h}",
+  "en": ""
+ },
+ {
+  "fr": "Écarts par candidat : aujourd'hui vs il y a 7 jours (et 28 jours à titre de contexte).",
+  "en": ""
+ },
+ {
+  "fr": "écart mesure surtout la différence de question posée.</li>",
+  "en": ""
+ },
+ {
+  "fr": "écart, nous ne commentons pas</strong> — l",
+  "en": ""
+ },
+ {
+  "fr": "écart</h3><ul class=\"tight small\" style=\"max-width:none\">",
+  "en": ""
+ },
+ {
+  "fr": "édifiante.</p>",
+  "en": ""
+ },
+ {
+  "fr": "était le 13/11 : compter d",
+  "en": ""
+ },
+ {
+  "fr": "était une liste de sondages ; c",
+  "en": ""
+ },
+ {
+  "fr": "évolution compte, et elle est plus robuste (beaucoup plus d",
+  "en": ""
+ },
+ {
+  "fr": "⚠ polls_importes.json illisible : chaîne amont seule",
+  "en": ""
+ },
+ {
+  "fr": "⚠ {len(arr) - len(bons)} entrée(s) de sondage ignorée(s) : format inattendu",
+  "en": ""
+ }
+]

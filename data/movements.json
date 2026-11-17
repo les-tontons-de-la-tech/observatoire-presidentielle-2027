@@ -1,9 +1,11 @@
 {
- "generated": "2026-11-17 18:27",
+ "generated": "2026-11-17 18:36",
  "scenario": "H67",
  "window": 90,
  "polls_window": 146,
+ "polls_scenario": 19,
  "polls_agg": 22,
+ "agg_window": 180,
  "last": "2026-11-13",
  "movs": [
   {

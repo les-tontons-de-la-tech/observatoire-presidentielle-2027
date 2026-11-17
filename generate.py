@@ -83,6 +83,52 @@ PAGES_LD = {
 }
 
 
+# Métadonnées anglaises. Mêmes clés, mêmes types que PAGES_LD : une page française et sa
+# jumelle anglaise ne peuvent pas décrire deux choses différentes. Les titres restent sous
+# 60 caractères et les descriptions entre 120 et 160, comme leurs équivalents français.
+PAGES_LD_EN = {
+    "/observatoire/": ("2027 presidential election — poll monitor, sourced aggregation",
+        "Poll monitor for the 2027 presidential election: sourced aggregation of the published surveys, published method, limits displayed.",
+        "WebPage"),
+    "/observatoire/sondages/": ("2027 presidential election — poll aggregation, method and limits",
+        "Averaging the 2027 presidential election polls: weighting, confidence interval, margins for each survey, legal notice and limits.",
+        "Article"),
+    "/observatoire/candidats/": ("Candidates in the 2027 presidential election — declared or not",
+        "Who is running in the 2027 presidential election: declared candidates, conditional bids, pending cases, withdrawals, and what remains to be settled.",
+        "Article"),
+    "/observatoire/backtest/": ("2022 backtest — the method put to the test",
+        "The aggregation method replayed on the 2022 campaign: average error, sensitivity grids, and the decision that follows from it.",
+        "Article"),
+    "/observatoire/lois/": ("Legislative watch — technology and power bills",
+        "What Parliament votes on digital, data and surveillance: the public votes of the National Assembly, by bill and by political group.",
+        "Article"),
+    "/observatoire/workflow/": ("How this monitor is built",
+        "How the monitor is built: sources, cache, calculations, static pages, publication and daily orchestration, in one diagram.",
+        "TechArticle"),
+}
+
+TITRES_COURTS_EN = {
+    "/observatoire/": "2027 election — poll monitor",
+    "/observatoire/sondages/": "2027 election — poll aggregation",
+    "/observatoire/candidats/": "Candidates in the 2027 election",
+    "/observatoire/backtest/": "2022 backtest — the method at work",
+    "/observatoire/lois/": "Legislative watch — tech bills voted",
+    "/observatoire/workflow/": "How this monitor is built",
+}
+
+
+def table_ld(lang):
+    """Table de métadonnées de la langue demandée (français par défaut)."""
+    return PAGES_LD_EN if lang == "en" else PAGES_LD
+
+
+def url_page(chemin, lang="fr"):
+    """Adresse publique d'une page, arborescence anglaise comprise."""
+    if lang == "en":
+        return SITE_URL + chemin.replace("/observatoire/", "/observatoire/en/", 1)
+    return SITE_URL + chemin
+
+
 DESC_MIN = 120
 DESC_MAX = 160
 
@@ -164,7 +210,7 @@ def meta_description(chemin, lang="fr"):
     La borne basse est un objectif d'écriture, pas une contrainte de code : on ne complète pas
     une description trop courte, on ne l'invente pas — c'est à l'auteur de l'écrire.
     """
-    return couper_description(PAGES_LD[chemin][1])
+    return couper_description(table_ld(lang)[chemin][1])
 
 
 def titre_court(chemin, lang="fr"):
@@ -174,7 +220,8 @@ def titre_court(chemin, lang="fr"):
     seule la balise <title> est raccourcie, parce qu'au-delà d'une soixantaine de caractères
     les moteurs en coupent la fin eux-mêmes, sans choisir où. Audit Ahrefs du 17/09/2026.
     """
-    return TITRES_COURTS.get(chemin, PAGES_LD[chemin][0])
+    table_courts = TITRES_COURTS_EN if lang == "en" else TITRES_COURTS
+    return table_courts.get(chemin, table_ld(lang)[chemin][0])
 
 
 TITRES_COURTS = {
@@ -196,13 +243,13 @@ def meta_social(chemin, lang="fr"):
     trois ne puissent pas diverger.
     """
     from html import escape
-    titre, description, _ = PAGES_LD[chemin]
-    url = SITE_URL + chemin
+    titre, description, _ = table_ld(lang)[chemin]
+    url = url_page(chemin, lang)
     image = SITE_URL + "/images/og.jpg"
     return "\n".join([
         '<meta property="og:type" content="article">',
         '<meta property="og:site_name" content="Diléviathan">',
-        '<meta property="og:locale" content="fr_FR">',
+        f'<meta property="og:locale" content="{"en_GB" if lang == "en" else "fr_FR"}">',
         f'<meta property="og:url" content="{url}">',
         f'<meta property="og:title" content="{escape(titre)}">',
         f'<meta property="og:description" content="{escape(description)}">',
@@ -224,8 +271,8 @@ def ld_json(chemin, lang="fr"):
     qui permet à un moteur de rattacher cette page à une personne et à une organisation.
     """
     import json as _json
-    titre, description, type_page = PAGES_LD[chemin]
-    url = SITE_URL + chemin
+    titre, description, type_page = table_ld(lang)[chemin]
+    url = url_page(chemin, lang)
     graphe = {
         "@context": "https://schema.org",
         "@graph": [
@@ -235,7 +282,7 @@ def ld_json(chemin, lang="fr"):
                 "url": url,
                 "name": titre,
                 "description": description,
-                "inLanguage": "fr-FR",
+                "inLanguage": "en-GB" if lang == "en" else "fr-FR",
                 "dateModified": TODAY.isoformat(),
                 "isPartOf": {"@id": SITE_URL + "/#website"},
                 "author": {"@id": SITE_URL + "/#person"},
@@ -1943,7 +1990,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
   </ul>
 </section>
 
-{changelog_bloc(3, m("Dernières mises à jour", "Latest updates"), m("Résumé des trois dernières. Le journal complet, avec les sources et le cadre légal, est dans la section Citer un chiffre de la page Agrégation.", "Summary of the last three. The full log, with sources and the legal framework, is in the Citing a figure section of the Aggregate page."), VALEURS)}
+{changelog_bloc(3, m("Dernières mises à jour", "Latest updates"), m("Résumé des trois dernières. Le journal complet, avec les sources et le cadre légal, est dans la section Citer un chiffre de la page Agrégation.", "Summary of the last three. The full log, with sources and the legal framework, is in the Citing a figure section of the Aggregate page."), VALEURS, lang)}
 </main>
 
 <footer class="wrap">

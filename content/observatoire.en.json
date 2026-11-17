@@ -1,0 +1,338 @@
+{
+  "_lisez_moi": "Textes rédigés de l'observatoire. Ce fichier est éditorial : il ne contient aucun chiffre calculé. Les chiffres viennent des scripts (generate.py, backtest2022.py, candidats.py) et de data/*.json. Toute modification ici doit être accompagnée d'une entrée de changelog datée.",
+  "maj": "2026-09-17",
+  "changelog": [
+    {
+      "date": "2026-11-16",
+      "nature": "chiffres",
+      "titre": "The scenario shifts to H67, and the page moves from 5 to 13 November",
+      "texte": "The upstream compilation stopped at the poll of 10 November and had not picked up the two notices published since. They were extracted from the documents of the Commission des sondages: ELABE (fieldwork 12-13 November, 1,500 respondents, six configurations) and OpinionWay (10-12 November, 1,001 respondents, two configurations), eight tables in all, each summing to 100.0. The page now counts 400 polls, 146 of them over the last 90 days, and its most recent poll is the one of 13 November. The reference list of the main table changes at the same time: H42 (ten names) was no longer tested by any pollster after 5 November, while H67 (eleven names, with Gabriel Attal and Édouard Philippe) was still tested on 13 November. The retained scenario is now the list tested most recently among those with at least three polls over 90 days, no longer the one with the most polls. Marine Le Pen stays at 34.3%; Édouard Philippe moves to 12.7% and Gabriel Attal appears at 6.1%, because both men are in the list — these two figures do not compare with the 16.2% of the ten-name list, which measured a different questionnaire."
+    },
+    {
+      "date": "2026-11-04",
+      "nature": "chiffres",
+      "titre": "Seven notices extracted, the page moves from 8 to 29 October",
+      "texte": "The upstream compilation had not integrated a poll since 16 October and was still serving the one of 8 October. The seven notices published since were extracted from the documents of the Commission des sondages: OpinionWay (13-14 and 21-22 October), ELABE (14-16), Harris Interactive (19-21), Cluster17 (19-22), Ipsos BVA (21-22) and IFOP (27-29), that is 24 voting-intention tables from six pollsters. Four carry the aggregated scenario and move the latest poll from 8 to 29 October. Each table sums to 100.0 and every name was matched against our list of candidates before writing; three second-round duels were set aside. The polls thus added live in a local layer that the upstream compilation discards as soon as it publishes the same poll: the contribution erases itself on the day the compilation catches up, and those polls carry † in the polls table."
+    },
+    {
+      "date": "2026-10-14",
+      "nature": "données",
+      "titre": "Thirteen candidate rows receive their date and their source",
+      "texte": "The thirteen rows that cited the census article of LCP, eleven of which had no date, now carry a sourced and verified date: Nathalie Arthaud (8 December 2025, BFM TV), Nicolas Dupont-Aignan (8 March 2025, Le Figaro), Florian Philippot (9 May 2026, BFM TV), François Asselineau (21 March 2026, L'Opinion), Clara Egger (20 April 2026, L'Opinion), Antoine Mikolajczak (27 June 2026, La République du Centre), Francis Lalanne (19 August 2026, CNEWS), Marine Tondelier (22 October 2025, Le Figaro), Clémentine Autain (14 June 2025, La Tribune Dimanche), Benjamin Lucas (14 May 2026, Le Monde), Gérald Darmanin (17 August 2026, Le Figaro) and Sarah Knafo (9 May 2026, Le Journal du Dimanche). Every link was opened and its date sentence re-read before writing; pages that block robots were read another way or replaced by an accessible source. Two substantive changes: Clémentine Autain, who gave up her primary candidacy on 11 July 2026, moves from conditional to withdrawn status, like Benjamin Lucas, withdrawn for the same reason. Dominique de Villepin remains without a date, for lack of a declared candidacy: the dated fact behind his status is in a comment (franceinfo, 29 September 2026). Nine rows remain without a date, all of them outside declared candidacies, and the page now says so with a computed count rather than a fixed one. No polling figure changes."
+    },
+    {
+      "date": "2026-10-14",
+      "nature": "sources",
+      "titre": "The candidacy watch now follows the LCP topic page",
+      "texte": "The census article of LCP ('Présidentielle 2027 : qui sont les candidats ?') had not been updated since 24 September 2026: the Monday weekly watch could therefore stay silent for whole weeks on real declarations. It now follows the 'Présidentielle 2027' topic, whose last-modified date is readable and whose grid gives the latest published headlines, each with its date. When something moves, the message names the articles that appeared and, for each of them, the people on our list whom it concerns. The source was measured before being connected: 12 articles read, a modification date of 14 October, and no person cited in those headlines missing from our list. A page that answers without being readable any more is flagged as a reading problem, not as a network one. No polling figure changes."
+    },
+    {
+      "date": "2026-10-14",
+      "nature": "données",
+      "titre": "Natacha Polony joins the list of candidates",
+      "texte": "Natacha Polony, 51, essayist, former editor-in-chief of Marianne and editor of the magazine L'Audace !, announced her candidacy on the morning of 14 October 2026, exclusively on France Inter: 'Nous sommes dans le chaos, la situation m'oblige, donc oui je suis candidate à l'élection présidentielle.' She had launched her movement in early September 2026 for 'tous les orphelins de la politique' and filed on 29 September the statutes of her campaign-finance association. The row classes her as a declared candidacy and places her on the left, her claimed references being the 'gaullisme social' of Philippe Séguin and the republican left of Jean-Pierre Chevènement. Sources: France Inter, L'invité de 7h50 (14/10/2026); Le Figaro (14/10/2026); La Nouvelle République (30/08/2026). No polling figure changes, and no poll published to date tests her name."
+    },
+    {
+      "date": "2026-10-12",
+      "nature": "données",
+      "titre": "Gilles Platret, the miscellaneous-right mayor of Chalon-sur-Saône, joins the list",
+      "texte": "Gilles Platret, 53, miscellaneous-right mayor of Chalon-sur-Saône since 2014 and regional councillor for Bourgogne-Franche-Comté, launched on the evening of 8 October 2026, at the public meeting 'Parlons de la France' in Chalon-sur-Saône, a process that should lead him to be a candidate. That evening he did not use the word 'candidate' ('ce que je viens de dire ce soir, c'est que je lançais le chemin'); his statement of the following day speaks of 'une démarche qui doit le conduire à être candidat', and the press records an announced candidacy. The row classes him as a declared candidacy, the nuance appears in his comment. A former vice-president of Les Républicains until 2023, he has sat among the miscellaneous right since 2024. He still has to gather the 500 signatures of elected officials: he announces a tour of France. Sources: BFM TV (09/10/2026), France 3 Bourgogne-Franche-Comté (09/10/2026), CNEWS (10/10/2026). No polling figure changes, and no poll published to date tests his name."
+    },
+    {
+      "date": "2026-10-11",
+      "nature": "données",
+      "titre": "Raphaël Glucksmann wins the social-democrat primary and becomes a candidate",
+      "texte": "Elected in the first round on 11 October 2026 with 66% of the vote (79,613 votes out of the 120,307 voters announced by the organising commission, for 140,282 registered voters), he moves from conditional to declared status: the primary condition is met. The four other candidates in the primary, Olivier Faure, Ségolène Royal, Emmanuel Maurel and Jérôme Guedj, move to supporter status, each with the declaration that documents it. The official tallies of the five candidates add up exactly to the 120,307 voters recorded. Sources: BFM TV and La Tribune of 11 October 2026. The verification date of the list moves to 11 October 2026. No polling figure changes."
+    },
+    {
+      "date": "2026-10-01",
+      "nature": "présentation",
+      "titre": "The week-by-week table now names the scenario it follows — and the names that drop out of it stay displayed",
+      "texte": "The table 'Change, week by week' follows the list of names that the most recent questionnaires test: a name that this list no longer tested dropped out without explanation — Édouard Philippe on 30 September, when a YouGov poll brought the list without him to 11 polls against 10 for the list with him. The table title now names the retained scenario, a row 'outside the scenario today' shows the all-lists value of the absent names — limited to declared candidacies, cross-checked against data/candidats2027.json — and a strict tie between two lists is settled by the previous reading, not by the internal order of the data."
+    },
+    {
+      "date": "2026-09-22",
+      "nature": "correction",
+      "titre": "The date of the first round of the primary was wrong by one day",
+      "texte": "The page announced the socialist primary on 10 and 11 October. Two national sources, La Croix of 26 August and La Dépêche of 16 September, give 9-10 and 16-17 October: the first round is held on 9 and 10. The date was wrong in both places where it appeared, in the comment of a candidacy and in the method section; both are corrected. No other figure changes."
+    },
+    {
+      "date": "2026-09-22",
+      "nature": "correction",
+      "titre": "Two candidacies on the list no longer matched the source",
+      "texte": "Philippe Brun and Fabien Verdier were given as candidates in the socialist primary. The first was suspended by the Socialist Party and excluded from the primary; the second did not gather enough signatures and was excluded as well. Both rows move to withdrawn status, with their situation in a comment and a dated source. Their declaration date stays in the history of the list: what changed is their situation, not their record."
+    },
+    {
+      "date": "2026-09-22",
+      "nature": "correction",
+      "titre": "Poll collection now accepts the new shape of the upstream dataset",
+      "texte": "The dataset of Mieux Voter used to store the list of polls at the root of the file; it now stores it under a 'polls' key, alongside the source and the hypotheses. The collection read the whole document as a list: the aggregation failed on one run, and the candidates page stopped being rewritten without anything reporting it. The collection now accepts both shapes, and discards any unusable entry while saying so. The published figures did not change."
+    },
+    {
+      "date": "2026-09-22",
+      "nature": "présentation",
+      "titre": "The candidates page displays its regeneration date",
+      "texte": "The home page and the aggregation page already carried the date of their last regeneration; the candidates page was the only one that did not state its freshness. It now displays it, and the date writes itself on every run, from the same timestamp as the other pages."
+    },
+    {
+      "date": "2026-09-22",
+      "nature": "présentation",
+      "titre": "Page descriptions are now capped",
+      "texte": "Seven pages declare their description to search engines. Six happened to fit under the display limit, and the one of the 2017 backtest exceeded it. Descriptions are now brought under the limit, preferably cutting at the end of a sentence. Form only: no figure and no page text changes."
+    },
+    {
+      "date": "2026-09-21",
+      "nature": "nouveauté",
+      "titre": "The list of candidacies is checked every week",
+      "texte": "This list is kept by hand, and nothing monitored its sources. A weekly check now verifies the reference page cited in the file, its last-modified date and the names it cites, and speaks only if something has moved. It never edits the list: it flags, the author decides. The page displays the date of this check, which advances by itself each week when nothing has changed."
+    },
+    {
+      "date": "2026-09-20",
+      "nature": "nouveauté",
+      "titre": "A second backtest, on the 2017 campaign",
+      "texte": "The 2022 backtest measured the method on the campaign that had been used to tune it. The same method is replayed on the 2017 campaign, which it never saw: 91 poll dates reconstructed from the list of polls of Wikipedia (CC BY-SA), official results of the Ministry of the Interior under the Open Licence, cross-checked against two sources. At J-132, the mean error is 3.81 points, against 3.83 for 2022 at the same horizon: the method holds. The ranking, however, does not hold at that distance, since the announced top 2 is François Fillon then Emmanuel Macron, whereas the qualifiers were Emmanuel Macron and Marine Le Pen. At J-10, the error falls to 1.26 point and the right pair is found. At the horizon where this observatory publishes, the equivalent of J-215, the page would have shown nothing: 31 polls in the window, but only 2 in the most-tested candidacy field, below the threshold of three polls. That fragility was announced; it is now measured."
+    },
+    {
+      "date": "2026-09-17",
+      "nature": "correction",
+      "titre": "The backtest no longer states what the data do not show",
+      "texte": "One sentence of the backtest announced 'à l'échéance du', followed by an empty date, which no scenario reached three polls — the page would therefore have stayed empty. Check completed: the six horizons tested have ten to twelve polls each, none has ever lacked material. The sentence asserted a case that did not occur, because of a template that kept the formula even when the list of concerned horizons was empty. It now states what the data show, and recalls that the fragility remains entire: on a campaign poorer in polls, the threshold of three polls would not be reached and the aggregation would stay silent."
+    },
+    {
+      "date": "2026-09-17",
+      "nature": "présentation",
+      "titre": "All six pages declare their author, their publisher and their date",
+      "texte": "The six pages of the observatory carried no structured data: an answer engine could neither identify who writes, nor date the page, nor attach it to the site. Each now declares its author (Christophe Wiest), the publisher (Flying Kujira), the last-modified date and its place in the site. Two pages that had no description — Legislative watch and Backtest 2022 — now have one. The observatory is also measured from today on: its audience had until now been invisible. Form only: no figure changes."
+    },
+    {
+      "date": "2026-09-16",
+      "nature": "présentation",
+      "titre": "Canonical tags on the six pages of the observatory",
+      "texte": "The six pages of the observatory declared no canonical address. Since the server serves both /observatoire/ and /observatoire/index.html, both answered 200 with the same content without anything telling Google which one to keep: this is one of the causes of the 'Duplicate page without a user-selected canonical' line in the indexing report. Each page now carries, in its head, a canonical pointing to its own address. Form only: no figure and no page text has changed.",
+      "pages": [
+        "accueil",
+        "agrégation",
+        "candidats",
+        "rétro-test",
+        "veille législative",
+        "workflow"
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "nature": "correction",
+      "titre": "Total of intentions: 100% instead of 100.1%",
+      "texte": "The Aggregation page announced 'Total of intentions displayed: 100.1%'. The calculation added the ten intentions as they are displayed, that is already rounded to one decimal: those roundings did not offset each other and added +0.099 point to the sum. The total now covers the unrounded averages, which come to exactly 100.0000%. Each row remaining rounded for reading, their sum may deviate by a tenth from the total: the page says so, and the label becomes 'Total of intentions', since it is no longer the sum of the displayed values.",
+      "pages": [
+        "agrégation"
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "nature": "correction",
+      "titre": "Legislative watch: the page now says why it stops on 21 July",
+      "texte": "The page displayed 'period covered: 20/11/2024 → 21/07/2026' without a word of explanation, which reads as a watch that has broken down. Check of 16/09: the file of votes published by the Assemblée was reissued that same morning and is identical, byte for byte, to the one of the previous day — so the source has nothing more recent. Parliament is not sitting: the 2025-2026 ordinary session ended on 21 July 2026, the government gave up an extraordinary session in September, and the 2026-2027 ordinary session opens on 1 October 2026 (Le Monde, 3 September 2026). A banner now shows the date of the last published vote, the days elapsed and this explanation, with its source; it will disappear by itself when votes resume. Committees may sit outside session, but their work does not lead to public votes. The period covered now stops at the date of the last verification of the source and not at the date of the last vote: it says how far the data have been verified. The last published vote remains displayed separately, in the banner. The two dates do not coincide as long as Parliament is not sitting, and the page explains it.",
+      "pages": [
+        "veille législative"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "sources",
+      "titre": "Source check: no new poll since 10 September",
+      "texte": "Both sources were verified on 15/09. The compilation of polls still counts 233 surveys, the most recent dated 10/09 (OpinionWay): five days without new fieldwork, and the week of 14/09 has produced nothing yet. The daily automation of the source did run and found nothing. Its Bayesian forecast is recalculated every day, but its fieldwork stops on 10/09: it therefore does not move. The page is not frozen by a breakdown, it is frozen by the political calendar.",
+      "pages": [
+        "agrégation"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "nouveauté",
+      "titre": "Page 'Legislative watch': what Parliament votes on",
+      "texte": "A new page follows the bills in the technopolitical perimeter — digital, artificial intelligence, data, surveillance, cybersecurity, media — in the current legislature. Public votes in the Assemblée nationale are grouped by bill, with their final vote and the detail of each ballot. 6 bills and 99 votes retained, 92 of them held in 2026; bills from the previous legislature (loi SREN, majorité numérique) remain listed for reference.",
+      "pages": [
+        "veille législative"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "chiffres",
+      "titre": "Vote by political group on each bill, every MP counted",
+      "texte": "Each bill carries the breakdown of the vote by group, with the position, the votes for, against, abstentions, non-voters and absentees — the sum equals the strength of the group, checked line by line. The distribution bar is drawn on the strength of the group and not on voters alone: on the vote of 21 July 2026, the Rassemblement national counts 17 participants out of 122 members and 105 absentees, which the bar makes visible. The names and colours of the groups are those of the official reference of the Assemblée.",
+      "pages": [
+        "veille législative"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "correction",
+      "titre": "Group positions recalculated: the Assemblée field contradicts its own tallies",
+      "texte": "The 'majority position' field published by the Assemblée gives the Écologiste et Social group as 'against' with 19 votes for, 7 against and 7 abstentions, where its own page displays 'For'; the Rassemblement national is given as 'against' with 2 against for 14 abstentions. The displayed position is therefore recalculated from the votes cast in each group, and the reason is written on the page.",
+      "pages": [
+        "veille législative"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "nouveauté",
+      "titre": "Countdown to the first round, light/dark theme",
+      "texte": "The home page displays a real-time countdown to 18 April 2027 at 20 h (closing of polling stations), the Aggregation page a compact 'J−n' reminder. Election dates in French format (dd/mm/yyyy) everywhere.",
+      "pages": [
+        "accueil",
+        "agrégation"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "correction",
+      "titre": "Bayesian forecast: cache kept when the source is unavailable",
+      "texte": "The download function (_get_json) had disappeared from the generator, which displayed 'unavailable' permanently. Restored, and if the external source stops answering, the page keeps the last data with their update date, instead of disappearing.",
+      "pages": [
+        "accueil",
+        "agrégation"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "présentation",
+      "titre": "Body text widened to the full width of the cards",
+      "texte": "The introductory sentences of sections (Bayesian comparison, method, log, backtest) are no longer constrained to 36 characters per line: they fill the card, while technical notes and captions stay narrow.",
+      "pages": [
+        "accueil",
+        "agrégation",
+        "candidats",
+        "rétro-test",
+        "workflow"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "présentation",
+      "titre": "Zoomable workflow diagram",
+      "texte": "On the Workflow page, a click on the diagram opens it full screen: scroll wheel to zoom, drag to move, Escape to close.",
+      "pages": [
+        "workflow"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "données",
+      "titre": "Political blocs aligned with the official nomenclature",
+      "texte": "Candidates are classified according to the political nuances of the Ministry of the Interior (far left, left, centre, right, far right). La France insoumise moves to the far left, the greens join the left, the sovereigntists are split between far right and miscellaneous.",
+      "pages": [
+        "candidats"
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "nature": "nouveauté",
+      "titre": "Page 'Workflow': how the site is built",
+      "texte": "An architecture diagram, its captions and the backtest settings, integrated into the design of the site (light/dark theme, shared navigation). The page is generated by workflow.py (versioned), the diagram uses the colour palette of the site and switches with the theme.",
+      "pages": [
+        "agrégation"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "chiffres",
+      "titre": "Selection window widened to 90 days, house effects corrected",
+      "texte": "Two settings measured on the 2022 campaign, and retained because they reduce the error: the window moves from 60 to 90 days (it removes the horizon of September 2021 where the page published nothing) and each pollster is corrected for its mean deviation from the consensus of the others. Mean error over six horizons: 3.19 → 3.11 points. At J−132 alone, it remains 3.8 points — the gain is real but small, and saying so is part of the result.",
+      "pages": [
+        "agrégation",
+        "rétro-test"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "chiffres",
+      "titre": "Election dates set and verified",
+      "texte": "The first round will be held on Sunday 18 April 2027 and the second on Sunday 2 May 2027 (Conseil des ministres of 1 July 2026). The page now displays the deadline and suspends itself automatically on the eve and the day of the vote, in accordance with article 11 of the law of 19 July 1977.",
+      "pages": [
+        "accueil",
+        "agrégation",
+        "candidats"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "nouveauté",
+      "titre": "Page 'The candidates' and section 'Who will be on the ballot?'",
+      "texte": "Thirty-eight people recorded, each row carrying its source and its verification date; a withdrawal remains displayed, struck through. To this is added a measure, not a model: the share of published questionnaires that actually test each name. It produces a verifiable result — a single pair of names shares one slot without the two ever crossing, Marine Le Pen and Jordan Bardella, with a complete switch between March and September 2026.",
+      "pages": [
+        "candidats"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "texte",
+      "titre": "Source vocabulary clarified",
+      "texte": "The columns that attributed the figures to 'our aggregation' now say where the material comes from: 'MieuxVoter' for the compilation of polls, 'MieuxVoter estimate' and 'Bayesian forecast' in the backtest. The distinction is explicit: the compilation is theirs, the weighted average is computed here.",
+      "pages": [
+        "agrégation",
+        "rétro-test"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "texte",
+      "titre": "Section 'Read this before quoting a figure'",
+      "texte": "Published on this page: what can be quoted, in what form, and what would be false. An average of polls is not a poll, and a second-round probability is not a voting intention.",
+      "pages": [
+        "agrégation"
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "nature": "présentation",
+      "titre": "Light and dark theme, reading on phone and tablet",
+      "texte": "The four pages adopt the theme of the site, with the choice remembered. Contrasts checked in both themes: no text below the AA threshold. On a phone, the header fits on one line, tables turn into cards and the reading measure goes from 88 to 70 characters per line.",
+      "pages": [
+        "accueil",
+        "agrégation",
+        "rétro-test",
+        "candidats"
+      ]
+    }
+  ],
+  "a_lire": {
+    "titre": "Read this before quoting a figure",
+    "chapo": "This page does not publish polls. It publishes the average of polls published elsewhere, computed here. What you may quote from it, in what form, and what would be false.",
+    "regles_titre": "Quoting correctly",
+    "regles": [
+      "Quote the average, never a poll: 'average of the polls published on {{date_maj}}, scenario {{scenario}} ({{scenario_size}} candidates), {{polls_aggregated}} polls aggregated over a window of {{window}} days'. No pollster has published this figure: it is computed here.",
+      "Quote the interval with its level: '{{tete_nom}} {{tete_val}} % [{{tete_ic}}]', not '{{tete_val}} %'. A bare figure suggests a precision that the average does not have.",
+      "Do not write 'according to a poll'. This page interviews no one: it aggregates surveys already published, whose list, margins and sponsors are displayed further down.",
+      "Below one point of difference we do not comment: the gap is within the margin. Do not comment on it either.",
+      "Do not attribute the average to the source: MieuxVoter publishes the compilation of polls; the weighting itself is done here, and its method is published.",
+      "Never mix two kinds of figures: voting intentions (here), second-round and victory probabilities (Bayesian forecast, clearly separated), market odds (we publish none)."
+    ],
+    "pieges_titre": "The traps of the figure",
+    "pieges": [
+      "The scenario is locked: a candidate included in the scenario is not a prediction of candidacy, and an absent candidate does not have '0 %' — that name is simply not tested in this list.",
+      "A name tested in a minority of questionnaires may be a very serious candidacy, and a name tested in all of them may never declare: this measure describes what the pollsters consider plausible, not what is going to happen.",
+      "The margin of error of the pollsters is not built into the average. An interval around an average does not replace the margin of a single poll.",
+      "House effects are corrected, but in 2022 the pollsters were mainly wrong together: correcting a gap between pollsters does not correct a collective blind spot.",
+      "The backtest covers the first round and stops at J−132, for lack of a free compilation covering January to April 2022. What it demonstrates holds at that distance, not ten days before the vote.",
+      "The first round does not announce the second: qualification depends on transfers, turnout and alliances, which this page does not model."
+    ],
+    "sources_titre": "Sources",
+    "sources": [
+      "Polls: MieuxVoter/presidentielle2027 compilation (MIT licence), completed for the surveys not yet integrated by our own extraction of the notices of the Commission des sondages — the surveys themselves belong to their pollsters.",
+      "2022 results: Ministry of the Interior (archives of electoral results), cross-checked with Wikipedia — 12 matching scores, 35,132,947 votes cast.",
+      "Candidacies: census of La Chaîne parlementaire, completed for each date by the first-hand source cited on the candidates page.",
+      "Official list of candidates: Conseil constitutionnel, published in the Journal officiel — it is the only document that is authoritative.",
+      "Bayesian forecast cited for comparison: whyalwaysrose/presidentielle-2027, MIT licence.",
+      "Computation code: the generator is public — les-tontons-de-la-tech/observatoire-presidentielle-2027 (MIT licence). Its method, its calculations and its revision log can be read there line by line."
+    ],
+    "legal_titre": "Legal framework",
+    "legal": [
+      "Loi n° 77-808 du 19 juillet 1977 relative à la publication et à la diffusion de certains sondages d'opinion: article 2 requires naming the polling body, the sponsor and the buyer, the number of people interviewed, the dates and the margin of error; article 3 requires the filing of a notice.",
+      "Loi organique n° 2021-335 of 29 March 2021: margins of error mandatory for polls connected with the presidential election.",
+      "Article 11: no publication, dissemination or comment of any poll on the eve and on the day of the ballot. This page complies with it automatically.",
+      "Article 12: a fine of 75 000 €, including for improper use of the word 'sondage' — one more reason to call a figure what it is.",
+      "We are not a polling institute and we conduct no survey: we aggregate published surveys and we cite our sources."
+    ],
+    "contact": "A correction to report, a missing source, a figure that seems wrong to you: christophe@dileviathan.fr. Substantive corrections are dated in the log of updates.",
+    "_jetons": "Les {{ }} sont remplis au rendu par generate.py (contenu.py::a_lire_bloc) : date_maj, scenario, scenario_size, polls_aggregated, window, tete_nom, tete_val, tete_ic."
+  }
+}

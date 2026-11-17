@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17 18:00",
+ "generated": "2026-11-17 18:27",
  "scenario": "H67",
  "window": 90,
  "polls_window": 146,
@@ -262,27 +262,6 @@
  ],
  "trends": [
   {
-   "candidat": "Jordan Bardella",
-   "parti": "Rassemblement National",
-   "intentions": 34.8,
-   "n": 28,
-   "intention7": 34.8,
-   "delta7": 0.0,
-   "intention28": 34.8,
-   "delta28": 0.0,
-   "serie": [
-    34.9,
-    34.8,
-    34.8,
-    34.8,
-    34.8,
-    34.8,
-    34.8,
-    34.8,
-    34.8
-   ]
-  },
-  {
    "candidat": "Marine Le Pen",
    "parti": "Rassemblement National",
    "intentions": 34.1,
@@ -511,6 +490,27 @@
     null,
     null,
     3.5
+   ]
+  },
+  {
+   "candidat": "Marine Tondelier",
+   "parti": "Europe Écologie Les Verts",
+   "intentions": 3.1,
+   "n": 185,
+   "intention7": 3.1,
+   "delta7": 0.0,
+   "intention28": 3.5,
+   "delta28": -0.4,
+   "serie": [
+    3.8,
+    3.9,
+    3.9,
+    3.8,
+    3.5,
+    3.3,
+    3.3,
+    3.1,
+    3.1
    ]
   }
  ]

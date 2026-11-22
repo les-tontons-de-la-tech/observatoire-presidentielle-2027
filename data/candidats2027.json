@@ -1,5 +1,5 @@
 {
- "verifie_le": "2026-11-10",
+ "verifie_le": "2026-11-22",
  "scrutins": {
   "premier_tour": "2027-04-18",
   "second_tour": "2027-05-02",
@@ -457,13 +457,13 @@
    "nom": "Dominique de Villepin",
    "parti": "La France humaniste",
    "famille": "centre",
-   "statut": "suspens",
-   "date_declaration": "",
-   "precision": "",
-   "source": "https://www.radiofrance.fr/franceinfo/podcasts/8h30-franceinfo/8h30-franceinfo-du-mardi-29-septembre-2026-4945658",
-   "source_label": "franceinfo, 29/09/2026",
-   "commentaire": "pas candidat déclaré : il a répété le 29 septembre 2026 sur franceinfo qu'il était encore trop tôt pour se déclarer, estimant que « le jeu va se décanter » dans les prochains mois.",
-   "commentaire_en": "not a declared candidate: he repeated on 29 September 2026 on franceinfo that it was still too early to declare, judging that “the field will settle” in the coming months."
+   "statut": "declare",
+   "date_declaration": "2026-11-20",
+   "precision": "jour",
+   "source": "https://www.france24.com/fr/info-en-continu/20261120-villepin-lance-son-pari-pr%C3%A9sidentiel",
+   "source_label": "France 24 / AFP, 20/11/2026",
+   "commentaire": "Ancien Premier ministre de Jacques Chirac (2005-2007) et ministre des Affaires étrangères (2002-2004), fondateur du mouvement La France humaniste ; a annoncé sa candidature le 20 novembre 2026 lors d'une conférence de presse à la Maison de l'Amérique latine, à Paris : « Je suis candidat à l'élection présidentielle de 2027 ». Il se présente comme une alternative au macronisme et aux « deux grandes forces de la radicalité » (LFI, RN), sans placer les deux partis sur le même plan. Programme de 258 propositions (référendums réguliers, nationalisation des autoroutes, droit de vote à 16 ans, déficit maintenu sous 3 %) ; environ 300 promesses de parrainages selon son équipe. Les enquêtes publiées avant l'annonce le mesuraient entre 1,5 % (IFOP, 13-16 novembre) et 3 % (ELABE, 12-13 novembre).",
+   "commentaire_en": "Former prime minister under Jacques Chirac (2005-2007) and foreign minister (2002-2004), founder of the La France humaniste movement; announced his candidacy on 20 November 2026 at a press conference at the Maison de l'Amérique latine in Paris: “I am a candidate in the 2027 presidential election”. He presents himself as an alternative to Macronism and to the “two great forces of radicalism” (LFI, RN), while refusing to place the two parties on the same footing. A programme of 258 proposals (regular referendums, nationalisation of motorways, voting age of 16, deficit kept below 3 %); around 300 signature pledges according to his team. Polls published before the announcement put him between 1.5 % (IFOP, 13-16 November) and 3 % (ELABE, 12-13 November)."
   },
   {
    "nom": "Olivier Becht",

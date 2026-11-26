@@ -97,6 +97,24 @@ IC 95 % = max( 1,96 × σ_pondéré / √n_eff , 1 point )        n_eff = (Σw)�
   le plus récemment** parmi celles qui comptent au moins 3 enquêtes — une liste que plus aucun
   institut ne teste ne reste pas en tête ; **agrégation** : 180 jours du même scénario ;
   **publication** : au moins 3 sondages.
+- **Noyau et entrants déclarés** (`core_mode`, depuis le 26/11/2026). Les instituts testent rarement
+  deux fois la même liste au nom près : exiger l'égalité exacte de signature figeait la page sur
+  H113 (11 noms), alors que les questionnaires de novembre ajoutaient Gabriel Attal, Dominique de
+  Villepin et Teddy Riner — tous trois déclarés. Une enquête est donc **admise** dans l'agrégation si
+  elle contient tout le noyau et n'ajoute **que** des noms de `ENTRANTS_SCENARIO` ; les noms du
+  noyau seuls sont moyennés. Mesure au 26/11/2026 : 7 enquêtes sur la liste exacte, **16 agrégées**
+  (9 avec un ou plusieurs entrants), dernière enquête du **19/11** au lieu du 17 ; le noyau totalise
+  **97,4 %** au lieu de 100, la différence étant la part des entrants. Effet sur les niveaux :
+  Édouard Philippe 12,8 → 11,6, Bruno Retailleau 5,4 → 5,0, les autres sous 0,4 point. Les entrants
+  ne sont **pas** moyennés : leurs niveaux sont rendus enquête par enquête (« Les entrants sur les
+  questionnaires récents »), une fourchette signalant qu'une même enquête publie plusieurs tableaux.
+  Un questionnaire à 16-18 noms (Ruffin, Hollande, Polony…) reste dehors : sa dilution n'a plus la
+  même ampleur. La série hebdomadaire est recalculée avec la même règle, et son total de noyau passe
+  de 99,7 % (22/10) à 97,4 % (26/11) — la dérive est celle de la dilution, pas d'un mouvement.
+- **La ligne « hors scénario » lit la liste complète, pas le tableau tronqué.** `trend_movements`
+  n'affiche que douze lignes ; Dominique de Villepin (2 %) en était coupé et n'apparaissait nulle
+  part sur la page des sondages. Le rendu reçoit désormais la liste entière (`keep=None`) pour cette
+  ligne, et n'en garde que six noms au maximum.
 - **Correction des effets de maison** (`HOUSE_CORRECTION = True`) : l'écart moyen de chaque institut au
   consensus des autres est estimé par itérations, contracté vers zéro selon le nombre d'enquêtes, puis
   retranché avant agrégation. Gain mesuré : 0,04 pt à fenêtre égale — réel mais faible, parce que les

@@ -53,6 +53,15 @@ MIN_POLLS = 3          # nombre minimum de sondages pour être publié
 IC_FLOOR = 1.0         # plancher de l'intervalle (± points) : anti-fausse précision
 TODAY = date.today()
 
+# Candidats déclarés que les instituts ajoutent à la liste de référence sans qu'elle cesse d'être
+# comparable : ce sont eux qui font vivre le scénario (entrée dans les questionnaires d'octobre-
+# novembre 2026). Une enquête est admise dans l'agrégation si elle contient tout le noyau et
+# n'ajoute QUE des noms de cette liste — un questionnaire à 16 noms (Ruffin, Hollande, Polony…)
+# reste dehors, sa dilution n'ayant plus la même ampleur. Décision d'auteur du 26/11/2026, motivée
+# par le fait que Villepin (déclaré le 20/11) et Riner (le 09/11) n'apparaissaient plus dans aucune
+# liste testée deux fois, et que l'égalité exacte de signature figeait la page sur H113.
+ENTRANTS_SCENARIO = ("Gabriel Attal", "Dominique de Villepin", "Teddy Riner")
+
 
 # ── Données structurées et mesure d'audience (17/09/2026) ────────────────────────────
 # Une seule source pour les six pages : le titre et la description d'une page servent à
@@ -908,11 +917,20 @@ def _scenario_precedent():
 
 
 def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight_mode="recence",
-              min_polls=None, scenario_window=None, house_correction=None):
+              min_polls=None, scenario_window=None, house_correction=None, core_mode=False):
     """Agrégation. `as_of` = date de référence (rétro-calcul) ; `scenario_sign` = verrouille le
     scénario ; `weight_mode` : "recence" | "egal" | "dernier" ; `scenario_window` = fenêtre de
     sélection du scénario (défaut SCENARIO_WINDOW) ; `house_correction` = corrige les effets de
-    maison par institut avant agrégation."""
+    maison par institut avant agrégation.
+
+    `core_mode` : la liste retenue devient un **noyau** — les enquêtes qui ajoutent un ou
+    plusieurs des entrants déclarés (`ENTRANTS_SCENARIO`) sont admises, et seuls les noms du
+    noyau sont moyennés. Motif mesuré : les instituts testent rarement deux fois la même liste
+    au nom près ; exiger l'égalité exacte de signature fige la page sur une liste que plus
+    personne ne teste. Le coût est une dilution : les noms du noyau ne totalisent plus 100 %
+    quand des entrants figurent au questionnaire — le total est publié (`noyau_total`) et la
+    différence nommée. Les entrants eux-mêmes ne sont pas moyennés : leurs niveaux sont rendus
+    enquête par enquête (`entrants_detail`)."""
     ref = as_of or TODAY
     swin = SCENARIO_WINDOW if scenario_window is None else scenario_window
     hcorr = HOUSE_CORRECTION if house_correction is None else house_correction
@@ -969,9 +987,19 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
                                                      tuple(kv[0]) == precedent))
         scenario = scen_recent[0][0]["hypothese"]
 
-    # 3. Agrégation : tous les sondages de ce scénario dans la fenêtre longue,
-    #    pondérés par la fraîcheur (demi-vie) et la taille d'échantillon.
-    scen_polls = [(p, age, d) for (p, age, d) in r1 if signature(p) == scen_sign and age <= AGG_WINDOW]
+    # 3. Agrégation : tous les sondages du scénario dans la fenêtre longue, pondérés par la
+    #    fraîcheur (demi-vie) et la taille d'échantillon. En `core_mode`, la liste retenue est un
+    #    noyau : une enquête est admise si elle contient tous les noms du noyau et n'ajoute que
+    #    des entrants déclarés — un questionnaire à 16 noms (Ruffin, Hollande…) reste dehors,
+    #    parce que sa dilution n'a plus la même ampleur et n'est plus comparable.
+    noyau = set(scen_sign)
+    if core_mode:
+        def _admis(p):
+            s = set(signature(p))
+            return noyau <= s and (s - noyau) <= set(ENTRANTS_SCENARIO)
+        scen_polls = [(p, age, d) for (p, age, d) in r1 if _admis(p) and age <= AGG_WINDOW]
+    else:
+        scen_polls = [(p, age, d) for (p, age, d) in r1 if signature(p) == scen_sign and age <= AGG_WINDOW]
     if not scen_polls:
         return None
     if weight_mode == "dernier":
@@ -990,11 +1018,36 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
                 v = vals[c["candidat"]] if vals and c["candidat"] in vals else float(c["intentions"])
                 acc[c["candidat"]].append((w, v, poll.get("institut"), d, c.get("parti")))
 
+    # Détail des entrants sur les questionnaires récents : rendus enquête par enquête, jamais
+    # moyennés (deux enquêtes d'une même vague ne font pas une moyenne — et ne sont pas d'accord
+    # entre elles : Tondelier 5 chez YouGov, 1 chez Harris, même liste à deux jours d'intervalle).
+    entrants_detail = []
+    if core_mode:
+        # Une enquête publie plusieurs tableaux (une configuration de candidats chacun) : les
+        # colonnes du rendu sont des **enquêtes**, pas des tableaux. Sans ce regroupement, la même
+        # vague Harris du 19/11 sortait deux fois de suite, et le lecteur croyait à deux sondages.
+        groupes = {}
+        for p, age, d in sorted(scen_polls, key=lambda x: x[2], reverse=True):
+            if age > 10 or len(groupes) >= 4:
+                break
+            vals = {c["candidat"]: c["intentions"] for c in p.get("candidats", [])
+                    if c["candidat"] in ENTRANTS_SCENARIO and isinstance(c.get("intentions"), (int, float))}
+            if not vals:
+                continue
+            cle = (p.get("institut") or "—", p.get("debut_enquete") or "—", p.get("fin_enquete") or "—")
+            g = groupes.setdefault(cle, dict(institut=cle[0], debut=cle[1], fin=cle[2],
+                                             echantillon=int(p.get("echantillon") or 0), valeurs={}))
+            for n, v in vals.items():
+                g["valeurs"].setdefault(n, []).append(v)
+        entrants_detail = list(groupes.values())
+
     seuil = MIN_POLLS if min_polls is None else min_polls
     rows = []
     somme_exacte = 0.0   # somme des moyennes NON arrondies (voir total_intentions plus bas)
     for name, vals in acc.items():
         if len(vals) < seuil:
+            continue
+        if core_mode and name not in noyau:   # les entrants ne sont pas moyennés ici
             continue
         sw = sum(v[0] for v in vals)
         mean = sum(w * x for w, x, *_ in vals) / sw
@@ -1023,6 +1076,11 @@ def aggregate(polls, as_of=None, scenario_sign=None, scenario_label=None, weight
         scenario_size=len(scen_sign),
         polls_in_scenario=len(scen_recent),
         polls_aggregated=len(scen_polls),
+        core_mode=bool(core_mode),
+        polls_exact=sum(1 for p, _a, _d in scen_polls if signature(p) == scen_sign),
+        entrants_inclus=sorted({n for p, _a, _d in scen_polls for n in (set(signature(p)) - noyau)}),
+        entrants_detail=entrants_detail,
+        noyau_total=round(somme_exacte, 1),
         imports=sum(1 for p, _a, _d in scen_polls if p.get("poll_id") in IDS_IMPORTES),
         window=SCENARIO_WINDOW, agg_window=AGG_WINDOW, half_life=HALF_LIFE,
         min_polls=seuil, ic_floor=IC_FLOOR, weight_mode=weight_mode,
@@ -1059,7 +1117,8 @@ def weekly_series(polls, weeks=8, base=None):
     out = []
     for k in range(weeks, -1, -1):
         cut = TODAY - timedelta(days=7 * k)
-        a = aggregate(polls, as_of=cut, scenario_sign=sign, scenario_label=base["scenario"])
+        a = aggregate(polls, as_of=cut, scenario_sign=sign, scenario_label=base["scenario"],
+                      core_mode=bool(base.get("core_mode")))
         out.append(dict(date=cut.isoformat(), weeks_ago=k,
                         polls=a["polls_aggregated"] if a else 0,
                         inst=len(a["instituts"]) if a else 0,
@@ -1540,7 +1599,7 @@ def _fiches_candidats():
         return []
 
 
-def hors_scenario(movs, trends, maxi=6, lang="fr"):
+def hors_scenario(movs, trends, maxi=6, lang="fr", core_mode=False):
     """Les candidats **déclarés** que le tableau du scénario ne peut pas montrer.
 
     Le tableau « semaine par semaine » suit la liste de noms retenue : un candidat absent de cette
@@ -1548,6 +1607,9 @@ def hors_scenario(movs, trends, maxi=6, lang="fr"):
     ne se lise pas comme un effacement — mais elle ne garde que les candidatures déclarées, recoupées
     avec data/candidats2027.json (statut « declare ») : un nom testé par les instituts n'est pas pour
     autant une candidature. Les valeurs viennent de l'indicateur toutes listes.
+
+    `trends` doit être la liste **complète** (`keep=None`) : tronquée à douze lignes, elle cachait
+    Dominique de Villepin (2 %) et la page ne le mentionnait nulle part.
     """
     fiches = _fiches_candidats()
     dedans = {m["candidat"] for m in movs}
@@ -1564,15 +1626,87 @@ def hors_scenario(movs, trends, maxi=6, lang="fr"):
                  "their tracking is the one in the \u201call lists\u201d table below." if len(absents) > 1 else
                  "It is not tested in the list used by the most recent questionnaires: "
                  "its tracking is the one in the \u201call lists\u201d table below.")
+        if core_mode:
+            suite = ("These names are not part of the averaged core: their levels are the ones of "
+                     "the questionnaires that test them, and of the \u201call lists\u201d table below."
+                     if len(absents) > 1 else
+                     "It is not part of the averaged core: its level is the one of the questionnaires "
+                     "that test it, and of the \u201call lists\u201d table below.")
         titre = "Outside the scenario today, among declared candidates:"
     else:
         suite = ("Ces noms ne sont pas testés dans la liste retenue par les questionnaires les plus récents : "
                  "leur suivi est celui du tableau « toutes listes » ci-dessous." if len(absents) > 1 else
                  "Il n'est pas testé dans la liste retenue par les questionnaires les plus récents : "
                  "son suivi est celui du tableau « toutes listes » ci-dessous.")
+        if core_mode:
+            suite = ("Ces noms ne font pas partie du noyau moyenné : leurs niveaux sont ceux des "
+                     "questionnaires qui les testent, et du tableau « toutes listes » ci-dessous."
+                     if len(absents) > 1 else
+                     "Il ne fait pas partie du noyau moyenné : son niveau est celui des questionnaires "
+                     "qui le testent, et du tableau « toutes listes » ci-dessous.")
         titre = "Hors scénario aujourd'hui, parmi les candidats déclarés :"
     return ('<p class="small" style="max-width:none;margin-top:12px">'
             f'<strong>{titre}</strong> {montres}. {suite}</p>')
+
+
+def _entrant_cell(vals, lang="fr"):
+    """Cellule d'un entrant : valeur simple, ou fourchette si l'enquête publie plusieurs tableaux."""
+    if not vals:
+        return "—"
+    v = sorted(set(vals))
+    return fr(v[0], lang) if len(v) == 1 else f"{fr(v[0], lang)}–{fr(v[-1], lang)}"
+
+
+def entrants_table(agg, lang="fr"):
+    """Les entrants sur les questionnaires récents — un niveau par enquête, jamais moyenné.
+
+    Le noyau agrégé exclut Attal, Villepin et Riner : ces noms figurent pourtant sur les
+    questionnaires de la semaine. Les moyenner sur deux enquêtes donnerait un chiffre qui n'existe
+    chez aucun institut, et qui masquerait leur désaccord (Tondelier 5 chez YouGov, 1 chez Harris,
+    même liste à deux jours d'intervalle). On montre donc la mesure d'institut, brute.
+    """
+    det = agg.get("entrants_detail") or []
+    if not agg.get("core_mode") or not det:
+        return ""
+    noms = [n for n in ENTRANTS_SCENARIO if any(n in d["valeurs"] for d in det)]
+    if not noms:
+        return ""
+    en = lang == "en"
+    t = (lambda a, b: b) if en else (lambda a, b: a)
+    entetes = "".join(
+        f'<th class="num small">{d["institut"]}<br><span class="muted">{frd(d["fin"])}</span></th>'
+        for d in det)
+    corps = "".join(
+        f'<tr><td>{n}</td>' + "".join(
+            f'<td class="num">{_entrant_cell(d["valeurs"].get(n), lang)}</td>'
+            for d in det) + '</tr>'
+        for n in noms)
+    intro = t(
+        "Ces noms sont déclarés et figurent sur les questionnaires les plus récents, mais ils ne "
+        "sont pas moyennés ici : deux enquêtes d'une même vague ne font pas une moyenne, et deux "
+        "instituts peuvent différer de plusieurs points sur la même liste. Une fourchette signale "
+        "qu'une même enquête publie plusieurs tableaux. Niveaux en % d'intentions de vote, mesure "
+        "d'institut, brute, sans agrégation.",
+        "These names are declared and appear on the most recent questionnaires, but they are not "
+        "averaged here: two polls of the same wave are not an average, and two pollsters can differ "
+        "by several points on the same list. A range means the same survey publishes several tables. "
+        "Levels in % of voting intentions, raw pollster figures, not aggregated.")
+    apres = t(
+        f"Le tableau principal porte sur le noyau de {agg['scenario_size']} noms, qui totalise "
+        f"{fr(agg.get('noyau_total') or 0, lang)} % sur les {agg['polls_aggregated']} enquêtes agrégées : "
+        "la différence est la part de ces entrants.",
+        f"The main table covers the {agg['scenario_size']}-name core, which totals "
+        f"{fr(agg.get('noyau_total') or 0, lang)} % across the {agg['polls_aggregated']} aggregated polls: "
+        "the difference is the share of these entrants.")
+    return ('<div style="margin-top:16px">'
+            f'<p class="small" style="max-width:none;margin-bottom:6px"><strong>'
+            + t("Les entrants sur les questionnaires récents", "Entrants on recent questionnaires")
+            + ' — ' + t("mesures d'institut, non moyennées", "pollster figures, not averaged")
+            + '</strong></p>'
+            f'<table style="margin-top:6px"><tr><th>{t("Candidat", "Candidate")}</th>{entetes}</tr>'
+            f'{corps}</table>'
+            f'<p class="small muted" style="max-width:none;margin-top:8px">{intro} {apres}</p>'
+            '</div>')
 
 
 def mov_line(movs, lang="fr"):
@@ -1642,8 +1776,12 @@ def trend_point(polls, as_of, min_polls=3):
     return out
 
 
-def trend_movements(polls, weeks=8, keep=12):
-    """Écarts hebdomadaires de l'indicateur toutes listes (les niveaux ne sont pas comparables)."""
+def trend_movements(polls, weeks=8, keep: "int | None" = 12):
+    """Écarts hebdomadaires de l'indicateur toutes listes (les niveaux ne sont pas comparables).
+
+    `keep=None` rend toutes les lignes : le tableau de la page n'en affiche que douze, mais la
+    ligne « hors scénario » doit pouvoir nommer un candidat déclaré classé plus bas — Villepin,
+    à 2 %, disparaissait de la page entière quand il était coupé par cette troncature."""
     pts = [(TODAY - timedelta(days=7 * k), None) for k in range(weeks, -1, -1)]
     pts = [(d, trend_point(polls, d)) for d, _ in pts]
     cur, p7, p28 = pts[-1][1], pts[-2][1], pts[-5][1]
@@ -1655,7 +1793,7 @@ def trend_movements(polls, weeks=8, keep=12):
                          intention7=v7, delta7=(None if v7 is None else round(r["intentions"] - v7, 1)),
                          intention28=v28, delta28=(None if v28 is None else round(r["intentions"] - v28, 1)),
                          serie=[pt[1].get(name, {}).get("intentions") for pt in pts]))
-    return rows[:keep]
+    return rows if keep is None else rows[:keep]
 
 
 def trend_table(rows, lang="fr"):
@@ -1680,9 +1818,10 @@ def trend_table(rows, lang="fr"):
             + tr("8 semaines", "8 weeks") + '</th></tr>' + body + '</table>')
 
 
-def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
+def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr", trends_tous=None):
     movs = movs or []
     trends = trends or []
+    trends_tous = trends_tous or trends
     r0 = agg["rows"][0] if agg["rows"] else None
     rows = agg["rows"]
     VALEURS = valeurs_textes(agg, rows)
@@ -1767,13 +1906,42 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
                        f"Testing the scenario — last {agg['window']} days")
     t_agg_polls_j = m(f"Agrégés — scénario {agg['scenario']}, {agg['agg_window']} derniers jours",
                       f"Aggregated — scenario {agg['scenario']}, last {agg['agg_window']} days")
+    if agg.get("core_mode"):
+        # En mode noyau, les deux lignes ne comptent plus la même chose : la première dit combien
+        # d'enquêtes portent la liste exacte, la seconde combien entrent dans la moyenne (liste
+        # exacte + questionnaires n'ajoutant que des entrants déclarés). Deux chiffres différents
+        # sous un libellé inchangé se liraient comme une erreur.
+        t_scen_polls_j = m(f"Liste exacte — {agg['window']} derniers jours",
+                           f"Exact list — last {agg['window']} days")
+        t_agg_polls_j = m(f"Agrégés — noyau + entrants, {agg['agg_window']} derniers jours",
+                          f"Aggregated — core + entrants, last {agg['agg_window']} days")
     t_periode = m("Période couverte", "Period covered")
     t_instituts = m("Instituts", "Pollsters")
     # Phrase de liaison du périmètre : deux fenêtres, deux rôles. Sans elle, « 146 sur 90 jours »
     # à côté de « 22 agrégés sur 180 jours » se lit comme une perte de 124 enquêtes, alors que la
     # différence est la règle du scénario — un chiffre que l'auteur a relevé comme « bizarre ».
     d_agg = agg["polls_aggregated"] - agg["polls_in_scenario"]
-    t_perim_p = m(
+    if agg.get("core_mode"):
+        entrants_n = agg["polls_aggregated"] - agg.get("polls_exact", agg["polls_aggregated"])
+        t_perim_p = m(
+            f"Les {agg['polls_in_window']} enquêtes de {agg['window']} jours ne sont pas toutes "
+            f"agrégées : la moyenne porte sur le <strong>noyau de {agg['scenario_size']} noms</strong> "
+            f"— {agg['polls_aggregated']} enquêtes sur {agg['agg_window']} jours l'ont testé, dont "
+            f"{agg.get('polls_exact', 0)} avec la liste exacte et {entrants_n} qui ajoutent un ou "
+            "plusieurs candidats déclarés (Attal, Villepin, Riner). Ces entrants ne sont pas moyennés : "
+            "leurs niveaux sont rendus enquête par enquête ci-dessous. Les autres questionnaires "
+            "portent d'autres configurations : les moyenner avec celles-ci produirait un chiffre qui "
+            "n'existe chez aucun institut.",
+            f"The {agg['polls_in_window']} polls of the {agg['window']}-day window are not all "
+            f"aggregated: the average covers the <strong>{agg['scenario_size']}-name core</strong> — "
+            f"{agg['polls_aggregated']} polls over {agg['agg_window']} days tested it, of which "
+            f"{agg.get('polls_exact', 0)} with the exact list and {entrants_n} adding one or more "
+            "declared candidates (Attal, Villepin, Riner). Those entrants are not averaged: their "
+            "levels are given pollster by pollster below. The other questionnaires carry other "
+            "configurations: averaging them with these would produce a figure that exists at no "
+            "polling institute.")
+    else:
+        t_perim_p = m(
         f"Les {agg['polls_in_window']} enquêtes de {agg['window']} jours ne sont pas toutes agrégées : "
         f"seules celles qui testent la liste retenue entrent dans la moyenne — {agg['polls_in_scenario']} "
         f"sur {agg['window']} jours, {agg['polls_aggregated']} sur {agg['agg_window']}"
@@ -1985,6 +2153,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
     <div class="met wide"><span>{t_instituts}</span><b>{", ".join(agg["instituts"])}</b></div>
   </div>
   <p class="small muted" style="max-width:none;margin-top:14px">{t_perim_p}</p>
+  {entrants_table(agg, lang)}
 </section>
 
 <section id="tableau" class="card">
@@ -2004,7 +2173,7 @@ def render_sondages(agg, movs=None, trends=None, fc=None, lang="fr"):
   <h2>{t_evol}</h2>
   <p class="small muted" style="max-width:none">{t_evol_p}</p>
   {mov_table(movs, lang)}
-  {hors_scenario(movs, trends, lang=lang)}
+  {hors_scenario(movs, trends_tous, lang=lang, core_mode=agg.get("core_mode"))}
   <p class="small" style="margin-top:14px"><strong>{t_mov7}</strong> {mov_line(movs, lang)}.</p>
   <h3 style="margin-top:26px">{t_tendance}</h3>
   <p class="small muted" style="max-width:none">{t_tendance_p}</p>
@@ -2162,9 +2331,10 @@ def valeurs_textes(agg, rows):
     return v
 
 
-def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
+def render_landing(agg, movs=None, trends=None, fc=None, lang="fr", trends_tous=None):
     movs = movs or []
     trends = trends or []
+    trends_tous = trends_tous or trends
     r0 = agg["rows"][0] if agg["rows"] else None
     n_cand = len(agg["rows"])
     VALEURS = valeurs_textes(agg, agg["rows"])
@@ -2243,7 +2413,7 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
   <p class="small muted" style="max-width:none">{m("Série <strong>rétro-calculée</strong> par la méthode actuelle, sur les sondages publiés à chaque échéance hebdomadaire (ce que la page aurait affiché, pas ce qu'elle affichait).", "Series <strong>recomputed retrospectively</strong> with the current method, from the polls published at each weekly date (what the page would have shown, not what it did show).")}
   {m("Un nom absent de cette liste ne disparaît pas de la page : la ligne « hors scénario » et le tableau « toutes listes » ci-dessous le suivent. Un écart inférieur à 1 point reste dans la marge et n'est pas commenté.", "A name absent from this list does not disappear from the page: the \"outside the scenario\" line and the \"all lists\" table below follow it. A gap below 1 point stays within the margin and is not commented on.")}</p>
   {mov_table(movs, lang)}
-  {hors_scenario(movs, trends, lang=lang)}
+  {hors_scenario(movs, trends_tous, lang=lang, core_mode=agg.get("core_mode"))}
   <p class="small" style="margin-top:14px"><strong>{m("Mouvements sur 7 jours (scénario retenu) :", "7-day movements (selected scenario):")}</strong>
   {mov_line(movs, lang)}.</p>
   <h3 style="margin-top:24px">{m("Tendance, toutes listes confondues", "Trend, all lists combined")}</h3>
@@ -2343,8 +2513,8 @@ def render_landing(agg, movs=None, trends=None, fc=None, lang="fr"):
   </div>
   <ul class="tight small" style="max-width:none">
     <li><strong>{m("Citez la moyenne, jamais un sondage", "Cite the average, never a single poll")}</strong> : {m("« moyenne des sondages publiés au", "\"average of the polls published as of")}
-    {VALEURS["date_maj"]}, {m("scénario", "scenario")} {VALEURS["scenario"]} ({VALEURS["scenario_size"]} {m("candidats", "candidates")}),
-    {VALEURS["polls_aggregated"]} {m("enquêtes agrégées »", "surveys aggregated\"")}.</li>
+    {VALEURS["date_maj"]}, {m("noyau", "core") if agg.get("core_mode") else m("scénario", "scenario")} {VALEURS["scenario"]} ({VALEURS["scenario_size"]} {m("candidats", "candidates")}),
+    {VALEURS["polls_aggregated"]} {m("enquêtes agrégées »", "surveys aggregated\"")}{m(f" (dont {agg.get('polls_exact', 0)} avec la liste exacte)", f" (of which {agg.get('polls_exact', 0)} with the exact list)") if agg.get("core_mode") else ""}.</li>
     <li><strong>{m("Citez l'intervalle avec le niveau", "Cite the interval with the level")}</strong> : {VALEURS["tete_nom"]}
     {VALEURS["tete_val"]} % [{VALEURS["tete_ic"]}]. {m("Un chiffre nu laisse croire à une précision que la moyenne n'a pas.", "A bare figure suggests a precision the average does not have.")}</li>
     <li><strong>{m("Sous un point d'écart, nous ne commentons pas", "Below one point of difference, we do not comment")}</strong> — {m("l'écart est dans la marge, et il ne doit pas être commenté davantage ailleurs.", "the gap is within the margin, and it should not be commented on further elsewhere.")}</li>
@@ -2424,12 +2594,15 @@ def main():
         print(f"publication suspendue (scrutin du {sus}) : aucune donnée écrite.")
         return
     polls = fetch(force="--force" in os.sys.argv)
-    agg = aggregate(polls)
+    agg = aggregate(polls, core_mode=True)
     if not agg:
         raise SystemExit("Aucun sondage exploitable dans la fenêtre.")
     series = weekly_series(polls, weeks=8, base=agg)
     movs = movements(series)
     trends = trend_movements(polls, weeks=8)
+    # Liste complète : le tableau n'affiche que douze lignes, mais la ligne « hors scénario »
+    # doit pouvoir nommer un candidat déclaré classé plus bas (Villepin, 2 %).
+    trends_tous = trend_movements(polls, weeks=8, keep=None)
     # Lecture « toutes listes » complète (le tableau de tendance n'en affiche que douze) :
     # sert à la comparaison avec la prévision bayésienne, candidat par candidat.
     agg["all_lists"] = {k: v["intentions"] for k, v in trend_point(polls, TODAY).items()}
@@ -2447,22 +2620,23 @@ def main():
                           rows={k: v["intentions"] for k, v in p["rows"].items()}) for p in series]
     os.makedirs(SITE, exist_ok=True)
     os.makedirs(os.path.join(SITE, "sondages"), exist_ok=True)
-    open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(render_landing(agg, movs, trends, fc))
+    open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(render_landing(agg, movs, trends, fc, trends_tous=trends_tous))
     # Version anglaise : mêmes données, mêmes chiffres, autre langue. Une page n'est
     # écrite que si sa traduction est complète — le sélecteur ne pointe que sur elle.
     en_dir = os.path.join(SITE, "en", "observatoire")
     os.makedirs(os.path.join(en_dir, "sondages"), exist_ok=True)
     open(os.path.join(en_dir, "index.html"), "w", encoding="utf-8").write(
-        render_landing(agg, movs, trends, fc, lang="en"))
+        render_landing(agg, movs, trends, fc, lang="en", trends_tous=trends_tous))
     open(os.path.join(en_dir, "sondages", "index.html"), "w", encoding="utf-8").write(
-        render_sondages(agg, movs, trends, fc, lang="en"))
+        render_sondages(agg, movs, trends, fc, lang="en", trends_tous=trends_tous))
     open(os.path.join(SITE, "sondages", "index.html"), "w", encoding="utf-8").write(
-        render_sondages(agg, movs, trends, fc))
+        render_sondages(agg, movs, trends, fc, trends_tous=trends_tous))
     json.dump(agg, open(os.path.join(DATA, "summary.json"), "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
     ecrire_dataset(agg)
     print(f"sondages source : {agg['total_polls_all']} | fenêtre : {agg['polls_in_window']} | "
-          f"scénario {agg['scenario']} : {agg['polls_in_scenario']} sondages")
+          f"scénario {agg['scenario']} : {agg['polls_in_scenario']} sondages sur la liste exacte, "
+          f"{agg['polls_aggregated']} agrégés (noyau + entrants)")
     for m in movs:
         d7 = "  n/a" if m["delta7"] is None else f"{m['delta7']:+5.1f}"
         print(f"  {m['candidat']:26} {m['intentions']:5} %  Δ7j={d7}   "

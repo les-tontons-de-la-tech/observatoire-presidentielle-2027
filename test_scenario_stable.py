@@ -68,6 +68,28 @@ def main():
         isole = _sondage("Unique", (G.TODAY - datetime.timedelta(days=1)).isoformat(), _liste("c"))
         seuil = G.aggregate(vieux + recents + [isole])
         assert seuil["scenario_sign"] == sorted(b), seuil["scenario_sign"]
+
+        # 6. Mode noyau : une enquête qui ajoute un entrant DÉCLARÉ est admise et ne moyenne que
+        #    le noyau ; une enquête qui ajoute un nom hors liste (Ruffin, Hollande…) reste dehors,
+        #    parce que sa dilution n'est plus comparable. Cas réel du 19/11/2026 : H113 (11 noms)
+        #    figée, Harris et YouGov testant 13-14 noms avec Attal, Villepin et Riner.
+        noyau = _liste("n")
+        entrant = "Teddy Riner"
+        G.ENTRANTS_SCENARIO = (entrant,)
+        de_base = [_sondage(f"N{i}", hier, noyau) for i in range(3)]
+        avec_entrant = _sondage("Entrant", hier, noyau + [entrant])
+        hors_liste = _sondage("Exotique", hier, noyau + ["François Ruffin"])
+        strict = G.aggregate(de_base + [avec_entrant, hors_liste])
+        assert strict["polls_aggregated"] == 3, strict["polls_aggregated"]
+        assert not strict.get("core_mode")
+        noy = G.aggregate(de_base + [avec_entrant, hors_liste], core_mode=True)
+        assert noy["polls_aggregated"] == 4, noy["polls_aggregated"]      # 3 + l'entrant déclaré
+        assert noy["polls_exact"] == 3, noy["polls_exact"]
+        assert entrant not in [r["candidat"] for r in noy["rows"]]        # jamais moyenné
+        assert noy["entrants_inclus"] == [entrant], noy["entrants_inclus"]
+        assert abs(noy["noyau_total"] - sum(r["intentions"] for r in noy["rows"])) < 0.06
+        # une enquête d'une même vague publie plusieurs tableaux : une seule colonne au rendu
+        assert len(noy["entrants_detail"]) == 1, noy["entrants_detail"]
     finally:
         G.DATA = garde
         shutil.rmtree(tmp)

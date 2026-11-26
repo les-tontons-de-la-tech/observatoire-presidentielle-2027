@@ -1,7 +1,13 @@
 {
  "_lisez_moi": "Textes rédigés de l'observatoire. Ce fichier est éditorial : il ne contient aucun chiffre calculé. Les chiffres viennent des scripts (generate.py, backtest2022.py, candidats.py) et de data/*.json. Toute modification ici doit être accompagnée d'une entrée de changelog datée.",
- "maj": "2026-09-17",
+ "maj": "2026-11-26",
  "changelog": [
+  {
+   "date": "2026-11-26",
+   "nature": "chiffres",
+   "titre": "La moyenne porte sur un noyau de 11 noms, la page repasse du 17 au 19 novembre",
+   "texte": "La liste de référence était figée sur l'égalité exacte des noms testés : Harris Interactive (terrain 18-19 novembre) publie trois tableaux à 13 et 14 noms, tous construits sur H113 plus Gabriel Attal, Dominique de Villepin et Teddy Riner — trois candidats déclarés. La page restait donc sur sept enquêtes arrêtées au 17 novembre, avec une liste qui excluait deux des déclarés. La liste retenue devient un noyau : une enquête entre dans la moyenne si elle contient tous ses noms et n'ajoute que des entrants déclarés, et seuls les noms du noyau sont moyennés. Résultat mesuré : 7 enquêtes sur la liste exacte, 16 agrégées (dont 9 avec un ou plusieurs entrants), dernière enquête au 19 novembre, six instituts. Le noyau totalise 97,4 % — la différence est la part des entrants, qui ne sont pas moyennés et dont les niveaux sont donnés enquête par enquête. Effet sur les niveaux : Édouard Philippe 12,8 → 11,6, Bruno Retailleau 5,4 → 5,0, Raphaël Glucksmann 11,5 → 11,1, Marine Le Pen 32,8 → 32,6 ; les six autres écarts sont de 0,2 point ou moins. Un questionnaire à 16-18 noms reste hors agrégation : sa dilution n'a plus la même ampleur, et deux instituts ne s'accordent pas sur la même liste — Marine Tondelier vaut 5 chez YouGov et 1 chez Harris à deux jours d'intervalle. La ligne « hors scénario » lisait un tableau tronqué à douze lignes : Dominique de Villepin, à 2 %, n'apparaissait nulle part. Elle lit désormais la liste complète."
+  },
   {
    "date": "2026-11-16",
    "nature": "chiffres",

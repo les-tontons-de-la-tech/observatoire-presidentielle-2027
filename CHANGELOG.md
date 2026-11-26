@@ -9,6 +9,18 @@ chiffre qu'on ne peut plus citer.
 
 ---
 
+## 26 novembre 2026
+
+**MÉTHODE — La liste retenue devient un noyau, les entrants déclarés sont admis.** Les instituts changeaient de questionnaire sans changer de sujet : Harris Interactive (terrain 18-19 novembre) teste trois listes à 13 et 14 noms, toutes construites sur H113 plus Gabriel Attal, Dominique de Villepin et Teddy Riner — trois candidats déclarés dans `data/candidats2027.json`. Exiger l'égalité exacte de signature laissait donc la page sur 7 enquêtes arrêtées au 17 novembre, et la liste de référence excluait deux déclarés. Une enquête entre désormais dans l'agrégation si elle contient **tous** les noms du noyau et n'ajoute que des noms de `ENTRANTS_SCENARIO` ; seuls les noms du noyau sont moyennés. Mesure : 7 enquêtes sur la liste exacte, **16 agrégées** sur 180 jours (9 avec un ou plusieurs entrants), dernière enquête au **19 novembre**, six instituts. Un questionnaire à 16-18 noms (Ruffin, Hollande, Polony…) reste dehors : sa dilution n'a plus la même ampleur.
+
+**CONSÉQUENCE — Le noyau totalise 97,4 %, et les niveaux bougent peu.** La moyenne porte sur 11 noms : elle vaut 97,4 % du total, la différence étant la part des entrants, qui ne sont pas moyennés. Effet mesuré sur les niveaux publiés : Édouard Philippe 12,8 → 11,6, Bruno Retailleau 5,4 → 5,0, Raphaël Glucksmann 11,5 → 11,1, Marine Le Pen 32,8 → 32,6 ; les six autres écarts sont de 0,2 point ou moins. La série hebdomadaire est recalculée avec la même règle : son total de noyau passe de 99,7 % (22/10) à 97,4 % (26/11), dérive de dilution et non mouvement d'opinion, et les enquêtes par point passent de 7 à 16 au dernier point.
+
+**TABLEAU NOUVEAU — Les entrants sont rendus enquête par enquête, jamais moyennés.** Un bloc « Les entrants sur les questionnaires récents » donne le niveau d'Attal, Villepin et Riner chez chaque institut, avec une fourchette quand une même enquête publie plusieurs tableaux. Motif : deux enquêtes de la même vague ne font pas une moyenne, et les instituts ne sont pas d'accord entre eux — Marine Tondelier vaut 5 chez YouGov (12-17/11) et 1 chez Harris (18-19/11) sur la même liste, à deux jours d'intervalle. C'est ce désaccord qui interdisait de basculer le tableau principal sur cette liste.
+
+**DÉFAUT CORRIGÉ — Dominique de Villepin n'apparaissait nulle part sur la page des sondages.** Le tableau « toutes listes » n'affiche que douze lignes (`keep=12`) et la ligne « hors scénario » lisait ce même tableau tronqué : à 2 %, le candidat déclaré le 20 novembre était coupé, sans qu'aucune phrase ne le signale. La ligne lit désormais la liste complète (`keep=None`), en garde six noms et se contente d'un décompte pour les suivants ; elle porte aussi le libellé adapté au noyau (« ne font pas partie du noyau moyenné »).
+
+---
+
 ## 17 novembre 2026
 
 **VERSION ANGLAISE — Les sept pages de l'observatoire existent en anglais sous `/en/observatoire/`.** Accueil, Agrégation, Candidats, Rétro-test 2022, Rétro-test 2017, Veille législative et Workflow. La traduction est faite à la source, dans les gabarits, jamais par substitution sur le HTML produit : `m(français, anglais)` pour le texte de passage, `i18n.py` pour les libellés partagés, `workflow_i18n.py` pour la page technique, et des champs `<champ>_en` pour la couche de données (les 41 notices de candidature, les 3 sources de référence). Restes mesurés page par page sur les fichiers publiés, tous légitimes : accueil 1 bloc français sur 391 (« Debout la France »), Agrégation 5 sur 706, Candidats 4 sur 529, Veille législative 42 sur 1 023 (intitulés de textes et noms de groupes de l'Assemblée, qui sont des données et non de la prose), Rétro-test 2022 0 sur 266, Rétro-test 2017 2 sur 345, Workflow 0 sur 170.

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25 18:00",
+ "generated": "2026-11-26 18:00",
  "total_polls_all": 432,
  "polls_in_window": 154,
  "scenario": "H113",
@@ -375,31 +375,43 @@
  "imports_total": 0,
  "series": [
   {
-   "date": "2026-09-30",
+   "date": "2026-10-01",
    "weeks_ago": 8,
    "polls": 0,
    "rows": {}
   },
   {
-   "date": "2026-10-07",
+   "date": "2026-10-08",
    "weeks_ago": 7,
    "polls": 0,
    "rows": {}
   },
   {
-   "date": "2026-10-14",
+   "date": "2026-10-15",
    "weeks_ago": 6,
-   "polls": 0,
+   "polls": 1,
    "rows": {}
   },
   {
-   "date": "2026-10-21",
+   "date": "2026-10-22",
    "weeks_ago": 5,
-   "polls": 2,
-   "rows": {}
+   "polls": 3,
+   "rows": {
+    "Marine Le Pen": 31.5,
+    "Jean-Luc Mélenchon": 16.8,
+    "Édouard Philippe": 15.4,
+    "Raphaël Glucksmann": 13.1,
+    "David Lisnard": 6.3,
+    "Bruno Retailleau": 6.3,
+    "Éric Zemmour": 3.4,
+    "Marine Tondelier": 2.7,
+    "Nicolas Dupont-Aignan": 2.2,
+    "Fabien Roussel": 1.9,
+    "Nathalie Arthaud": 0.5
+   }
   },
   {
-   "date": "2026-10-28",
+   "date": "2026-10-29",
    "weeks_ago": 4,
    "polls": 3,
    "rows": {
@@ -417,7 +429,7 @@
    }
   },
   {
-   "date": "2026-11-04",
+   "date": "2026-11-05",
    "weeks_ago": 3,
    "polls": 3,
    "rows": {
@@ -435,7 +447,7 @@
    }
   },
   {
-   "date": "2026-11-11",
+   "date": "2026-11-12",
    "weeks_ago": 2,
    "polls": 5,
    "rows": {
@@ -453,7 +465,7 @@
    }
   },
   {
-   "date": "2026-11-18",
+   "date": "2026-11-19",
    "weeks_ago": 1,
    "polls": 7,
    "rows": {
@@ -471,7 +483,7 @@
    }
   },
   {
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "weeks_ago": 0,
    "polls": 7,
    "rows": {

@@ -1,7 +1,7 @@
 {
- "generated": "2026-11-26 20:14",
+ "generated": "2026-11-27 18:00",
  "total_polls_all": 432,
- "polls_in_window": 154,
+ "polls_in_window": 148,
  "scenario": "H113",
  "scenario_sign": [
   "Bruno Retailleau",
@@ -61,17 +61,6 @@
     ],
     "Teddy Riner": [
      3
-    ]
-   }
-  },
-  {
-   "institut": "IFOP",
-   "debut": "2026-11-13",
-   "fin": "2026-11-16",
-   "echantillon": 1823,
-   "valeurs": {
-    "Gabriel Attal": [
-     4
     ]
    }
   }
@@ -543,25 +532,25 @@
  "imports_total": 0,
  "series": [
   {
-   "date": "2026-10-01",
+   "date": "2026-10-02",
    "weeks_ago": 8,
    "polls": 0,
    "rows": {}
   },
   {
-   "date": "2026-10-08",
+   "date": "2026-10-09",
    "weeks_ago": 7,
    "polls": 0,
    "rows": {}
   },
   {
-   "date": "2026-10-15",
+   "date": "2026-10-16",
    "weeks_ago": 6,
-   "polls": 1,
+   "polls": 2,
    "rows": {}
   },
   {
-   "date": "2026-10-22",
+   "date": "2026-10-23",
    "weeks_ago": 5,
    "polls": 4,
    "rows": {
@@ -579,7 +568,7 @@
    }
   },
   {
-   "date": "2026-10-29",
+   "date": "2026-10-30",
    "weeks_ago": 4,
    "polls": 5,
    "rows": {
@@ -597,7 +586,7 @@
    }
   },
   {
-   "date": "2026-11-05",
+   "date": "2026-11-06",
    "weeks_ago": 3,
    "polls": 6,
    "rows": {
@@ -615,7 +604,7 @@
    }
   },
   {
-   "date": "2026-11-12",
+   "date": "2026-11-13",
    "weeks_ago": 2,
    "polls": 9,
    "rows": {
@@ -633,7 +622,7 @@
    }
   },
   {
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "weeks_ago": 1,
    "polls": 16,
    "rows": {
@@ -651,7 +640,7 @@
    }
   },
   {
-   "date": "2026-11-26",
+   "date": "2026-11-27",
    "weeks_ago": 0,
    "polls": 16,
    "rows": {
